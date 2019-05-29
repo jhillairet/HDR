@@ -1,0 +1,84 @@
+\documentclass{amu_these}
+
+\begin{document}
+
+										%% page de titre
+	\chead{}
+	\pdfbookmark[0]{Page de titre}{titre}
+	\input{tex/titre.tex}
+
+	\chapter*{Résumé}					%% résumé
+	\input{tex/resume}
+	\addcontentsline{toc}{chapter}{Résumé}
+
+	\chapter*{Abstract}					%% abstract
+	\input{tex/abstract}
+	\addcontentsline{toc}{chapter}{Abstract}
+
+	\chapter*{Remerciements}			%% remerciements
+	\input{tex/remercie}
+	\addcontentsline{toc}{chapter}{Remerciements}
+
+
+    \microtypesetup{protrusion=false}	%% désactive la protrusion (TOC LOFT GLS)
+	\tableofcontents					%% TOC
+	\listoffigures						%% LOF
+	\listoftables						%% LOT
+	\printglossary[						%% Acronymes
+		type=\acronymtype,
+		title={Liste des acronymes},
+		toctitle={Liste des acronymes}
+		]
+	\printglossary[						%% Glossaire
+		title={Glossaire},
+		toctitle={Glossaire}
+		]
+	\printglossary[						%% Nomenclature
+		type=notation,
+		title={Nomenclature},
+		toctitle={Nomenclature}
+		]
+    \microtypesetup{protrusion=true}	%% rétabli la protrusion
+
+
+	\chapter*{Introduction}
+	%\input{tex/intro}
+	\addcontentsline{toc}{chapter}{Introduction}
+
+	\chapter{ Généralités}
+	%\input{tex/chap1}
+
+	\chapter{ Méthodologie de la recherche}
+	%\input{tex/chap2}
+
+	\chapter{ Résultats}
+	%\input{tex/chap3}
+
+	\chapter*{Conclusion}
+	%\input{tex/conc}
+	\addcontentsline{toc}{chapter}{Conclusion}
+
+	\appendix
+
+	\newpage
+	\printbibliography[					%% bibliographie
+	heading=bibintoc
+	]	
+	\newpage
+	\printindex							%% index
+	\newpage
+	\printendnotes						%% notes
+
+%% annexes
+	\setcounter{chapter}{0}
+	\renewcommand{\thesection}{\Alph{section}}
+	
+	\chapter*{ANNEXES}
+	\newpage
+	\addcontentsline{toc}{chapter}{ANNEXES}
+	
+	%\input{tex/annexe1}
+	\newpage
+	%\input{tex/annexe2}
+
+\end{document}
