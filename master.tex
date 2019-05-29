@@ -1,25 +1,26 @@
 \documentclass{amu_these}
 
 \begin{document}
-
+    
 										%% page de titre
-	\chead{}
-	\pdfbookmark[0]{Page de titre}{titre}
-	\input{tex/titre.tex}
+	%\chead{}
+	%\pdfbookmark[0]{Page de titre}{titre}
+	%\input{tex/titre.tex}
 
-	\chapter*{Résumé}					%% résumé
-	\input{tex/resume}
-	\addcontentsline{toc}{chapter}{Résumé}
+	%\chapter*{Résumé}					%% résumé
+	%\input{tex/resume}
+	%\addcontentsline{toc}{chapter}{Résumé}
 
-	\chapter*{Abstract}					%% abstract
-	\input{tex/abstract}
-	\addcontentsline{toc}{chapter}{Abstract}
+	%\chapter*{Abstract}					%% abstract
+	%\input{tex/abstract}
+	%\addcontentsline{toc}{chapter}{Abstract}
 
-	\chapter*{Remerciements}			%% remerciements
-	\input{tex/remercie}
-	\addcontentsline{toc}{chapter}{Remerciements}
+	%\chapter*{Remerciements}			%% remerciements
+	%\input{tex/remercie}
+	%\addcontentsline{toc}{chapter}{Remerciements}
 
-
+    \selectlanguage{english}
+    
     \microtypesetup{protrusion=false}	%% désactive la protrusion (TOC LOFT GLS)
 	\tableofcontents					%% TOC
 	\listoffigures						%% LOF
@@ -42,20 +43,22 @@
 
 
 	\chapter*{Introduction}
-	%\input{tex/intro}
+	\input{tex/intro}
 	\addcontentsline{toc}{chapter}{Introduction}
 
-	\chapter{ Généralités}
-	%\input{tex/chap1}
+	\chapter{Controlled fusion, RF heating and current drive}
+	\input{tex/chap1}
 
-	\chapter{ Méthodologie de la recherche}
-	%\input{tex/chap2}
+	\chapter{RF Coupling}
+	\input{tex/chap2}
 
-	\chapter{ Résultats}
-	%\input{tex/chap3}
+	\chapter{High RF Power Devices}
+	\input{tex/chap3}
+
+    \chapter{Teaching}
 
 	\chapter*{Conclusion}
-	%\input{tex/conc}
+	\input{tex/conc}
 	\addcontentsline{toc}{chapter}{Conclusion}
 
 	\appendix
