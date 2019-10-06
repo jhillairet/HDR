@@ -1,87 +1,233 @@
-\documentclass{amu_these}
+\documentclass[
+fontsize=10pt, % Base font size
+twoside=true, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
+%open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
+%chapterprefix=true, % Uncomment to use the word "Chapter" before chapter numbers everywhere they appear
+%chapterentrydots=true, % Uncomment to output dots from the chapter name to the page number in the table of contents
+numbers=noenddot, % Comment to output dots after chapter numbers; the most common values for this option are: enddot, noenddot and auto (see the KOMAScript documentation for an in-depth explanation)
+%draft=true, % If uncommented, rulers will be added in the header and footer
+%overfullrule=true, % If uncommented, overly long lines will be marked by a black box; useful for correcting spacing problems
+]{kaobook}
+
+
+% Choose the language
+\usepackage[english]{babel} % Load characters and hyphenation
+\usepackage[english=british]{csquotes}	% English quotes
+
+% Load the bibliography package
+%\usepackage{styles/kaobiblio}
+\addbibresource{biblio.bib} % Bibliography file
+
+% Load mathematical packages for theorems and related environments. NOTE: choose only one between 'mdftheorems' and 'plaintheorems'.
+\usepackage{styles/mdftheorems}
+%\usepackage{styles/plaintheorems}
+
+% Paths in which to look for images
+\graphicspath{{figures/}{./}} 
+
+\makeindex[columns=3, title=Alphabetical Index, intoc] % Make LaTeX produce the files required to compile the index
+
+\makeglossaries % Make LaTeX produce the files required to compile the glossary
+
+\makenomenclature % Make LaTeX produce the files required to compile the nomenclature
+
+%----------------------------------------------------------------------------------------
+
+
 
 \begin{document}
-    
-										%% page de titre
-	%\chead{}
-	%\pdfbookmark[0]{Page de titre}{titre}
-	%\input{tex/titre.tex}
-
-	%\chapter*{Résumé}					%% résumé
-	%\input{tex/resume}
-	%\addcontentsline{toc}{chapter}{Résumé}
-
-	%\chapter*{Abstract}					%% abstract
-	%\input{tex/abstract}
-	%\addcontentsline{toc}{chapter}{Abstract}
-
-	%\chapter*{Remerciements}			%% remerciements
-	%\input{tex/remercie}
-	%\addcontentsline{toc}{chapter}{Remerciements}
-
-    \selectlanguage{english}
-    
-    \microtypesetup{protrusion=false}	%% désactive la protrusion (TOC LOFT GLS)
-	\tableofcontents					%% TOC
-	\listoffigures						%% LOF
-	\listoftables						%% LOT
-	\printglossary[						%% Acronymes
-		type=\acronymtype,
-		title={Liste des acronymes},
-		toctitle={Liste des acronymes}
-		]
-	\printglossary[						%% Glossaire
-		title={Glossaire},
-		toctitle={Glossaire}
-		]
-	\printglossary[						%% Nomenclature
-		type=notation,
-		title={Nomenclature},
-		toctitle={Nomenclature}
-		]
-    \microtypesetup{protrusion=true}	%% rétabli la protrusion
-
-
-	\chapter*{Introduction}
-	\input{tex/intro}
-	\addcontentsline{toc}{chapter}{Introduction}
-
-	\chapter{Controlled fusion, RF heating and current drive}
-	\input{tex/chap1}
-
-	\chapter{RF Coupling}
-	\input{tex/chap2}
-
-	\chapter{High RF Power Devices}
-	\input{tex/chap3}
-
-    \chapter{Teaching}
-
-	\chapter*{Conclusion}
-	\input{tex/conc}
-	\addcontentsline{toc}{chapter}{Conclusion}
-
-	\appendix
-
-	\newpage
-	\printbibliography[					%% bibliographie
-	heading=bibintoc
-	]	
-	\newpage
-	\printindex							%% index
-	\newpage
-	\printendnotes						%% notes
-
-%% annexes
-	\setcounter{chapter}{0}
-	\renewcommand{\thesection}{\Alph{section}}
 	
-	\chapter*{ANNEXES}
-	\newpage
-	\addcontentsline{toc}{chapter}{ANNEXES}
+	%----------------------------------------------------------------------------------------
+	%	BOOK INFORMATION
+	%----------------------------------------------------------------------------------------
 	
-	%\input{tex/annexe1}
-	\newpage
-	%\input{tex/annexe2}
+	%\titlehead{The \texttt{kaobook} class}
+	\subject{Use this document as a template}
+	
+	\title[HDR]{Titre de la HDR}
+	\subtitle{Customise this page according to your needs}
+	
+	\author[Julien Hillairet]{Julien Hillairet}
+	
+	\date{\today}
+	
+	%\publishers{An Awesome Publisher}
+	
+	%----------------------------------------------------------------------------------------
+	
+	\frontmatter % Denotes the start of the pre-document content, uses roman numerals
+	
+	%----------------------------------------------------------------------------------------
+	%	OPENING PAGE
+	%----------------------------------------------------------------------------------------
+	
+	%\makeatletter
+	%\extratitle{
+	%	% In the title page, the title is vspaced by 9.5\baselineskip
+	%	\vspace*{9\baselineskip}
+	%	\vspace*{\parskip}
+	%	\begin{center}
+	%		% In the title page, \huge is set after the komafont for title
+	%		\usekomafont{title}\huge\@title
+	%	\end{center}
+	%}
+	%\makeatother
+	
+	
+	%----------------------------------------------------------------------------------------
+	%	DEDICATION
+	%----------------------------------------------------------------------------------------
+	
+	\dedication{
+		The harmony of the world is made manifest in Form and Number, and the heart and soul and all the poetry of Natural Philosophy are embodied in the concept of mathematical beauty.\\
+		\flushright -- D'Arcy Wentworth Thompson
+	}
+	
+	%----------------------------------------------------------------------------------------
+	%	OUTPUT TITLE PAGE AND PREVIOUS
+	%----------------------------------------------------------------------------------------
+	
+	% Note that \maketitle outputs the pages before here
+	
+	% If twoside=false, \uppertitleback and \lowertitleback are not printed
+	% To overcome this issue, we set twoside=semi just before printing the title pages, and set it back to false just after the title pages
+	\KOMAoptions{twoside=semi}
+	\maketitle
+	\KOMAoptions{twoside=false}
+	
+	%----------------------------------------------------------------------------------------
+	%	RESUME
+	%----------------------------------------------------------------------------------------
+	
+	\input{tex/resume.tex}
+	
+	%----------------------------------------------------------------------------------------
+	%	TABLE OF CONTENTS & LIST OF FIGURES/TABLES
+	%----------------------------------------------------------------------------------------
+	
+	\begingroup % Local scope for the following commands
+	
+	% Define the style for the TOC, LOF, and LOT
+	%\setstretch{1} % Uncomment to modify line spacing in the ToC
+	%\hypersetup{linkcolor=blue} % Uncomment to set the colour of links in the ToC
+	\setlength{\textheight}{23cm} % Manually adjust the height of the ToC pages
+	
+	% Turn on compatibility mode for the etoc package
+	\etocstandarddisplaystyle % "toc display" as if etoc was not loaded
+	\etocstandardlines % "toc lines as if etoc was not loaded
+	
+	\tableofcontents % Output the table of contents
+	
+	%\listoffigures % Output the list of figures
+	
+	% Comment both of the following lines to have the LOF and the LOT on different pages
+	%\let\cleardoublepage\bigskip
+	%\let\clearpage\bigskip
+	
+	%\listoftables % Output the list of tables
+	
+	\endgroup
+	
+	%----------------------------------------------------------------------------------------
+	%	MAIN BODY
+	%----------------------------------------------------------------------------------------
+	
+	\mainmatter % Denotes the start of the main document content, resets page numbering and uses arabic numbers
+	
+	\input{tex/intro.tex}
+	
+	% % Page avec titre seul
+	%\pagelayout{wide} % No margins
+	%\addpart{intro}
+	%\pagelayout{margin} % Restore margins
+	
+	\input{tex/chap1.tex}
+	
+	\input{tex/chap2.tex}
+	
+	\input{tex/chap3.tex}
+	
+	\input{tex/chap4.tex}
+	
+	%----------------------------APPENDIX------------------------------------------------------------
+	\appendix % From here onwards, chapters are numbered with letters, as is the appendix convention
+	
+	\pagelayout{wide} % No margins
+	\addpart{Appendix}
+	\pagelayout{margin} % Restore margins
+	
+	\input{tex/annexe1.tex}
+	
+	\input{tex/annexe2.tex}
+	
+	%----------------------------------------------------------------------------------------
+	
+	\backmatter % Denotes the end of the main document content
+	
+	\setchapterstyle{plain} % Output plain chapters from this point onwards
+	
+	%----------------------------------------------------------------------------------------
+	%	BIBLIOGRAPHY
+	%----------------------------------------------------------------------------------------
+	
+	% The bibliography needs to be compiled with biber using your LaTeX editor, or on the command line with 'biber main' from the template directory
+	
+	\defbibnote{bibnote}{Here are the references in citation order.\par\bigskip} % Prepend this text to the bibliography
+	\printbibliography[heading=bibintoc, title=Bibliography, prenote=bibnote] % Add the bibliography heading to the ToC, set the title of the bibliography and output the bibliography note
+	
+%	%----------------------------------------------------------------------------------------
+%	%	NOMENCLATURE
+%	%----------------------------------------------------------------------------------------
+%	
+%	% The nomenclature needs to be compiled on the command line with 'makeindex main.nlo -s nomencl.ist -o main.nls' from the template directory
+%	
+%	\nomenclature{$c$}{Speed of light in a vacuum inertial frame}
+%	\nomenclature{$h$}{Planck constant}
+%	
+%	\renewcommand{\nomname}{Notation} % Rename the default 'Nomenclature'
+%	\renewcommand{\nompreamble}{The next list describes several symbols that will be later used within the body of the document.} % Prepend this text to the nomenclature
+%	
+%	\printnomenclature % Output the nomenclature
+%	
+%	%----------------------------------------------------------------------------------------
+%	%	GLOSSARY
+%	%----------------------------------------------------------------------------------------
+%	
+%	% The glossary needs to be compiled on the command line with 'makeglossaries main' from the template directory
+%	
+%	\newglossaryentry{computer}{
+%		name=computer,
+%		description={is a programmable machine that receives input, stores and manipulates data, and provides output in a useful format}
+%	}
+%	
+%	% Glossary entries (used in text with e.g. \acrfull{fpsLabel} or \acrshort{fpsLabel})
+%	\newacronym[longplural={Frames per Second}]{fpsLabel}{FPS}{Frame per Second}
+%	\newacronym[longplural={Tables of Contents}]{tocLabel}{TOC}{Table of Contents}
+%	
+%	\setglossarystyle{listgroup} % Set the style of the glossary (see https://en.wikibooks.org/wiki/LaTeX/Glossary for a reference)
+%	\printglossary[title=Special Terms, toctitle=List of Terms] % Output the glossary, 'title' is the chapter heading for the glossary, toctitle is the table of contents heading
+	
+%	%----------------------------------------------------------------------------------------
+%	%	INDEX
+%	%----------------------------------------------------------------------------------------
+%	
+%	% The index needs to be compiled on the command line with 'makeindex main' from the template directory
+%	
+%	\printindex % Output the index
+	
+	%----------------------------------------------------------------------------------------
+	%	BACK COVER
+	%----------------------------------------------------------------------------------------
+	
+	% If you have a PDF/image file that you want to use as a back cover, uncomment the following lines
+	
+	%\clearpage
+	%\thispagestyle{empty}
+	%\null%
+	%\clearpage
+	%\includepdf{cover-back.pdf}
+	
+	%----------------------------------------------------------------------------------------
+
 
 \end{document}
