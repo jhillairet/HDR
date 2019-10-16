@@ -9,14 +9,14 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 %overfullrule=true, % If uncommented, overly long lines will be marked by a black box; useful for correcting spacing problems
 ]{kaobook}
 
+\usepackage{palatino}
 
-% Choose the language
 \usepackage[english]{babel} % Load characters and hyphenation
 \usepackage[english=british]{csquotes}	% English quotes
 
 % Load the bibliography package
-%\usepackage{styles/kaobiblio}
-\addbibresource{biblio.bib} % Bibliography file
+\usepackage{styles/kaobiblio}
+\addbibresource{HDR.bib} % Bibliography file
 
 % Load mathematical packages for theorems and related environments. NOTE: choose only one between 'mdftheorems' and 'plaintheorems'.
 \usepackage{styles/mdftheorems}
@@ -25,11 +25,11 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 % Paths in which to look for images
 \graphicspath{{figures/}{./}} 
 
-\makeindex[columns=3, title=Alphabetical Index, intoc] % Make LaTeX produce the files required to compile the index
+%\makeindex[columns=3, title=Alphabetical Index, intoc] % Make LaTeX produce the files required to compile the index
 
-\makeglossaries % Make LaTeX produce the files required to compile the glossary
+%\makeglossaries % Make LaTeX produce the files required to compile the glossary
 
-\makenomenclature % Make LaTeX produce the files required to compile the nomenclature
+%\makenomenclature % Make LaTeX produce the files required to compile the nomenclature
 
 %----------------------------------------------------------------------------------------
 
