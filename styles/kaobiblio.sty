@@ -29,7 +29,6 @@
 % Choose the default options, which will be overwritten by the options passed to this package.
 \PassOptionsToPackage{
 	%style=numeric-comp,
-	%style=numeric-comp,
 	%citestyle=authortitle-icomp,
 	citestyle=numeric-comp,
 	%bibstyle=authoryear,
@@ -105,13 +104,9 @@
 
 % Command to format the marginnote created for cited items
 \NewDocumentCommand{\formatmargincitation}{m}{% The parameter is a single citation key
-	\parencite{#1}: \citeauthor*{#1} (\citeyear{#1})\\%, \citetitle{#1}\\
+	\parencite{#1}: \citeauthor*{#1} (\citeyear{#1}), \citetitle{#1}\\
 }
 
-
-\NewDocumentCommand{\citeauthyear}{m}{
-	\citeauthor*{#1} (\citeyear{#1})~\parencite{#1}
-}
 %----------------------------------------------------------------------------------------
 %	CITATION ENVIRONMENTS
 %----------------------------------------------------------------------------------------
