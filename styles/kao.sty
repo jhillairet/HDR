@@ -79,7 +79,7 @@
 \RequirePackage{microtype} % Improves character and word spacing
 \RequirePackage{needspace} % Required to prevent page break right after a sectioning command
 \RequirePackage{xspace} % Better print trailing whitespace
-\RequirePackage[usenames,dvipsnames]{xcolor} % Colours
+\RequirePackage[usenames,dvipsnames,table]{xcolor} % Colours
 
 % TODO: recognize space/indent justified/raggedright class options
 
@@ -131,7 +131,7 @@
 	symbol*,
 	hang,
 	flushmargin,
-	perpage,
+	% perpage,
 	stable,
 ]{footmisc} % Required to set up the footnotes
 \RequirePackage{footnotebackref} % Creates back references from footnotes to text
@@ -148,13 +148,23 @@
 
 \RequirePackage{marginnote} % Provides options for margin notes
 \RequirePackage{marginfix} % Make marginpars float freely
+\RequirePackage{sidenotes} % Use sidenotes
+\RequirePackage{chngcntr} % Reset counters at sections
 
 % Justify and format margin notes
 \renewcommand*{\raggedleftmarginnote}{} % Suppress left margin
 \renewcommand*{\raggedrightmarginnote}{} % Suppress right margin
 \renewcommand*{\marginfont}{\@margin@par} % Format marginnotes according to \@marginpar (see above)
-\renewcommand{\marginnotevadjust}{3pt} % Bring all marginnotes downward a bit
-\RequirePackage[marginnote=true]{snotez} % Provides options for sidenotes
+\renewcommand{\marginnotevadjust}{2pt} % Bring all marginnotes downward a bit
+%\RequirePackage[marginnote=true]{snotez} % Provides options for sidenotes
+
+\def\snotez@if@nblskip#1{%
+\expandafter\ifx\@car#1\@nil*%
+\expandafter\@firstoftwo
+\else
+\expandafter\@secondoftwo
+\fi
+}
 
 % Redefine the command to print marginnotes:
 % (a) the optional offset argument goes at the first position
@@ -165,11 +175,55 @@
 	\oldmarginnote{#2}[\snotez@if@nblskip{#1}{\@cdr#1\@nil\baselineskip}{#1}]%
 }
 
+% Redefine the following sidenotes' command to use the kao version of marginnote
+\RenewDocumentCommand \@sidenotes@placemarginal { m m }
+{
+\IfNoValueOrEmptyTF{#1}
+{\marginpar{#2}}
+{\marginnote[#1]{#2}}
+}
+
+% Initially set the counter to zero instead of 1, and update it before printing the sidenote.
+\setcounter{sidenote}{0}
+\RenewDocumentCommand\sidenote{ o o +m }{%
+\IfNoValueOrEmptyTF{#1}{%
+	\refstepcounter{sidenote}% This command has been moved here
+}{%
+}%
+\sidenotemark[#1]%
+\sidenotetext[#1][#2]{#3}%
+\@sidenotes@multimarker%
+}
+
+% % Formatting sidenotes
+% \setsidenotes{
+% 	text-mark-format=\textsuperscript{\normalfont#1}, % Use a superscript for the marker in the text
+% 	note-mark-format=#1:, % Use a normal font for the marker in the margin; use a colon after the sidenote number
+% 	note-mark-sep=\enskip, % Set the space after the marker
+% }
+
 % Formatting sidenotes
-\setsidenotes{
-	text-mark-format=\textsuperscript{\normalfont#1}, % Use a superscript for the marker in the text
-	note-mark-format=#1:, % Use a normal font for the marker in the margin; use a colon after the sidenote number
-	note-mark-sep=\enskip, % Set the space after the marker
+\RenewDocumentCommand \@sidenotes@thesidenotemark { m }%
+{%
+\leavevmode%
+\ifhmode%
+\edef\@x@sf{\the\spacefactor}%
+\nobreak%
+\fi%
+\hbox{\@textsuperscript{\normalfont#1}}%
+\ifhmode%
+\spacefactor\@x@sf%
+\fi%
+\relax%
+}%
+
+\RenewDocumentCommand\sidenotetext{ o o +m }% number, offset, text
+{%
+\IfNoValueOrEmptyTF{#1}%
+{%
+\@sidenotes@placemarginal{#2}{\@margin@par\thesidenote:\enskip#3}%
+}%
+{\@sidenotes@placemarginal{#2}{\@margin@par#1:\enskip#3}}%
 }
 
 %----------------------------------------------------------------------------------------
@@ -183,10 +237,10 @@
 \RequirePackage{multirow} % Cells occupying multiple rows in tables
 \RequirePackage{multicol} % Multiple columns in dictionary
 \RequirePackage[hypcap=true]{caption} % Correctly placed anchors for hyperlinks
-\RequirePackage{atbegshi}
-\RequirePackage{perpage}
+% \RequirePackage{atbegshi}
+% \RequirePackage{perpage}
 \let\c@abspage\relax
-\newcommand{\pp@g@sidenote}{}
+% \newcommand{\pp@g@sidenote}{}
 %\RequirePackage[nomencl=false]{scrhack} % Force KOMA to like floatrow
 \RequirePackage{floatrow} % Set up captions of floats
 \RequirePackage{dblfloatfix} % Better positioning of wide figures and tables
@@ -212,14 +266,16 @@
 \setlength\columnseprule{.4pt} % Set the width of vertical rules in tables
 
 % Environment to hold a margin figure (from the sidenotes package)
-\newsavebox{\@sidenotes@marginfigurebox}
-\newenvironment{marginfigure}[1][0pt]{ % The optional parameter is the vertical offset
+% We redefine it here because we want to use our own caption formatting.
+\newsavebox{\@kao@marginfigurebox}
+\renewenvironment{marginfigure}[1][0pt]{ % The optional parameter is the vertical offset
 	%\let\footnotemark\mpfootnotemark
 	\FloatBarrier % Force LaTeX to place previous floats
 	\mparshift{\snotez@if@nblskip{#1}{\@cdr#1\@nil\baselineskip}{#1}} % Move the figure up or down according to the offset argument
 	\begin{lrbox}{\@sidenotes@marginfigurebox}
 		\begin{minipage}{\marginparwidth}
 			\captionsetup{type=figure}
+			% \centering % Better not to center margin figures
 }{
 		\end{minipage}
 	\end{lrbox}
@@ -227,31 +283,27 @@
 }
 
 % Environment to hold a margin table (from the sidenotes package)
-\newsavebox{\@sidenotes@margintablebox}
-\newenvironment{margintable}[1][0pt]{ % The optional parameter is the vertical offset
+\newsavebox{\@kao@margintablebox}
+\renewenvironment{margintable}[1][0pt]{ % The optional parameter is the vertical offset
 	\FloatBarrier % Force LaTeX to place previous floats
 	\mparshift{\snotez@if@nblskip{#1}{\@cdr#1\@nil\baselineskip}{#1}} % Move the table up or down according to the offset argument
 	\begin{lrbox}{\@sidenotes@margintablebox}
 		\begin{minipage}{\marginparwidth}
-			%\captionsetup{type=table,style=margintable}
 			\captionsetup{type=table}
-			\centering
 }{
 		\end{minipage}
 	\end{lrbox}
 	\marginpar{\usebox{\@sidenotes@margintablebox}} % Place the table box in the margin
 }
 
-% Environment to hold a margin listing (from the sidenotes package)
+% Environment to hold a margin listing
 \newsavebox{\@sidenotes@marginlistingbox}
 \newenvironment{marginlisting}[1][0pt]{ % The optional parameter is the vertical offset
 	\FloatBarrier % Force LaTeX to place previous floats
 	\mparshift{\snotez@if@nblskip{#1}{\@cdr#1\@nil\baselineskip}{#1}} % Move the listing up or down according to the offset argument
 	\begin{lrbox}{\@sidenotes@marginlistingbox}
 		\begin{minipage}{\marginparwidth}
-			%\captionsetup{type=listing,style=marginlisting}
 			\captionsetup{type=lstlisting}
-			\centering
 }{
 		\end{minipage}
 	\end{lrbox}
@@ -417,6 +469,9 @@
 
 \RequirePackage{etoc} % Required to insert local tables of contents
 
+\newcounter{margintocdepth}
+\setcounter{margintocdepth}{\subsectiontocdepth}
+
 \newlength{\mtocshift} % Length of the vertical offset used for margin tocs
 \setlength{\mtocshift}{-5.2cm}
 
@@ -443,20 +498,11 @@
 		%\etocsettocstyle{}{}
 		%\etocsettocstyle{\normalfont\sffamily\normalsize}{}
 		\etocsettocstyle{\usekomafont{section}\small}{}
-		\etocsetnexttocdepth{subsection}
+		\etocsetnexttocdepth{\themargintocdepth}
 		% Print the table of contents in the margin
 		\marginnote[#1]{\localtableofcontents}
 	\endgroup
 }
-
-%----------------------------------------------------------------------------------------
-%	NUMBERING
-%----------------------------------------------------------------------------------------
-
-\setcounter{secnumdepth}{1} % Number only up to sections
-
-%\counterwithin*{sidenote}{chapter} % Uncomment to reset the sidenote counter at each chapter
-%\counterwithout{sidenote}{chapter} % Uncomment to have one sidenote counter for the whole document
 
 %----------------------------------------------------------------------------------------
 %	PAGE LAYOUT
@@ -594,15 +640,15 @@
 \RequirePackage[T1]{fontenc} % utf8 encoding in the output (.pdf) file
 \RequirePackage[utf8]{inputenc} % utf8 encoding in the input (.tex) file
 
-\RequirePackage{mathpazo} % Serif font
-\RequirePackage[scaled]{helvet} % Sans-serif font
+\RequirePackage[scaled=.97,helvratio=.93,p,theoremfont]{newpxtext} % Serif palatino font
+\RequirePackage[vvarbb,smallerops,bigdelims]{newpxmath} % Math palatino font
 \RequirePackage[scaled=.85]{beramono} % Monospace font
-\RequirePackage[cal=boondoxo]{mathalfa} % Mathcal from STIX, unslanted a bit
-\RequirePackage[cmintegrals,bigdelims,vvarbb]{newtxmath} % Maths fonts
-\RequirePackage{esint} % Integral symbols
+\RequirePackage[scr=rsfso,cal=boondoxo]{mathalfa} % Mathcal from STIX, unslanted a bit
+\RequirePackage{bm} % Bold math
 
 % When using the Palatino (mathpazo) font, it is better to use a slightly larger stretch.
-\setstretch{1.10}
+%\setstretch{1.10}
+\linespread{1.07} % Give Palatino more leading (space between lines)
 
 %----------------------------------------------------------------------------------------
 %	HYPERREFERENCES
@@ -697,4 +743,4 @@
 
 \RequirePackage{styles/environments}
 \RequirePackage{styles/packages}
-\RequirePackage{styles/references}
+\RequirePackage{styles/kaorefs}

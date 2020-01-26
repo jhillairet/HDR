@@ -25,7 +25,7 @@
 %----------------------------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{kaobook}[2019/06/05 v1.0 kaobook class v1.0]
+\ProvidesClass{kaobook}[2019/06/05 v1.0 kaobook class v1.1]
 
 \newcommand{\@classname}{kaobook} % Class name
 \newcommand{\@baseclass}{scrbook} % Base class name
@@ -224,17 +224,14 @@
 }
 
 % Takes as input the image path and optionally the "beforeskip"
-\DeclareDocumentCommand{\setchapterimage}{O{5.5cm} m}
-{
-	\setchapterpreamble[o]{
-		\vspace*{-2.7cm}\hspace*{-2.56cm}
-		\includegraphics[width=\paperwidth,height=#1+2.7cm,keepaspectratio=false]{#2}
-	}
-
-	\chapterstyleimage
-
+\DeclareDocumentCommand{\setchapterimage}{O{5.5cm} m}{%
+	\setchapterpreamble[o]{%
+		\vspace*{-2.7cm}\hspace*{-2.5cm}%
+		\includegraphics[width=\paperwidth,height=#1+2.7cm,keepaspectratio=false]{#2}%
+	}%
+	\chapterstyleimage%
 	% beforeskip=-(figure_height-top_margin)
-	\RedeclareSectionCommand[beforeskip=-#1, afterskip=.6cm]{chapter}
+	\RedeclareSectionCommand[beforeskip=-#1, afterskip=.6cm]{chapter}%
 	\setlength{\mtocshift}{0cm}%
 }
 
@@ -265,3 +262,12 @@
 \PassOptionsToClass{toc=listof}{\@baseclass}
 \PassOptionsToClass{toc=index}{\@baseclass}
 \PassOptionsToClass{toc=bibliography}{\@baseclass}
+
+%----------------------------------------------------------------------------------------
+%	NUMBERING
+%----------------------------------------------------------------------------------------
+
+\setcounter{secnumdepth}{1} % Number only up to sections
+
+\counterwithin*{sidenote}{chapter} % Uncomment to reset the sidenote counter at each chapter
+%\counterwithout{sidenote}{chapter} % Uncomment to have one sidenote counter for the whole document
