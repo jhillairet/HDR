@@ -14,6 +14,36 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 \usepackage[english]{babel} % Load characters and hyphenation
 \usepackage[english=british]{csquotes}	% English quotes
 
+%%%%%% Math packages
+%\newcommand\hmmax{0}  
+%\newcommand\bmmax{0}
+\usepackage{siunitx, physics}
+
+%%%%%% color definitions
+%\usepackage[svgnames]{xcolor} % Enabling mixing colors and color's call by 'svgnames'
+%\definecolor{MyColor1}{rgb}{0.2,0.4,0.6} %mix personal color
+%\newcommand{\textb}{\color{Black} \usefont{OT1}{lmss}{m}{n}}
+%\newcommand{\blue}{\color{MyColor1} \usefont{OT1}{lmss}{m}{n}}
+%\newcommand{\blueb}{\color{MyColor1} \usefont{OT1}{lmss}{b}{n}}
+%\newcommand{\red}{\color{LightCoral} \usefont{OT1}{lmss}{m}{n}}
+%\newcommand{\green}{\color{Turquoise} \usefont{OT1}{lmss}{m}{n}}
+
+%%%%%% definitions of mathematical variables
+\newcommand{\bbf}{{\mathbf b}}
+\newcommand{\ebf}{{\mathbf e}}
+\newcommand{\jbf}{{\mathbf j}}
+\newcommand{\kbf}{{\mathbf k}}
+\newcommand{\ubf}{{\mathbf u}}
+\newcommand{\vbf}{{\mathbf v}}
+\newcommand{\xbf}{{\mathbf x}}
+\newcommand{\Bbf}{{\mathbf B}}
+\newcommand{\Ebf}{{\mathbf E}}
+\newcommand{\Mbf}{{\mathbf M}}
+\newcommand{\Sbf}{{\mathbf S}}
+\newcommand{\Vbf}{{\mathbf V}}
+\newcommand{\nablabf}{\mbox{\boldmath${\nabla}$}}
+
+
 % Paths in which to look for images
 \graphicspath{{figures/}{./}} 
 
@@ -160,10 +190,10 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 	
 	\input{tex/intro.tex}
 	
-	 % Page avec titre seul
-	\pagelayout{wide} % No margins
-	\addpart{intro}
-	\pagelayout{margin} % Restore margins
+%	 % Page avec titre seul
+%	\pagelayout{wide} % No margins
+%	\addpart{intro}
+%	\pagelayout{margin} % Restore margins
 	
 	\input{tex/chap1.tex}
 	

@@ -5,18 +5,85 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Controlled Fusion}
-Nuclear fusion, the process that powers the sun, has the potential to generate virtually unlimited amounts of greenhouse-gas–free and safe energy on earth. Although fusion power has long been pursued, the benefits of developing a reliable system to generate this energy is well worth the effort. 
+\section{Nuclear Fusion}
+Nuclear fusion is the process that powers all the stars in the Universe, including our Sun. To get nuclear fusion, nuclei have to come close enough to each other where nuclear forces can overcome their mutual electrostatic repulsion. This would require temperatures of the order of 720 keV for head-on collisions of thermal particles to lead to fusion reactions in a classical way. 
+Actually, quantum physics has to be taken into account in the process. Both in tokamaks and in stars interiors, fusion reactions take place predominantly due to the tunnel effect. Crossing this barrier can be quantified in a probabilistic manner with the reaction rate $R$ $[\mathrm{reaction/m^3 s}]$, defined as the probability of reaction per unit time and volume. 
+The reaction rate between mono-energetic ions of density $n_1$ $\mathrm{[m^{-3}]}$ striking target ions of density $n_2$ $\mathrm{[m^{-3}]}$ is proportional to the effective cross-section area $\sigma$ $\mathrm{[m^2]}$ and to the velocity difference $v_{12}$ between the two species:
+\begin{equation*}
+	r_{12} = n_1 n_2 \; \sigma v_{12}
+\end{equation*}
+The quantity  $\sigma v_{12}$, which depends on the kinetic energy of the colliding particles, is called the reactivity ($\mathrm{[m^3/s]}$). The reaction rate $r_{12}$ is proportional to the square of the density of the mixture. In fusion plasmas, ions are not mono-energetic. They are assumed to have Maxwellian velocity distributions. The average reactivity $\langle \sigma v \rangle_{12}$ derives from the following expression:
+\begin{equation*}
+	\left < \sigma v \right >_{12} 
+	= \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} 
+	\sigma(v_{12}) v_{12}\;  f_1(v_1) f_2(v_2) \; dv_1dv_2
+\end{equation*}
+
+Finally, the average reaction rate $R_{12}$ reads:
+\begin{equation*}
+	R_{12} = n_1 n_2 \; \left < \sigma v \right >_{12}
+\end{equation*}
+It governs the time evolution of both densities: $\dv{n_1}{t} = \dv{n_2}{t} = - R_{12}$. The temperature dependence of the reactivity $\langle \sigma v \rangle_{12}$ is plotted on figure \ref{fig:chap1:reactivity} for several fusion reactions.
+
+\begin{figure} 
+	\begin{center}
+		\includegraphics[width=1.0\textwidth]{figures/chap1/Fusion_Reactivity.png}
+		\caption{Fusion reactivity versus temperature for few couples of fusion reactions. Data from \citeauthyear{richardson2019}.}
+		\label{fig:chap1:reactivity}
+	\end{center}
+\end{figure}
+
+The D-T reactivity reaches its maximum for a temperature of 64 keV, corresponding to a temperature of $742\,10^6$ K. Since it has the highest reaction rate, the D-T reaction is the “easiest” to initiate (maximum reactivity at lowest temperature) of all fusion reactions and is the main targeted reaction for controlled fusion reactors\sidecite{cea1987, ball2019}: 
+\begin{equation*}
+	\mathrm{D + T} \longrightarrow \mathrm{{}^4 He~(3.56~MeV) + n~(14.03~MeV)}
+\end{equation*}
+Therefore, the D-T reaction leads to a total released energy of $E_{DT}$ = 17.59 \si{MeV} = $2.82\times 10^{-12} \si{J}$ per fusion reaction\sidenote{This value can be compared to the 200~MeV released by $^{235}$U fission. Yet, the energy release \emph{per nucleon} ($i.e.$ per kilogram) is approximately 4 times larger for fusion than for fission reactions.}.
+
+The fusion power per unit volume $p_{DT}$ produced by the fusion of the nuclei of deuterium and tritium reads: 
+\begin{equation*}
+	p_{DT} = n_D n_T \left< \sigma v \right>_{DT} E_{DT}
+\end{equation*}
+with $n_D$ and $n_T$ the deuterium and tritium density and $\left< \sigma v \right>_{DT}$ the D-T reactivity. 
 
 
-Generating electricity from fusion reactions requires that hot plasmas be maintained at enormous temperatures. To achieve these temperatures, CEA’s tungsten (W) experimental superconducting tokamak (WEST) reactor injects several megawatts of high-energy radio-frequency (RF) radiation into the plasma using antennas that are a few meters long, half a meter wide and weigh several tons. 
+The fusion power per unit volume $p_{DT}$ produced by the fusion of the nuclei of deuterium and tritium reads: 
+\begin{equation*}
+p_{DT} = n_D n_T \left< \sigma v \right>_{DT} E_{DT}
+\end{equation*}
+with $n_D$ and $n_T$ the deuterium and tritium density and $\left< \sigma v \right>_{DT}$ the D-T reactivity. Assuming equal deuterium and tritium densities:
+\begin{equation*}
+n_D = n_T = \frac{n}{2}
+\end{equation*}
+with $n$ the electron density, then the thermonuclear power density is:
+\begin{equation*}
+p_{DT} = \frac{1}{4} n^2 \left< \sigma v \right>_{DT} E_{DT}
+\end{equation*}
 
+Assuming a constant reactivity in the plasma ("flat profile hypothesis") and using the tore volume $V$, the fusion power is: 
+\begin{equation}
+P_{fus} = \frac{V}{4}
+n^2 \left< \sigma v \right>_{DT} E_{DT}
+\end{equation}
 
+In the temperature range 10.3-18.5 keV, it turns out that the reactivity $\left< \sigma v \right>_{DT}$ can well (with about 10$\%$ error) be approximated by \sidecite{wesson2011}: 
+\begin{equation*}
+	\left< \sigma v \right>_{DT} \approx 1.18\, 10^{-24}\; \hat T^2 \;\si{\left[m^3 s^{-1}\right]}
+\end{equation*}
+where $\hat T$ is expressed in $\si{keV}$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Magnetic Controlled Fusion}
+If controlled in a reactor, fusion power could be an ideal energy source. It would run on hydrogen isotopes (such as deuterium which can be found in sea water and tritium which can be generated inside the reactor), does not generate greenhouse gas and creates no radioactive waste except the reactor vessel itself. It would require much less land mass than wind or solar power installations for similar power and could produce power 24/7. But producing a self-sustaining fusion reaction requires that deuterium and tritium be heated to over 150 million K, a temperature at which they become plasma: an electrically charged gas. 
 
-\subsection{Magnetic Confinement}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Sustaining a high temperature in steady-state requires that the plasma be confined by magnetic field. The magnetic device called \emph{tokamak}, first developed in the Soviet Union in the early 1960s, is an efficient way to confine high temperature plasmas\sidecite{shafranov2001, azizov2012, mirnov2019}. It is an axially symmetric field configuration 
+
+, generated by superconducting electromagnets. 
+
+
+
+
+
 
 \subsection{Ohmic Heating}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
