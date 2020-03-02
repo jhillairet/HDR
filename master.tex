@@ -1,7 +1,7 @@
 \documentclass[
 fontsize=10pt, % Base font size
 twoside=true, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
-open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
+%open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
 %chapterprefix=true, % Uncomment to use the word "Chapter" before chapter numbers everywhere they appear
 %chapterentrydots=true, % Uncomment to output dots from the chapter name to the page number in the table of contents
 numbers=noenddot, % Comment to output dots after chapter numbers; the most common values for this option are: enddot, noenddot and auto (see the KOMAScript documentation for an in-depth explanation)
@@ -9,26 +9,37 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 %overfullrule=true, % If uncommented, overly long lines will be marked by a black box; useful for correcting spacing problems
 ]{kaobook}
 
+%%%% Add 1st Author Publications in the manuscript: 1
+\def\addpublications{0}
+
+%%%%%% Font and languages
 \usepackage{palatino}
 
 \usepackage[english]{babel} % Load characters and hyphenation
 \usepackage[english=british]{csquotes}	% English quotes
 
-%%%%%% Math packages
-%\newcommand\hmmax{0}  
-%\newcommand\bmmax{0}
-\usepackage{siunitx, physics}
+%%%%%% to include pdf files (in the appendix)
+%\usepackage{pdfpages}
 
-%%%%%% color definitions
-%\usepackage[svgnames]{xcolor} % Enabling mixing colors and color's call by 'svgnames'
-%\definecolor{MyColor1}{rgb}{0.2,0.4,0.6} %mix personal color
-%\newcommand{\textb}{\color{Black} \usefont{OT1}{lmss}{m}{n}}
-%\newcommand{\blue}{\color{MyColor1} \usefont{OT1}{lmss}{m}{n}}
-%\newcommand{\blueb}{\color{MyColor1} \usefont{OT1}{lmss}{b}{n}}
-%\newcommand{\red}{\color{LightCoral} \usefont{OT1}{lmss}{m}{n}}
-%\newcommand{\green}{\color{Turquoise} \usefont{OT1}{lmss}{m}{n}}
+%%%%%% section and subsection properties
+\usepackage{titlesec}
+\usepackage{sectsty}
+% set section/subsections HEADINGS font and color
+\definecolor{ColorSection}{rgb}{0.8,0.0,0.0} %mix personal color
+\definecolor{ColorSubSection}{rgb}{0.2,0.4,0.6} %mix personal color
+\sectionfont{\color{ColorSection}}  % sets colour of sections
+\subsectionfont{\color{ColorSubSection}}  % sets colour of subsections
 
-%%%%%% definitions of mathematical variables
+% enlarge the default width of the dictum (0.333 default)
+\renewcommand{\dictumwidth}{0.7\textwidth}
+
+
+%%%%%% Maths
+\usepackage{ physics}
+%\usepackage{siunitx}
+\newcommand{\si}{}
+
+% definitions of mathematical variables
 \newcommand{\bbf}{{\mathbf b}}
 \newcommand{\ebf}{{\mathbf e}}
 \newcommand{\jbf}{{\mathbf j}}
@@ -44,9 +55,7 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 \newcommand{\nablabf}{\mbox{\boldmath${\nabla}$}}
 
 
-% Paths in which to look for images
-\graphicspath{{figures/}{./}} 
-
+%%%%%% Bibliography
 % Load the bibliography package and pass it some options
 \usepackage[sorting=none,
 			sortcites=true,
@@ -58,20 +67,21 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 % Use the "none" sorting for the document
 \assignrefcontextentries[]{*}
 
-%% Redefine the citation style: use bracket like [i-ii]
-%\RenewDocumentCommand{\formatmargincitation}{m}{
-%	\parencite{#1}: \citeauthor*{#1} (\citeyear{#1})\\
-%}
+% Redefine the citation style to Author (year) and using bracket like [i-ii]
+\RenewDocumentCommand{\formatmargincitation}{m}{
+	\parencite{#1} \citeauthor*{#1} (\citeyear{#1})\\
+}
 
 % Redefine the citation style: uses numbered sidenotes (upperscript)
-\RenewDocumentCommand{\formatmargincitation}{m}{%
-	\supercite{#1} \citeauthor*{#1} (\citeyear{#1})\\
-}
-
-\RenewDocumentCommand{\sidecite}{m}{%
-	\supercite{#1}%
-	\margincitation{#1}%
-}
+%\RenewDocumentCommand{\formatmargincitation}{m}{%
+%	\supercite{#1} \citeauthor*{#1} (\citeyear{#1})\\
+%}
+%
+% redefine sidecite to use upperscript numbers
+%\RenewDocumentCommand{\sidecite}{m}{%
+%	\supercite{#1}%
+%	\margincitation{#1}%
+%}
 
 % Citing author and date in the text 
 \NewDocumentCommand{\citeauthyear}{m}{%
@@ -85,14 +95,12 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 %\makenomenclature % Make LaTeX produce the files required to compile the nomenclature
 
 
+
 %----------------------------------------------------------------------------------------
-
-
-
 \begin{document}
 	
 	%----------------------------------------------------------------------------------------
-	%	BOOK INFORMATION
+	%	TITLE
 	%----------------------------------------------------------------------------------------
 	
 	%\titlehead{The \texttt{kaobook} class}
@@ -133,8 +141,10 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 	%----------------------------------------------------------------------------------------
 	
 	\dedication{
-		The harmony of the world is made manifest in Form and Number, and the heart and soul and all the poetry of Natural Philosophy are embodied in the concept of mathematical beauty.\\
-		\flushright -- D'Arcy Wentworth Thompson
+		\begin{center}
+			\includegraphics[width=1\linewidth]{figures/electromagnetic_spectrum_small}
+		\end{center}
+		\flushright -- Randall Munroe, \href{https://xkcd.com/273/}{XKCD\#273}
 	}
 	
 	%----------------------------------------------------------------------------------------
@@ -209,13 +219,10 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 	\pagelayout{wide} % No margins
 	\addpart{Appendix}
 	\pagelayout{margin} % Restore margins
-%	
-%	\input{tex/annexe1.tex}
-%	
-%	\input{tex/annexe2.tex}
 	
-	% Bibliography of my 1st author publications
-	%\input{tex/perso_biblio.tex}
+	%	\input{tex/annexe1.tex}
+	%	
+	%	\input{tex/annexe2.tex}
 	
 	%----------------------------------------------------------------------------------------
 	
@@ -226,13 +233,84 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 	%----------------------------------------------------------------------------------------
 	%	BIBLIOGRAPHY
 	%----------------------------------------------------------------------------------------
-	
+	%%%% Main bibliography of the document
 	% The bibliography needs to be compiled with biber 	
 	\defbibnote{bibnote}{Here are the references in alphabetical order.\par\bigskip} % Prepend this text to the bibliography
 	% Use the "nyt" sorting for the bibliography
 	\begin{refcontext}[sorting=nyt]
 		\printbibliography[heading=bibintoc, title=Bibliography, prenote=bibnote] 
 	\end{refcontext}
+
+	%%%%% Bibliography of my 1st author publications
+	\begin{refsection}[first_author_papers.bib]
+		\nocite{*}
+		\printbibliography[title=First Author References, heading=bibintoc]
+	\end{refsection}
+
+	%%%%% Copy of 1st author publications
+	\if\addpublications1
+	\chapter{First Author Publications}
+	
+	\section{LHCD}
+	
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]
+		{publications/LHCD/Hillairet et al._2009_Modeling of lower hybrid antennas using the {ALOHA} code and comparisons with Tore Supra experiments.pdf}
+		
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]
+		{publications/LHCD/Hillairet et al._2010_ALOHA an Advanced LOwer Hybrid Antenna coupling code.pdf}
+		
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]
+		{publications/LHCD/Hillairet et al._2011_RF modeling of the ITER-relevant lower hybrid antenna.pdf}
+		
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]
+		{publications/LHCD/Hillairet et al._2012_Design and testing of a 5GHz TE10 TE30 mode conver.pdf}
+		
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]
+		{publications/LHCD/Hillairet et al._2012_Lower Hybrid antennas for nuclear fusion experiments.pdf}
+		
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]
+		{publications/LHCD/Hillairet et al._2013_Recent progress on lower hybrid current drive and implications for ITER.pdf}
+		
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]
+		{publications/LHCD/Hillairet et al._2015_Design and tests of 500kW RF windows for the ITER LHCD system.pdf}
+		
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]
+		{publications/LHCD/Hillairet et al._2019_Lower hybrid range cold magnetized plasma coupling in ANSYS HFSS.pdf}
+		
+	\section{ICRH}
+	
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]
+		{publications/ICRH/Hillairet et al._2015_Ion cyclotron resonance heating systems upgrade toward high power and CW.pdf}
+		
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]	
+		{publications/ICRH/Hillairet et al._2015_R&D activities on RF contacts for the ITER ion cyclotron resonance heating launcher.pdf}
+		
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]
+		{publications/ICRH/Hillairet et al._2018_Radiofrequency and mechanical tests of silver coated CuCrZr contacts for the ITER ion cyclotron antenna.pdf}
+		
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]
+		{publications/ICRH/Hillairet_2019_RF Network Analysis of the WEST ICRH Antenna with the Open-Source Python.pdf}
+	
+	\section{Multipactor}
+	
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]
+		{publications/Multipactor/Hillairet et al._2017_Multipactor in High Power Radio-Frequency Systems for Nuclear Fusion.pdf}
+	
+	\section{Teaching and Outreaching}
+	
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]	
+		{publications/TeachingOutreaching/Hillairet et al._2019_Protecting Fusion Reactors from Extreme Heat.pdf}
+		
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]
+		{publications/TeachingOutreaching/Hillairet et al._2020_Radio-frequency hands-on for nuclear fusion Master's sudents.pdf}
+		
+		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]	
+		{publications/TeachingOutreaching/Martins et al._2020_ITER robots.pdf}
+	\fi
+	
+
+	
+
 
 %	%----------------------------------------------------------------------------------------
 %	%	NOMENCLATURE
