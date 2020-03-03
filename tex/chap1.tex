@@ -2,6 +2,8 @@
 %\chaptertoc{}
 
 \chapter{Controlled Fusion, RF heating and Current Drive}
+\label{chap:fusion_and_rf}
+\margintoc
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -89,13 +91,29 @@ Sustaining a high temperature in steady-state requires that the plasma be confin
 \subsection{Ohmic Heating}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Radio frequency Heating and Current Drive}
+\subsection{Current Drive}
+
+
+\section{Radio frequency Heating and Current Drive}
+\subsection{General Principles}
+Radio-Frequency Heating and Current-Drive methods have in common the following systems:
+\begin{itemize}
+	\item Wave propagation and absorption on ions or electrons by wave-particle interactions
+	\item Antennas to couple the electromagnetic power to plasma waves
+	\item Transmission Lines to transport the electromagnetic power to the antennas
+	\item High Power RF generators, that transform electrical power into electromagnetic power
+\end{itemize}
+
+The antenna coupling is 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Ion Cyclotron Resonance Frequency}
+\subsection{Ion Cyclotron Resonance Frequency}
+\marginnote{Part of this chapter is taken from the chapter X of the IAEA Textbook of Fusion Technology [REF].}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Lower Hybrid Resonance Frequency}
+\subsection{Lower Hybrid Resonance Frequency}
 \marginnote{Part of this chapter is taken from the chapter X of the IAEA Textbook of Fusion Technology [REF].}
 Originally, the occurrence of a wave resonance, the \emph{lower hybrid resonance}, has been anticipated to lead to strong wave-particle interaction through linear and non-linear mode conversion to a hot plasma wave\sidecite{stix1992}. With an appropriate RF launcher conceived to excite cold plasma waves, these would propagate into the plasma until reaching the lower hybrid resonant layer at $\omega_{LH}$. This resonance exists in tokamak plasma in the region close to the ion plasma frequency $\omega_{pi}/2\pi$, which lies in the lower end of the microwave band (1-5~GHz). At this layer, the perpendicular group velocity vanishes and the waves can convert into a hot plasma mode which is absorbed. This heating technique, known as \emph{Lower Hybrid plasma Ion Heating} (LHIH) or \emph{Lower Hybrid Resonance Heating} (LHRH), was the originally experimentally investigated method in the 70'\sidecite{bellan1974, hooke1972, golant1972, tonon1977}. Different physical mechanisms have been invoked to explain the energy absorption, such as stochastic Ion Heating in \citeauthyear{karney1978} and quasi-linear electron Landau damping in \citeauthyear{brambilla1983}.
 
@@ -109,4 +127,5 @@ Since in 1982 many impressive results were presented on LHCD\sidecite{stevens198
 Currently, the LH waves term refers to the waves which satisfy the slow-wave branch of the cold plasma dispersion relation for parallel index larger than one ($|n_{\parallel}|>1$) and a RF frequency $\omega$ which lies between the ion cyclotron $\omega_{ci}$ and the electron cyclotron $\omega_{ce}$ frequencies. 
 
 %For the LH method which operates at the lower end of the microwave band (1-5 GHz) klystrons transform electrical power into electromagnetic power (step 1), which is transported to the plasma using waveguides (step 2). The power is coupled to the plasma with antennas called "grills" because of their characteristic shape (step 3), transported inside the plasma by plasma waves (typically the slow wave) (step 4), and absorbed on ions or electrons by wave-particle interaction (step 5).
+
 
