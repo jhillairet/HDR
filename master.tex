@@ -30,14 +30,18 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 \sectionfont{\color{ColorSection}}  % sets colour of sections
 \subsectionfont{\color{ColorSubSection}}  % sets colour of subsections
 
+%%%%%% numerote aussi les subsections
+\setcounter{secnumdepth}{3}
+
+
 % enlarge the default width of the dictum (0.333 default)
 \renewcommand{\dictumwidth}{0.7\textwidth}
 
 
 %%%%%% Maths
-\usepackage{ physics}
-%\usepackage{siunitx}
-\newcommand{\si}{}
+\usepackage{physics}
+\usepackage{siunitx}
+%\newcommand{\si}{}
 
 % definitions of mathematical variables
 \newcommand{\bbf}{{\mathbf b}}
