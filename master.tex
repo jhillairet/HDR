@@ -9,7 +9,7 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 %overfullrule=true, % If uncommented, overly long lines will be marked by a black box; useful for correcting spacing problems
 ]{kaobook}
 
-%%%% Add 1st Author Publications in the manuscript: 1
+%%%% set to 1 to add 1st Author Publications in the manuscript
 \def\addpublications{0}
 
 %%%%%% Font and languages
@@ -33,31 +33,54 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 %%%%%% numerote aussi les subsections
 \setcounter{secnumdepth}{3}
 
-
-% enlarge the default width of the dictum (0.333 default)
+%%%%%% enlarge the default width of the dictum (0.333 default)
 \renewcommand{\dictumwidth}{0.7\textwidth}
 
+%%%%%% epigraph (inspirational quote at the beginning of a chapter)
+\usepackage{epigraph}
+
+%%%%%% Table
+\usepackage{tabularx} % smarter arrays
 
 %%%%%% Maths
 \usepackage{physics}
 \usepackage{siunitx}
-%\newcommand{\si}{}
 
-% definitions of mathematical variables
+%%%%%% definitions of mathematical variables
+\newcommand{\abf}{{\mathbf a}}
 \newcommand{\bbf}{{\mathbf b}}
 \newcommand{\ebf}{{\mathbf e}}
 \newcommand{\jbf}{{\mathbf j}}
 \newcommand{\kbf}{{\mathbf k}}
+\newcommand{\rbf}{{\mathbf r}}
+\newcommand{\nbf}{{\mathbf n}}
 \newcommand{\ubf}{{\mathbf u}}
 \newcommand{\vbf}{{\mathbf v}}
 \newcommand{\xbf}{{\mathbf x}}
+\newcommand{\Abf}{{\mathbf A}}
 \newcommand{\Bbf}{{\mathbf B}}
+\newcommand{\Hbf}{{\mathbf H}}
+\newcommand{\Jbf}{{\mathbf J}}
+\newcommand{\Dbf}{{\mathbf D}}
 \newcommand{\Ebf}{{\mathbf E}}
+\newcommand{\Kbf}{{\mathbf K}}
 \newcommand{\Mbf}{{\mathbf M}}
 \newcommand{\Sbf}{{\mathbf S}}
 \newcommand{\Vbf}{{\mathbf V}}
+\newcommand{\Sbb}{{\mathbb S}}
 \newcommand{\nablabf}{\mbox{\boldmath${\nabla}$}}
+\newcommand{\diff}{{\mathrm{d}}}
+\newcommand{\SWR}{{\mathrm{SWR}}}
+\newcommand{\Vfwd}{{v_{\mathrm{f}}}}
+\newcommand{\Ifwd}{{i_{\mathrm{f}}}}
+\newcommand{\Vrefl}{{v_{\mathrm{r}}}}
+\newcommand{\Irefl}{{i_{\mathrm{r}}}}
+\newcommand{\Vbff}{{\mathbf{V}_{\mathrm{f}}}}
+\newcommand{\Vbfr}{{\mathbf{V}_{\mathrm{r}}}}
+\newcommand{\Zref}{{Z_{\mathrm{ref}}}}
 
+\newcommand{\TE}{{\mathrm{TE}}}
+\newcommand{\TM}{{\mathrm{TM}}}
 
 %%%%%% Bibliography
 % Load the bibliography package and pass it some options
@@ -75,6 +98,12 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 \RenewDocumentCommand{\formatmargincitation}{m}{
 	\parencite{#1} \citeauthor*{#1} (\citeyear{#1})\\
 }
+
+%%%% General TOC depth
+\setcounter{tocdepth}{4}
+
+%%%% Margin TOC depth
+\renewcommand{\themargintocdepth}{1}
 
 % Redefine the citation style: uses numbered sidenotes (upperscript)
 %\RenewDocumentCommand{\formatmargincitation}{m}{%
@@ -98,7 +127,8 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 
 %\makenomenclature % Make LaTeX produce the files required to compile the nomenclature
 
-
+% fix bad unicode character which may arise from copy/paste
+\DeclareUnicodeCharacter{202F}{\,}
 
 %----------------------------------------------------------------------------------------
 \begin{document}
@@ -108,10 +138,11 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 	%----------------------------------------------------------------------------------------
 	
 	%\titlehead{The \texttt{kaobook} class}
-	\subject{Use this document as a template}
+	\subject{Habilitation à Diriger les Recherches}
 	
-	\title[HDR]{Titre de la HDR}
-	\subtitle{Customise this page according to your needs}
+	\title[HDR]{Enhancing Performances of High Power Radio-Frequency
+		Systems in Magnetic Confinement Fusion Devices}
+	%\subtitle{Customise this page according to your needs}
 	
 	\author[Julien Hillairet]{Julien Hillairet}
 	
@@ -209,12 +240,16 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 %	\addpart{intro}
 %	\pagelayout{margin} % Restore margins
 	
+	% Fusion and tokamak
 	\input{tex/chap1.tex}
 	
-	\input{tex/chap2.tex}
-	
+	% RF Components
 	\input{tex/chap3.tex}
 	
+	% RF Coupling
+	\input{tex/chap2.tex}
+	
+	% Education
 	\input{tex/chap4.tex}
 	
 	%----------------------------APPENDIX------------------------------------------------------------
@@ -245,11 +280,54 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 		\printbibliography[heading=bibintoc, title=Bibliography, prenote=bibnote] 
 	\end{refcontext}
 
+	\newpage
+	\chapter{Publications}
 	%%%%% Bibliography of my 1st author publications
 	\begin{refsection}[first_author_papers.bib]
+		\section*{First Author References}
 		\nocite{*}
-		\printbibliography[title=First Author References, heading=bibintoc]
+		\printbibliography[heading=none]
 	\end{refsection}
+
+	\section*{Conference and Journal Editorial Work}
+	\begin{itemize}
+		\item Editor of the \href{https://www.epj-conferences.org/articles/epjconf/abs/2017/26/contents/contents.html}{22th Topical Conference on Radio-Frequency Power in Plasmas}, Aix-en-Provence, France, May 30 - June 2, 2017.
+		\item Guest Editor with Alf Köhn (University of Stuttgart) of \href{https://iopscience.iop.org/journal/0031-9120/page/Spotlight-on-Nuclear-Fusion}{IOP "Spotlight on Nuclear Fusion"}.
+	\end{itemize}
+	
+	\section*{Patent}
+
+	\begin{itemize}
+		\item Chen, Z., Hillairet, J., 2017. Dispositif De Manoeuvre D’un Actionneur Dispose Dans Une Enceinte Fermee Au Travers D’une Paroi De L’enceinte. \href{https://bases-brevets.inpi.fr/fr/document/FR3066944.html?s=1587045453863&p=5&cHash=9dd74066794d8b15bf32b0ef194d0d86}{FR3066944}~\cite{chen2017-4}.
+	\end{itemize}
+		
+	
+	\newpage
+	\chapter{Encadrement}
+	\section*{Thèses encadrées}
+	\begin{itemize}
+	\item Nicolas Fil, \textit{Characterization and modelling of the secondary electron emission properties under magnetic field for high power RF systems subject to Multipactor effect}. Institut Supérieur de l'Aéronautique et de l'Espace - Université Toulouse, 2017. 
+	
+	\item Zhaoxi Chen. \textit{Mechanical and Materials Development of Radio-Frequency Contact for the ITER Ion Cyclotron Resonance Heating Antenna}. Université Toulouse III - Paul Sabatier, 2018.
+	
+	\item Walid Helou. \textit{Design and operation of antennas at the ion cyclotron and lower hybrid range of frequencies for nuclear fusion reactors}. Aix-Marseille University, 2018.
+
+		\item Adrien Plaçais, \textit{Modélisation et mesures de l'émission secondaire de diélectriques et des phénomènes multipactor en présence de champ magnétique pour la fusion nucléaire contrôlée et le spatial}. Institut Supérieur de l'Aéronautique et de l'Espace - Université Toulouse, 2020 (prévue).
+	
+	\end{itemize}
+
+	\section*{Stages de Master 2 encadrés}
+	\begin{itemize}
+		\item Mélanie Preynas, \textit{Développement d’un nouveau module pour le code de couplage ALOHA}, 2009.
+		\item Michal Kazda, \textit{Study of the coupling properties of a Passive-Active Multijunction Lower Hybrid antenna with tokamak plasma}, 2010.
+		\item François Farthouat, \textit{Conception d'un dispositif de réglage du système optique associé à un gyrotron}, 2010 (co-encadré avec Elodie Corbel).
+		\item Pierre-Etienne Marx, \textit{Calcul d'admittance de surface pour l'onde lente à la fréquence hybride basse dans un plasma}, 2011.
+		\item Walid Helou, \textit{Etude d’un nouveau concept d’antennes forte puissance à la fréquence hybride basse (LH) pour des réacteurs à fusion nucléaire}, 2012.
+%		\item Laurent Valade, \textit{Modelling of heat loads on RF antennas, due to parasitic absorption of Lower Hybrid power in tokamak plasmas}, 2012 (co-encadré avec Annika Ekedahl).
+		\item Nicolas Fils, \textit{Modélisation des propriétés d'émission secondaire de composants RF haute puissance}, 2014
+		\item Adrien Plaçais, \textit{Modélisation de l'émission secondaire de diélectriques et des phénomènes multipactor en présence de champ magnétique}, 2017.
+	\end{itemize}
+
 
 	%%%%% Copy of 1st author publications
 	\if\addpublications1
@@ -310,6 +388,7 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 		
 		\includepdf[nup=2x2, pages=-, fitpaper=true, linktodoc=true]	
 		{publications/TeachingOutreaching/Martins et al._2020_ITER robots.pdf}
+	
 	\fi
 	
 
