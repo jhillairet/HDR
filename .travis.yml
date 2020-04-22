@@ -12,7 +12,9 @@ cache:
 # Change working directory so including files will work
 before_script: cd $TRAVIS_BUILD_DIR
 script:
-  - pdflatex --shell-escape ./master.tex
+  - pdflatex --shell-escape -synctex=1 -interaction=nonstopmode ./master.tex
+  - biber ./master
+  - pdflatex --shell-escape -synctex=1 -interaction=nonstopmode ./master.tex
 deploy:
   provider: releases
   api_key:
