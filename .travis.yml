@@ -1,7 +1,10 @@
 # YAML file from https://dev.to/renegadecoder94/how-to-build-latex-with-travis-ci-and-minted-39ff
 # See also https://github.com/PHPirates/travis-ci-latex-pdf
+# We test each method for building LaTeX in a separate job.
 language: generic
-# Dependency of the minted package
+
+dist: bionic
+
 before_install:
   - sudo apt-get install python-pygments
 install:
