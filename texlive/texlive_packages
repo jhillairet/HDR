@@ -27,6 +27,7 @@ geometry
 hyperref
 hyphenat
 ifmtarg
+ifoddpage
 iftex
 import
 intcalc
