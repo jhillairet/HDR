@@ -17,14 +17,14 @@ cache:
 before_script: cd $TRAVIS_BUILD_DIR
 script:
   # Texliveonfly will download packages automatically
-  - texliveonfly ./master.tex
+  #- texliveonfly ./master.tex
   # You can use latexmk to automatically handle bibtex and references (recommended)
-  #- latexmk -pdf ./master.tex
+  - latexmk -pdf ./master.tex
   
-  - pdflatex --shell-escape -synctex=1 -interaction=nonstopmode master.tex
-  - bibtex master
-  - pdflatex--shell-escape -synctex=1 -interaction=nonstopmode  master.tex
-  - pdflatex --shell-escape -synctex=1 -interaction=nonstopmode master.tex # Compile twice to fix references
+  #- pdflatex --shell-escape -synctex=1 -interaction=nonstopmode master.tex
+  #- bibtex master
+  #- pdflatex--shell-escape -synctex=1 -interaction=nonstopmode  master.tex
+  #- pdflatex --shell-escape -synctex=1 -interaction=nonstopmode master.tex # Compile twice to fix references
 
 # Uncomment the following lines to see the packages installed in travis
 after_script:
