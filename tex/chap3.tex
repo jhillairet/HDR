@@ -354,10 +354,12 @@ where the $\abf$ and $\bbf$ array are constituted of the $a_i$ and $b_i$ element
 % #####################################################
 % #####################################################
 \subsection{Coaxial Lines}\label{sec:coaxial_lines}
+% #####################################################
 \subsubsection{Coaxial Lines Main Properties}
 A coaxial line is made of two cylindrical conductors, the internal of radius $a$ and the external of radius $b$, encapsulated one inside the other as illustrated in Figure~\ref{fig:coaxial_line_geometry}. The space between both conductors is filled with a dielectric. In high power application, conductors are made of rigid metallic cylinder (aluminium or stainless steel) eventually copper or silver coated to reduce RF losses. The dielectric is simply (dry) air, pressurized nitrogen or vacuum to reduce dielectric breakdown. 
 
-\paragraph{Electric and Magnetic Fields}
+% #####################################################
+\subsubsection{Electric and Magnetic Fields}
 The fundamental mode in a coxial line is a TEM mode as both electric and magnetic field are transverse to the propagation direction. This mode has no cut-off and therefore coaxial can be used down to DC.
 
 \begin{marginfigure}[*-10]
@@ -382,7 +384,8 @@ where $V=V_0 e^{\mp\gamma z}$ is the voltage between the conductors and $I=I_0 e
 	\label{fig:coaxial_line_fields}
 \end{marginfigure}	
 
-\paragraph{Characteristic Impedance}. 
+% #####################################################
+\subsubsection{Characteristic Impedance}. 
 The characteristic impedance $Z_0$ in $[\si{\Omega}]$ of a coaxial line is:
 \begin{equation}
 Z_0 = 
@@ -393,8 +396,8 @@ Z_0 =
 \marginnote[-1cm]{Or also, $Z_0\approx 138 \sqrt{\frac{\mu_r}{\varepsilon_{r}}} \log_{10}\left( \frac{b}{a} \right)$}
 with $\varepsilon_{r}$ the relative permittivity and $\mu_r$ the relative permeability of the filling dielectric. 
 
-\paragraph{Power and Losses}
-
+% #####################################################
+\subsubsection{Power and Losses}
 From Eq.(\ref{eq:coaxial_electric_field}), the maximum electric field is located on the inner conductor ($r=a$). The maximum voltage before breakdown $V_{\mathrm{max,bd}}$ is:
 \begin{equation}
 	V_{\mathrm{max,bd}} = a\ln\left(b/a\right) E_d
@@ -447,19 +450,6 @@ P_\ell (z)
 
 % #####################################################
 % #####################################################
-\subsubsection{High Power Coaxial Components}
-Rigid coaxial transmission lines for high power application are commonly available in 30, 50 or 75~$\si{\Omega}$ characteristic impedances. The former is optimized for power handling while the later is used for minimum attenuation. In between, 50~$\si{\Omega}$ lines are a compromise between power handling and attenuation. 
-
-\todo{Picture of coaxial components}
-
-
-%RF design and tests on a broadband, high-power coaxial quadrature hybrid applicable to ITER ICRF transmission line system for load-resilient operations
-%\sidecite{kim2015}
-
-In Tore Supra/WEST, ICRH lines consist in Spinner 30~\si{\Omega} 9" coaxial lines ($\phi_\mathrm{i}/\phi_\mathrm{o}=140/230~\si{mm}$ with 2 and 5~\si{mm} thickness respectively). The inner conductor is often made of copper for the internal conductor while the outer conductor is made of aluminium AG5. Long pulse duration can be limited by the thermal expansion of the (inner) conductor. Modelling have shown that forcing dry air or nitrogen flow between inner and outer conductor would however be sufficient to reach 2\si{MW}/1000\si{s} \sidecite{vulliez2005}.
-
-% #####################################################
-% #####################################################
 \subsection{Rectangular Waveguides}\label{sec:rectangular_waveguide}
 \subsubsection{Rectangular Waveguides Main Properties}
 Electromagnetic wave can also propagate in hollow metallic structures filled with dielectric. The structure dimensions must be designed to the wavelength to transport. Waveguides can support different kinds of modes, the most conventiannol being TE (Transvere Electric) and TM (Transverse Magnetic) modes. 
@@ -472,53 +462,66 @@ Electromagnetic wave can also propagate in hollow metallic structures filled wit
 
 A hollow rectangular waveguide of width $a$ and height $b$ is illustrated in Figure \ref{fig:rectangular_waveguide_geometry}. Solving Maxwell’s equations for this geometry leads to multiple possible solutions, or \emph{modes}. In a rectangular waveguide, modes can be expressed as \emph{Transverse Electric} (TE) or \emph{Transverse Magnetic} (TM), depending of their respective polarization. Since the walls of a rectangular waveguide constrain the electromagnetic field boundary conditions along two dimensions, two integer indices $m$ and $n$ are used to describe a mode from another. Thus, modes in a rectangular waveguides can be $\TE_{mn}$ or $\TM_{mn}$\sidenote{With $m$ and $n$ integers greater or equal to 0 for $\TE$ modes and greater or equal to 1 for $\TM$ modes.}. These modes are eigenfunctions of the equation system and each mode is characterized by a wavenumber $\beta_{mn}$:
 \begin{equation}
-	\beta_{mn} = \sqrt{k^2_0 - k_{c,mn} }
+	\beta_{mn} = \sqrt{k^2_0 - k_{c,mn}^2 }
 	\label{eq:rectwg_wavenumber}
 \end{equation}
 with $k_0=\omega\sqrt{\mu\varepsilon}=\sqrt{\mu_r \varepsilon_{r}}\omega/c$ and where $k_{c,mn}$ is the \textit{cut-off wavenumber}:
+\marginnote{We recall here for convenience that the medium wavelength $\lambda$ is:
+	$$
+	\lambda = \frac{\lambda_0}{n} = \frac{v_\phi}{f}
+	$$
+	where $\lambda_0$ is the wavelength in vacuum, $v\phi$ is the phase velocity, $n=c/v_\phi=\sqrt{\mu_r \varepsilon_{r}}$ is the refractive index and $c=1/\sqrt{\mu_0 \varepsilon_{0}}$ the speed of light. We also define 
+	$$
+	\xi_0=\sqrt{\frac{\mu_0}{\varepsilon_{0}}}=120\pi=377\,\si{\Omega}
+	$$ 
+	as the vacuum characteristic impedance.
+}
 \begin{equation}
 	k_{c,mn}
 	=
 	\sqrt{\left(\frac{m\pi}{a}\right)^{2}+\left(\frac{n\pi}{b}\right)^{2}}
 	\label{eq:rectwg_cutoff_wavenumber}
 \end{equation}
+
 Each mode has an associated \textit{cut-off frequency} $f_{c,mn}$, below which a mode cannot propagate in the guide:
 \begin{equation}
 	f_{c,mn} = \frac{k_{c,mn}}{2\pi\sqrt{\mu \varepsilon}}
 	\label{eq:rectwg_cutoff-frequency}
 \end{equation}
-The mode with the lowest cut-off frequency is called the \textit{fundamental} or \textit{dominant} mode. Because we have assumed that $a>b$, the lowest cut-off frequency ocurs for the $\TE_{10}$ ($m=1,n=0$) mode\sidenote{There are no $\TE_{00}$ mode.}. For practical applications, the dimensions of the waveguides are generally chosen in order to have one and only one mode allowed propagating for a specified frequency band. Other modes can eventually be excited by waveguides discontinuities, but can’t propagate since they are evanescent ($k^2_0 < k_{c,mn}^2$). Such modes are referred to \textit{high order modes}. For high power applications, a great care is given to waveguide inner walls, bends and connections, since reflected power and arcs may occur due to discontinuities in the conducting walls, such as the ones caused by misalignments, bumps, holes, etc.
+The mode $mn$ can propagate in a rectangular waveguide only if the operating frequency is higher than the cut-off frequency of the mode, i.e. $f>f_{c,mn}$. The mode with the lowest cut-off frequency is called the \textit{fundamental} or \textit{dominant} mode. Because we have assumed that $a>b$, the lowest cut-off frequency occurs for the $\TE_{10}$ ($m=1,n=0$) mode\sidenote{There are no $\TE_{00}$ mode.}. 
 
-\paragraph{Electric and Magnetic Fields}
-At a given frequency in a homogeneous-filled metallic hollow waveguide, the set of all possible TE and TM modes forms an orthogonal basis and a complete system\cite[§1.2]{marcuvitz1951},\cite[§5.2]{Collin1990},\cite[§8.2]{Harrington2001}. In practice, this sum is over all propagating modes and truncated to few evanescent modes only (if needed). The geometry of the rectangular waveguide is illustrated in TODO. In order to match the geometry usually used for plasma-wave coupling theory, we assume here that the large side of the waveguide is aligned in the direction $y$ and the short side in the direction of $z$. The waveguide cross-section is supposed homogenous in the $x$ direction.
+For practical applications, the dimensions of the waveguides are generally chosen in order to have one and only one mode allowed propagating for a specified frequency band. Other modes can eventually be excited by waveguides discontinuities, but can’t propagate since they are evanescent ($k^2_0 < k_{c,mn}^2$ in Eq.(\ref{eq:rectwg_wavenumber})). Such modes are referred to \textit{high order modes}. For high power applications, a great care is given to waveguide inner walls, bends and connections, since reflected power and breakdowns may occur due to discontinuities in the conducting walls, such as the ones caused by flange misalignments \sidecite{harvey1955,brady1965,kerr2010}, bumps, holes, etc.
 
+% #####################################################
+\subsubsection{Electric and Magnetic Fields}
+At a given frequency in a homogeneous-filled metallic hollow waveguide, the set of all possible TE and TM modes forms an orthogonal basis and a complete system\cite[§1.2]{marcuvitz1951},\cite[§5.2]{Collin1990},\cite[§8.2]{Harrington2001}. In practice, this sum is over all propagating modes and truncated to few evanescent modes only if needed, which is the case for antenna-plasma coupling calculations (Cf. Section~\ref{sec:lhcd}). In order to match the geometry usually used for plasma-wave coupling theory, we assume here that the large side of the waveguide is aligned in the direction $y$ and the short side in the direction of $z$. The waveguide cross-section is supposed homogenous in the $x$ direction. The geometry of a rectangular waveguide is illustrated in Fig.\ref{fig:rectangular_waveguide_geometry_fields}. The transverse electromagnetic fields can be expressed the summation of these modes:
 
-%\begin{figure}[h]
-%	\begin{centering}
-%		\includegraphics[scale=0.6]{sections_lyx/figures/geometrie_guides}
-%		\par\end{centering}
-%	
-%	\caption{\selectlanguage{english}%
-%		\label{fig:geometrie_guides}Géométrie des guides d'ondes, vu du plasma.\selectlanguage{french}%
-%	}
-%	
-%	
-%\end{figure}
+\begin{marginfigure}[0cm]
+	\includegraphics[width=1\linewidth]{figures/chap3/rectangular_waveguide_fields}
+	\caption{Rectangular Waveguide Geometry and $\TE_{10}$ mode pattern derived from Eq.(\ref{eq:rectwg_EHfields_TE10})}
+	\label{fig:rectangular_waveguide_geometry_fields}
+\end{marginfigure}
 
-\begin{eqnarray}
-\mathbf{E}_{t}(\mathbf{r}) & = & \sum_{p,m,n} V_{pmn}(x)\mathbf{e}_{pmn} (y,z)
+\begin{subequations}
+	\begin{align}
+\mathbf{E}_{t}(\mathbf{r}) = & \sum_{p,m,n} V_{pmn}(x)\mathbf{e}_{pmn} (y,z)
 \label{eq:E_guides_somme_modes}\\
-\mathbf{H}_{t}(\mathbf{r}) & = & \sum_{p,m,n} I_{mn}(x)\mathbf{h}_{pmn} (y,z)
+\mathbf{H}_{t}(\mathbf{r}) = & \sum_{p,m,n} I_{pmn}(x)\mathbf{h}_{pmn} (y,z)
 \label{eq:H_guides_somme_modes}
-\end{eqnarray}
+	\end{align}
+\label{eq:rectwg_transverse_fields_sum_modes}
+\end{subequations}
 with $V_{pmn}$ and $I_{pmn}$ the eigenvalues of a mode $p=\{\TE,\TM\}$ of indexes $(m,n)$ and $\gamma_{pmn}=j\beta_{pmn}$ its associated wavenumber. 
 
-\begin{eqnarray}
-V_{pmn}(x) & = & A_{pmn}e^{-\gamma_{pmn}x} + B_{pmn}e^{+\gamma_{pmn}x}
+\begin{subequations}
+	\begin{align}
+V_{pmn}(x) = & A_{pmn}e^{-\gamma_{pmn}x} + B_{pmn}e^{+\gamma_{pmn}x}
 \label{eq:valeur_propre_V}\\
-I_{pmn}(x) & = & \frac{1}{Z_{pmn}}\left(A_{pmn}e^{-\gamma_{pmn}x} - B_{pmn}e^{+\gamma_{pmn}x}\right)
+I_{pmn}(x) = & \frac{1}{Z_{pmn}}\left(A_{pmn}e^{-\gamma_{pmn}x} - B_{pmn}e^{+\gamma_{pmn}x}\right)
 \label{eq:valeur_propre_I}
-\end{eqnarray}
+	\end{align}
+	 \label{eq:rectwg_modes_eigenvalues}
+\end{subequations}
 with $Z_{pmn}$ the mode characteristic impedance:
 \begin{equation}
 Z_{pmn} = 
@@ -527,7 +530,6 @@ Z_{pmn} =
 \frac{\gamma_{mn}}{j\omega\varepsilon}=\frac{\gamma_{mn} \xi_0}{j k_0} & \mathrm{\, for\,\TM\, modes}
 \end{cases}
 \end{equation}
-with $\xi_0=\sqrt{\mu_0/\varepsilon_{0}}=120\pi=377\,\si{\Omega}$ the vacuum characteristic impedance. 
 
 The model eingenfunction for rectangular waveguides are\cite[§2.2]{marcuvitz1951},\cite[§8.1,§8.2]{Harrington2001},\cite[§5.4]{Collin1990},\cite[§3.3]{pozar2012},\cite[Appendix A]{Bers1981} for TE modes:
 \begin{eqnarray}
@@ -539,19 +541,17 @@ and mode TM modes:
 \mathbf{e}_{mn}^{\TM}(y,z) & = & -\nabla_{t}\phi_{mn}\\
 \mathbf{h}_{mn}^{\TM}(y,z) & = & \ebf_x \times\mathbf{e}_{mn}^{\TM}= -\ebf_x \times\nabla_{t}\phi_{mn}
 \end{eqnarray}
-where $\psi$ and $\phi$ are the generator functions (\emph{transverses field pattern mode functions}) \cite[Table 8.1]{Harrington2001}\cite[§1.2 (6.c)]{marcuvitz1951}\cite[Appendix A, A13-14]{Bers1981}:
-
+The longitudinal components are given by:
 \begin{eqnarray}
 E_{x}^{TM} & = & \sum_{m,n}\frac{k_{c,mn}^{2}}{j k_{0}}\xi_0 I_{m,n}(x)\phi_{mn}(y,z)\\
 H_{x}^{TE} & = & \sum_{m,n}\frac{k_{c,mn}^{2}}{j k_{0}}\xi_0^{-1} V_{m,n}(x)\psi_{mn}(y,z)
 \end{eqnarray}
-In particular, for a rectangular waveguide\cite[Appendix A]{Bers1981}, \cite[§2.2]{marcuvitz1951}:
-
+$\psi$ and $\phi$ are the generator functions (\emph{transverses field pattern mode functions}). For a rectangular waveguide\cite[Table 8.1]{Harrington2001}\cite[§1.2 (6.c),§2.2]{marcuvitz1951}\cite[Appendix A, A13-14]{Bers1981}:
 \begin{eqnarray}
 \psi_{mn} & = & \frac{1}{\pi}\sqrt{\frac{\epsilon_{m}\epsilon_{n}}{m^{2}\frac{b}{a}+n^{2}\frac{a}{b}}}\cos\left(\frac{m\pi}{a}y\right)\cos\left(\frac{n\pi}{b}z\right)\label{eq:fonction_generatrice_TE}\\
 \phi_{mn} & = & \frac{2}{\pi}\sqrt{\frac{1}{m^{2}\frac{b}{a}+n^{2}\frac{a}{b}}}\sin\left(\frac{m\pi}{a}y\right)\sin\left(\frac{n\pi}{b}z\right)\label{eq:fonction_generatrice_TM}
 \end{eqnarray}
-where $\epsilon_{n}=1$ if $n=0$, $\epsilon_{n}=2$ otherwise.
+where $\epsilon_{k}=1$ if $k=0$ or $\epsilon_{k}=2$ otherwise.
 
 Since these solutions form a orthogonal basis, the following integral over the waveguide cross-section $S$ gets\cite{marcuvitz1951,Collin1990}:
 
@@ -572,29 +572,63 @@ in particular:
 \end{subequations}
 where $\delta_{m=m',n=n'}=1$ if $m=m'$ and $n=n'$, $0$ otherwise.
 
-\paragraph{Power and Losses}
-The time-average power flow along a rectangular waveguide is:
+For the fundamental mode $\TE_{10}$ (with $a>b$), one has in particular:
+\begin{subequations}
+	\begin{align}
+\psi_{10}(y) &= 
+	\frac{1}{\pi} \sqrt{\frac{2a}{b}} \cos\left(\frac{\pi}{a} y\right) 
+	\\
+\Ebf_t(x,y) =& 
+	-  \sqrt{\frac{2}{ab}} \sin\left(\frac{\pi}{a} y\right)V_{10}(x) \hat\ebf_z 
+	\\
+\Hbf_t(x,y) =& 
+	   \sqrt{\frac{2}{ab}} \sin\left(\frac{\pi}{a} y\right)I_{10}(x)\hat\ebf_y 
+	\\
+H_x(x,y) =& 
+	\frac{k_{c,10}^2}{j \omega\mu} \frac{1}{\pi} \sqrt{\frac{2a}{b}} \cos\left(\frac{\pi}{a} y\right) V_{10}(x)
+	\end{align}
+	\label{eq:rectwg_EHfields_TE10}
+\end{subequations}
+\marginnote[-3cm]{We we have used $\omega\mu=k_0\xi_0=\beta_{mn}Z_{mn}$.}
+
+% #####################################################
+\subsubsection{Power and Losses}
+The previous choice of normalization factors leads to simple time-average power flow along a rectangular waveguide:
 \begin{equation}
-P=\iint\frac{1}{2}\Re\left[\mathbf{E}_{t}\times\mathbf{H}_{t}^{*}\right]\cdot\mathbf{\hat{e}}_{x} \diff S
+P=\iint\frac{1}{2}\Re\left[\mathbf{E}_{t}\times\mathbf{H}_{t}^{*}\right]\cdot \hat \ebf_x \diff S
 =
-\sum_{l}\frac{1}{2}Z^{-1}_{l}\left(\left|A_{l}\right|^{2}-\left|B_{l}\right|^{2}\right)
+\sum_{l}\frac{1}{2Z_{l}}\left(\left|A_{l}\right|^{2}-\left|B_{l}\right|^{2}\right)
 \label{eq:poynting}
 \end{equation}
 where the sum is over the propagating modes only. 
 
-Since the $\TE_{10}$ mode is the fundamental mode and the most used to transfer the RF power, we will specify some quantities for $m=1,n=0$. Let $P_\mathrm{i}$ (in [\si{W}]) the forward power and $P_\mathrm{r}$ the relected power, with $R$ the reflection coefficient defined by $R=P_\mathrm{r}/P_\mathrm{i}$. 
+Since the $\TE_{10}$ mode is the fundamental mode and the most used to transfer the RF power, we will specify some quantities for $m=1,n=0$. Using Eqs.(\ref{eq:rectwg_EHfields_TE10}), the power flow down the guide for the $\TE_{10}$ is:
+\begin{equation}
+	P_{10} = \frac{1}{2} \Re \iint_S  \left(\Ebf \times \Hbf^* \right)\cdot \hat\ebf_x \diff y \diff z
+	= \frac{1}{2} \Re\left[V_{10}(x) I^*_{10}(x) \right]
+	\label{eq:rectwg_poynting_TE10_V10_I10}
+\end{equation}
+which reads from Eqs.(\ref{eq:rectwg_modes_eigenvalues}):
+\begin{equation}
+	P_{10} = \frac{1}{2Z_{10}}\left(\left|A_{10}\right|^{2}-\left|B_{10}\right|^{2}\right)
+	\label{eq:rectwg_poynting_TE10_A10_B10} = P_\mathrm{i} -  P_\mathrm{r}
+\end{equation}
+where $P_\mathrm{i}$ (in [\si{W}]) is the forward power and $P_\mathrm{r}$ the reflected power. Coefficients $|A_{10}|$ and $|B_{10}|$ can then be related conveniently to the forward and reflected power:
+\begin{subequations}
+	\begin{align}
+	|A_{10}| =& \sqrt{2Z_{10} P_\mathrm{i}} \\
+	|B_{10}| =& \sqrt{2Z_{10} P_\mathrm{r}} =  R |A_{10}|
+	\end{align}	
+\end{subequations}	
+where we have used the "voltage" reflection coefficient $R$ defined by $R^2=P_\mathrm{r}/P_\mathrm{i}$. Using all the previous definitions, the electromagnetic field in Eqs.(\ref{eq:rectwg_EHfields_TE10}) can be directly related to forward and reflected powers, giving peak values comparable to full-wave calculations and for breakdown analysis. A simple benchmark of these relations is given on Fig.\ref{fig:rectwg_benchmark_fields}.
 
-%In particular, the power flow down the waveguide for the TE10 mode is:
-%\begin{equation}
-%	P_{10} = \frac{\omega \mu a^3 b}{4\pi^2}|A_{10}|^2 \beta_{10}
-%\end{equation}
 The electric field for the $\TE_{10}$ mode is maximum at $x=a/2$ (in the middle of the waveguide). This peak electric field value for this mode is:
 \begin{equation}
 	\left| E_{y,\mathrm{max}} \right|
 	=
 	2 \sqrt{\frac{Z_{10} P_\mathrm{i}}{a b }} 
 		\left( 
-			1 + \sqrt{R}
+			1 + R
 		\right)
 \end{equation}
 
@@ -602,95 +636,49 @@ The maximum incident power before breakdown for a given reflection coefficient i
 \begin{equation}
 	P_{\mathrm{max,bd}}
 	= 
-	\frac{a b}{4 Z_{10}} \frac{E_d^2}{\left(1 + \sqrt{R}\right)^2}
+	\frac{a b}{4 Z_{10}} \frac{E_d^2}{\left(1 + R\right)^2}
 \end{equation}
 with $E_d$ the electric strength of the medium. The previous expression shows that the maximum power is again obtained for a minimum reflection coefficient and increase with the waveguide dimensions. 
 
-The Ohmic loss is not homogeneous in a rectangular waveguide. The Ohmic power loss density (in [$\si{W/m^2}$]) is, for the small ($\Psi_b$) and the large ($\Psi_a$) sides of the waveguide respectively:
+The Ohmic loss is not homogeneous in a rectangular waveguide. The Ohmic power loss density (in [$\si{W/m^2}$]) is, for the large ($\Psi_a$) and the small ($\Psi_b$) sides of the waveguide respectively:
 \begin{subequations}
-\begin{align}
-\Psi_b(z)
-			 =& P_\mathrm{i}(1+R)^2
-			 	\frac{2 R_s}{Z_{10} a b} 
-			 	\frac{\lambda_{g,10}}{\lambda_0}
-			 	\left(\frac{\lambda_0}{\lambda_{c,10}}\right)^2 	\\
-\Psi_a(z)
-			=&
-			 P_\mathrm{i}(1+R)^2 
-			 \frac{2 R_s}{Z_{10} a b} 
-			 \frac{\lambda_{g,10}}{\lambda_0}
-			 \left( 
-			 	\left(\frac{\lambda_0}{\lambda_{g,10}} \right)^2 \sin\left(\frac{\pi x}{a}\right)^2 
-			 	+ \left(\frac{\lambda_0}{\lambda_{c,10}}\right)^2  \cos\left(\frac{\pi x}{a}\right)^2 
-			 \right)
-\end{align}
+	\begin{align}
+		\Psi_a(x,y)
+		=& \frac{R_s}{2} \left(\left| H_x(x,y) \right|^2 + \left| H_y(x,y) \right|^2 \right)
+\\
+		\Psi_b(x)
+		=& \frac{R_s}{2} \left| H_x(x,0) \right|^2 
+	\end{align}
 \end{subequations}
-So, the Ohmic power loss per unit length $P_\ell$ (in \si{W/m}) for a waveguide is then: 
+
+From symmetry, the currents on the top and bottom walls are identical, as are the currents on the small walls. So, the Ohmic power loss per unit length $P_\ell$ (in \si{W/m}) for a waveguide is then: 
 \begin{equation}
-\frac{\diff P_\ell }{\diff z} 
+P_\ell (z)
 = 
-2\int_0^a  \Psi_a(z) \diff x 
+2\int_0^a  \Psi_a(x,z) \diff x 
 + 
 2\int_0^b  \Psi_b(z) \diff y 
 \end{equation}
-
-%Waveguide attenuation
-%\begin{equation}
-%\alpha_{\mathrm{wg}} 
-%	= 
-%	R_s
-%	\frac{1 + \frac{2b}{a}\left(\frac{f_c}{f}\right)^2}{b\xi_0\sqrt{1-\left(\frac{f_c}{f}\right)^2}}
-%\end{equation}
-
-% #####################################################
-% #####################################################
-\subsubsection{Waveguide Plumbery – a practical example with Tore Supra/WEST}
-Many waveguide devices have been developed in order to transmit, measure, combine or split the power from one point to another. These devices are commonly used on LHCD systems to transport the power from a klystron to (a section of) an antenna, but also in order to protect the klystron from possible reflected RF power by the plasma.   
-
-As an example of the usage of such devices, the Tore Supra/WEST LHCD system is illustrated in Figure \ref{fig:toresupralhcdsystem}. The power is generated at the klystron plant and transmitted to the two launchers through rectangular waveguides (8 lines per launcher). 
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.9\linewidth]{figures/chap3/ToreSupra_LHCD_System}
-	\caption{Schematic of the Tore Supra LHCD system, from the klystrons plant to the vacuum vessel.}
-	\label{fig:toresupralhcdsystem}
-\end{figure}
-
-Once reaching the launcher rear end, the power goes trough a \textit{hybrid junction} (also called 3-dB splitter). This device splits the forward power into two waveguides, one to feed the upper part and the other for the lower part of the launcher.  If reflected power (from the plasma) returns from these two waveguides, the power is recombined and directed to a fourth one. An actively cooled water load is connected to this fourth port, in order to dump the remaining RF power reflected by the plasma and thus protect the klystron. A rectangular waveguide 3-dB splitter is illustrated in Figure \ref{fig:hybridjunction1}. 
+which reads:
+\begin{equation}
+P_\ell (z)
+= 
+R_s \left[
+	\frac{1}{b} \left| I_{10} \right|^2 
+	+ 
+	\left(
+		2a + \frac{a^2}{b}
+	\right)
+	\frac{k_{c,10}^2}{(\omega\mu\pi)^2} 
+	\left| V_{10} \right|^2 
+\right]
+\end{equation}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.4\linewidth]{figures/chap3/HybridJunction1}
-	\includegraphics[width=0.4\linewidth]{figures/chap3/HybridJunction2}
-	\includegraphics[width=0.4\linewidth]{figures/chap3/HybridJunction_Efield}
-	\caption{Top: Illustration of an rectangular waveguide hybrid junction. When excited from port 1, the power is split to ports 2 and 3. when the power comes from ports 2 and 3, the power is recombined and directed to port 4, where the power is dumped into a water load. Bottom: The electric field distribution when excited from port 1. }
-	\label{fig:hybridjunction1}
-\end{figure}
-
-
-After being split, the RF power goes through various devices up to the plasma (Figure \ref{fig:toresuprac4cad}): 
-\begin{itemize}
-	\item A bidirectional coupler, which allows measuring the forward and reflected power amplitude and phase ;
-	\item A DC break, which isolates the DC potential of the tokamak from the DC potential of the transmission line (for the protection of persons);
-	\item A vacuum feed through (window) which isolates the tokamak vacuum from the pressurized medium existing in the waveguide. These windows (16 by launchers) are illustrated in Figure \ref{fig:toresuprac4cad}. A window consists in a dielectric medium inserted between two rectangular waveguides. The dimensions of the dielectric medium (a ceramic, such beryllium oxide BeO or alumina) are calculated in order not producing reflected power. A part of the power is always absorbed in the ceramic, so a great care is applied to correctly cool the window in order to avoid heating up and ultimately break the ceramic. More details on windows are given in \ref{sec:RF_windows}
-	\item A TE10-TE30 mode converter, which splits the incoming RF power into three, thus leading to split the power into three poloidal rows of waveguides. A mode converter is a rectangular waveguide device which large side is modulated in order to allow higher modes (such as TE20, TE30 and TE40) and such that the power is totally transferred from one mode to another one (efficiency is close to 100\%). Once the power is transferred to the TE30 mode, metallic septa located in zero field regions split the power into three independent waveguides. The device is illustrated in Figure \ref{fig:modeconverter}. More details on TE10-TE30 mode converter are given in \ref{sec:mode_converter}
-	\item Finally a multijunction, a structure which will be described in details in the next section, splits and phases the power in the toroidal direction, then leads to the plasma. The section \ref{sec:multijunction} is dedicated to Multijunction antennas.
-\end{itemize}
-
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.9\linewidth]{figures/chap3/ToreSupra_C4_CAD}
-	\caption{Illustration of the power splitting scheme in WEST LHCD launcher LH1 or LH2.}
-	\label{fig:toresuprac4cad}
-\end{figure}
-
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.9\linewidth]{figures/chap3/ModeConverter}
-	\caption{Illustration of the electric field distribution in a TE10-TE30 mode converter at 5 GHz. The device is excited from the left.}
-	\label{fig:modeconverter}
+	\includegraphics[width=1.0\linewidth]{figures/chap3/rectangular_waveguide_fields_losses}
+	\caption{$E$ and $H$ fields and RF losses in a 400~\si{mm} WR284 waveguide ($72.13 \times 34.04$~\si{mm}) with $P_\mathrm{i}=500~\si{kW}$ and  $P_\mathrm{r}=100~\si{kW}$ at 3.7~\si{GHz}. Conductor are in copper. Results are  benchmarked against full-wave ANSYS HFSS.}
+	\label{fig:rectwg_benchmark_fields}
 \end{figure}
 
 
@@ -702,32 +690,6 @@ After being split, the RF power goes through various devices up to the plasma (F
 
 
 
-
-% #####################################################
-% #####################################################
-% #####################################################
-\section{RF Components}\label{sec:RF_components}
-
-% #####################################################
-% #####################################################
-\subsubsection{RF Windows}\label{sec:RF_windows}
-\marginnote{Part of this section are taken from \citeauthyear{hillairet2015}.}
-
-Output window failure caused by–Reflected power–Vacuum arcs–Multipactordischarge–X-ray damage•Heat dissipation
-
-\cite{vaughan1961, ikeda1989, neuber1998, hemmert1998}
-
-
-% #####################################################
-% #####################################################
-\subsubsection{TE10-TE30 Mode Converters}\label{sec:mode_converter}
-\marginnote{Part of this section are taken from \citeauthyear{hillairet2012, hillairet2020} and internal technical notes.}
-
-
-% #####################################################
-% #####################################################
-\subsection{RF Contacts}\label{sec:RF_contacts}
-\marginnote{Part of this section are taken from \citeauthyear{hillairet2015-1, hillairet2018}, PhDs \citeauthyear{chen2018-2} and associated papers \cite{chen2017-2, chen2017-3,  chen2018, chen2018-1, chen2020}.}
 
 
 
@@ -771,23 +733,23 @@ Role de l'angle des bareaux de l'écran de faraday\sidecite{bures1990}
 % #####################################################
 \subsubsection{“Grill” Antennas}
 \todo{Power limit and multipactor in grill:\cite{hwang1981, vaughan1982, goniche2012-2, goniche2014} from vaughan1982:
-This suggests that multipactor in the Brambilla grill might be suppressed
-by making each of the dividing septa thicker in the middle than at the
-edges, to introduce a similar small lateral component of RF field. If
-successful, this would have the merit of being a "geometrical" not
-subject to change during the life of the equipment. Solutions to multipactor
-which depend on surface treatment orc onditioning are inherently
-less reliable, because further surface changes during life are not only
-possible but very probable.
-If tests are made of this suggestion, it is essential that the actual working
-environment be reproduced, most particularly the local magnetic
-field. Multipactor is a phenomenon strongly influenced by stray fields,
-and testsi n which they are norte presented are almost valueless.
+	This suggests that multipactor in the Brambilla grill might be suppressed
+	by making each of the dividing septa thicker in the middle than at the
+	edges, to introduce a similar small lateral component of RF field. If
+	successful, this would have the merit of being a "geometrical" not
+	subject to change during the life of the equipment. Solutions to multipactor
+	which depend on surface treatment orc onditioning are inherently
+	less reliable, because further surface changes during life are not only
+	possible but very probable.
+	If tests are made of this suggestion, it is essential that the actual working
+	environment be reproduced, most particularly the local magnetic
+	field. Multipactor is a phenomenon strongly influenced by stray fields,
+	and testsi n which they are norte presented are almost valueless.
 	
 	
 	
-use of titatium to lower secondary emission in JFT-2 and WEGA
-not a great idea in CMod
+	use of titatium to lower secondary emission in JFT-2 and WEGA
+	not a great idea in CMod
 }
 \todo{fast wave coupling : electric field in the waveguide need to be directed polodally. But N//>1 so dielectric filled waveguide, problem.}
 
@@ -1014,9 +976,85 @@ Although not part of the initial ITER planned procurement phase, a 20 MW/CW 5 GH
 
 In addition, LHCD-assisted start-up could reduce the flux consumption during current ramp-up, resulting in a longer flat top or burn time. An early application of 20 MW LHCD during the plasma current ramp-up phase of the ITER reference scenario 2 is effective to reduce the flux consumption. An expected saved flux of 43Wb is equivalent to about 500 s of additional burn duration \sidecite{hoang2009-1}.
 
-% #####################################################
-\subsection{ITER RF Windows}
 
+
+
+
+
+% #####################################################
+% #####################################################
+% #####################################################
+\section{RF Components}\label{sec:RF_components}
+
+% #####################################################
+% #####################################################
+\subsection{5 GHz ITER RF Window Design and Tests}\label{sec:RF_windows}
+% ############################################
+\subsubsection{Context}
+\marginnote{Parts of this section are taken from \citeauthyear{hillairet2015}.}
+A tokamak operates at pressures different from the transmission line pressure. RF windows intend to isolate these different pressures but allow propagation of the microwaves with low losses and limited RF power reflection. Vacuum vessel operates at ultra-low pressure, typically $10^{-4}$ to $10^{-6}$~\si{Pa}, while transmission lines can contain atmospheric pressure or pressurized gas to increase the breakdown voltage. Consequently, the window must be sufficiently strengthened to withstand differential pressures of the order of several tens of \si{kPa}. On the other hand, window must withstand mechanical stresses such as shock and vibration, and important temperature variations. Window failures can be caused by reflected power, vacuum arcs/multipactor or too much heat dissipation \sidecite{vaughan1961, ikeda1989, neuber1998, hemmert1998}. In the case of a fusion reactor such like ITER, the windows are also part of the first nuclear confinement barrier.
+
+The high current drive efficiency of lower hybrid waves makes Lower Hybrid Current Drive (LHCD) system a crucial actuator to sustain a fraction of the non-inductive current drive in tokamaks. Simulations of ITER scenarios show that LHCD can help saving the poloidal flux consumption during ramp-up phases and thus extends significantly the flat-top duration \sidecite{hoang2009-1}. On the technological aspect, if the viability of the Passive Active Multijunction launcher concept has been validated in steady-state conditions at 3.7~\si{GHz} \sidecite{ekedahl2010}, its scalability to 5~\si{GHz} especially in terms of high power handling and Continuous Wave (CW) operations, remain to be demonstrated. In 2011-2013, as part of an international work leaded by CEA/IRFM \sidecite{hoang2009-1}, CEA/IRFM made a particular R\&D effort in order to validate the design and the performances of 5~\si{GHz} LHCD system for ITER. 
+
+\todo{figure ITER LHCD system}
+
+As the dimensions of the tokamak access ports are limited, the number of transmission lines connected to the antenna is limited too. In order to fit into the available space, to simplify the assembly design and to improve the maintenance of the system, the number of transmission lines and thus the number of RF windows must be kept as low as possible. This leads to increase the power handling capability of each transmission line, and ultimately of each window.
+
+In the proposed ITER LHCD design, 24~\si{MW}~CW of RF power at 5~\si{GHz} are expected to be generated and transmitted to the plasma. In order to separate the vacuum vessel pressure from the cryostat waveguide pressure, forty eight 5~\si{GHz} 500~\si{kW} windows are to be assembled on the waveguides at the equatorial port flange. For nuclear safety reasons, 48 additional windows could be located in the cryostat section, to separate the cryostat waveguide pressure from the exterior transmission line pressure and to monitor it. Because the failure of a window would lead to lock a transmission line, these windows have been identified as one of the main critical components for the ITER LHCD system since first ITER LHCD studies \sidecite{bibet2005}. In order to initiate this R\&D effort, two 5~\si{GHz} 500~\si{kW}/5~s pill-box prototype windows have been developed and manufactured in 2012 by the PMB/ALCEN Company in close collaboration with the CEA/IRFM\sidecite{hillairet2014}. 
+
+% ############################################
+\subsubsection{RF and Thermo-Mechanical Design}
+The proposed ITER 5~\si{GHz} RF window is based on a pill-box window concept \sidecite{ives1993,maebara1995}, i.e. a thin ceramic disc brazed in the middle of a short straight section of a circular waveguide axially connected on both sides to rectangular waveguides. According to the transmission line theory, the pill-box window has four discontinuities: rectangular waveguide to circular waveguide, vacuum to ceramic and ceramic to vacuum and circular waveguide to rectangular waveguide. Typical design rule of thumb of such device is circular section diameter about the same size of the diagonal of the rectangular waveguide. Without taking into account the ceramic, the circular section length is approximately half a guided wavelength of the circular $\TE_{11}$ mode, in order to not generate spurious reflection into the rectangular sections. For a prescribed dielectric properties, the RF design consists in optimizing the geometrical dimensions of the window, mainly the diameter, the ceramic thickness and the vacuum circular waveguide length in order to minimize both RF reflection (matching) and RF power absorption in the ceramic (from trapped or ghost-mode heating \cite{ives1993} ). Once optimized, taking into account the ceramic, the matching is optimum only for a narrow band of frequency and is very sensitive to the device dimensions and the ceramic relative permittivity. As the klystrons used for fusion applications have narrow bandwidth, for instance 5~MHz at 3.7~GHz \sidecite[-1cm]{beunas2009, magne2011} or 5~GHz klystrons \sidecite{kenichihayashi2007, park2013}, the RF optimization is performed for the central frequency only. 
+
+The heat losses in the ceramic, which have to be extracted by an active water cooling, depend on both the inside electric field topology and the ceramic dielectric loss (loss tangent). Undesirable modes due to parasitic resonances can be excited in the ceramic volume, raising the electric field and thus the heat dissipation. This aspect is uncorrelated from the return loss and one can even achieve low return loss but can have high heat losses in the ceramic (>2~\si{kW}) \sidecite{mirizzi2011}. So both aspects have to be taken into account during the RF optimization process.
+
+In the 2001 initial Lower Hybrid (LH) antenna design, 24 RF windows were set on the cryostat port. Each of them fed 2 RF windows installed on the vacuum port. Since the antenna is designed for a power up to 20 MW, each RF window of the first and second group have to withstand respectively 833 kW CW and 417 kW CW. Two preliminary designs had been proposed in [16]. However, the mechanical analysis performed in [19] showed that stresses are higher than the static fatigue limit of 50 MPa. This particularly point invalidates the design for dynamic fatigue (cycles of repeated heating and cooling). Following this study, a new RF design has been developed. At the contrary of the model proposed in \sidecite{bibet2001-1}, a larger rectangular input section has been used (WR229 instead of WR187). It was found in \sidecite{hillairet2013} a range of dielectric thickness which combines low total dielectric losses (<650W) by minimizing the axial electric field in the ceramic and a low VSWR (S11<-25dB). We did not take into account in this study the impact of non-negligible amount of reflected power (>5\%), such as experimented on tokamak.
+
+As highlighted in \sidecite{ao2014}, the relative dielectric properties of the ceramic disk depend on the manufacturer, even when the same manufacturer and ceramic batch are used. At the frequency of 5~GHz, the dielectric losses (loss tangent) of aluminium oxide (Al2O3), aluminium nitride (AlN) or Beryllium Oxyde (BeO) are of the same order ($\tan\delta \approx 10^{-4}$). The choice for BeO ceramic is motivated by its larger thermal conductivity (in the range of 330 to 370~\si{W/m/K} at room temperature) than the other ones (in the range of 30~\si{W/m/K} for Al2O3 and 70-180~\si{W/m/K} for AlN). BeO is used in high power 3.7~GHz and 5~GHz klystrons windows. In order to determine the final thickness of the windows, the BeO ceramic RF properties must be known with accuracy. A BeO sample has been requested from the ceramic manufacturer (American Beryllia) with the guarantee that the final ceramics will be made from the same lot. The sample has been characterized within a RF resonant cavity setup in collaboration with the XLIM laboratory \sidecite{lefloch2014}. The measurement of the BeO sample has been made at two surrounding frequencies and the results are given in \cite{hillairet2015}. The relative permittivity and the loss tangent at 5~GHz have been calculated from a linear interpolation of the measured values, to be $\varepsilon_{r}6.36\pm0.159$ and $\tan \delta = 4.30\times 10^{-4}\pm3.82\times 10^{-5}$ respectively. 
+
+From these measurements, the final dimensions have been calculated by the PMB/ALCEN Company in collaboration with CEA. In the proposed design, a rectangular waveguide of section 58.17x29.08~\si{mm} (WR229 standard) is used to forward the RF power into the circular section. The ceramic disk diameter and the thickness are 85.89~mm and 8.3~mm respectively. Other dimensions are reported in Figure~\ref{fig:iterwindowsmaindimensions}. In order to increase the RF performance of the window, in particular the return loss, two matching inductive rods have been added on each side of the window. These rods also make possible an eventual post-manufacturing tuning, by slightly deforming them after the final assembly. This technique has also been used in the TED 3.7~GHz windows used on the Tore Supra tokamak, but with a larger rod diameter due to the reduced frequency. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap3/ITER_window/ITER_windows_main_dimensions}
+	\caption{Main dimensions of the final 5 GHz RF window prototype. }
+	\label{fig:iterwindowsmaindimensions}
+\end{figure}
+
+The power loss in the ceramic volume and the electric field topology have been evaluated with finite element modelling. With the material properties cited above, the calculated dissipated power in ceramic is around 550~W for 500~kW input on matched load. Taking into account a conservative copper conductivity of 4.4~MS/m, the total resistive losses are estimated to 720~W. Combined, the expected total RF losses for the window to evacuate is thus of the order of 1.27~kW. 
+
+In order to conform to ITER acceptance criteria for vacuum feedthroughs \sidecite{waldon2008}, the maximum pressure on the ceramic (air) has been specified to be 3~bars absolute (0.3~MPa). The water cooling circuit specifications has been specified in accordance with the NFRI 5~GHz klystron test-bed in which the high power tests have been performed\sidecite{do2011, kim2019-2}. The maximum pressure on the cooling circuit has been set to 6~bars, with a maximum pressure drop on the cooling circuit for a 8~L/min flow of 0.3~bar\footnote{It has to be noted that these specifications are well below the ITER port plug specifications, for which the water temperature and pressure are expected to be 70-100$\si{\celsius}$ up to 40~bars in cooling mode and up to 250$\si{\celsius}$ and 45~bars in baking mode. However, such conditions are challenging because the copper skirt thickness has to be increased to sustain such a pressure. Increasing the skirt thickness in order to withstand a 40-45~bars pressure will reduce the cooling efficiency. Moreover, if the skirt is thicker, the mechanical constraints on the ceramic due to the differential thermal expansion between the BeO and Cu will be more severe since the skirt will be stiffer. For this reason, the present proposed prototype design only focuses on the RF performances.}. 
+
+Assuming an inlet flow of 8~L/min and an outlet return pressure of 1.5~bar specified by the water cooling loop system, the fluid velocity calculated from computational fluid dynamics (CFD) modelling in ANSYS Fluent at the 10~mm diameter inlet is 1.7~m/s. Figure~\ref{fig:iterwindowswatervelocity} illustrates the water velocity in half of the cooling section. The flow in the fluid section is mainly turbulent, as the Reynold number at the inlet/outlet is of the order of 10000 and 40000 in the skirt. Since inlet and outlet have been located normal to the skirt, the water velocity rise up to 4.6 m/s at the interface between the pipe and the skirt. However, the flow is rapidly homogenous in the skirt and with lower velocities (cf. Figure~\ref{fig:iterwindowswatervelocity_closeup_skirt}), leading to an homogenous cooling of the ceramic. The average value of the heat transfer coefficient is H=12300~\si{W.m^{-2}K^{-1}} on the inner side of the skirt. The water pressure is homogenous inside the skirt and the estimated pressure drop is 0.12~bar. Cavitation regime is not expected in the cooling section, as the cavitation number is more than two orders of magnitude above the critical threshold ($\mathrm{Ca}\approx 1$) in all situations.\marginnote{The \href{https://en.wikipedia.org/wiki/Euler_number_(physics)}{Cavitation number} ($\mathrm{Ca}$) is a dimensionless number used in flow calculations. It expresses the relationship between the difference of a local absolute pressure from the vapor pressure and the kinetic energy per volume, and is used to characterize the potential of the flow to cavitate. }
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap3/ITER_window/ITER_windows_water_velocity}
+	\caption{Water velocity in the skirt around the ceramic. Inlet is located at the left of the picture. The black oval illustrates the close-up view of Figure~\ref{fig:iterwindowswatervelocity_closeup_skirt}.}
+	\label{fig:iterwindowswatervelocity}
+\end{figure}
+
+\begin{marginfigure}[-5cm]
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap3/ITER_window/ITER_windows_water_velocity_closeup_skirt}
+	\caption{Close-up of the fluid velocity in the skirt section.}
+	\label{fig:iterwindowswatervelocity_closeup_skirt}
+\end{marginfigure}
+
+The thermal model of the window has been set-up using loading from both the electromagnetic (heat load on walls and ceramic) and CFD models (convection on the skirt). 
+
+Illustrations of the resistive losses and the dielectric losses for 500 kW input are given in Figure 6 and Figure 7.
+
+% #####################################################
+% #####################################################
+\subsection{TE10-TE30 Mode Converters}\label{sec:mode_converter}
+\marginnote{Part of this section are taken from \citeauthyear{hillairet2012, hillairet2020} and internal technical notes.}
+
+
+% #####################################################
+% #####################################################
+\subsection{RF Contacts}\label{sec:RF_contacts}
+\marginnote{Part of this section are taken from \citeauthyear{hillairet2015-1, hillairet2018}, PhDs \citeauthyear{chen2018-2} and associated papers \cite{chen2017-2, chen2017-3,  chen2018, chen2018-1, chen2020}.}
 
 
 
