@@ -6,8 +6,9 @@
 texliveonfly latexmk
 
 # Collections
-collection-langeuropean
+collection-latexrecommended
 collection-fontsrecommended
+collection-langeuropean
 
 # LuaTeX
 luaotfload
