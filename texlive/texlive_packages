@@ -49,6 +49,7 @@ sidenotes
 subfiles
 tikz-page
 titlesec
+todonotes
 unicode-math
 xcolor
 xifthen
