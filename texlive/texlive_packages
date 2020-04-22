@@ -33,9 +33,11 @@ multirow
 needspace
 newpx
 placeins
+pgf
 ragged2e
 setspace
 sidenotes
+tikz
 tikz-page
 titlesec
 unicode-math
