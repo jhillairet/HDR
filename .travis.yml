@@ -1,0 +1,27 @@
+# YAML file from https://dev.to/renegadecoder94/how-to-build-latex-with-travis-ci-and-minted-39ff
+language: generic
+# Dependency of the minted package
+before_install:
+  - sudo apt-get install python-pygments
+install:
+  - source ./texlive/texlive_install.sh
+cache:
+  directories:
+    - /tmp/texlive
+    - $HOME/.texlive
+# Change working directory so including files will work
+before_script: cd $TRAVIS_BUILD_DIR
+script:
+  - pdflatex --shell-escape ./master.tex
+deploy:
+  provider: releases
+  api_key:
+    secure: ${GITHUB_TOKEN}
+  file:
+    - ./master.pdf
+  skip_cleanup: true
+  on:
+    tags: true
+    branch: master
+notifications:
+  email: true
