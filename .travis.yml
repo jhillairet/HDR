@@ -24,6 +24,12 @@ script:
   #- pdflatex --shell-escape -synctex=1 -interaction=nonstopmode ./master.tex
   #- biber ./master
   #- pdflatex --shell-escape -synctex=1 -interaction=nonstopmode ./master.tex
+
+# Uncomment the following lines to see the packages installed in travis
+after_script:
+  - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
+  - tlmgr list --only-installed | grep -oP 'i \K.+?(?=:)'
+  
 deploy:
   provider: releases
   api_key:
