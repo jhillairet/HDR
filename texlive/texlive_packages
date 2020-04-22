@@ -15,6 +15,9 @@ luaotfload
 # texliveonfly does not detect the following packages automatically
 minted fvextra upquote lineno xstring framed caption
 
+# index and bib
+imakeidx biblatex biber logreq
+
 # other manually added packages
 algorithm2e
 amsfonts
