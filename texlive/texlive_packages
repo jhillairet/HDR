@@ -27,6 +27,7 @@ hyperref
 hyphenat
 ifmtarg
 iftex
+import
 intcalc
 kastrup 
 koma-script
