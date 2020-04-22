@@ -18,7 +18,7 @@ script:
 deploy:
   provider: releases
   api_key:
-    secure: ${GITHUB_TOKEN}
+    secure:  d6aa298c152968d809e774da2e48604988f09784
   file:
     - ./master.pdf
   skip_cleanup: true
