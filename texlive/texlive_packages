@@ -30,6 +30,7 @@ hyphenat
 ifmtarg
 ifoddpage
 iftex
+imakeidx
 import
 intcalc
 kastrup 
