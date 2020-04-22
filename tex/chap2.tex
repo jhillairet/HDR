@@ -921,7 +921,7 @@ This suggests that more current can be driven with low parallel velocity electro
 
 $$\Delta j/ \Delta P \propto (v_{\parallel}^2 q) / (m n_e)$$
 
-this means that high current drive efficiency can be reached from fast electrons. Thus, it is actually more effective to push fast electrons than slower. Even if it may be energetically more expensive to accelerate fast electrons, this energy deposition need occurs less often because current last longer when carried by relatively less collisional electrons \sidecite{Fisch1987}. 
+this means that high current drive efficiency can be reached from fast electrons. Thus, it is actually more effective to push fast electrons than slower. Even if it may be energetically more expensive to accelerate fast electrons, this energy deposition need occurs less often because current last longer when carried by relatively less collisional electrons \sidecite{fisch1987}. 
 
 For the purpose of current drive with LH waves, the Landau damping is the dominant absorption mechanism. Landau damping is a collision-less damping process in which particles exchange energy with waves travelling with the nearly same phase velocity parallel to the magnetic field, that is, for particle parallel velocity $v_{\parallel}$ satisfying resonant condition:
 
@@ -937,10 +937,83 @@ However, in many past and present LHCD experiments, the resonant velocity $v_{\p
 \marginnote{Part of this section are taken from paper \cite{hillairet2010}.}
 
 
+
+
+% #####################################################
+% #####################################################
+\subsection{Coupling Calculation of Tore Supra/WEST LHCD Antennas}
+\marginnote{Part of this section are taken from paper \cite{hillairet2009-2}.}
+
+During October and November 2008, dedicated experiments were carried out in Tore Supra in order to compare the measured power reflection coefficients on the C2 and C3 launchers\sidenote{The C2 antenna has been removed from Tore Supra in 2009 and replaced by the Passive-Active Multijunction, labelled C4 (then LH2 in WEST).} with the numerical results from the ALOHA code. In order to avoid possible non-linear effects\cite{petrzilka1987, ekedahl2009}, low power pulses were used, i.e. pulses for which the power density at the mouth of the antenna is less than $2~\si{MW/m}^2$ (corresponding to a total input power of 100~kW). The parameters for pulse $\#43016$ are shown in Fig.~\ref{fig:TS43016}. A large variation of density in front of the antenna between $0.3\times10^{17}~\mathrm{m}^{-3}$ and $13\times10^{17}~\mathrm{m}^{-3}$ was obtained by varying the distance between the last closed flux surface (LCFS) and the antenna during the pulse (cut-off density is $n_{ec}=1.7\times10^{17}~\mathrm{m}^{-3}$). Electron density was measured with the Langmuir probes embedded in to the LH antennas. 
+
+\todo{Refaire la figure}
+\begin{figure}[h]
+	\includegraphics{figures/chap2/Tore_Supra/TS43016}
+	\caption{Tore Supra pulse $\#43016$. Top: total power; middle: reflection coefficient; bottom: plasma LCFS and antenna positions.}
+	\label{fig:TS43016}
+\end{figure}
+
+%Also shown are the poloidal cross sections of the plasma at the time of the RFA measurements at t = 7.05, 9.2 and 10.9 s (strictly speaking these are the poloidal cross sections for 42939 but I found very similar cross sections for all shots). The densities (as well as other RFA parameters like Jsat, Ti and Te) measured for different shots and fixed time are very similar because the plasma density is almost identical for all shots, the difference in the heating power between shots is very small and Ip is constant. The density e-folding increases slightly as the plasma moves from the APL during the shot, which could be explained by the enhancement of the particle transport on the LFS, as demonstrated earlier by the Jamie�s Mach probe measurements.
+
+In ALOHA, the edge plasma is described with a linear electron density profile and no vacuum layer in front of the grill. RFA measurements have been used to estimate typical scrape-off thickness in front of the antennas\cite{kocan2008-1}. The connection lengths $L_{c,LH}$ in front of C2 and C3, corresponding to the distance between protruding side limiters, are known to be $40~\si{cm}$ and $60~\si{cm}$. Assuming that the ratio of the cross-field diffusion coefficient $D_\perp$ and the plasma acoustic velocity $c_s$ is constant in the SOL, and using scrape-off thickness defined as $\lambda_n=\frac{n_{e0}}{\nabla n_{e0}}=\sqrt{\frac{D_\perp L_c}{c_s}}$, one finds that $\lambda_{n,LH}=\sqrt{\frac{L_{c,RFA}}{L_{c,LH}}\lambda_{n,RFA}^2}$. 
+
+
+
+% #################################################
+% #################################################
+% #################################################
+\subsubsection{C2 antenna}
+We present here some comparisons between experimental measurements and ALOHA on the Tore Supra C2 antenna. This antenna, installed in 1991, has been removed in 2009 and replaced by a new passive-active multi-junction antenna\cite{guilhem2009,guilhem2011}. The C2 antenna is made of 8 modules. Each module line is a 1-to-4 multi-junction (cf.~Fig~\ref{fig:geometry_TS_LHAntennas}). Permanent built-in phase shifters produce a $90^\circ$ phase difference between each output waveguides on a toroidal line, which produce a nominal peak parallel index of $n_{\parallel,0}=1.82$.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\textwidth]{figures/chap2/Tore_Supra/geometry_TS_LHAntennas}
+	\caption{ALOHA description of the upper parts of C2 and C3 antennas . Grey parts symbolizes passive waveguides.}
+	\label{fig:geometry_TS_LHAntennas}
+\end{figure}
+
+In Figure~\ref{fig:MarkI_mean_RC}, experimental reflection coefficients at different electron densities, measured during Tore Supra pulses \#43014-43016 for 5 upper modules of the C2 antenna are plotted. The density is measured with the nearest Langmuir probe placed at the center of the C2 antenna. Plain black line corresponds to the reflection coefficient calculated with ALOHA for different electron density values $n_{e0}$ at the mouth of the antenna for $\lambda_n=7$~mm. Dotted lines are for$\lambda_n=5$ and $10$~mm. For the C2 antenna, RFA measurements give $\lambda_n$ in $[3.3, 6.5]$~mm, which is in agreement with ALOHA results. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.95\textwidth]{figures/chap2/Tore_Supra/C2_mean_CR_modBas}
+	\caption{Average reflection  coefficient (in percents) versus electron density (normalized to LH cut-off density) for C2 antennas. Measured reflection  coefficient are taken from TS pulses number 43014-43016. Black curve corresponds to a $2~mm$ scrape-off thickness ($\pm 1~mm$).}
+	\label{fig:MarkI_mean_RC}
+\end{figure}
+
+% #################################################
+% #################################################
+% #################################################
+\subsubsection{C3 antenna}
+C3\sidenote{The antenna has been relabelled LH1 in WEST.} has been installed in 1999 and is also made of 8 modules. Each module is a 1-to-6 multi-junction (cf. Figure~\ref{fig:geometry_TS_LHAntennas}). Permanent built-in phase shifters produce a $90^\circ$ phase difference between each output waveguides on a toroidal line, which produce a nominal peak parallel index of $n_{\parallel,0}=2.02$.
+
+In Figure~\ref{fig:MarkII_mean_RC}, experimental reflection coefficients at different electron densities, measured during Tore Supra pulses \#43014-43016 for the 4 first lower modules of the C3 antenna are plotted. The density is measured with the nearest Langmuir probe placed at the bottom of the C3 antenna. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.95\textwidth]{figures/chap2/Tore_Supra/C3_mean_lowerMod}
+	\caption{Average reflection  coefficient (in percents) versus electron density (normalized to LH cut-off density) for C3 antennas. Measured reflection  coefficient are taken from TS pulses number 43014-43016. Black curve corresponds to a $2~mm$ scrape-off thickness ($\pm 1~mm$).}
+	\label{fig:MarkII_mean_RC}
+\end{figure}
+
+
+
+
+% ##################################################
+\subsubsection{C4 antenna}
+\todo{Figures Mélanie}
+
+% ##################################################
+\subsubsection{Summary of this section}
+
+Experimental reflection coefficients at different electron densities, measured during Tore Supra pulses had been compared with the ALOHA code predictions. Results obtained with ALOHA are in good agreement with the experimental measurements for both Tore Supra antennas and shows that ALOHA is an efficient LH predictive tool. 
+
 % ###################################################
 % ###################################################
 \subsection{Full-Wave Antenna Coupling}\label{sec:LHCD_FW_antena_coupling}
 \marginnote{Part of this section are taken from paper \cite{hillairet2019}.}
+
+
 
 %\subsection{Resonance Cone}
 %Bellan and Porkolab PRL 34, 124, 1975.
