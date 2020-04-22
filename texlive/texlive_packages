@@ -45,6 +45,7 @@ pgf
 ragged2e
 setspace
 sidenotes
+subfiles
 tikz-page
 titlesec
 unicode-math
