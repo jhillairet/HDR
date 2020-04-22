@@ -1,8 +1,5 @@
-afterpage
 amsfonts
-amssymb
 atbegshi
-beramono
 bookmark
 booktabs
 booktabs
@@ -13,7 +10,6 @@ etoc
 etoolbox
 everyhook
 everypage
-update-tl
 fancyhdr
 fancyvrb
 float
@@ -28,6 +24,7 @@ koma-script
 marginfix
 marginnote
 microtype
+ms
 multirow
 needspace
 newpx
