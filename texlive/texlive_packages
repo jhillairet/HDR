@@ -57,6 +57,7 @@ relsize
 setspace
 sidenotes
 subfiles
+textcase
 tikz-page
 titlesec
 todonotes
