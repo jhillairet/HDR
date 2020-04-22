@@ -19,7 +19,7 @@ script:
   # Texliveonfly will download packages automatically
   #- texliveonfly ./master.tex
   # You can use latexmk to automatically handle bibtex and references (recommended)
-  - latexmk -pdf ./master.tex
+  - latexmk -pdf -interaction=nonstopmode ./master.tex
   
   #- pdflatex --shell-escape -synctex=1 -interaction=nonstopmode master.tex
   #- bibtex master
