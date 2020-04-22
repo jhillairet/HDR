@@ -31,7 +31,7 @@ kastrup
 koma-script
 marginfix
 marginnote
-mathalfa
+mathalpha
 microtype
 ms
 multirow
@@ -42,7 +42,6 @@ pgf
 ragged2e
 setspace
 sidenotes
-tikz
 tikz-page
 titlesec
 unicode-math
