@@ -26,10 +26,11 @@ script:
   - pdflatex -interaction=nonstopmode  master.tex
   - pdflatex -interaction=nonstopmode master.tex # Compile twice to fix references
 
-# Uncomment the following lines to see the packages installed in travis
-after_script:
-  - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
-  - tlmgr list --only-installed | grep -oP 'i \K.+?(?=:)'
+## Uncomment the following lines to see the packages installed in travis
+#after_script:
+#  - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
+#  - tlmgr list --only-installed | grep -oP 'i \K.+?(?=:)'
+
 deploy:
   provider: releases
   api_key:
