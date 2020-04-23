@@ -719,6 +719,21 @@ Role de l'angle des bareaux de l'écran de faraday\sidecite{bures1990}
 % #####################################################
 % #####################################################
 \subsection{WEST ICRH Antennas Design}
+\marginnote{Parts of this section are taken from \citeauthyear{hillairet2015-2} and CEA/IRFM internal reports made in 2013-2014 during the design of the WEST ICRH antennas.}
+
+Three new identical ELM-resilient and CW power ICRH antennas have been designed for WEST. The ELM resilience property is obtained through an internal conjugate-T electrical scheme with series capacitors\sidecite{bosia2003-1}. The antenna design is based on a previously tested prototype in 2004 and 2007 at 48~MHz \sidecite{vulliez2008, argouarch2009}. In the frame of the Associated Laboratory in the fusion field between IRFM and ASIPP, the design has been upgraded in order to: 
+\begin{itemize}
+	\item improve the power capabilities and coupling resistance from the previous prototype   \sidecite{helou2015-1}
+	\item increase the nominal frequency range to 55~MHz to match WEST scenarios\sidecite{bourdelle2015}
+	\item allow CW operation with actively cooled components \sidecite{chen2015, vulliez2015}.
+\end{itemize} 
+All these aspects led to iterate between RF and mechanical design, with generally opposite constraints and necessary compromises\sidenote{In order to improve the mechanical assembly of the WEST antenna in comparison to the 2007 prototype, the main dimensions changes have been proposed by K.Vulliez, A.Argouarch and P.Mollard for the conceptual design review in 2013 and assessed after from the RF point of view in an internal note\sidecite{hillairet2014-1}}. 
+
+The impedance transformer and the bridge sections dimensions are modified from the 2007 prototype in order to facilitate its manufacturing and its mechanical assembly. The impedance transformer optimization also improves the antenna load tolerance. While the ICRH system upgrade for the WEST project also concerned the generator updadre and the moving of an antenna from port Q5 to port Q4A, this section only focuses on the antenna design. 
+
+% ###################################################
+\subsubsection{}
+
 
 % ###################################################
 % ###################################################
@@ -843,14 +858,14 @@ The Figure~\ref{fig:halfantennacurrentvoltage} illustrates the voltage and curre
 \begin{figure}
 	\centering
 	\includegraphics[width=.95\linewidth]{figures/chap3/WEST_ICRH/half_antenna_current_voltage}
-	\caption{figure}{Voltages and currents at the matching capacitor for a defined power excitation, antenna loading and matching conditions.}
+	\caption{Voltages and currents at the matching capacitor for a defined power excitation, antenna loading and matching conditions.}
 	\label{fig:halfantennacurrentvoltage}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=.95\linewidth]{figures/chap3/WEST_ICRH/antenna_graph}
-	\caption{figure}{Circuit graph of a complete antenna.}
+	\caption{Circuit graph of a complete antenna.}
 	\label{fig:antenna_graph}
 \end{figure}
 
@@ -866,9 +881,11 @@ The Figure~\ref{fig:halfantennacurrentvoltage} illustrates the voltage and curre
 % #####################################################
 \subsection{Summary of this section}
 
+\todo{design antenna}
 
-The RF circuit of the WEST ICRH antennas has been modelled using the open-source Python package \texttt{Scikit-rf}. The package provides a modern, object-oriented library for network analysis and calibration which is both flexible and scalable. As the package is developed in Python, it makes it naturally compatible with the rich and modern scientific Python libraries, testing and code coverage frameworks and reproducible modelling approaches using on-line virtualization services. The WEST ICRH antenna is modelled by connecting the various elements that compose it, separately full-wave modelled. Tunable elements, such as the matching capacitors, can be either created from ideal lump components or from interpolating full-wave calculations performed at various capacitance configurations. Being open-source, using \texttt{scikit-rf} to create the antenna numerical model with reproducible work-flow adds confidence in the fact that future users could use/maintain and extend it.
+The RF antenna model of the WEST ICRH antennas has been modelled using the open-source Python package \href{http://scikit-rf.org/}{\texttt{scikit-rf}}. The package provides a modern, object-oriented library for network analysis and calibration which is both flexible and scalable. As the package is developed in Python, it makes it naturally compatible with the rich and modern scientific Python libraries, testing and code coverage frameworks and reproducible modelling approaches using on-line virtualization services. The WEST ICRH antenna is modelled by connecting the various elements that compose it, separately full-wave modelled. Tunable elements, such as the matching capacitors, can be either created from ideal lump components or from interpolating full-wave calculations performed at various capacitance configurations. Being open-source, using \texttt{scikit-rf} to create the antenna numerical model with reproducible work-flow adds confidence in the fact that future users could use/maintain and extend it.
 
+\todo{Antenna results}
 
 % #####################################################
 % #####################################################
