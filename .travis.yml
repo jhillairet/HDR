@@ -1,35 +1,19 @@
-# YAML file from https://dev.to/renegadecoder94/how-to-build-latex-with-travis-ci-and-minted-39ff
-# See also https://github.com/PHPirates/travis-ci-latex-pdf
-# We test each method for building LaTeX in a separate job.
-language: generic
+sudo:       required
+language:   generic
+services:   docker
 
-dist: bionic
+# Docs of the options: https://github.com/Strauman/travis-latexbuild/tree/master#configuration-options
+tex-config:
+- tex-scheme=small
+- push-type=none
+- build-pattern=master.tex
+#- latexmk-flags=-dvi -f
+# Check at https://www.ctan.org/pkg/package-name in which TeX Live package a LaTeX package is contained.
+- packages=xkeyval, collection-latex, collection-langeuropean, exam, amsmath, amscls, mathtools, thmtools, stmaryrd, xcolor, pdfpages, pgf, cancel, hyperref, pgfplots, listings, scalerel, stackengine, etoolbox, listofitems, marvosym, amsfonts, opensans, slantsc, fancyhdr, ulem, algorithms, algorithmicx, float, booktabs, enumitem, polynom, fancyvrb, makecmds, multirow, chngcntr, fvextra, upquote, lineno, ifplatform, xstring, framed, caption, collection-fontsrecommended, minted, pgfgantt, geometry, beamer, translator, environ, trimspaces, imakeidx, graphics, tools, oberdiek
 
-before_install:
-  - sudo apt-get install python-pygments
-install:
-  - source ./texlive/texlive_install.sh
-cache:
-  directories:
-    - /tmp/texlive
-    - $HOME/.texlive
-# Change working directory so including files will work
-before_script: cd $TRAVIS_BUILD_DIR
+# We will use the docker image from https://hub.docker.com/r/phpirates/texlive-latexbuild/
 script:
-  # Texliveonfly will download packages automatically
-  #- texliveonfly ./master.tex
-  # You can use latexmk to automatically handle bibtex and references (recommended)
-  - latexmk -pdf -interaction=nonstopmode ./master.tex
-  
-  #- pdflatex --shell-escape -synctex=1 -interaction=nonstopmode master.tex
-  #- bibtex master
-  #- pdflatex--shell-escape -synctex=1 -interaction=nonstopmode  master.tex
-  #- pdflatex --shell-escape -synctex=1 -interaction=nonstopmode master.tex # Compile twice to fix references
-
-# Uncomment the following lines to see the packages installed in travis
-after_script:
-  - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
-  - tlmgr list --only-installed | grep -oP 'i \K.+?(?=:)'
+- docker run --mount src=$TRAVIS_BUILD_DIR/,target=/repo,type=bind phpirates/texlive-latexbuild:small-2018
   
 deploy:
   provider: releases
