@@ -21,9 +21,11 @@ script:
   # You can use latexmk to automatically handle bibtex and references (recommended)
   #- latexmk -pdflua -interaction=nonstopmode ./master.tex
   
-  - pdflatex -interaction=nonstopmode master.tex
-  - bibtex master
-  - pdflatex -interaction=nonstopmode  master.tex
+  # Run PDFLaTeX combined with biber few times to fix all references. 
+  # Expect error until the last command (from Travis to not report error)
+  - pdflatex -interaction=nonstopmode master.tex || true
+  - bibtex master || true
+  - pdflatex -interaction=nonstopmode  master.tex || true
   - pdflatex -interaction=nonstopmode master.tex # Compile twice to fix references
 
 ## Uncomment the following lines to see the packages installed in travis
