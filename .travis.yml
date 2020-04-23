@@ -17,20 +17,22 @@ cache:
 before_script: cd $TRAVIS_BUILD_DIR
 script:
   # Texliveonfly will download packages automatically
-  #- texliveonfly ./master.tex
+  - texliveonfly ./master.tex --compiler=pdflatex
   # You can use latexmk to automatically handle bibtex and references (recommended)
-  - latexmk -pdf -interaction=nonstopmode ./master.tex
+  #- latexmk -pdflua -interaction=nonstopmode ./master.tex
   
-  #- pdflatex --shell-escape -synctex=1 -interaction=nonstopmode master.tex
-  #- bibtex master
-  #- pdflatex--shell-escape -synctex=1 -interaction=nonstopmode  master.tex
-  #- pdflatex --shell-escape -synctex=1 -interaction=nonstopmode master.tex # Compile twice to fix references
+  # Run PDFLaTeX combined with biber few times to fix all references. 
+  # Expect error until the last command (from Travis to not report error)
+  - pdflatex -interaction=nonstopmode master.tex || true
+  - bibtex master || true
+  - pdflatex -interaction=nonstopmode  master.tex || true
+  - pdflatex -interaction=nonstopmode master.tex # Compile twice to fix references
 
-# Uncomment the following lines to see the packages installed in travis
-after_script:
-  - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
-  - tlmgr list --only-installed | grep -oP 'i \K.+?(?=:)'
-  
+## Uncomment the following lines to see the packages installed in travis
+#after_script:
+#  - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
+#  - tlmgr list --only-installed | grep -oP 'i \K.+?(?=:)'
+
 deploy:
   provider: releases
   api_key:
