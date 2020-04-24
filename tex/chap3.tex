@@ -696,9 +696,6 @@ R_s \left[
 % #####################################################
 \subsection{Generality on ICRH Antennas}
 
-
-
-
 % #####################################################
 \subsubsection{Coupling Elements}
 In order to excite the Fast-Waves in the Ion Cyclotron range of frequencies ($f=$30-80~MHz) as required for plasma heating, the wave electric field needs to be perpendicular to both $\Bbf_0$ and $\mathbf{k}$. In this rang of frequencies, the wavelength of the electromagnetic waves is of order of few meters, so larger or of the same order as the machine size. To excite the Fast-Wave, ICRH antennas usually consist in array of loop radiators similar to strip-lines, or \textit{straps}, to excite waves directly inside the vacuum vessel (Figure~\ref{fig:icrhantennasimplified}). These straps are oriented perpendicularly to the direction of the magnetic field $B_0$\footnote{In tokamaks, the total magnetic field being slightly tilted with respect to the toroidal direction, straps should have a complex shape to produce fields with the proper polarization. While possible and more accessible nowadays than before with modern manufacturing techniques, building such straps is complex and most antennas use strap oriented in the poloidal direction, i.e. perpendicular to the toroidal magnetic field.}. The antenna geometry and the amplitude and phase distribution of the flowing RF currents $J_{RF}$ on these straps shapes the wavenumber spectrum $E_{RF}(k)$ excited by the antenna. The antenna having a characteristic toroidal size (of tens of centimetres) much smaller than the wave wavelength, most plane waves excited by the antenna are evanescent. The distance to the plasma is thus a crucial parameter for the coupling performances, so antennas are generally made conform as possible to the plasma to minimize the distance from the strap to the plasma. 
@@ -757,7 +754,7 @@ Because of their mass difference, there is a discrepancy between ions and electr
 
 Three new identical ELM-resilient and CW power ICRH antennas have been designed for WEST. The ELM resilience property is obtained through an internal conjugate-T electrical scheme with series capacitors\sidecite{bosia2003-1}. The antenna design is based on a previously tested prototype in 2004 and 2007 at 48~MHz \sidecite{vulliez2008, argouarch2009}, illustrated in Figure~\ref{fig:proto2007antenna}. 
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/chap3/WEST_ICRH/proto2007_antenna}
 	\caption{CAD model of the "2007 Prototype" antenna.}
@@ -776,7 +773,7 @@ All these aspects led to iterate between RF and mechanical design, with generall
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{figures/chap3/WEST_ICRH/proto2007_antenna_cut}
-	\caption{Nomenclare of the ICRH 2007 or WEST antenna: The "Bridge" defines the antenna section which purpose is to split the input power toward both capacitors of half an antenna. The outer conductor of the coaxial input is connected to the antenna box while the inner conductor is connected to the bridge.}
+	\caption{Nomenclature of the ICRH 2007 or WEST antenna: The "Bridge" defines the antenna section which purpose is to split the input power toward both capacitors of half an antenna. The outer conductor of the coaxial input is connected to the antenna box while the inner conductor is connected to the bridge.}
 	\label{fig:proto2007antennacut}
 \end{figure}
 
@@ -802,7 +799,9 @@ The frequency increase is a practical consequence of the changes of Tore Supra t
 	\label{fig:westfrontfaceevolution1}
 \end{marginfigure}
 
-From July 2013 to May 2014, the coupling of various models have been assessed using the COMSOL finite element software. Perfectly Match Layers (PMLs) boundary conditions adapted to plasma fast wave were used in 2D and 3D\sidecite{jacquot2013, colas2019}. Starting from the 2007 prototype geometry, the effects of geometrical modifications on coupling resistance have been assessed, from very simplified parametrized 2D (Figure~\ref{fig:westfrontfaceevolution1}) to almost final 3D geometries (Figure~\ref{fig:westfrontfaceevolution2}). These models used first experimental density profiles obtained in Tore Supra in 2007 (pulse \#40574) before using assumptions of WEST density profiles. In this pulse, an L-mode plasma has been moved horizontally over 5 cm in front of the load-resilient antenna prototype to assess its coupling properties at 48 MHz. The calculations have been performed for 8 profiles in order to make relative comparisons of the coupling resistance. 2D model run in few minutes while 3D models typically required ten to twenty hours depending on their complexity and the distance to the cut-off density on a desktop computer. These parametrized models allowed us to assess the relevant geometrical parameters (strap thickness, width, and distances to the plasma cut-off and antenna box) affecting the coupling resistance. In order to optimize the coupling resistance in dipole configuration, the thickness of the strap has been kept as low as possible (between 13 and 15 mm) while ensuring sufficient stiffness, since they are water cooled through 70$\si{\degreeCelsius}$/30~bars inner channels. As an example, at 57~MHz, increasing the strap thickness by 15 mm decreased the coupling resistance by 25\% for the same plasma loading. The coupling resistance of the new antennas has been increased compared to the prototypes one in particular by reducing the distance between the strap and the Faraday screen bars from 52~mm to 34~mm and by supressing a vertical septum which was masking a portion of the straps in the prototype (Figure~\ref{fig:westfrontfaceevolution1}). 
+From July 2013 to May 2014, the coupling of various models have been assessed using the COMSOL finite element software. Perfectly Match Layers (PMLs) boundary conditions adapted to plasma fast wave were used in 2D and 3D\sidecite{jacquot2013, colas2019}. Starting from the 2007 prototype geometry, the effects of geometrical modifications on coupling resistance have been assessed, from very simplified parametrized 2D (Figure~\ref{fig:westfrontfaceevolution1}) to almost final 3D geometries (Figure~\ref{fig:westfrontfaceevolution2}). These models used first experimental density profiles obtained in Tore Supra in 2007 (pulse \#40574) before using assumptions of WEST density profiles. In this pulse, an L-mode plasma has been moved horizontally over 5 cm in front of the load-resilient antenna prototype to assess its coupling properties at 48 MHz. The calculations have been performed for 8 profiles in order to make relative comparisons of the coupling resistance. 2D model run in few minutes while 3D models typically required ten to twenty hours depending on their complexity and the distance to the cut-off density on a desktop computer. 
+
+These parametrized models allowed us to assess the relevant geometrical parameters (strap thickness, width, and distances to the plasma cut-off and antenna box) affecting the coupling resistance. In order to optimize the coupling resistance in dipole configuration, the thickness of the strap has been kept as low as possible (between 13 and 15 mm) while ensuring sufficient stiffness, since they are water cooled through 70$\si{\degreeCelsius}$/30~bars inner channels. As an example, at 57~MHz, increasing the strap thickness by 15~mm decreased the coupling resistance by 25\% for the same plasma loading. The coupling resistance of the new antennas has been increased compared to the prototypes one in particular by reducing the distance between the strap and the Faraday screen bars from 52~mm to 34~mm and by supressing a vertical septum which was masking a portion of the straps in the prototype (Figure~\ref{fig:westfrontfaceevolution1}). 
 
 \begin{marginfigure}
 	\centering
@@ -811,11 +810,18 @@ From July 2013 to May 2014, the coupling of various models have been assessed us
 	\label{fig:westfrontfaceevolution2}
 \end{marginfigure}
 
-Each antenna is equipped with four internal COMET tunable vacuum capacitors, with capacitances ranging from 15~pF to 150~pF and specifically upgraded for CW operation. In order to operate the antenna at a higher frequency, 55~MHz compared with the 48~MHz of the prototype, with the same capacitance range, the straps electrical length has been reduced in order to decrease their reactance $X_s$. However, increasing the coupling resistance also decreases the strap reactance $X_s$. Hence, trade-off were unavoidable between coupling efficiency and impedance matching as the desired frequencies. 
+Each antenna is equipped with four internal COMET tunable vacuum capacitors, with capacitances ranging from 15~pF to 150~pF and specifically upgraded for CW operation. In order to operate the antenna at a higher frequency, 55~MHz compared with the 48~MHz of the prototype, with the same capacitance range, the straps electrical length has been reduced in order to decrease their reactance $X_s$. However, increasing the coupling resistance also decreases the strap reactance $X_s$ {\sidecite{pinsker1998, helou2018}. Hence, trade-off were unavoidable between coupling efficiency and impedance matching as the desired frequencies\footnote{Other trade-off have been made due to the following reasons. Bringing closer the strap and its feeder leads to reduce the coupling resistance (-23\% decrease of the coupling resistance for 50~mm distance reduction). Increasing the toroidal width of the straps led to reduce the strap reactance but also to decrease the coupling resistance (-50\% decrease of the coupling resistance for +40~mm width increase). It has been kept to 130~mm, the same value as for the prototype.}. 
 
-In addition, bringing closer the strap and its feeder leads to reduce the coupling resistance (-23\% decrease of the coupling resistance for 50~mm distance reduction). Increasing the toroidal width of the straps led to reduce the strap reactance but also to decrease the coupling resistance (-50\% decrease of the coupling resistance for +40~mm width increase). It has been kept to 130~mm, the same value as for the prototype. As the design of the antenna progressed, the coupling of few milestone CAD 3D models has been calculated with the TOPICA code \sidecite{milanesio2009} with the same plasma scenarios to assess the impact of mechanical design evolutions on the coupling performances.
+As the design of the antenna progressed, the coupling of few milestone CAD 3D models has been calculated with the TOPICA code \sidecite{milanesio2009} with the same plasma scenarios to assess the impact of mechanical design evolutions on the coupling performances.
 
-However, 
+
+
+RF circuit optimizations have been first conducted on a single conjugate-T with uncoupled straps loaded with impedances. Thereafter, full-wave models of the T-junction, impedance transformer and vacuum feedthrough have been taken into account in ANSYS Designer®. This allows pushing realistic RF excitations into the full-wave ANSYS HFSS® model in order to deduce the heat flux topologies over the devices, which then can be easily imported in ANSYS Mechanical® for thermal modelling. Capacitors have been modelled using equivalent circuits. Finally, an electric circuit of the full antenna using TOPICA impedance matrices has been simulated. This model has been used to deduce the realistic capacitor sets, current and voltage values to be expected for various plasma scenarios. A full-wave modelling of the capacitor has also been performed and integrated into a RF circuit solver to confirm the approach [11].
+
+Expected electron density profiles for WEST H-mode plasmas have also been used to load the antenna model. A set of profiles have been calculated for 3 different line average densities. Since the plasma volume in WEST is smaller than in Tore Supra, the antennas are located closer to the centre of the machine to keep the same gap from the antenna to the plasma. Three radial locations of the antenna have been used (R=3, 2.975 and 2.95 m) to model the coupling in TOPICA with these profiles, with the toroidal curvature of the plasma adjusted accordingly to the WEST magnetic ripple. As no data were available for H-mode temperature profile, L-mode profile has been used. It has to be noted than the private plasma located between the antenna limiters has not been included in the TOPICA models.
+
+Using the coupling resistance definition from ref. [6] and the maximum capacitors currents and voltages (850 A and 54 kV peak respectively) the maximum coupled power has been calculated. In order to balance the top and bottom strap current magnitudes, one can allow the launchers input impedances to have an additional imaginary part. It might increase the VSWR but still allowing higher coupled power: an unbalanced current distribution can lead to currents/voltages exceeding the maximum limits at one strap while they are by far respecting the limits for the other one. FIGURE1 illustrates the maximum coupled power achievable for the three antennas with respect to capacitors current and voltage limitations, for two matching strategies (VSWR=1:1 or VSWR<1.7:1). In this curve, the antennas have been matched for each coupling resistance point. 
+
 
 
 
@@ -833,7 +839,7 @@ However,
 	\label{fig:bridgeevolution}
 \end{marginfigure}
 
-In order to reduce the manufacturing cost as well to simplify the mechanical assembly design of the bridge, it has been proposed to design the bridge symmetrical with respect to its input transmission line. An idealized bridge/antenna box geometry which dimensions corresponding to the 2007 Prototype has been created and compared to one with an in-axis input transmission line (Figure~\ref{fig:bridgeevolution}). Minor changes were observed on both reflection and transmission. As a consequence, the WEST ICRH antenna bridges has been made symmetrical with respect to the input transmission line.
+In order to reduce the manufacturing cost as well to simplify the mechanical assembly design of the bridge, it has been proposed to design the bridge symmetrical with respect to its input transmission line. An idealized bridge/antenna box geometry which dimensions corresponding to the 2007 Prototype has been created and compared to one with an in-axis input transmission line (Figure~\ref{fig:bridgeevolution}). As minor changes were observed on both reflection and transmission, the WEST ICRH antenna bridges has been made symmetrical with respect to the input transmission line.
 
 \begin{marginfigure}
 	\centering
@@ -844,7 +850,7 @@ In order to reduce the manufacturing cost as well to simplify the mechanical ass
 
 Also in order to facilitate the mechanical assembly of the antenna, in particular the water pipes and diagnostic cables connection, it has been proposed to enlarge the distance between the rear part of the antenna box and the rear part of the bridge, ie. the dimensions $d_1$, $d_2$ and $d_3$ are illustrated in Figure~\ref{fig:bridgeevolution2}. The influence of each dimensions on RF performances have been assessed and it was proposed to keep the 2007 prototype ($d_1$=17.7~mm) value for the WEST antenna and not increasing it (keeping this value to the minimum possible from a mechanical point of view). The $d_2$ dimension could be increased by 20~mm from the 2007 prototype ($d_2$=30.8~mm) value for the WEST antenna ($d_2\to$50~mm). Increasing the length $d_3$ means increasing the strap electrical length. A +20~m ($d_3\to$30~mm.) increasing as been proposed, which impacts the matching capability of the antenna, especially for higher frequencies (50-60MHz). However, 
 
-For the same reason, the radial length of the bridge labelled $L_3$ in Figure~\ref{fig:bridgeevolution3} has been increase by 50mm ($L_3\to $185.5~mm) for the WEST antenna. The $L_3$ length was found to has no impact on the VSWR of the antenna. Thus, the radial length of the bridge has been increased by50~mm ($L_3\to$185.5~mm) for the WEST antenna.
+For the same reason, the radial length of the bridge labelled $L_3$ in Figure~\ref{fig:bridgeevolution3} has been increase by 50~mm ($L_3\to $185.5~mm) for the WEST antenna. The $L_3$ length was found to has no impact on the VSWR of the antenna. Thus, the radial length of the bridge has been increased by50~mm ($L_3\to$185.5~mm) for the WEST antenna.
 
 \begin{marginfigure}
 	\centering
@@ -853,11 +859,11 @@ For the same reason, the radial length of the bridge labelled $L_3$ in Figure~\r
 	\label{fig:bridgeevolution3}
 \end{marginfigure}
 
+A two-stage quarter-wavelength and water cooled impedance transformer is connected from the bridge to the vacuum feed-through. The impedance transformer dimensions have been optimized for a 3~$\si{\Omega}$ T-junction impedance and a 30~$\si{\Omega}$ feeder characteristic impedance at 50~MHz. The final diameters have been afterwards adjusted to match pipe diameter standards with a slight compromise with the RF performance. 
 
-The impedance transformer optimization also improves the antenna load tolerance.
 
+\todo{Illustration Impedance transformer}
 
-\clearpage
 
 \begin{figure}
 	\centering
@@ -866,12 +872,20 @@ The impedance transformer optimization also improves the antenna load tolerance.
 	\label{fig:westicrhantennaelements}
 \end{figure}
 
+\clearpage
 
 % ###################################################
 % ###################################################
 \subsection{WEST ICRH Antenna Modelling}\label{sec:WEST_ICRH_antenna_modelling}
 \marginnote{Parts of this section are taken from \citeauthyear{hillairet2019-1}}
-In this section, we illustrates some functionalities of the open source Python package \texttt{scikit-rf}  through the example of modelling the WEST Ion Cyclotron Resonance Heating (ICRH) antenna. The complete antenna circuit is made by connecting the various elements that compose it, separately full-wave modelled or using equivalent lumped models, like done with proprietary codes (i.e. owned by the person or the firm who has developed it)  in \sidecite{durodie2015, helou2015-2} or with commercial software such as ANSYS Designer in \sidecite[+1cm]{hillairet2015-2}. This section is accompanied by a set of  \href{https://doi.org/10.5281/zenodo.2668370}{online Jupyter notebooks} illustrating in more details the code leading to the results presented here.
+In this section, we illustrate the complete RF modelling the WEST Ion Cyclotron Resonance Heating (ICRH) antenna. The complete antenna circuit is made by connecting the various elements that compose it, separately full-wave modelled from the final CAD model of the antenna or using equivalent lumped models. 
+
+Such approach is not new \textit{per se} since it was done during the WEST ICRH antenna design with commercial software such as ANSYS Designer in \sidecite{hillairet2015-2} and was also done with proprietary codes (i.e. owned by the person or the firm who has developed it) in \sidecite{durodie2015, helou2015-2}. However, the author firmly believes in the advantages Open Source software in Science, as when these tools are not open-sourced, it leads to an obvious reproducibility problem as one should only rely on authors claims. To conform to the necessity of reproducibility in science,  software sources used in physical and engineering researches should ideally be made open when possible \sidecite{ince2012}. The case of RF network manipulation and analysis is no different. Thus, this section illustrates some functionalities of the open source Python package \texttt{scikit-rf} co-developed by the author and used by hundred (thousands?) of users in the world\marginnote{At the time of the writing of this manuscript (April 2020), the \texttt{scikit-rf} package has been download more then 50000 times using the Anaconda Python package manager. The number of download of the package on github is of the order of 50 per 15 days.}. This section is accompanied by a set of  \href{https://doi.org/10.5281/zenodo.2668370}{online Jupyter notebooks} illustrating in more details the code leading to the results presented here.
+
+
+
+
+. 
 
 
 % ###########################################
@@ -1006,16 +1020,39 @@ The Figure~\ref{fig:halfantennacurrentvoltage} illustrates the voltage and curre
 % #####################################################
 % #####################################################
 \subsection{WEST ICRH Antennas Results}
-\todo{Write IAEA paper}
+\marginnote{Parts of this section are taken from \citeauthyear{hillairet2020-2}.}
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.69\linewidth]{figures/chap3/WEST_ICRH/WEST_ICRH_antenna_picture}	\includegraphics[width=0.29\linewidth]{figures/chap3/WEST_ICRH/WEST_ICRH_antenna_inside_WEST}
+	\caption{Pictures of one of the three WEST ICRH Antenna. Left: during assembly. Right: once installed inside WEST.}
+	\label{fig:westicrhantennapicture}
+\end{figure}
+
+During the WEST C3 campaign in 2017-2018, the first two ICRH antenna have been comissioned and used on plasma \sidecite{helou2019}, after having been commissioned separately at high voltage under vacuum on the TITAN test bed \sidecite{bernard2019}. Up to 1~MW per antenna have been achieved and up to 1.4~MW with the two antennas combined. Antennas behaved as expected from RF modelling and their tuning have been made both manually and using a real-time controlled algorithm. 
+
+During the WEST experimental campaign C4 in 2019 and for the first time in WEST, all the three ICRH antennas have been operated on plasma. The RF plant has been run reliably and all three antennas have been used simultaneously on plasma. Using ICRH system alone, the total RF coupled power on plasma peaked to 6~MW and reached regularly the range of 3~MW during few seconds. The ICRH system has been operated together with the Lower Hybrid and Current Drive (LHCD) system: up to 9.2~MW peak and 8~MW during 3 seconds in stable conditions of combined RF power have coupled.
+
+Long pulse high power operation requires dedicated protections from the generator to the antenna. Several complementary interlock systems have been also validated \cite{helou2019}. Sub-Harmonic Arc Detector (SHAD) and reflected power interlocks stop generators from feeding an antenna within 10~µs, then re-apply power after 30~ms. The RF power is real-time controlled in order not to exceed the antenna maximum electric field (2~kV/mm) or the maximum voltages and currents thresholds at the capacitors (30~kV or 915~A peak values respectively). The new optical arc detectors looking inside the antenna have been qualified and found to trigger mostly during the conditioning phases. These optical detectors are particularly essential to protect the low impedance sections of the antenna, where arcs may not trigger other safety systems. The pressure level inside the antenna is monitored from an auxiliary pumping system.  RF power is cut if pressure is above a safety threshold of $3.5\times10^{-3}$~Pa until pressure recovers. Abnormal events can also be detected from the antenna voltage measurements and additional interlocks have been added for safer operation. RF power is stopped within 10~µs in case of voltages lower than 10~kV (for power larger than 100 kW) or if voltages relative differences are higher than 50\%. Thanks to all of these security systems no damage has been observed on the three antenna front-faces after the WEST 2019 experimental campaign.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/chap3/WEST_ICRH/WEST_ICRH_VSWR_vs_Rc}
+	\caption{Voltage Standing Wave Ratio (VSWR) versus coupling resistance (Rc) for a WEST ICRH antennas (data from WEST pulse \#55589) and RF modelling (plain line). The behaviour of a non-resilient antenna is indicated for reference (dashed line).}
+	\label{fig:westicrhvswrvsrc}
+\end{figure}
+
+\todo{Finalize this section with the IAEA paper}
 
 % #####################################################
 % #####################################################
 \subsection{Summary of this section}
+In 2013-2014, the RF design of the WEST ICRH antenna has been performed at CEA/IRFM. The design started from the dimensions of an antenna prototype tested on Tore Supra in 2004 and 2007. The dimensions of the antenna front face have been optimized using the COMSOL software in order to improve the antenna coupling with respect to the 2007 prototype. Other elements of the antenna have been optimized to leave more space for water cooled elements since the WEST antenna is fully water-cooled in order to be compatible with CW operation. 
 
-\todo{design antenna}
+The complete RF model of the WEST ICRH antennas has been modelled using the open-source Python package \href{http://scikit-rf.org/}{\texttt{scikit-rf}}, which the author is co-developer. The package provides a modern, object-oriented library for network analysis and calibration which is both flexible and scalable. The WEST ICRH antenna is modelled by connecting the various elements that compose it, separately full-wave modelled from final CAD models. Tunable elements, such as the matching capacitors, can be either created from ideal lump components or from interpolating full-wave calculations performed at various capacitance configurations. Being open-source, using \texttt{scikit-rf} to create the antenna numerical model with reproducible work-flow adds confidence in the fact that future users could use/maintain and extend it.
 
-The RF antenna model of the WEST ICRH antennas has been modelled using the open-source Python package \href{http://scikit-rf.org/}{\texttt{scikit-rf}}. The package provides a modern, object-oriented library for network analysis and calibration which is both flexible and scalable. As the package is developed in Python, it makes it naturally compatible with the rich and modern scientific Python libraries, testing and code coverage frameworks and reproducible modelling approaches using on-line virtualization services. The WEST ICRH antenna is modelled by connecting the various elements that compose it, separately full-wave modelled. Tunable elements, such as the matching capacitors, can be either created from ideal lump components or from interpolating full-wave calculations performed at various capacitance configurations. Being open-source, using \texttt{scikit-rf} to create the antenna numerical model with reproducible work-flow adds confidence in the fact that future users could use/maintain and extend it.
+Finally, the three WEST ICRH antenna have been commissioned and used on WEST plasma between 2017 and 2019. The commissioning phase was relatively short, of about two days for each antenna to reach 1 to 1.5¨~MW. In the C4 campaign, after this commissioning phase, all three antennas have been operated simultaneously on WEST plasmas, leading to 5.8~MW coupled ICRH power after around 50~plasma discharges (close to 2~MW per antenna). All antennas are equipped with dedicated gas puffing valves in order to improve the coupling conditions. However, due to the present WEST pumping system capabilities, no major coupling improvement has been observed for the limited level of gas flux injected by these valves so far. In combined operation with the Lower Hybrid Current Drive (LHCD) system, a total injected RF power of up to 9.2~MW has been achieved. These first results give confidence in achieving higher performances in future WEST plasma.
+
 
 \todo{Antenna results}
 
