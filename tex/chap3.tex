@@ -257,7 +257,7 @@ with $\sigma=1/\rho$ the metal conductivity (in $[\si{S/m}]$) and $\sigma$ the m
 
 % #####################################################
 % #####################################################
-\subsection{Matching Systems}
+\subsection{Matching Systems}\label{sec:matching_systems}
 In high power RF systems for fusion applications, the load is ultimately the plasma facing the antennas. As seen in Section~\ref{sec:icrh} and Section~\ref{sec:lhcd}, the plasma loading impedance is generally small compared to antenna and transmission line. Hence, a significant amount of RF power will be reflected toward the generators. It is essential to protect high power RF sources (tetrodes, klystrons) from reflected power (output mismatch). Reflected power perturbs the source impedance, the output amplitude and phase and creates higher dissipation losses\sidecite[-1cm]{pompon2012}. It can also lead to the failure of RF windows \sidecite[-+0.5cm]{ikeda1989} or even damage the tube itself\sidecite{gold1997,carter2005,benford2007}. 
 
 Unfortunately, the plasma characteristics depend on the machine setup but also on its history, hence its RF load properties are relatively little known in advance. In addition, plasma intrinsic instabilities, such as Edge Localized Modes (ELMs), can also induce strong and fast load variations in front of the antenna, which may affect strongly the generator performances for the aforementioned reasons\sidecite{braun1995, beaumont1996} or generate breakdown in antennas and transmission lines due to peak voltage increases \sidecite{bobkov2003-1, goniche2012-2}. 
@@ -687,52 +687,184 @@ R_s \left[
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 % #####################################################
 % #####################################################
 \section{ICRH Antennas}\label{sec:ICRH_antennas}
 \marginnote{Part of this section are taken from \citeauthyear{hillairet2020-1}.}
 
-\subsection{Generality on ICRH Antennas}
 % #####################################################
-\subsubsection{Matching}
+% #####################################################
+\subsection{Generality on ICRH Antennas}
 
-At ASDEX-Upgrade, the load resilient system used to maintain the RF power during H-mode is exclusively the 3dB hybrid coupler system. The reflected power is mainly redirected toward a dummy load thanks to the symmetrical properties of the 3dB coupler.
 
-At JET, three different load resilient systems are employed. Firstly, a hybrid system feeds antennas A and B. Secondly, a conjugated T system (resilient antenna) with internal matching (ICT) is plugged to the ITER-Like Antenna (ILA). Part of the matching is made by vacuum capacitors connected close to the antenna. Thirdly, a conjugated T system with external matching (ECT) feeds antennas C and D. Part of the matching is made by phase shifters connected far from the antennas.
+
+
+% #####################################################
+\subsubsection{Coupling Elements}
+In order to excite the Fast-Waves in the Ion Cyclotron range of frequencies ($f=$30-80~MHz) as required for plasma heating, the wave electric field needs to be perpendicular to both $\Bbf_0$ and $\mathbf{k}$. In this rang of frequencies, the wavelength of the electromagnetic waves is of order of few meters, so larger or of the same order as the machine size. To excite the Fast-Wave, ICRH antennas usually consist in array of loop radiators similar to strip-lines, or \textit{straps}, to excite waves directly inside the vacuum vessel (Figure~\ref{fig:icrhantennasimplified}). These straps are oriented perpendicularly to the direction of the magnetic field $B_0$\footnote{In tokamaks, the total magnetic field being slightly tilted with respect to the toroidal direction, straps should have a complex shape to produce fields with the proper polarization. While possible and more accessible nowadays than before with modern manufacturing techniques, building such straps is complex and most antennas use strap oriented in the poloidal direction, i.e. perpendicular to the toroidal magnetic field.}. The antenna geometry and the amplitude and phase distribution of the flowing RF currents $J_{RF}$ on these straps shapes the wavenumber spectrum $E_{RF}(k)$ excited by the antenna. The antenna having a characteristic toroidal size (of tens of centimetres) much smaller than the wave wavelength, most plane waves excited by the antenna are evanescent. The distance to the plasma is thus a crucial parameter for the coupling performances, so antennas are generally made conform as possible to the plasma to minimize the distance from the strap to the plasma. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\linewidth]{figures/chap3/ICRH_antenna_simplified}
+	\caption{Simplified schematic of a classic ICRH antenna in a tokamak.}
+	\label{fig:icrhantennasimplified}
+\end{figure}
+
+
+%RDL\sidecite{owens1985}
+
+% #####################################################
+\subsubsection{Faraday Screen}
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap3/WEST_ICRH/ICRH_Faraday_Screen_Principle}
+	\caption{Surface current induced on a shield above a perfectly conducting plane by the enclosed line current $I$. Surface current shown is superposition of currents on inner and outer blade faces. From \cite{faulconer1983}}
+	\label{fig:icrhfaradayscreenprinciple}
+\end{marginfigure}
+
+Unfortunately, it was identified early that coupling structures do not excite only Fast-Waves but also Slow-Waves \sidecite{evrard1982-1}. Slow-Waves are produced by RF currents parallel to the magnetic field as well by oscillating space charges on the antenna structure. For this reason, early ICRH experiments introduced the use of electrostatic shield, or \textit{Faraday Screen} \sidecite{england1989}. A Faraday Screen is formed by an array of metallic strips (or bars), aligned with the total magnetic field \sidecite{bures1990}. By screening the electric field components parallel to the strips/bars (Figure~\ref{fig:icrhfaradayscreenprinciple}), it aims acting as a polarizer, to filter out specifically the undesirable Slow-Wave. A denser screen better isolates the central conductor of the antenna from the plasma, but it also causes significant magnetic shielding and enhanced Ohmic losses in the screen \sidecite{faulconer1983}, leading to actively cooled structures. Various experiments have shown the benefits of faraday Screen \sidecite{noterdaeme1986, bures1990, myra1990}, but some also concluded that heating performance of unshielded antenna was found to be similar to that of a shielded antenna \sidecite{nieuwenhove1991, nieuwenhove1992}.  Although it might be necessary to keep a Faraday shield for other reasons, such as decoupling of thermal and mechanical stresses on plasma facing components, the question of the necessity of a Faraday Screen in future ICRH antennas is still an open question in the ICRH community \sidecite{noterdaeme2019}. 
+
+
+
+% #####################################################
+\subsubsection{Matching}\label{sec:ICRH_matching_systems}
+From the RF engineer point of view, an ICRH system is equivalent to transmission line loaded with a complex impedance (Figure~\ref{fig:icrhantennacircuitmodel}). The antenna can be view as an impedance which properties depend on the plasma. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\linewidth]{figures/chap3/ICRH_antenna_circuit_model}
+	\caption{Simplified model of a ICRH system.}
+	\label{fig:icrhantennacircuitmodel}
+\end{figure}
+
+A single strap element can be modelled by a line terminated with a lumped impedance $Z_L = R + j X$ \sidecite{bhatnagar1982}. Without plasma, the resistive part of this load represents the antenna Ohmic losses, which are generally small ($R \propto 10^{-1}~\si{\Omega}$. In front of a magnetized plasma, part of the waves are coupled to the plasma and the resistive part of the load increases. Hence, for the circuit point of view, coupling is indistinguishable from increasing losses. In most tokamak experiments, the resistive loading is in the 0.5 to 10 $\si{\Omega}$ range \sidecite{pinsker1998}. The reactive part is mostly inductive. Its value depends mainly of the strap and antenna geometry is generally much higher than the resistive part. In addition, changes of the resistive part are also correlated with changes in the reactive part \cite{pinsker1998}\sidenote{The electrical equivalent length of the antenna is then usually reduced when facing a plasma.}. Since the characteristic impedance of the transmission line $Z_0$ is usually between 30 to 50~$\si{\Omega}$, we always have $R \ll Z_0$ and hence a matching unit is necessary to maximize the power coupled to the plasma by the antenna.
+
+Moreover, sudden changes in antenna loading arise in tokamaks operating in H-mode. During plasma perturbations (such like ELMs), loading rises on a time scale of ~100~ms and subsequently decays on a time scale of a few milliseconds. This sub-millisecond timescale represents a challenge to any dynamic impedance matching scheme implemented in ICRH systems\sidecite{hofmeister1994, ladurelle1997, evrard2005, noterdaeme2005, prechtl2009, grine2012, lin2015}, because their response time is not fast enough. To cope with these fast events, inherently load insensitive schemes, or \textit{load-resilient}, are desirable. At ASDEX-Upgrade, the load resilient system used to maintain the RF power during H-mode is exclusively the 3dB hybrid coupler system. The reflected power is mainly redirected toward a dummy load thanks to the symmetrical properties of the 3dB coupler. At JET, three different load resilient systems are employed. Firstly, a hybrid system feeds antennas A and B. Secondly, a conjugated-T system (resilient antenna) with internal matching is plugged to the ITER-Like Antenna (ILA). Part of the matching is made by vacuum capacitors connected close to the antenna. Thirdly, a conjugated T system with external matching feeds antennas C and D. Part of the matching is made by phase shifters connected far from the antennas.
 
 \todo{below}
-The better understanding of RF sheaths has also led to a proposal to remove Faraday shields from ICRF antennas, and experiments with unshielded antennas have been successfully performed in TEXTOR \cite{nieuwenhove1991, nieuwenhove1992-1} and ASDEX-Upgrade [Noterdaemne?] without significant differences from those with shielded antennas. Although it might be necessary to keep a Faraday shield for other reasons, such as decoupling of thermal and mechanical stresses on plasma facing components (Faraday shield or current strap), in ITER this opens a way to
+\subsubsection{RF Sheaths}
+Early ICRH experiments have reported non-linear interactions between high power RF waves and edge plasma, leading to the production of influx of impurities which prevented efficient heating of the plasma \sidecite{rothman1966}. Since then, despite improvements in antenna design and plasma operation which substantially reduced these undesirable phenomenon \sidecite{noterdaeme1993}, it still remains an important operational limitation of ICRH \sidecite{noterdaeme2019-1}. One mechanism leading to the release impurities during ICRH operation is RF sheaths rectification. 
 
-Role de l'angle des bareaux de l'écran de faraday\sidecite{bures1990}
+Because of their mass difference, there is a discrepancy between ions and electrons motions along magnetic field lines. Electrons accumulate faster than ions on Plasma Facing Components (PFC) and form a thin negatively biased layer that repulses electrons and attracts ions. This attraction increases the ion parallel energy into the wall and thus enhance the heavy ion bombardment of the PFC. Ion impacting the PFC can cause sputtering of impurities that can reach and contaminate the plasma. In the presence RF waves parallel to the magnetic field lines (which corresponds to the Slow-Wave polarization) driven by ICRH antenna, sheaths are enhanced. Instead of being constant in time, DC potential drop across the sheath is then the superposition of a DC component and a RF oscillations, called \textit{RF-induced sheath rectification}. This  mechanism has been identified as a major reason for the increased interaction with the wall as is still an intense research topic \sidecite{bobkov2019}.
+
+
+
 
 % #####################################################
 % #####################################################
 \subsection{WEST ICRH Antennas Design}
 \marginnote{Parts of this section are taken from \citeauthyear{hillairet2015-2} and CEA/IRFM internal reports made in 2013-2014 during the design of the WEST ICRH antennas.}
 
-Three new identical ELM-resilient and CW power ICRH antennas have been designed for WEST. The ELM resilience property is obtained through an internal conjugate-T electrical scheme with series capacitors\sidecite{bosia2003-1}. The antenna design is based on a previously tested prototype in 2004 and 2007 at 48~MHz \sidecite{vulliez2008, argouarch2009}. In the frame of the Associated Laboratory in the fusion field between IRFM and ASIPP, the design has been upgraded in order to: 
+Three new identical ELM-resilient and CW power ICRH antennas have been designed for WEST. The ELM resilience property is obtained through an internal conjugate-T electrical scheme with series capacitors\sidecite{bosia2003-1}. The antenna design is based on a previously tested prototype in 2004 and 2007 at 48~MHz \sidecite{vulliez2008, argouarch2009}, illustrated in Figure~\ref{fig:proto2007antenna}. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap3/WEST_ICRH/proto2007_antenna}
+	\caption{CAD model of the "2007 Prototype" antenna.}
+	\label{fig:proto2007antenna}
+\end{figure}
+
+In the frame of the Associated Laboratory in the fusion field between IRFM and ASIPP, the 2007 design has been upgraded for WEST in order to: 
 \begin{itemize}
 	\item improve the power capabilities and coupling resistance from the previous prototype   \sidecite{helou2015-1}
 	\item increase the nominal frequency range to 55~MHz to match WEST scenarios\sidecite{bourdelle2015}
 	\item allow CW operation with actively cooled components \sidecite{chen2015, vulliez2015}.
 \end{itemize} 
-All these aspects led to iterate between RF and mechanical design, with generally opposite constraints and necessary compromises\sidenote{In order to improve the mechanical assembly of the WEST antenna in comparison to the 2007 prototype, the main dimensions changes have been proposed by K.Vulliez, A.Argouarch and P.Mollard for the conceptual design review in 2013 and assessed after from the RF point of view in an internal note\sidecite{hillairet2014-1}}. 
+All these aspects led to iterate between RF and mechanical design, with generally opposite constraints and necessary compromises\sidenote{In order to improve the mechanical assembly of the WEST antenna in comparison to the 2007 prototype, the main dimensions changes have been proposed by K.Vulliez, A.Argouarch and P.Mollard for the conceptual design review in 2013 and assessed after from the RF point of view in an internal note\sidecite{hillairet2014-1}}. While the ICRH system upgrade for the WEST project also concerned the generator update and the moving of an antenna from port Q5 to port Q4A, this section only focuses on the antenna design. 
 
-The impedance transformer and the bridge sections dimensions are modified from the 2007 prototype in order to facilitate its manufacturing and its mechanical assembly. The impedance transformer optimization also improves the antenna load tolerance. While the ICRH system upgrade for the WEST project also concerned the generator updadre and the moving of an antenna from port Q5 to port Q4A, this section only focuses on the antenna design. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/chap3/WEST_ICRH/proto2007_antenna_cut}
+	\caption{Nomenclare of the ICRH 2007 or WEST antenna: The "Bridge" defines the antenna section which purpose is to split the input power toward both capacitors of half an antenna. The outer conductor of the coaxial input is connected to the antenna box while the inner conductor is connected to the bridge.}
+	\label{fig:proto2007antennacut}
+\end{figure}
+
 
 % ###################################################
-\subsubsection{}
+\subsubsection{Front Parts}
+With respect to the 2007 prototype, the front face of the WEST ICRH antennas have undergone few major changes in order to meet the following objectives:
+\begin{enumerate}
+	\item Increase the antenna overall coupling resistance $R_c$ (Eq.(\ref{eq:coupling_resistance}))
+	\item Increase the nominal antenna frequency to 55~MHz
+	\item Water-cool the whole antenna, in particular the straps, the antenna box and the Faraday screen
+	\item Minimize sheaths potential
+\end{enumerate}
+
+Increasing the coupling resistance allows coupling more power for a given set of voltages and currents. In other words, it also allows lowering capacitor voltages (and electric field) and currents for a given coupled power, which has operational and safety benefits\sidenote{In addition, the capacitor manufacturer COMET has lowered the maximum voltage and current specifications on its products between 2004 and 2013. Meeting lower voltage and current specifications.}. 
+
+The frequency increase is a practical consequence of the changes of Tore Supra to become WEST\sidecite{bourdelle2015}: as the plasma volume was reduced and  shifted toward the high field side of the machine, locating the cyclotron resonance in the plasma centre requires higher RF frequencies (cf. Eq.(\ref{eq:cyclotron_resonance})). The desired frequency band of the ICRH system for WEST was thus asked to 48-60~MHz \todo{WEST ICRH guide}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/chap3/WEST_ICRH/WEST_front_face_evolution1}
+	\caption{Evolution of 2D CAD models for coupling optimization.}
+	\label{fig:westfrontfaceevolution1}
+\end{marginfigure}
+
+From July 2013 to May 2014, the coupling of various models have been assessed using the COMSOL finite element software. Perfectly Match Layers (PMLs) boundary conditions adapted to plasma fast wave were used in 2D and 3D\sidecite{jacquot2013, colas2019}. Starting from the 2007 prototype geometry, the effects of geometrical modifications on coupling resistance have been assessed, from very simplified parametrized 2D (Figure~\ref{fig:westfrontfaceevolution1}) to almost final 3D geometries (Figure~\ref{fig:westfrontfaceevolution2}). These models used first experimental density profiles obtained in Tore Supra in 2007 (pulse \#40574) before using assumptions of WEST density profiles. In this pulse, an L-mode plasma has been moved horizontally over 5 cm in front of the load-resilient antenna prototype to assess its coupling properties at 48 MHz. The calculations have been performed for 8 profiles in order to make relative comparisons of the coupling resistance. 2D model run in few minutes while 3D models typically required ten to twenty hours depending on their complexity and the distance to the cut-off density on a desktop computer. These parametrized models allowed us to assess the relevant geometrical parameters (strap thickness, width, and distances to the plasma cut-off and antenna box) affecting the coupling resistance. In order to optimize the coupling resistance in dipole configuration, the thickness of the strap has been kept as low as possible (between 13 and 15 mm) while ensuring sufficient stiffness, since they are water cooled through 70$\si{\degreeCelsius}$/30~bars inner channels. As an example, at 57~MHz, increasing the strap thickness by 15 mm decreased the coupling resistance by 25\% for the same plasma loading. The coupling resistance of the new antennas has been increased compared to the prototypes one in particular by reducing the distance between the strap and the Faraday screen bars from 52~mm to 34~mm and by supressing a vertical septum which was masking a portion of the straps in the prototype (Figure~\ref{fig:westfrontfaceevolution1}). 
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/chap3/WEST_ICRH/WEST_front_face_evolution2}
+	\caption{Evolution of 3D CAD models for coupling optimization.}
+	\label{fig:westfrontfaceevolution2}
+\end{marginfigure}
+
+Each antenna is equipped with four internal COMET tunable vacuum capacitors, with capacitances ranging from 15~pF to 150~pF and specifically upgraded for CW operation. In order to operate the antenna at a higher frequency, 55~MHz compared with the 48~MHz of the prototype, with the same capacitance range, the straps electrical length has been reduced in order to decrease their reactance $X_s$. However, increasing the coupling resistance also decreases the strap reactance $X_s$. Hence, trade-off were unavoidable between coupling efficiency and impedance matching as the desired frequencies. 
+
+In addition, bringing closer the strap and its feeder leads to reduce the coupling resistance (-23\% decrease of the coupling resistance for 50~mm distance reduction). Increasing the toroidal width of the straps led to reduce the strap reactance but also to decrease the coupling resistance (-50\% decrease of the coupling resistance for +40~mm width increase). It has been kept to 130~mm, the same value as for the prototype. As the design of the antenna progressed, the coupling of few milestone CAD 3D models has been calculated with the TOPICA code \sidecite{milanesio2009} with the same plasma scenarios to assess the impact of mechanical design evolutions on the coupling performances.
+
+However, 
+
+
+
+
+
+ 
+
+% ###################################################
+\subsubsection{Rear Parts}
+% TODO: \usepackage{graphicx} required
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap3/WEST_ICRH/bridge_evolution}
+	\caption{Modification of the bridge section from 2007 prototype (top) to WEST (bottom). The input transmission line has been made in-axis}
+	\label{fig:bridgeevolution}
+\end{marginfigure}
+
+In order to reduce the manufacturing cost as well to simplify the mechanical assembly design of the bridge, it has been proposed to design the bridge symmetrical with respect to its input transmission line. An idealized bridge/antenna box geometry which dimensions corresponding to the 2007 Prototype has been created and compared to one with an in-axis input transmission line (Figure~\ref{fig:bridgeevolution}). Minor changes were observed on both reflection and transmission. As a consequence, the WEST ICRH antenna bridges has been made symmetrical with respect to the input transmission line.
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/chap3/WEST_ICRH/bridge_evolution2}
+	\caption{Illustration of the bridge/antenna box inner dimensions $d_1$, $d_2$ and $d_3$.}
+	\label{fig:bridgeevolution2}
+\end{marginfigure}
+
+Also in order to facilitate the mechanical assembly of the antenna, in particular the water pipes and diagnostic cables connection, it has been proposed to enlarge the distance between the rear part of the antenna box and the rear part of the bridge, ie. the dimensions $d_1$, $d_2$ and $d_3$ are illustrated in Figure~\ref{fig:bridgeevolution2}. The influence of each dimensions on RF performances have been assessed and it was proposed to keep the 2007 prototype ($d_1$=17.7~mm) value for the WEST antenna and not increasing it (keeping this value to the minimum possible from a mechanical point of view). The $d_2$ dimension could be increased by 20~mm from the 2007 prototype ($d_2$=30.8~mm) value for the WEST antenna ($d_2\to$50~mm). Increasing the length $d_3$ means increasing the strap electrical length. A +20~m ($d_3\to$30~mm.) increasing as been proposed, which impacts the matching capability of the antenna, especially for higher frequencies (50-60MHz). However, 
+
+For the same reason, the radial length of the bridge labelled $L_3$ in Figure~\ref{fig:bridgeevolution3} has been increase by 50mm ($L_3\to $185.5~mm) for the WEST antenna. The $L_3$ length was found to has no impact on the VSWR of the antenna. Thus, the radial length of the bridge has been increased by50~mm ($L_3\to$185.5~mm) for the WEST antenna.
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/chap3/WEST_ICRH/bridge_evolution3}
+	\caption{Illustration of the bridge radial length $L_3$.}
+	\label{fig:bridgeevolution3}
+\end{marginfigure}
+
+
+The impedance transformer optimization also improves the antenna load tolerance.
+
+
+\clearpage
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap3/WEST_ICRH/WEST_ICRH_antenna_elements}
+	\caption{Elements of a WEST ICRH Antenna}
+	\label{fig:westicrhantennaelements}
+\end{figure}
 
 
 % ###################################################
@@ -1618,7 +1750,7 @@ This work shows that large margins must be taken from the reference design (or a
 \subsection{RF Contacts}\label{sec:RF_contacts}
 \marginnote{Part of this section are taken from \citeauthyear{hillairet2015-1, hillairet2018}, PhDs \citeauthyear{chen2018-2} and associated papers \cite{chen2017-2, chen2017-3,  chen2018, chen2018-1, chen2020}.}
 
-
+\cite{agarici1997}
 
 
 % #####################################################

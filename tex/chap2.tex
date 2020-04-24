@@ -225,6 +225,13 @@ First, a general introduction to the
 antennas
 
 \subsection{Cold Plasma Waves}
+
+The plasma being an anisotropic dielectric medium
+
+the wave-number spectrum in the toroidal and poloidal direction is imposed by the geometry and the excitation of the antenna. Wavevector in the radial direction is deduced from the dispersion relation
+
+
+
 Much of the essential physics of the problem can be understood using simplified geometry (slab)
 assume that the inhomogeneity is in the $x$-direction which is also the direction of $k_\perp$. Modelling the wave in the equatorial plane of the tokamak. $k_y$ set to zero without adding anything essential to the conclusions
 
@@ -785,6 +792,8 @@ where $k_0=\frac{\omega}{c}$
 
 \todo{below}
 
+
+
 the key ICRF engineering issue-designing a coupler to effectively radiate plasma waves-can be fully described by electromagnetic theory with a simple dielectric tensor\cite{perkins1984}.
 
 Thus the electrical engineering issues of heating tokamak
@@ -792,10 +801,21 @@ reactors can all be cast in terms of standard linear electromagnetic
 theory with the sole complication being the presence
 of off-diagonal terms in a spatially dependent dielectric tensor\cite{perkins1984}.
 
+Minority Ion Cyclotron resonance condition
+\begin{equation}
+	\omega = N\Omega_{ci} - k_\parallel v_\parallel
+\label{eq:ion_cylotron_resonance_general}
+\end{equation}
+
+\begin{equation}
+\Omega_{ci} = \frac{Z q B_0}{A m_p}
+\label{eq:ion_cyclotron_angular_frequency}
+\end{equation}
 
 % ###################################################
 % ###################################################
 \subsection{ICRF Dispersion Relation}
+\sidecite{adam1987}
 
 % ###################################################
 % ###################################################
@@ -840,6 +860,9 @@ to remove the heat influx as the distance decreases.
 
 KSTAR \sidecite{bae2003-1, wang2010}
 
+aspects theorique couplage\sidecite{messiaen1982}
+
+Works well with experiments\sidecite{koch1988}
 
 % ###################################################
 % ###################################################
