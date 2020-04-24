@@ -42,3 +42,4 @@ deploy:
   file: master.pdf
   on:
     repo: jhillairet/HDR
+    all_branches: true
