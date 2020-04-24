@@ -40,6 +40,7 @@ deploy:
   api_key:
     secure: XX1saNzLS+0+v0vqu0Ju1qNDk0zdfBbgElRf3tBo/+dVdoro0jFshxk+xy+73nMZeRRnKVIwyZyWSY8x2u6421J+a63FHrTg6FviNLhyRDQ2IDgTC3RyUiT0Y2RVHhIHd6LbtpAqgt2mg8F25eH227x5BCzikhZb/GMisXvBnSbrfM+ZaEYW++5qCnASiU66IdAzVDpAL1JNg0JJsl51ncDVYWPJWBLLwG33MVcIUn61FnD5F3ySl7LM1/rBinTa4niuE6k6NN3dYIkpQ72YbFJWgzaWb7gzc93Wtv/KRZ7XX6xyAXHCr3KsIZdluPGlOfQ6xkNwtB5JImUUVsr/MMPV8v8sCpgpjhCp2jEjh02HtHfNjy813Zt4y3JQaQmq+Dx1THIxHqKEnCvgznxLMKsMql1cjah8fN1IF//njrouqFjapZyXJyOvqDOZYgukMKvpEJSc2/RFFvNcqgwrp3bxdeH3tpv8T8oARCRLlIhbd8VzZR7zKVb5tzKl8SxXLqzYKW6g+h90ZHNfxRJcjVAQeGhCIR2K3sPtUvwsyHLVG9cddUACqsXLUJQTTYWQyb2GLeDDFZV5zXEE28FVSWAN3f1dbLLE3SsCw+nlzjI/hbny/jHEVQ+u5ce/ytcU78hB/Ada5y88lNn/Y2GHhifUhLK7V32G5BeyVXOPWEw=
   file: master.pdf
+  skip_cleanup: true
   on:
     repo: jhillairet/HDR
     all_branches: true
