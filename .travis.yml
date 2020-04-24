@@ -44,3 +44,4 @@ deploy:
   on:
     repo: jhillairet/HDR
     all_branches: true
+    tags: true
