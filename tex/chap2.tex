@@ -169,6 +169,9 @@ K_{zx} & K_{zy} & K_{zz} \\
 \right)
 \end{equation}  
 
+
+\subsection{Cold Plasma Approximation}
+
 We follow the usual choice of geometry and coordinates, in which the $z$ direction is taken along the direction of the magnetic field $\Bbf_0$.  
 
 On se place dans les hypothèses d'un plasma froid, c'est-à-dire que
@@ -188,25 +191,30 @@ Such medium can support various kinds of waves, which main properties are derive
 	-j D & S & 0\\
 	0 & 0 & P
 \end{array}\right)
-\label{eq:tenseur_K_bis}
+\label{eq:stix_K}
 \end{equation}
 where
-\begin{eqnarray}
-S(\mathbf{r},\omega) 
+\begin{subequations}
+	\begin{eqnarray}
+	S(\mathbf{r},\omega) 
 	& = & 
 	1-\sum_{i}\frac{\omega_{pi}^{2}}{\omega^{2}-\Omega_{ci}^{2}}
-\label{eq:stix_S}
-\\
-D(\mathbf{r},\omega) 
+	\label{eq:stix_S}
+	\\
+	D(\mathbf{r},\omega) 
 	& = & 
 	\sum_{i}\frac{\Omega_{ci}}{\omega}\frac{\omega_{pi}^{2}}{\omega^{2}-\Omega_{ci}^{2}}
-\label{eq:stix_D}
-\\
-P(\mathbf{r},\omega) 
+	\label{eq:stix_D}
+	\\
+	P(\mathbf{r},\omega) 
 	& = & 
 	1-\sum_{i}\frac{\omega_{pi}^{2}}{\omega^{2}}
-\label{eq:stix_P}
-\end{eqnarray}
+	\label{eq:stix_P}
+	\end{eqnarray}
+	\label{eq:stix_SDP}
+\end{subequations}
+where $\omega$, $\Omega_{c,s}$ and $\omega_{p,s}$ are respectively the RF source, the cyclotron and the plasma angular frequencies of the species $s$.
+
 
 Due to its electrical conductivity, a plasma couples to electric and magnetic fields. 
 
@@ -224,7 +232,6 @@ As an example, we calculate this relationship
 First, a general introduction to the 
 antennas
 
-\subsection{Cold Plasma Waves}
 
 The plasma being an anisotropic dielectric medium
 
@@ -788,7 +795,7 @@ where $k_0=\frac{\omega}{c}$
 % ###################################################
 % ###################################################
 % ###################################################
-\section{ICRF}\label{sec:icrh}
+\section{Ion Cyclotron Range of Frequencies}\label{sec:icrh}
 
 \todo{below}
 
@@ -875,7 +882,7 @@ Works well with experiments\sidecite{koch1988}
 % ###################################################
 % ###################################################
 % ###################################################
-\section{LHRF}\label{sec:lhcd}
+\section{Lower Hybrid Range of Frequencies}\label{sec:lhcd}
 
 % ###################################################
 % ###################################################
@@ -958,19 +965,279 @@ where $k_{\parallel}=k_0 n_{\parallel}$ is the parallel wavenumber of the wave, 
 
 However, in many past and present LHCD experiments, the resonant velocity $v_{\parallel 0}=c/n_{\parallel 0}$ corresponds to supra thermal region where the number of electrons should be in principle too small for any significant wave damping to take place and to account for the observed current drive. Indeed, strong wave damping on a Maxwellian distribution with temperature $T$ requires the wave damping to be no larger than four times the thermal velocity $v_T=\sqrt{k T/m}$. This paradox is commonly referred to as the \emph{spectral gap} problem and is an active area of research. Various explanations are proposed to explain this spectral gap, among these the toroidal effects on the wave propagation that can cause sufficient up-shift (increase of the parallel wavenumber) in the parallel refraction index $n_{\parallel}$ to “fill” the spectral gap, non-linear interactions such as \textit{parametric decay instabilities} (PDI), diffraction effects or power density spectrum fluctuations. 
 
+
+
+\clearpage
 % ###################################################
 % ###################################################
-\subsection{The ALOHA code}\label{sec:ALOHA}
-\marginnote{Part of this section are taken from paper \cite{hillairet2010}.}
+\section{The ALOHA (Advanced LOwer Hybrid Antenna) code}\label{sec:ALOHA}
+\marginnote{Parts of this section are taken from paper \citeauthyear{hillairet2010}.}
+% ###################################################
+\subsection{Context of this work}
+The theory of the coupling between LHRF antennas and the plasma has been developed in \sidecite[-0.5cm]{brambilla1976-1,brambilla1979} for 2D waveguides (parallel plates infinite the poloidal direction) and refined after for rectangular waveguides in \sidecite{bers1983}. In 2007, best known linear coupling codes used to design present operating antennas are Slow Wave ANtenna (SWAN) \sidecite{litaudon1990, moreau1984} or GRILL3D \sidecite[+1cm]{irzak1995}. In these codes, the toroidal lines of waveguides are assumed to be infinite in the poloidal direction and are described using a modal expansion. The modal description of the field makes possible to simulate large antennas with a moderate computing cost but the code cannot handle realistic geometry.
+
+In order to improve the antenna-plasma coupling description of SWAN code while keeping its low computational cost, a code named Advanced LOwer Hybrid Antenna (ALOHA) has been developed\sidenote{The code has been initially written by S.Berio and Ph.Bibet in 1994 \cite{berio1996}, then improved later by Damien Voyer in 2006. Since 2008, I continued to develop the code, completely rewritten since in modern Fortran with a Matlab front-end. The code development was first versioned on CEA internal servers since Nov.2009 before being \href{https://github.com/jhillairet/ALOHA}{open-sourced in on github} since Sept.2015. ALOHA has been used by different user in fusion laboratory worldwide: MIT/PSFC, ASIPP, NFRI, IPR, IPP/Prague, etc. Since 2008, ALOHA has been cited in more than 130 references.}. In ALOHA, LH antennas may be modelled by any RF full-wave commercial software or home-made code\footnote{For optimization process, a plug-in named HAMAC (Hybrid Antenna Modelling for the ALOHA Code) has been developed in the frame of the master training of Melanie Preynas in 2009 and Michal Kazda in 2010.}. The plasma coupling is calculated from a fast classical 1D modelling that describes the effect of the slow wave only\cite{brambilla1976-1} or from a more advanced 2D modelling that implies the contribution of both fast and slow waves\cite{brambilla1979, bers1983, irzak1995}.
+These calculations are based on the linear cold plasma theory and non-linear effects, such as thermal effects ("warm" dielectric tensor) and ponderomotive force have not been taken into account in the present analysis. However, some specific developments have been brought in one hand, to describe a more realistic electron density profiles taking into account the close environment of LH antennas and in the other hand, to avoid computational difficulties when the antenna is large. These assumptions let ALOHA to solve a case in a couple of seconds up to 2 hours on a 2008 desktop computer, depending on the number of waveguides of the antenna and the plasma model chosen. By comparison, a boundary element code such as the Torino Politecnico Lower Hybrid Antenna (TOPLHA) code\sidecite{milanesio2011}, required at that time high-end or super-computers to be solved. At the same time, finite element software such as COMSOL just began to be able to treat materials with generic temporally-dispersive dielectric tensors. Such approach leaves absolute freedom in the description of the antenna geometry and of the plasma within the collisional cold plasma approximation but required high computation time or resources \sidecite{meneghini2009-1, shiraiwa2011-1}. Nowadays, the Finite-Element Method can be used in more daily basis for LHCD coupling as discussed in Section~\ref{sec:LHCD_FW_antena_coupling}. However, it is still inconsistent with intensive use, for example in daily experiments when one has to evaluate the effect of modules tripping on the radiated spectrum or during antenna design stage, where many calculations may be expected. In order to interpret and improve present day experiments and to design future antennas, an advanced but fast and convenient modelling tools is still convenient.
+
+The next section recall the key elements of the linear coupling theory. ALOHA specificities are detailed, such as the use of generalized scattering matrix use, the 2D grill modelling and the two electron density gradients profile. The Section~\ref{sec:ALOHA_TS} is devoted to experimental comparisons and simulation benchmarks on Tore Supra antennas. 
+
+
+\subsection{Main assumptions}\label{sec:Theory}
+
+\subsubsection{Network description}\label{sec:network_description}
+
+The LHCD antenna of past or present experiments (JET, Alcator C-Mod, FTU, EAST, KSTAR, Tore Supra/WEST, etc.) are designed to launch an asymmetric parallel wavenumber spectrum where most of the power is generated at a low parallel refractive index $\left|n_{\parallel}\right|\approx2$. This is usually achieved by phasing the forward waves in waveguides which are stacked along the static magnetic field. This phasing can be obtained externally in the transmission line feeding of the antenna \sidecite[-2cm]{bernabei2003, bae2003, park2010} or directly inside the antenna when E-plane power dividers -- usually called "multijunction" \sidecite{moreau1984} -- are associated with built-in phase shifters \sidecite[+0.5cm]{ekedahl2009-1, bo-jiang2006, zhao2010}.
+
+Here, the term "module" refers to the unit of the antenna composed of one "input" waveguide fed by the power source and one or several "output" waveguides facing the plasma, and the "grill" refers to the plane containing all the open ended waveguides of the antenna. A complete LH antenna can be made of many different modules, stacked in the toroidal or poloidal directions. A simple example is depicted in Figure~\ref{fig:geometry_antenna}.
+
+In the ALOHA code, the plasma coupling of a LH grill antenna is split in two parts: the modeling of the modules and the modeling of the grill in front of the plasma. 
+
+Firstly, the electromagnetic characterization of a module is obtained using some RF software or code, which results in the calculation of the scattering matrix of a module $\mathbb{S}_{\mbox{module}}$ in which only the propagating modes are taken into account. This matrix quantifies the coupling between all inputs and outputs of the RF structure \cite{kurokawa1965}. 
+
+Secondly, the coupling to the plasma of all the output waveguides that compose the grill is considered. At this stage, evanescent modes excited at the end of the waveguides are also taken in account. Thus, the grill is characterized by a $N$-port network where $N=N_{\mbox{wg}}\times N_{\mbox{modes}}$ is the number of ports, $N_{\mbox{wg}}$ the total number of output waveguides and $N_{\mbox{modes}}$ the number of electromagnetic modes in each waveguide. A scattering matrix $\mathbb{S}_{\mbox{grill/plasma}}$ of dimensions $N\times N$ is then derived using the approach detailed in Section~\ref{sec:grill_modeling}: this matrix quantifies the coupling between the different ports. In such a modeling, each mode is associated to a port \cite{Harrington2001}; a port can coincide either with the principal mode that propagate inside an output waveguide or with a higher order mode excited at the end of an output waveguide. 
+
+Finally, following the well known network approach, both modeling are combined: the ports in the scattering matrices $\mathbb{S}_{\mbox{module}}$ and $\mathbb{S}_{\mbox{grill/plasma}}$ that correspond to the same mode in a waveguide are identified and the global response of the antenna can then be extracted and directly compared to experimental data.
+
+For a better understanding, let us consider the example of the antenna shown in Figure~\ref{fig:geometry_antenna}. It is composed of one toroidal line of waveguides shared into two modules. Each module is a multijunction in which a large input feeding waveguide is split into four smaller output waveguides; the output waveguides are said to be active waveguides since they are connected to the input waveguide inside the module. The modules are separated by a short circuited waveguide; this waveguide is isolated and consequently is said to be passive. Moreover, there is also one passive waveguide on each side of the antenna. Each module is characterized by a scattering matrix $\mathbb{S}_{\mbox{module1}}$ and $\mathbb{S}_{\mbox{module2}}$.
+
+%
+\begin{figure}[h]
+	\centering{}\includegraphics[width=0.9\textwidth]{figures/chap2/ALOHA/figure1} 
+	\caption{A typical LH (multijunction) antenna structure. In this example, the
+		antenna is made of two multijunction modules stacked in the toroidal
+		($z$) direction. One passive waveguide is inserted between both modules
+		and on each side of the antenna.\label{fig:geometry_antenna} }
+	
+\end{figure}
+
+
+Suppose that, in front of the plasma, two modes are excited inside the output waveguides: the principal mode $\TE_{10}$ and the evanescent mode $\TM_{11}$. The network modeling of this problem is given in figure \ref{fig:network_representation}. In that representation, a port in a N-port network is described by a terminal. Thus, each of both modules is characterized by a 5-port network (1\,input waveguide $\times$ 1\,mode + 4\,active waveguides $\times$ 1\,mode) and the coupling of the grill with the plasma is modeled by a 22-port network (\textit{\emph{8\,active waveguides $\times$ 2\,modes + 		3\,passive waveguides $\times$ 2\,modes}}). The terminals in the 22-port network that coincide with the principal mode of the active waveguides in the modules are connected to the corresponding terminals in the 5-port network. The terminals in the 22-port network that coincide with the principal mode of the passive waveguides are shunt on a piece of transmission line ended by a short-circuit to model the reflection of the wave. The terminals in the 22-port network that coincide with the evanescent modes are shunt on the imaginary mode impedance of the output waveguide, which is equivalent to consider that those modes carry reactive energy in a waveguide of infinite length. Finally, the antenna reduces to a 2-port network in which the ports correspond to the input feeding waveguide of both modules and the global scattering matrix of the antenna is a $2\times2$ matrix $\left(\mathbb{S}_{\mbox{access}}\right)$. This formalism allows the code to fully take into account the coupling of the modes in the waveguides.
+
+%
+\begin{figure}[h]
+	\centering{}\includegraphics[width=0.7\textwidth]{figures/chap2/ALOHA/figure2} \caption{Illustration of the modeling of the antenna described in figure \ref{fig:geometry_antenna}
+		using the N-port concept.\label{fig:network_representation} }
+	
+\end{figure}
 
 
 
+\subsubsection{Module modelling}\label{sub:module_modeling}
+
+Lower Hybrid experiments show that the coupling efficiency not only depends on the plasma configuration but also on the antenna structure. Antennas are often designed in order to minimize the reflected power from the plasma to the RF sources, thus limiting the need of complex and expensive klystron protection systems. Multijunction concept is frequently used in tokamaks in order to create large waveguide arrays. The necessary phase shifts between adjacent waveguides used to launch non-symmetrical parallel wavenumber spectrum is usually obtained in the design by adjusting the relative guide heights \sidecite{litaudon1992}. These built-in phase shifters create multiple passages of the waves through the structure, which lead to a reduction of the reflected power to the RF sources as well as an increase of the electric field strength or an increase of secondary peaks in the radiated power spectrum. Thus, the RF design of such antennas is less straight-forward than simple open-ended waveguides and an accurate RF characterization is required to analyze the experimental data.
+
+The coupling efficiency requires the measurement of the forward and reflected electric fields in all waveguides which in principle can be done but requires the installation under vacuum of a very large number of probes\sidecite{jacquet1997, meneghini2010}. For an easier maintenance of the RF system, the use of a single bi-directional coupler at the module input in the pressurized transmission line is usually preferred. With this scheme, the electric field map at the plasma-antenna interface, needed to compute the launched parallel index $n_{\parallel}$, is only accessible by computation. In order to directly compare theoretical coupling predictions to experimental RF measurements, the RF description of each module have to be considered incorporating all the RF components in line from the plasma up to the RF probes location. Thus, the realistic wave propagation inside each module, through multijunctions and power splitters (such as hybrid junctions, magic tees or mode converters) has to be taken into account. 
+
+Commercial RF softwares, for example ANSYS HFSS, CST Studio or COMSOL, are convenient tools to design and optimize such components. In ALOHA, the scattering matrix calculated by these codes that describe the modules of the antenna can be directly used as input. Once the antenna's module scattering matrices calculated ($\mathbb{S}_{\mbox{module}}$), they are used as input for ALOHA to simulate the coupling between the modules and the plasma, as explained in the next sections.
+
+
+\subsubsection{Grill-plasma modelling}\label{sec:grill_modeling}
+
+\paragraph{Plasma description}\label{sec:dielectric_tensor}
+
+Lets consider the geometry shown in Figure~\ref{fig:geometry_antenna}. The static magnetic field $\mathbf{B}_{0}$ is assumed to be in the $z$ direction and vary as well as the plasma density in $x$ direction. This hypothesis is specifically valid for large tokamak such as ITER or tokamak with high aspect ratio in which the angle between the magnetic field and the narrow waveguide is small. The interface between waveguides and plasma is set at $x=0$. The plasma is considered homogeneous
+in $y$ and $z$ directions. The electromagnetic field scattered by the antenna is supposed to be dissipated far away from the coupling region so that the coupling problem is treated as a problem of radiation in a semi-infinite medium independently of the absorption in the core plasma. In such a modelling, the propagation into the plasma core is not calculated, meaning that effects such as mode conversion are not taken into account. 
+
+From Maxwell's equations, we recall that the electromagnetic field in a cold plasma in the absence of source satisfies the vector wave equation Eq.(\ref{eq:wave_equation}):
+\begin{equation}
+\left(\nabla\times\nabla\times-k_{0}^{2}\mathbb{K}\cdot\right)\left|\begin{array}{c}
+\mathbf{E}(\mathbf{r})\\
+\mathbf{H}(\mathbf{r})\end{array}\right.=0
+\end{equation}
+
+where $\mathbf{E}$ and $\mathbf{H}$ are the electric and magnetic fields, $\mathbf{r}=x\mbox{\ensuremath{\hat{\mathbf{x}}}}+y\hat{\mathbf{y}}+z\hat{\mathbf{z}}$ is the space vector coordinates and $k_{0}=\frac{\omega}{c}$ the free-space wavenumber. In the vicinity of the grill, the plasma is described by its (normalized) cold dielectric tensor $\mathbb{K}$ Eq.(\ref{eq:stix_K}) which is recalled here: 
+\begin{equation}
+	\mathbb{K}(x,\omega)=\left[\begin{array}{ccc}
+	S & jD & 0\\
+	-jD & S & 0\\
+	0 & 0 & P\end{array}\right]
+	\label{eq:dielectric_tensor}
+\end{equation}
+where parameters $S$, $D$ and $P$ are defined by Eq.(\ref{eq:stix_SDP}) and depend on radial position $x$ and wave frequency.
+
+%\begin{eqnarray}
+%S(x,\omega) & = & 1-\sum_{s}\frac{\omega_{p,s}^{2}}{\omega^{2}-\Omega_{c,s}^{2}}\label{eq:stix_sum}\\
+%D(x,\omega) & = & \sum_{s}\frac{\Omega_{ci}}{\omega}\frac{\omega_{p,s}^{2}}{\omega^{2}-\Omega_{c,s}^{2}}\label{eq:stix_difference}\\
+%P(x,\omega) & = & 1-\sum_{s}\frac{\omega_{p,s}^{2}}{\omega^{2}}\label{eq:stix_plasma}
+%\end{eqnarray}
+%where $\omega$, $\Omega_{c,s}$ and $\omega_{p,s}$ are respectively the RF source, the cyclotron and the plasma angular frequencies of the species $s$.
+
+% ####################################################################
+\paragraph{Grill description}
+The transverse (perpendicular to the $x$ direction) electromagnetic field $\mathbf{E}_{t,\mbox{grill}}$, $\mathbf{H}_{t,\mbox{grill}}$ at the end of the output waveguides, i.e. in the $x=0$ grill plane, can be expanded as a series of excited modes in similar way than Eq.(\ref{eq:voltage_current_lossy_line}) from Chap.\ref{chap:RF_fundamentals}:
+\begin{eqnarray}
+\mathbf{E}_{t,\mbox{grill}}(x=0,y,z) & = & \sum_{n=1}^{N}\sqrt{Z_{n}}\left(a_{n}+b_{n}\right)\mathbf{e}_{t,n}(y,z)\\
+\mathbf{H}_{t,\mbox{grill}}(x=0,y,z) & = & \sum_{n=1}^{N}\frac{1}{\sqrt{Z_{n}}}\left(a_{n}-b_{n}\right)\mathbf{h}_{t,n}(y,z)
+\end{eqnarray}
+where $\mathbf{e}_{t,n},\,\mathbf{h}_{t,n}$ are the TE or TM modal functions (explicitly given in reference.\,\cite{Harrington2001}) associated to the port $n$ and $Z_{n}$ the impedance of the port $n$ for the current mode. The coefficients $a_{n}$ and $b_{n}$ are the incident and reflected power waves associated to the port $n$. We recall that $N=N_{\mbox{wg}}\times N_{\mbox{modes}}$ is the total number of ports, $N_{\mbox{wg}}$ being the total number of waveguides and $N_{\mbox{modes}}$ the number of modes in each waveguide. Since the analytical expression of the modes function $\mathbf{e}_{t,n},\,\mathbf{h}_{t,n}$ are known, the transverse fields can be analytically expressed in the spectral domain by Fourier transform:
+\begin{eqnarray}
+\mathbf{\tilde{E}}_{t,\mbox{grill}}\left(n_{y},n_{z}\right) & = & \sum_{n=1}^{N}\sqrt{Z_{n}}\left(a_{n}+b_{n}\right)\mathbf{\tilde{e}}_{t,n}\left(n_{y},n_{z}\right)\label{eq:E_grill_spectral}\\
+\tilde{\mathbf{H}}_{t,\mbox{grill}}\left(n_{y},n_{z}\right) & = & \sum_{n=1}^{N}\frac{1}{\sqrt{Z_{n}}}\left(a_{n}-b_{n}\right)\tilde{\mathbf{h}}_{t,n}\left(n_{y},n_{z}\right)\label{eq:H_grill_spectral}\end{eqnarray}
+where $\mathbf{\tilde{e}}_{t,n}$ and $\mathbf{\tilde{h}}_{t,n}$ are the Fourier transform of the modal functions $\mathbf{e}_{t,n},\,\mathbf{h}_{t,n}$ and $n_{y}=k_{y}/k_{0}$ and $n_{z}=k_{z}/k_{0}$ are the refractive indexes in $y$ and $z$ directions respectively. These latter expressions will be used for the coupling calculation in the next section.
+
+
+\paragraph{Coupling from grill to plasma}
+
+Following the classical linear-coupling regime \cite{brambilla1979,bers1983}, the characterization of the plasma medium can be reduced to a spectral surface admittance $\mathbb{Y}_{S}$ defined on the plane that separates the grill from the plasma region:
+\begin{equation}
+\tilde{\mathbf{H}}_{t,\mbox{plasma}}\left(n_{y},n_{z}\right)=Y_{0}\mathbb{Y}_{S}\left(n_{y},n_{z}\right)\tilde{\mathbf{E}}_{t,\mbox{plasma}}\left(n_{y},n_{z}\right)\label{eq:surface_admittance}
+\end{equation}
+
+where $\tilde{\mathbf{H}}_{t,\mbox{plasma}}\left(n_{y},n_{z}\right)$ and $\tilde{\mathbf{E}}_{t,\mbox{plasma}}\left(n_{y},n_{z}\right)$ are the Fourier transforms of the transverse magnetic $\mathbf{H}_{t,\mbox{plasma}}(x=0,y,z)$ and electric fields $\mathbf{E}_{t,\mbox{plasma}}(x=0,y,z)$. $Y_{0}$ is the vacuum admittance. The plasma surface admittance $\mathbb{Y}_{s}$, which is discussed in Sec.\ref{sec:surface_admittance}, is generally
+a $2\times2$ complex matrix.
+
+The waveguides of the grill are supposed to be opened through a perfect metallic surface of infinite extent. Due to the continuity of the transverse electric field in the waveguide openings and no tangent electric field on the perfect metallic surface, the transverse magnetic field $\mathbf{\tilde{H}}_{t,\mbox{plasma}}$ can be expressed using the surface admittance $\mathbb{Y}_{s}$ defined in (\ref{eq:surface_admittance}) and the expansion of the electric field $\mathbf{\tilde{E}}_{t,\mbox{grill}}$ given in (\ref{eq:E_grill_spectral}). Thus, 
+\begin{equation}
+\tilde{\mathbf{H}}_{t,\mbox{plasma}}\mbox{\ensuremath{\left(n_{y},n_{z}\right)}}=\sum_{n=1}^{N}\sqrt{Z_{n}}\left(a_{n}+b_{n}\right)Y_{0}\mathbb{Y}_{s}\left(n_{y},n_{z}\right)\mathbf{\tilde{e}}_{t,n}\left(n_{y},n_{z}\right)\label{eq:H_plasma_spectral}
+\end{equation}
+
+Let $\tilde{\mathbf{H}}_{t,\mbox{metal}}\left(n_{y},n_{z}\right)$ be the transverse magnetic field related to the current induced on the perfect metallic surface of infinite extent. Due to the continuity between transverse magnetic field in the waveguide openings, one finds from the expansion of the magnetic field in the grill (\ref{eq:H_grill_spectral}) and in the plasma (\ref{eq:H_plasma_spectral}) the following equality:
+\begin{eqnarray}
+\sum_{n=1}^{N}\frac{1}{\sqrt{Z_{n}}}\left(a_{n}-b_{n}\right)\tilde{\mathbf{h}}_{t,n}\left(n_{y},n_{z}\right) & + & \tilde{\mathbf{H}}_{t,\mbox{metal}}\left(n_{y},n_{z}\right)=\label{eq:H_continuity_spectral}\\
+&  & \sum_{n=1}^{N}\sqrt{Z_{n}}\left(a_{n}+b_{n}\right)Y_{0}\mathbb{Y}_{s}\left(n_{y},n_{z}\right)\mathbf{\tilde{e}}_{t,n}\left(n_{y},n_{z}\right)\nonumber 
+\end{eqnarray}
+
+The mode matching method is then applied \cite{berio1996}: a linear system is obtained by dot product multiplying both sides of (\ref{eq:H_continuity_spectral}) with $\tilde{\mathbf{h}}_{t,m}^{*}\left(n_{y},n_{z}\right)$ for $m=1,\ldots,N$ and integrating over the spectral domain $\left\{ n_{y},n_{z}\right\} $ of infinite extent. Moreover, by multiplying both sides by $k_{0}^{2}/4\pi^{2}$, the left hand side of the equation can be transposed in the spatial domain $\left\{ y,z\right\} $ thanks to Parseval's theorem:
+\begin{eqnarray}
+\sum_{n=1}^{N}\frac{1}{\sqrt{Z_{n}}}\left(a_{n}-b_{n}\right)\left[\int\int_{-\infty}^{+\infty}\!\mathbf{h}_{t,m}^{*}\left(y,z\right)\cdot\mathbf{h}_{t,n}\left(y,z\right)\, dy\, dz\right.\\
+\left.+\int\int_{-\infty}^{+\infty}\!\mathbf{h}_{t,m}^{*}\left(y,z\right)\cdot\mathbf{H}_{t,\mbox{metal}}\left(y,z\right)\, dy\, dz\right]=\nonumber \\
+\sum_{n=1}^{N}\sqrt{Z_{n}}\left(a_{n}+b_{n}\right)C_{mn}\nonumber 
+\end{eqnarray}
+where the coupling admittance term $C_{mn}$ is given by:
+\begin{equation}
+C_{mn}=Y_{0}\frac{k_{0}^{2}}{4\pi^{2}}\int\int_{-\infty}^{+\infty}\tilde{\mathbf{h}}_{t,m}^{*}\left(n_{y},n_{z}\right)\mathbb{Y}_{s}\left(n_{y},n_{z}\right)\mathbf{\tilde{e}}_{t,n}\left(n_{y},n_{z}\right)\, dn_{y}\, dn_{z}\label{eq:coupling_admittance}
+\end{equation}
+Since the modal function $\mathbf{h}_{t,m}$ is zero on a perfect metallic plane, the term involving $\mathbf{H}_{t,\mbox{metal}}$ cancels. The orthonormal properties of the modal eigenfunctions\cite{Collin1990,Harrington2001}
+leads to:
+\begin{equation}
+\frac{1}{\sqrt{Z_{m}}}\left(a_{m}-b_{m}\right)=\sum_{n=1}^{N}\sqrt{Z_{n}}\left(a_{n}+b_{n}\right)C_{mn}\qquad\forall\, m=1,\,\ldots,\, N\label{eq:linear_system}
+\end{equation}
+The linear system of equation.(\ref{eq:linear_system}) can be rewritten
+using a matrix formalism:
+\begin{equation}
+\sqrt{\mathbb{Z}}^{-1}\left(\mathbf{a}-\mathbf{b}\right)=\mathbb{C}\sqrt{\mathbb{Z}}\left(\mathbf{a}+\mathbf{b}\right)\label{eq:linear_system_matrix}
+\end{equation}
+where $\sqrt{\mathbb{Z}}$ is diagonal matrix with $\left[\sqrt{\mathbb{Z}}\right]_{ii}=\sqrt{Z_{i}}$ and $\mathbb{C}$ is the coupling admittance matrix with $\left[\mathbb{C}\right]_{ij}=C_{ij}$. $\mathbf{a}$ and $\mathbf{b}$ are respectively the incident and reflected waves vectors associated to the port $i$, such as $\left[\mathbf{a}\right]_{i}=a_{i}$ and $\left[\mathbf{b}\right]_{i}=b_{i}$. The scattering matrix $\mathbb{S}_{\mbox{grill/plasma}}$ discussed in Section~\ref{sec:network_description} is defined by
+
+\begin{equation}
+\mathbf{b}=\mathbb{S}_{\mbox{grill/plasma}}\mathbf{a}\label{eq:Sgrillplasma_def}
+\end{equation}
+Finally, using (\ref{eq:linear_system_matrix}), one finds:
+\begin{equation}
+\mathbb{S}_{\mbox{grill/plasma}}=\left(\mathbb{I}+\sqrt{\mathbb{Z}}\mathbb{C}\sqrt{\mathbb{Z}}\right)^{-1}\left(\mathbb{I}-\sqrt{\mathbb{Z}}\mathbb{C}\sqrt{\mathbb{Z}}\right)
+\end{equation}
+where $\mathbb{I}$ is the unit matrix.
+
+\subsubsection{Antenna power spectrum}
+An important feature of LH antennas is the radiated power spectral density $dp$ that can be computed from the Poynting vector: \begin{equation} dp\left(n_{y},n_{z}\right)=\Re\left\{ \frac{k_{0}^{2}}{4\pi^{2}}\left[\tilde{\mathbf{E}}\left(n_{y},n_{z}\right)\times\mathbf{\tilde{H}^{*}}\left(n_{y},n_{z}\right)\cdot\widehat{x}\right]\right\} \label{eq:power_spectrum_2D}
+\end{equation}
+According to previous equations, this power density can be evaluated once the power waves $\mathbf{a},\mathbf{b}$ for each waveguides have been calculated. In order to compare 1D and 2D modelling, it is possible to define a 1D spectrum $dp_{z}$ that integrates the contribution of all the $n_{y}$ for a given $n_{z}$:
+\begin{equation}
+dp_{z}\left(n_{z}\right)=\int_{-\infty}^{+\infty}\! dp\left(n_{y},n_{z}\right)\, dn_{y}\label{eq:power_spectrum_1D}
+\end{equation}
+Finally, the power conservation must imply that, neglecting the RF
+losses in the antenna:
+\begin{equation}
+\int\int_{-\infty}^{+\infty}\! dp\left(n_{y},n_{z}\right)\, dn_{y}\, dn_{z}=\sum_{n=1}^{N_{\mbox{module}}}p_{n,\mbox{in}}\left(1-RC_{n}\right)\label{eq:spectrum_power_conservation}
+\end{equation}
+where $p_{n,\mbox{in}}$ and $RC_{n}$ are respectively the power incoming from an RF source and the Reflection Coefficient for the n-th module. 
+
+
+\subsubsection{Plasma surface admittance}\label{sec:surface_admittance}
+
+The plasma surface admittance defined in equation.(\ref{eq:surface_admittance}) can be evaluated either numerically or analytically depending on the hypothesis made on the wave propagation plasma and on the density
+profile\cite{brambilla1979, bers1983}. In ALOHA, two kinds of wave propagation models have been implemented. 
+
+In the first one, the so-called ALOHA-2D mode -- 2D because the plasma parameters depend on two coordinates, namely $n_{y}$ and $n_{z}$ -- waveguides cross-section are considered finite in both dimensions and both TE and TM modes are taken into account. In this case, the plasma admittance matrix can either be evaluated numerically \cite{irzak1995} or analytically for linear density evolution in terms of Airy and Whittaker functions\cite{brambilla1979, bers1983}. A brief derivation of the 2D admittance matrix is given in the paper \citeauthyear{hillairet2010}. A numerical evaluation of the 2D admittance is also implemented in ALOHA using the finite element method. The radial domain $x$ is discretized in sub-domains where the field is expanded on second-order polynomials. Using the Galerkin method and setting a WKB condition at the end of the domain, an algebraic system is obtained and solved using a Gaussian elimination. 
+
+In the second model, the so-called ALOHA-1D mode, the fast wave coupling is neglected and the waveguide height is considered to be infinite in the poloidal $y$-direction (i.e. $n_{y}=0$). In this case, only the $\mbox{TEM}$ and $\TM$ modes are excited and the plasma admittance reduces to a scalar that can be expressed analytically in terms of Airy functions for step or linear electron density profiles\cite{brambilla1976-1}. A brief derivation of its expression is also given in the paper \citeauthyear{hillairet2010}.
+
+A priori, the 1D description of the plasma should not match with the description of the modules since the waveguides have 2D cross-section. However, the scattering matrix formalism characterizes RF structures in terms of incident and reflected power waves in a port and not in terms of electric or magnetic fields. Incident and reflected power waves are only described by the electromagnetic power they carry and a phase, normalized to a port impedance\cite{kurokawa1965}. Thus, the network concept presented in section \ref{sec:network_description} allows to combine ports with different geometries. In ALOHA, rectangular waveguide modes are characterized by their transverse components both in $y$ and $z$ directions. Since in parallel plate waveguides, there is only a transverse component in the $z$ direction, ALOHA-1D only considers the contribution in this direction. The modal impedance, which describes the relationship between transverse components of the electric and magnetic fields, is always the one of the rectangular waveguide, even in 1D calculation. When one wants to compare scattering parameters with a completely 1D code such as SWAN, then an impedance
+re-normalization is required.
+
+The 1D approach is of great interest in spite of the approximations made. Indeed, since the waveguides of the grill are modeled by parallel plate waveguides, two different poloidal lines of waveguides are not coupled by the plasma, which means that there is no coupling between ports associated to those waveguides in the matrix $\mathbb{S}_{\mbox{grill/plasma}}$. When an antenna is composed of several poloidal lines of waveguides, it is then possible to define a density evolution for each line in order to simulate the effect of poloidal inhomogeneities. Finally, an other strong advantage of the 1D approach is to simplify the double integral of equation.(\ref{eq:coupling_admittance}) to a simple one, reducing dramatically the computation time while keeping a good agreement with experiments as it will be seen in future Sections.
+
+
+\paragraph{Several layers model}\label{sec_several_layers_model}
+
+In a tokamak plasma, the density profile of the scrape-off layer in which the LH antenna radiates may be perturbed by the antenna side limiters or other protruding objects such as other antennas. Thus, the modeling of the electron density by a single linear profile is not deeply realistic and experiments shows that the density decay length -- which can be approximated in a first order by $\lambda=n_{e}/\nabla n_{e}$ \sidecite[+0.5cm]{wesson1999} -- is millimetric in front of the grill and centimetric further \sidecite{leuterer1991}. Consequently, it seems natural to describe the electron density profile using several layers with different values of $\nabla n_{e}$.
+
+\begin{marginfigure}
+	\begin{centering}
+		\includegraphics[width=1.0\textwidth]{figures/chap2/ALOHA/figure3}
+		\par\end{centering}
+	
+	\caption{Description of the electronic density profile by two linear profiles
+		in front of an antenna. $x=0$ coincides with the position of the
+		mouth of the grill.\label{fig:Electron-density-profile} }
+	
+\end{marginfigure}
+
+In ALOHA, it is possible to model the plasma density profile by one or two density gradients. The first layer is characterized by a density gradient $\nabla n_{e1}$ and a thickness $d$; the second layer is characterized by a density gradient $\nabla n_{e2}$ of infinite extent, as illustrated in figure \ref{fig:Electron-density-profile}: 
+\begin{equation}
+\left\{ \begin{array}{ll}
+n_{e}\left(x\right)=n_{e0}+\nabla n_{e1}\, x & 0\leq x\leq d\\
+n_{e}\left(x\right)=n_{ed}+\nabla n_{e2}\,\left(x-d\right) & x>d\end{array}\right.\label{eq:density_profile}
+\end{equation}
+
+where $n_{ed}=n_{e0}+\nabla n_{e1}\, d$.
+
+
+Inside the second layer, the solution of the wave equation (\ref{eq:wave_equation}) for $\tilde{E}_{z}$ is similar to the one found in the case of a single layer since the physical requirement as $x\rightarrow+\infty$ is the same. Inside the first layer, the solution for $\tilde{E}_{z}$ is a combination of Airy and Whittaker functions. The relationship between the both solutions can be found considering that the solutions for the transverse electric and magnetic fields at the interface of both layers $x=d$ have to be continuous and the plasma admittance at the mouth of the antenna can be expressed analytically. Details of the derivation for a 1D case can be found in \citeauthyear{hillairet2010}.
+
+
+\subsubsection{Numerical validations}\label{sec:numerical_considerations}
+
+The results of the coupling calculation described in the previous sections depend on the total number of modes $N_{\mbox{modes}}$. In order to determine the minimal number of modes to take into account in order to insure the convergence of ALOHA, the total number of modes has been varied and the results on the C3 antenna compared. This is illustrated in Figure~\ref{fig:RC-E_vs_ne_vs_modes}, where the average reflection coefficient and the average electric field at the grill mouth are plotted versus the electron edge density $n_{e0}$ for the C3 antenna. When three or more modes are used, the results get very
+close, indicating that the convergence has been reached. 
+
+%
+\begin{figure}[h]
+	\begin{centering}
+		\includegraphics[width=1.0\textwidth]{figures/chap2/ALOHA/figure4a}
+		\par\end{centering}
+	
+	\begin{centering}
+		\includegraphics[width=1.0\textwidth]{figures/chap2/ALOHA/figure4b}
+		\par\end{centering}
+	
+	\caption{Reflection coefficient (upper) and average electric
+		field at the mouth (lower) vs edge electron density
+		for the C3 antenna calculated by ALOHA, for different total number
+		of modes taken in account.\label{fig:RC-E_vs_ne_vs_modes} }
+	
+\end{figure}
+
+
+In Figure~\ref{fig:Computation-time-versus-modes}, the computation time has been plotted versus the total number of modes $N_{\mbox{modes}}$ for a simple antenna made of 8 independently fed waveguides and for the C3 antenna (57 waveguides per row). As illustrated in the Figure~\ref{fig:Computation-time-versus-modes}, the time complexity of the coupling calculation is function of the number of waveguides and the number of modes taken into account. In both examples, the running time is proportional to the square of the product of the number of waveguides and the number of modes, i.e. $O\left(N_{\mbox{wg}}^{2}\times N_{\mbox{modes}}^{2}\right)$. In the following of this paper, 3 modes were used for all the simulations made with ALOHA. 3 modes are sufficient at low density ( $1.10^{17}\sim20.10^{17}\mbox{\ensuremath{m^{-3}}}$)
+which is the density range of interest for this work.
+
+%
+\begin{figure}[h]
+	\begin{centering}
+		\includegraphics[width=1.0\textwidth]{figures/chap2/ALOHA/figure5}
+		\par\end{centering}
+	
+	\caption{Computation time versus total number of modes for a simple antenna
+		made of 8 waveguides and for the C3 antenna. The dashed lines are
+		quadratic fit in $N_{\mbox{modes}}^{2}$. \label{fig:Computation-time-versus-modes}}
+	
+\end{figure}
+
+
+When the antenna is large -- that is to say in practical terms when there are more than about thirty waveguides --, the numerical computation of the coupling for a 2D plasma description becomes very difficult. In order to reach the convergence, the precision required on the calculation of the coupling terms in (\ref{eq:coupling_admittance}) leads to a drastic increase of the computational time. To avoid this problem, a solution consists in introducing losses in the vacuum permittivity. This hypothesis changes the diagonal terms of the dielectric tensor ($S'=S-j\delta$ and $P'=P-j\delta$ where $\delta$ is a factor of losses, $\delta\ll1$ and $\delta>0$) and this eliminates the singularities that appear in the expression of the admittance surface given previously. However, the implementation of the analytical solution when losses are introduced is very difficult because of the complex arguments that appear in Whittaker functions. It is then more convenient to numerically solve the differential wave equations by using the finite element method as explained previously. For the sake of illustration, setting $\delta=10^{-2}$ enables to reduce the computational time by more than two order of magnitude without disturbing the antenna response .
+
+
+\subsubsection{Summary of this work}
+The open-source ALOHA code has been developed to model the Lower Hybrid antenna coupling. In this code, multijunction antennas can be described by any full-wave RF software in order to take into account their detailed geometry. The plasma density layers in front of the antenna can be defined by one or two linear models in order to allow a more realistic description of the scrape-off density profile in front of the antenna. The coupling between the plasma and antenna is treated with either fast and slow waves (ALOHA-2D) or slow wave only (ALOHA-1D) via a surface admittance formulation. The code has also been successfully benchmarked to other codes: TOPLHA \sidecite[+2cm]{milanesio2011}, OLGA \sidecite[+1cm]{preinhaelter2017-1, preinhaelter2018} or FEM codes such as ANSYS HFSS \sidecite{hillairet2019}. The next Section presents some experimental comparisons with experiments performed on Tore Supra.
+
+\clearpage
 
 % #####################################################
 % #####################################################
-\subsection{Coupling Calculation of Tore Supra/WEST LHCD Antennas}
+\subsection{ALOHA Coupling Calculations for Tore Supra/WEST LHCD Antennas}\label{sec:ALOHA_TS}
 \marginnote{Part of this section are taken from paper \cite{hillairet2009-2}.}
-
+\subsubsection{Context of this work}
 During October and November 2008, dedicated experiments were carried out in Tore Supra in order to compare the measured power reflection coefficients on the C2 and C3 launchers\sidenote{The C2 antenna has been removed from Tore Supra in 2009 and replaced by the Passive-Active Multijunction, labelled C4 (then LH2 in WEST).} with the numerical results from the ALOHA code. In order to avoid possible non-linear effects\cite{petrzilka1987, ekedahl2009}, low power pulses were used, i.e. pulses for which the power density at the mouth of the antenna is less than $2~\si{MW/m}^2$ (corresponding to a total input power of 100~kW). The parameters for pulse $\#43016$ are shown in Fig.~\ref{fig:TS43016}. A large variation of density in front of the antenna between $0.3\times10^{17}~\mathrm{m}^{-3}$ and $13\times10^{17}~\mathrm{m}^{-3}$ was obtained by varying the distance between the last closed flux surface (LCFS) and the antenna during the pulse (cut-off density is $n_{ec}=1.7\times10^{17}~\mathrm{m}^{-3}$). Electron density was measured with the Langmuir probes embedded in to the LH antennas. 
 
 \todo{Refaire la figure}
@@ -1037,53 +1304,125 @@ Experimental reflection coefficients at different electron densities, measured d
 
 % ###################################################
 % ###################################################
-\subsection{Full-Wave Antenna Coupling}\label{sec:LHCD_FW_antena_coupling}
+\section{Full-Wave Antenna Coupling}\label{sec:LHCD_FW_antena_coupling}
 \marginnote{Part of this section are taken from paper \cite{hillairet2019}.}
+\subsection{Context of this work}
+During the last two decades, the availability of RF full wave software eased the design of RF antennas, such as ICRF and LHRF antennas. As both software and hardware progressed, modelling has become more and more realistic, reducing the gap between CAD and RF models and accelerating the necessary feedback between mechanical and RF engineers. Nowadays, thermal or mechanical loads can be provided directly from the results of RF simulations inside integrated workflows, which make design phases faster.
+
+As seen in Section~\ref{sec:waves-in-plasma}, when the magnetic field is oriented along the $z$ axis, the plasma facing the antennas can be described in the cold-plasma approximation with the relative permittivity tensor in the $e^{j\omega t}$ time-harmonic convention Eq.(\ref{eq:stix_K}), recalled here:
+\begin{equation}
+\varepsilon_r 
+=
+\left(
+\begin{array}{ccc}
+S & jD & 0 \\
+-jD & S & 0 \\
+0 & 0 & P
+\end{array}
+\right)
+\label{eq:stix_tensor}
+\end{equation}
+where the parameters $S$, $D$, $P$ are defined in Eqs.(\ref{eq:stix_SDP}) and depends of the RF frequency, the plasma species and the confining magnetic field. 
+%The range of values taken by the $S, D$ and $P$ parameter for typical operational parameters for ICRF and LHRF is illustrated in Fig.\ref{fig:sdp_vs_density}. 
+A decade ago, antenna to plasma coupling modelling with commercial full-wave tools was not possible unless some severe simplifications, as they used to not support anisotropic and inhomogeneous dielectric media. Moreover, solving such problems requires large computer resources, which were not easily available since recently. Community codes such as {OLGA} \cite{preinhaelter2017} or {ALOHA} \cite{hillairet2010} (Section~\ref{sec:ALOHA}) and {TOPLHA} \cite{milanesio2012} for LHRF and {ANTITER II} \cite{messiaen2011} or {TOPICA} \cite{lancellotti2006} for {ICRF}, were developed specifically for that purpose. While these tools are generally faster than full-wave modelling since they solve part of the problem in the spectral domain, their Doppelgänger is to assume slab plasma and eventually simplified antenna geometries to keep an analytical formulation of the problem. When dealing with detailed and curved antennas, poloidal and toroidal plasma curvatures or wave scattering by plasma inhomogeneities, 3D numerical approaches become mandatory. 
+
+Regarding coupling performances only, using constant dielectric fast-wave antenna loading has been proved to be a good workaround \cite{messiaen2011-1}. In practice, using high permittivity medium such as (salty) water\cite{messiaen2005} or BaTiO3 solutions\cite{helou2018} are used in laboratory experiments. Hence,  antenna coupling performances have been investigated substituting the plasma load  with a salty water tank in ANSYS HFSS \cite{ravera2012, qin2015} or with BaTiO3 in Microwave CST \cite{bottollier-curtet2011}. Meta-material load had been successfully tested\cite{rustomji2018} for LHRF coupling measurements at low power. 
+
+However, using constant dielectric as radiation medium can't reproduce neither the inhomogeneity produced by increasing density in operational conditions or the medium gyrotropy and anisotropy effects on antenna loading. If these effect are not crucial for coupling calculations, they are for interest for other codes using antenna coupling quantities as input. As an example, if the magnetic field is aligned with the $z$ direction, the radiated spectrum generated by the antenna which depend on the wave number in toroidal $k_z$ and poloidal $k_y$ directions, is an even function of $k_z$ but not of $k_y$ due to gyrotropy\sidecite{messiaen2011, colas2019}.
+
+Since the last decade, full wave codes such as {COMSOL}, Microwave {CST} or {ANSYS} {HFSS} for example, have been able to define propagating medium as anisotropic tensor with eventually negative or complex permittivity, spatial and frequency dependences. This ability allowed coupling calculations of the C-Mod LH launcher\cite{meneghini2009-1}. Recently, the open-source initiative \cite{shiraiwa2017-1} allows modelling RF waves propagation in edge and core plasmas. In all cases, a difficulty arises in the model setup if  geometry is partially taken into account to save resources: in this case, boundary conditions at the edges of the plasma domain need to be defined. Indeed, default radiation or absorbing boundary conditions such as Perfectly Matched Layer (PML) shipped in all these software are not designed to be used directly on the anisotropic material boundaries but instead on isotropic mediums. For antenna to plasma coupling, the plasma medium in which the antenna radiate is at the contrary considered as an semi-infinite medium and should be thus defined with attached ideal absorbing boundary conditions. Specific PML for anisotropic materials such as a magnetized cold plasma have been used in \cite{jacquot2013, colas2019} and mathematically studied in  \cite{becache2017}. Recently in \cite{louche2017}, a 1D cold plasma has been modelled in CST Microwave Studio and compared against analytical solutions. Due to a software limitation to define non-homogeneous medium, a stratified PML has been used to mimic the single pass absorption in a bulk plasma. To obtain a precise solution, a large number of layers are required in the PML. 
+
+Thanks to the collaboration between CEA, ITER and ANSYS, the RF modelling software ANSYS HFSS supports inhomogeneous anisotropic medium since 2016\sidecite{hillairet2019-2}. The purpose of the work presented in this section is not to produce a rigorous approach of the coupling simulation or to model the wave absorption mechanism in the plasma or non-linear effects such as sheaths  on the antenna boundaries. The motivation is to assess the ability of HFSS to describe the usual range of experimental magnetized cold plasma inhomogeneous parameters facing LHRF (sec.\ref{sec:LHRF}) antennas, away from resonances, in order to guide the RF designer during the design phase of an antenna. Due to space constraint, we focuses only on the LHRF case.%, but the treatment of ICRF cases is similar.
+
+\subsection{LHRF Coupling}
+As previously seen in Section~\ref{sec:lhcd}, in the Lower Hybrid Current Drive range of frequencies (2-6~GHz) and edge plasma electron densities in current tokamak experiments ($n_e=10^{17}-10^{18}$ $\si{m^{-3}}$), the cold plasma dielectric tensor is mostly diagonal:
+ \begin{equation}
+ \varepsilon_r 
+ \approx
+ \left(
+ \begin{array}{ccc}
+ 1 & 0 & 0 \\
+ 0 & 1 & 0 \\
+ 0 & 0 & P
+ \end{array}
+ \right)
+ \label{eq:stix_tensor_lhrf}
+ \end{equation}
+with
+\begin{equation}
+\varepsilon_{r,zz} = P\approx 1 - \frac{\omega_{pe}^2}{\omega^2} = 1 - \frac{n_e}{n_c}
+\end{equation}
+where $\omega_{pe}$ and $\omega$ are respectively the plasma and the RF angular frequency and $n_c$ the slow-wave cut-off density defined by:
+\begin{equation}
+	n_c = \frac{ \varepsilon_0 \omega^2 m_e}{e^2}
+	\label{{eq:cutoff_density_lh}}
+\end{equation}
+In practice, operational plasma parameters lead to  $P\in[-10,0]$. Thus, as  $n_e$ increases, the required mesh length in the full wave simulation should decrease accordingly to match the decrease of the skin depth which depends of both  permittivity (and conductivity). 
+
+In HFSS, using standard PML around such a medium does not give satisfactory results and one should consider instead developing its own PMLs as done in \cite{jacquot2013}. A workaround consists in adding progressively artificial losses, also known as "adiabatic absorbers"\cite{oskooi2008}. If the waves are sufficiently attenuated before they reach the propagation domain boundaries, the edge boundaries can be set as perfect electric conductors. In order not to interfere too much with the coupling results, a non-lossy region is made in front of the antenna (Figure \ref{fig:LH_HFSS}).  A power law of increasing conductivity has been used to attenuate the field, as:
+\begin{equation}
+\sigma(x) =  
+\begin{cases} 
+	\alpha_x (x - x_0)^2 & \mbox{if } x \gg 0 \\
+	0 & \mbox{otherwise}
+\end{cases}	
+\end{equation}
+with  $\alpha_x$  a scaling parameter and $x_0$ the location of the lossy region limit. Similar  expressions are used  in direction $y$ and $z$  for $\sigma(y)$ and $\sigma(z)$. The function $\sigma(x)$ can be directly set-up in the material editor or as a global parameter, paying attention that the spatial parameters $(x,y,z)$ are the one of the local material coordinates. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap2/LHCD/LH_loss_region}\\
+	\includegraphics[width=1.0\linewidth]{figures/chap2/LHCD/LH_electric_field_fine_definition}
+	\caption{$x-z$ maps in the middle of the waveguide height. Left: conductivity map in the toroidal plane. Right: electric field magnitude (log scale).}
+	\label{fig:LH_HFSS}
+\end{figure}
+
+As a rule of thumb, a toroidal region at least four times larger than the antenna (toroidal) width and a radial depth at least as large as the antenna (toroidal) width are sufficient, as long as the conductivity law in the radiating region absorb enough power. Without magnetic field tilt angle and without phasing law between waveguide rows, propagation is mainly restricted to the XZ plane and thus the poloidal volume has low influence. A poloidal size of less than twice the height of the antenna is sufficient. In practice, a parametric scan should be first performed on the magnitude of the conductivity law  $\alpha$ until convergence is obtain on the result of interest, for example on the reflection coefficients of the antenna.
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap2/LHCD/LH_electric_field}
+	\caption{Example of simple LHCD antenna with 6 active waveguides.}
+	\label{fig:lhelectricfield}
+\end{marginfigure}
 
 
+In the example illustrated by Figure~\ref{fig:lhelectricfield} and its results presented in Figure~\ref{fig:LH_HFSS}, a 3D LHRF antenna made of six waveguides (76~mm heigh in poloidal direction, 8.5~mm width in toroidal direction and spaced by 2~mm and excited at 3.7~GHz) is facing a small vacuum gap (few millimetres of less) before a linearly increasing density plasma described by:
+\begin{equation}
+	n_e(x)=n_{e0} \left(1+ \frac{x-d_\mathrm{gap}}{\lambda_n} \right)
+\end{equation} 
+where $\lambda_n$ is the density scrape-off length and $d_\mathrm{gap}$ the vacuum-gap depth. In order to get physically relevant results, the mesh size should be sufficiently refined to capture  the contribution of high wavenumbers waves propagating in the plasma. In case of LHRF antennas, high toroidal wavenumbers are due to the inevitable spurious lobes generated by LHRF phased array. In the case of the cold plasma in this range of frequencies, the medium wavelength decreases with increasing density. Thus, for a given convergence target criteria (for example in this work the maximum change in the magnitude of the scattering parameters between two consecutive passes is $\Delta S\approx 10^{-3}$ ), the number of elements will increase with the initial edge density. Putting the plasma directly at the contact of the waveguide leads to high order modes (most being evanescent) at the interface between the antenna and the plasma. These modes requires very fine mesh, unless with the reflection inside the antenna would be generally overestimated. A vacuum gap region between the antenna and the plasma speeds-up very much the convergence process since it attenuates these high order modes. This model required around 150~000 elements for a convergence target of $\max|\Delta S|<10^{-3}$, solved in 10-20 minutes on a 64~GB desktop computer. For comparison, similar ALOHA results are obtained in less than a minute. 
 
-%\subsection{Resonance Cone}
-%Bellan and Porkolab PRL 34, 124, 1975.
-%
-%
-%\subsection{Overview of parameters achieved and example of some systems}
-%\subsubsection{LH Launchers main figures of merit}
-%
-%There are three important figures of merit to measure the efficiency and the performances of a LH launcher: 
-%\begin{enumerate}
-%	\item The first one is the k-space radiated power spectrum, generally characterized by its \emph{parallel power spectrum} $p(n_{\parallel})$ . This quantity represents the amount of power for each parallel index excited by the launcher. The relation between this power spectrum and the array excitation is related to the Fourier transform of the electromagnetic field at the plasma-antenna interface. 
-%	
-%	\item  The second one is the ratio of the reflected power (at the mouth or at the end of the launcher) to the input power, named the \emph{reflection coefficient} (sometime expressed in percent). 
-%	$$RC = \frac{P_r}{P_i}$$
-%	\item The third one is the \emph{directivity} of the launcher, which is the fraction of the power spectrum over its total power content. It can be viewed as the fraction of the power that goes toward one toroidal direction over the total coupled power. One can define the directivity as follow\footnote{Other definitions exist, essentially in order to ad a physical content to the directivity, in relation with the current drive efficiency evolution in the plasma. See for instance \sidecite{Litaudon1990a}.}
-%	$$
-%	D
-%	= 
-%	\frac{
-%		\int_{n_{\parallel} >0} p(n_{\parallel}) dn_{\parallel} 
-%	}{
-%		\int_{n_{\parallel}} p(n_{\parallel}) dn_{\parallel} } 
-%	$$
-%\end{enumerate}
-%
-%Theoretically, if the $n_{\parallel}$ spectrum of an antenna is known, one can evaluate the reflection coefficient. However, since the wave field at the launcher aperture (and thus the launcher spectrum) depends on the plasma itself, numerical codes are required to make a self-consistent numerical evaluation of the coupling. Such codes are coupling codes.
-%
-%\subsection{LH systems and launchers performances}
-%Mainly because of its relative simplicity, most of the LH launchers have been based on a "grill" configuration, as for example in the 1980' \sidecite{porkolab1984a, gormezano1986a, Stevens1988}.
-%
-%Typical grill launchers have a high reflection coefficient (of the order of 20 to 40\%) but directivity higher than 80\%. Since all the waveguides can be feed by independent RF sources, and thus independently phased, such launchers have a wide flexibility in terms of operational space (excited spectrum) which is of great interest for physics studies. However, since each waveguide is independently power fed, the complexity of the launcher grows enormously with the number of output waveguides, leading to cumbersome transmission systems for multi-megawatt power levels (Table \ref{tab:grillperformances}). 
-%
-%
-%Multijunction launchers at the contrary have led to hundred of waveguides launchers (see Table \ref{tab:multijunctionperformances}). The complexity of the multijunction design and manufacturing is balanced by the a simpler transmission line system behind the launcher. Because of the self-matching property, the typical reflection coefficient of multijunction launchers is generally less than 10\%. However, the multiple back and forth of the waves leads to an increase of the peak electric field in secondary waveguides. Moreover, since the phase shift is created by the built-in phase shifter inside the launcher, the flexibility of phase configuration is reduced in comparison to classic grill launchers. 
-%
-%
-%The PAM concept tested in FTU and in the Tore Supra tokamak showed that reflected power lower than 5\% (i.e. high coupling efficiency) and continuous operations could be combined (cf. Figure \ref{fig:ts45472c4ir}) during long pulse operations. 
-%
-%
-%
-%\subsection{ITER System}
-%
-%Although not part of the ITER initially planned procurement phase, a conceptual design of a 20~MW/CW 5~GHz LHCD system has been proposed for the second mission of ITER, i.e. Q=5 steady state target \sidecite{hoang2009}. In ITER, the parallel index of the launched waves $n_{\parallel 0}$ ~ 2.0 has been selected as a trade-off between the current drive efficiency, the wave accessibility and the location of power deposition, all of which depend upon the plasma conditions. Depending of the plasma scenarios (steady-state, hybrid, ramp-up, etc.), the additional current driven by LHCD would range between 0.42 MA (steady-state) up to more than 3.0 MA (ramp-up) \sidecite{decker2011}. In any case, these values confirm that for steady state scenarios, a substantial bootstrap current is required \sidecite{jacquinot1999}. The average current drive efficiency, which is the figure of merit of the LHCD, has been calculated to be $\eta \equiv 0.2 \times 10^{20} A m^{-2} W^{-1}$, similar to the ones measured in present days tokamaks \sidecite{jacquinot1999}. This value can be compared to other additional current drive scheme, such as NBI or ECCD. 
-%
-%In addition, LHCD-assisted start-up could reduce the flux consumption during current ramp-up, resulting in a longer flat top or burn time. An early application of 20 MW LHCD during the plasma current ramp-up phase of the ITER reference scenario 2 is effective to reduce the flux consumption. An expected saved flux of 43Wb is equivalent to about 500 s of additional burn duration \sidecite{hoang2009}.
-%
+The Figure~\ref{fig:LH_fied_spectrum} illustrate the benchmark with the ALOHA code on the electric field and the power density spectrum calculated from the Fourier transform of the electric and magnetic fields at the mouth of the LHRF antenna. The maximum electric field in HFSS is in general lower than in ALOHA because of the smoothing effect of the mesh. The average value is however of the same order. The average Reflection Coefficient (RC) calculated from HFSS matches well ALOHA's calculations when the edge density is higher than the cut-off density (Figure \ref{fig:LH_RC_vs_NeOverNc}). Looking in details, waveguide per waveguide, HFSS results have a reduced RC amplitude  excursion than ALOHA's.  
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap2/LHCD/LH_HFSS_vs_ALOHA_Ez}\\
+	\includegraphics[width=1.0\linewidth]{figures/chap2/LHCD/LH_HFSS_vs_ALOHA_spectrum}
+	\caption{Example of comparison between ALOHA and HFSS ($n_e = 2n_c$ , $\lambda_n=1$ cm, 1 mm vacuum gap).  Top: toroidal component of the electric field at the mouth of the antenna. Bottom: Power density spectrum excited by the antenna.}
+	\label{fig:LH_fied_spectrum}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.98\linewidth]{figures/chap2/LHCD/LH_RC_vs_NeOverNc}
+	\caption{Reflection Coefficient (RC) as calculated by ALOHA and HFSS versus the edge density   ($n_e/n_c$) with  $\lambda_n$=1~cm, $d_\mathrm{gap}$=2~mm vacuum gap.}
+	\label{fig:LH_RC_vs_NeOverNc}
+\end{figure}
+
+\subsection{ICRF Coupling}
+In the Ion Cyclotron range of frequencies (30-60~MHz) for magnetic field in the Tesla range, the relative dielectric permittivity parameter $P$ in Eq.(\ref{eq:stix_tensor}) ranges from $-10^3$ to $-10^5$. Properly mesh the problem requires a node distance of the order of thousandth the wavelength in vacuum. In a domain size of the order of the wavelength, it makes the numerical problem hard to solve on desktop computers. If only the coupling to the fast wave is of interest, the mesh size can be forced to not be smaller than a fraction of the wavelength is the plasma $\lambda_0/\sqrt{\max(|S|, |D|)}$ where $\lambda_0$ if the  wavelength in vacuum. 
+
+However, if anisotropy effects are discarded, using an inhomogeneous equivalent-dielectric isotropic medium  defined as $\varepsilon_{r,eq}=S-D$ \cite{messiaen2011-1}, is a fast and good approximation to determine the antenna coupling performances, in particular S or Z-parameters. Density profile or its equivalent-dielectric permittivity profile, defined from analytical expressions or from tabulated data, can be imported into HFSS  and used into the material properties in order to create an inhomogeneous media. 
+
+%A simplified two-straps antenna has been modelled in ANSYS HFSS and sucessfullt benchmarked to ANTITER~II\cite{messiaen2011}. Detailed assumptions and results will be published in a future paper.
+
+%As an example, a simplified two straps antenna has been modelled in ANSYS  HFSS and in the coupling code ANTITER~II\cite{Messiaen2011}. After a 1~cm vacuum gap between the antenna and the plasma, the electron density increases linearly from $n_{e0}=10^{15} \mathrm{m}^{-3}$ up to a maximum density of $n_{e1}\in [10^{18}, 10^{19}] \mathrm{m}^{-3}$ within a 30~cm distance and stay constant after. Details on the geometry and various assumptions will be published in a dedicated paper.
+%In order to get coherent comparisons, the strap thickness was considered as flat as assumed in ANTITER II. Port length has been set long enough to attenuate high-order modes and properly de-embedded. The figure XX illustrates the coupling resistance and various impedances against the maximum density $n_{e1}$ and show a good agreement between HFSS and ANTITER~II.  
+
+\subsection{Summary of this section}
+Thanks to the collaboration between CEA, ITER and ANSYS, the RF modelling software ANSYS HFSS supports inhomogeneous anisotropic medium since 2016\sidecite{hillairet2019-2}. The ANSYS HFSS software have been benchmarked for coupling calculations of Lower Hybrid Resonance Frequency to usual edge tokamak cold magnetize plasma conditions. Reflected power and electric field obtained in HFSS agree well with the dedicated LH coupling code ALOHA if absorbing boundary conditions are properly set. In practice, usual edge plasma scenario can be modelled with the requirement of a vacuum gap. The  required memory resources increases with the electron density increase, which can be a practical limitation for high-density scenarios.
+
+For ICRF, the magnitude of the dielectric tensor elements, in particular in the direction parallel to the confinement magnetic field, reach high values which do not allow a direct implementation in HFSS unless using large computing resources. However, if one is only interested in coupling calculation (S/Z-parameters and first order electromagnetic fields), discarding anisotropy effects, using an equivalent dielectric as a loading medium leads to satisfactory results with respect to the IC dedicated coupling code ANTITER II. 
+
+In both case, since it is possible to define inhomogeneous media in HFSS, one can describe equation-based evolution or to directly use numerical data (coming from edge plasma diagnostic such as reflectometers) to model various coupling scenarios. The results obtained can be used by antenna designers to evaluate coupling performances. 
