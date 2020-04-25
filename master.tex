@@ -44,7 +44,21 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 
 %%%%%% Maths
 \usepackage{physics}
+
+\DeclareMathSymbol{\Omega}{\mathalpha}{letters}{"0A}% italics
+\DeclareMathSymbol{\varOmega}{\mathalpha}{operators}{"0A}% upright
+\providecommand*{\upOmega}{\varOmega}% for siunitx
 \usepackage{siunitx}
+% Note that the sign must be
+%  µ
+%  MICRO SIGN
+%  Unicode: U+00B5, UTF-8: C2 B5
+% and \emph{not}
+%  μ
+%  GREEK SMALL LETTER MU
+%  Unicode: U+03BC, UTF-8: CE BC
+\sisetup{math-micro=\text{µ},text-micro=µ}
+
 
 %%%%%% definitions of mathematical variables
 \newcommand{\abf}{{\mathbf a}}
@@ -83,6 +97,7 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 \newcommand{\TE}{{\mathrm{TE}}}
 \newcommand{\TM}{{\mathrm{TM}}}
 
+\newcommand{\degC}{$\si{\degreeCelsius}$ }
 %%%%%% Bibliography
 % Load the bibliography package and pass it some options
 \usepackage[sorting=none,
@@ -271,11 +286,14 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 	% Fusion and tokamak
 	\input{tex/chap1.tex}
 	
-	% RF Components
-	\input{tex/chap3.tex}
+	% RF fundamentals
+	\input{tex/chap_RF_fundamentals.tex}
 	
 	% RF Coupling
 	\input{tex/chap2.tex}
+	
+	% RF Components
+	\input{tex/chap3.tex}
 	
 	% Education
 	\input{tex/chap4.tex}
