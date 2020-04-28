@@ -116,7 +116,7 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 }
 
 %%%% General TOC depth
-\setcounter{tocdepth}{4}
+\setcounter{tocdepth}{3}
 
 %%%% Margin TOC depth
 \renewcommand{\themargintocdepth}{1}
@@ -276,6 +276,7 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 	
 	\mainmatter % Denotes the start of the main document content, resets page numbering and uses arabic numbers
 	
+	% Summary
 	\input{tex/intro.tex}
 	
 %	 % Page avec titre seul
@@ -291,9 +292,13 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 	
 	% RF Coupling
 	\input{tex/chap2.tex}
+
+	% RF Components	
+	\input{tex/chap_high_power_icrf.tex}
+	\input{tex/chap_high_power_lhrf.tex}
 	
-	% RF Components
-	\input{tex/chap3.tex}
+	% Multipactor
+	\input{tex/chap_multipactor.tex}
 	
 	% Education
 	\input{tex/chap4.tex}

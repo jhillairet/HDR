@@ -1,17 +1,17 @@
 % controlled fusion and RF heating and current drive
 %\chaptertoc{}
-
+\setchapterpreamble[u]{\margintoc}
 \chapter{Controlled Fusion, RF heating and Current Drive}
 \label{chap:fusion_and_rf}
-\margintoc
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Nuclear Fusion}
 \subsection{Fusion Power}
-\marginnote{Part of this section are taken from Master Fusion lecturer notes on Tokamak dimensioning, from which the paper \citeauthyear{sarazin2019} has been derived.}
+\marginnote[+1cm]{Part of this section are taken from Master Fusion lecturer notes on Tokamak dimensioning, organized at CEA/IRFM for the French Fusion Master students in 2019 and 2020. This teaching work also led to the paper  \citeauthyear{sarazin2019}.}
 
-Nuclear fusion is the process that powers all the stars in the Universe, including our Sun. If controlled in a reactor, fusion power could be an ideal energy source. It would run on hydrogen isotopes\sidenote[][*+3]{Such as deuterium which can be found in sea water and tritium which can be generated inside the reactor}, does not generate greenhouse gas and creates no radioactive waste except the reactor vessel components itself. It would be a dispatchable source (in contrast to intermittency inherently affecting solar and wind energies) and would require much less land area than wind or solar power installations for similar power. But producing a self-sustaining fusion reaction requires that deuterium and tritium be heated to over 150~million~\si{K}, a temperature at which they become plasma: an electrically charged gas. 
+Nuclear fusion is the process that powers all the stars in the Universe, including our Sun. If controlled in a reactor, fusion power could be an ideal energy source. It would run on hydrogen isotopes\sidenote[][*+6]{Such as deuterium which can be found in sea water and tritium which can be generated inside the reactor}, does not generate greenhouse gas and creates no radioactive waste except the reactor vessel components itself. It would be a dispatchable source (in contrast to intermittency inherently affecting solar and wind energies) and would require much less land area than wind or solar power installations for similar power. But producing a self-sustaining fusion reaction requires that deuterium and tritium be heated to over 150~million~\si{K}, a temperature at which they become plasma: an electrically charged gas. 
 
 Indeed, to get nuclear fusion, nuclei have to come close enough to each other where nuclear forces can overcome their mutual electrostatic repulsion. This would require temperatures of the order of 720 \si{keV} for head-on collisions of thermal particles to lead to fusion reactions in a classical way. 
 
@@ -142,7 +142,7 @@ Past or current fusion reactors achieved so far 1/10th of this value, but 30 yea
 % ####################################################
 % ####################################################
 \section{Tokamak}
-Sustaining a high temperature plasma in steady-state requires that the plasma be confined by magnetic field, such as in a tokamak, described in this section. The magnetic device called \emph{tokamak}, first developed in the Soviet Union in the early 1960s, is an efficient way to confine high temperature plasmas\sidecite{shafranov2001, azizov2012, mirnov2019}. It is an axially symmetric field configuration with a large toroidal magnetic field, a moderate plasma pressure and a relatively small toroidal current\sidecite[+0.4cm]{Freidberg2007}. By virtue of the highest achieved values of the $n T \tau_e$ product, tokamak is presently the leading magnetic configuration for a fusion reactor. Because of its performance, there is a large number of experimental tokamaks currently in operation or being constructed\marginnote{See \href{http://www.tokamak.info/}{www.tokamak.info} for an updated list of past, present and future experiments}. The following machines are cited in this manuscript: WEST (previously Tore-Supra, Cadarache, France), JET (Culham, UK), ASDEX-Upgrade (Garching, Germany), EAST (Hefei, China), HL-2A (Chengdu, China), KSTAR (Deajon, Korea) and the international project ITER (Cadarache, France).
+Sustaining a high temperature plasma in steady-state requires that the plasma be confined by magnetic field, such as in a tokamak, described in this section. The magnetic device called \emph{tokamak}, first developed in the Soviet Union in the early 1960s, is an efficient way to confine high temperature plasmas\sidecite[-3cm]{shafranov2001, azizov2012, mirnov2019}. It is an axially symmetric field configuration with a large toroidal magnetic field, a moderate plasma pressure and a relatively small toroidal current\cite{Freidberg2007}. By virtue of the highest achieved values of the $n T \tau_e$ product, tokamak is presently the leading magnetic configuration for a fusion reactor. Because of its performance, there is a large number of experimental tokamaks currently in operation or being constructed\footnote{See \href{http://www.tokamak.info/}{www.tokamak.info} for an updated list of past, present and future experiments}. The following machines are cited in this manuscript: WEST (previously Tore-Supra, Cadarache, France), JET (Culham, UK), ASDEX-Upgrade (Garching, Germany), EAST (Hefei, China), HL-2A (Chengdu, China), KSTAR (Deajon, Korea) and the international project ITER (Cadarache, France).
 
 \begin{marginfigure}[0cm]
 	\includegraphics[width=1\linewidth]{figures/chap1/tokamak_toroidal_field}
@@ -172,11 +172,7 @@ An electric field in the toroidal direction is induced through the plasma by ram
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Ohmic Heating and Current Drive}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{The Need for Additional Heating}
-\marginnote{Parts of this section are taken from the "Tokamak dimensioning" activity given to French Master students in the frame of the "Master Fusion" and published in \citeauthyear{sarazin2019}.}
-
+\subsection{Ohmic Heating}
 The plasma current density $J_p$ ($[\si{A/m^2}]$) flowing through plasma with resistivity $\eta$ ($[\si{\Omega.m}]$) heats up the plasma and generates an Ohmic heating power density $p_\Omega$:
 
 \begin{equation}\label{eq:ohmic_power_density}
@@ -251,29 +247,29 @@ the maximum temperature achievable by ohmic heating is about few keV only. This 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{The Need for Non-Inductive Current Drive}
-Operating a tokamak in steady-state conditions means sustaining a constant current into plasma (Fig.\ref{fig:tokamak_transformer_effect}). However, inducing a constant plasma current requires ramping the current in the central solenoid, which can't be done indefinitely. The duration is limited by the magnetic flux (number of Volt-seconds) that can be provided by the central solenoid coil. So, tokamaks are intrinsically pulsed machines.
-Thus, to run in steady-state, a tokamak requires the plasma current to be sustained by other non-inductive means, ie. "non-inductive" current drive. Current-drive methods such as by high-power radio waves also heat the plasma, but not all heating methods generate substantial plasma current density. 
-
+\subsection{Non-Inductive Current Drive}
 \begin{marginfigure}[-3cm]
 	\includegraphics[width=1\linewidth]{figures/chap1/tokamak_transformer_effect}
 	\caption{Tokamak transformer effect.}
 	\label{fig:tokamak_transformer_effect}
 \end{marginfigure}
+Operating a tokamak in steady-state conditions means sustaining a constant current into plasma (Fig.\ref{fig:tokamak_transformer_effect}). However, inducing a constant plasma current requires ramping the current in the central solenoid, which can't be done indefinitely. The duration is limited by the magnetic flux (number of Volt-seconds) that can be provided by the central solenoid coil. So, tokamaks are intrinsically pulsed machines.
+Thus, to run in steady-state, a tokamak requires the plasma current to be sustained by other non-inductive means, ie. "non-inductive" current drive. Current-drive methods such as by high-power radio waves also heat the plasma, but not all heating methods generate substantial plasma current density. 
 
-\todo{Improve this section. Discuss RF CD efficiency}
+
+
+%\todo{Improve this section. Discuss RF CD efficiency}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Radio frequency Heating and Current Drive}
-\marginnote{Parts of this section are taken from the chapter 2 of the IAEA Textbook of Fusion Technology \citeauthyear{hillairet2020-1}}
+\section{Radio frequency Heating and Current Drive}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{General Principles}
+\subsection{General Principles}
 As introduced in the previous section, auxiliary heating techniques are mandatory in tokamaks to raise ion temperature to the required values for burning state due to the physics inherent limitations. Several auxiliary heating and current drive systems have been developed in the history of fusion experiments and two broad types are used, namely neutral beam injection and radio-frequency methods. %Each has physics-based and technological strengths and weaknesses. 
 The former involves  injection of high energy beams of neutral atoms which can cross the machine magnetic field and transfer its energy to the plasma via charge exchange reactions. Among the latter, many concepts have been tested\footnote{To the author knowledge, there is unfortunately no reference book listing all these various efforts and their associated successes (or failures). Putting apart the textbook dealing with waves in plasma, only few books have been written years ago specifically on the topic of RF heating and current drive: \citeauthyear{granatstein1985}, \citeauthyear{Golant1989}, \citeauthyear{Cairns1991}. Unfortunately, neither describes the technological aspects associated to a given heating or current drive method. Engineering "tips and tricks" and technological know-how is mostly transmitted internally in research institute with relatively few international exchanges. This was not a problem as the number of staff was sufficient. As cost-driven management results in staff reduction, this know-how tends to disappear... To sum up, there currently no "how to build a fusion plasma heating and current drive system" book (yet?).} and results reported in conferences and journal papers \sidecite{hwang1981, bers1984, england1989, jacquinot1999, pinsker2001} or in book chapters \cite[§6]{kikuchi2012}, \cite[§15]{Freidberg2007} or \cite{hillairet2020-1}. 
 
-As the sizes of the fusion machines increased, a selection occurred on the kinds of selected RF systems, constrained by cost considerations, the know-how of the time and of course by the experience of people in charge\footnote{"L'histoire est juste peut-être, mais qu'on ne l'oublie pas, elle a été écrite par les vainqueurs", Alexis de Saint-Priest - 1842. "What is history but a fable agreed upon?" (Napoleon Bonaparte).}. Nowadays, the RF systems used in large fusion experiments are Ion and Electron Cyclotron Resonance Heating (ICRH and ECRH) and Lower Hybrid Current Drive (LHCD). Only ICRH and ECRH are planned in ITER\sidenote{\url{www.iter.org/mach/Heating}} after that LHCD has been removed from its latest research plan \cite{iterorganization2018}. 
+As the sizes of the fusion machines increased, a selection occurred on the kinds of selected RF systems, constrained by cost considerations, the know-how of the time and of course by the experience of people in charge\footnote{"What is history but a fable agreed upon?" (Napoleon Bonaparte).}. Nowadays, the RF systems used in large fusion experiments are Ion and Electron Cyclotron Resonance Heating (ICRH and ECRH) and Lower Hybrid Current Drive (LHCD). Only ICRH and ECRH are planned in ITER\sidenote{\url{www.iter.org/mach/Heating}} after that LHCD has been removed from its latest research plan \cite{iterorganization2018}. 
 
 All RF heating and current drive methods share the same following requirements:
 \begin{enumerate}
@@ -285,12 +281,20 @@ All RF heating and current drive methods share the same following requirements:
 
 Since the transmission lines are pressurized with an inert gas (or dry air) to increase breakdown voltage limits, one or more feed-through (or "windows") are therefore required before connecting them to an antenna inside the vacuum chamber. These components are made of ceramics or diamond, transparent to the RF waves but insuring the tightness between pressurized and vacuum regions. Windows for LHCD are discussed in Section~\ref{sec:RF_windows}.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap1/RF_HCD_antennas}
+	\caption{Illustration of various RF antennas for heating and current drive applications in tokamaks, with their associated frequency range.}
+	\label{fig:rfhcdantennas}
+\end{figure}
+
+
 In this manuscript, we will focus only on ICRH and LHCD systems. Moreover, we will not address the problems arising from the interactions between these two systems, when they are used either sequentially or simultaneously.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Ion Cyclotron Resonance Frequency}
+\subsection{Ion Cyclotron Resonance Frequency}
 The resonance between the natural cyclotron motion of an ion in a static magnetic field with an electromagnetic wave having the same (gyro)frequency have been recognized early in the magnetic fusion research as a bulk plasma heating method\sidecite[-1cm]{berger1958, stix1958}. Experimental confirmations rapidly confirmed the theoretical findings\sidecite{stix1958-1, stix1960, hooke1961, rothman1969}. Nowadays, ICRH is the RF heating scheme whose highest powers have been coupled, with for example up to 16.5~\si{MW} in JET \sidecite[+1cm]{jacquinot1999}. ICRH is used in almost all present day tokamaks at multi-\si{MW} level and it is likely it will  play an important role in next generation experiments and fusion reactors.
 
 %Hot plasmas being weakly collisional, waves damping have to rely on collision-less wave-particle mechanisms. Absorption of the ICRF wave power in the ion cyclotron range of frequency can happen by three mechanisms: minority heating, harmonic heating or mode conversion. 
@@ -299,7 +303,7 @@ The physical heating mechanisms at play at the ion cyclotron resonance is not as
 
 Fusion scientists then have discovered that inside the plasma, the polarization of the wave is mainly set by the dominant species, while the absorption depends on the resonant species. If the dominant species is different from the resonant species, then the component of the wave with the right polarization at the resonance (of the resonant species) is different from zero. Once absorbed, the minority species then transfers its energy to the bulk plasma by Coulomb collisions. This method is called \textit{minority heating} \sidecite{perkins1984} and is one of the most used in tokamaks\cite{jacquinot1999}. For example in most Tore Supra/WEST scenarios, plasma consists in deuterium (D) as a majority specie, with few percent in ratio of hydrogen (H) as a minority species \sidecite{bourdelle2015}. 
 
-It is also possible to use higher harmonics of the cyclotron resonance to heat the plasma ions, i.e. $\omega = N \Omega_{ci}$ with $N$ an integer larger than 1. This method is called \textit{harmonic heating} and actually was combined with minority heating since the beginning of ICRH experiments \sidecite{jacquinot1977, hosea1979}. The theoretical analysis shows that good accessibility persists and that a reasonable portion of the wave has the proper in-phase polarization for strong wave–particle resonance. However, the damping rate depends sensitively on temperature and density and thus is not as robust and reliable as one might like\cite{Freidberg2007}. 
+It is also possible to use higher harmonics of the ion cyclotron resonance $\Omega_i$ to heat the plasma ions, i.e. $\omega = p \Omega_{i}$ with $p$ an integer larger than one. This method is called \textit{harmonic heating} and actually was combined with minority heating since the beginning of ICRH experiments \sidecite{jacquinot1977, hosea1979}. The theoretical analysis shows that good accessibility persists and that a reasonable portion of the wave has the proper in-phase polarization for strong wave–particle resonance. However, the damping rate depends sensitively on temperature and density and thus is not as robust and reliable as one might like\cite{Freidberg2007}. 
 
 Power can also be absorbed directly by the electrons by Landau damping/Transit Time Magnetic Pumping or linear mode conversion to Ion Bernstein Waves (IBW) \sidecite{stix1965, brambilla1985}. Recent developments use a combination of three ions to integrate a minority heating with mode conversion scenarios. A mix of two majority ions leads to a mode conversion layer where the amplitude of the electric field of the wave with the right polarization is increased. Locating this layer at the position of the resonance of a third, minority species can lead to strong absorption by this minority and highly accelerated ions \sidecite{ongena2017}.
 
@@ -310,7 +314,7 @@ Ion cyclotron was used to be promoted as the "cheapest" RF scheme since it has t
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Lower Hybrid Resonance Frequency}
+\subsection{Lower Hybrid Resonance Frequency}
 Originally, the occurrence of a wave resonance, the \emph{lower hybrid resonance}, has been anticipated to lead to strong wave-particle interaction through linear and non-linear mode conversion to a hot plasma wave \sidecite{stix1992}. With an appropriate RF launcher conceived to excite cold plasma waves, these would propagate into the plasma until reaching the lower hybrid resonant layer at $\omega_{LH}$. This resonance exists in tokamak plasma in the region close to the ion plasma frequency $\omega_{pi}/2\pi$, which lies in the lower end of the microwave band (1-5~GHz). At this layer, the perpendicular group velocity vanishes and the waves can convert into a hot plasma mode which is absorbed. This heating technique, known as \emph{Lower Hybrid plasma Ion Heating} (LHIH) or \emph{Lower Hybrid Resonance Heating} (LHRH), was the originally experimentally investigated method in the 70' \sidecite{bellan1974, hooke1972, golant1972, tonon1977}. Different physical mechanisms have been invoked to explain the energy absorption, such as stochastic Ion Heating in \citeauthyear{karney1978} and quasi-linear electron Landau damping in  \citeauthyear{brambilla1983}.
 
 
@@ -320,34 +324,71 @@ Rather than trying to heat ions, it was theorized postulated that high phase vel
 
 Since in 1982 many impressive results were presented on LHCD\sidecite{stevens1983, porkolab1984, tonon1983} toward steady state or quasi steady state tokamak operations, most LH experiments were dedicated to electron interaction and especially to current drive. A recent review of LHCD is available in \sidecite[+0.5cm]{bonoli2014}.
 
-\marginnote[+1cm]{These terms will be explained in Section~\ref{sec:waves-in-plasma}.}
-Currently, the "LH waves" term refers to the waves which satisfy the slow-wave branch of the cold plasma dispersion relation for parallel index larger than one ($|n_{\parallel}|>1$) and a RF frequency $\omega$ which lies between the ion cyclotron $\omega_{ci}$ and the electron cyclotron $\omega_{ce}$ frequencies. 
+Currently in the fusion community, the "LH waves" term refers to the waves which satisfy the slow-wave branch of the cold plasma dispersion relation for wavenumber parallel to the direction of the magnetic field than one ($|k_{\parallel}|>1$) with a RF frequency $\omega$ which lies between the ion cyclotron $\omega_{ci}$ and the electron cyclotron $\omega_{ce}$ frequencies. 
 
 %For the LH method which operates at the lower end of the microwave band (1-5 GHz) klystrons transform electrical power into electromagnetic power (step 1), which is transported to the plasma using waveguides (step 2). The power is coupled to the plasma with antennas called "grills" because of their characteristic shape (step 3), transported inside the plasma by plasma waves (typically the slow wave) (step 4), and absorbed on ions or electrons by wave-particle interaction (step 5).
 
 
-\subsubsection{High Power RF Sources}
-\todo{add some pictures}
+\subsection{High Power RF Sources}
+
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=1.0\linewidth]{figures/chap1/RF_HCD_sources}
+%	\caption{Illustration of the main high-power RF sources used in fusion with their associated range of frequencies.}
+%	\label{fig:rfhcdsources}
+%\end{figure}
+
 In the ICRH frequency range (30-60~\si{MHz}), electrical to electromagnetic power transformation is typically carried out by a series of amplifiers (Tetrode, Triode), a technology derived from high-power, steady-state broadcast transmitters. Typical unit sizes for present ICRH pulsed systems are 2~\si{MW} (around 500~\si{kW} in CW). The Tore Supra/WEST ICRH plant is equipped with Thales Electron Device tetrodes\sidecite{clerc1986, clerc1992-1} and shares some aspects of the JET ICRH plant which is detailed in \sidecite[+0.5cm]{wade1994}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.49\linewidth]{figures/chap1/ToreSupra_ICRH_plant}
+	\includegraphics[width=0.49\linewidth]{figures/chap1/ToreSupra_ICRH_plant2}
+	\caption{Pictures of the WEST ICRH plant. The plant consists in 6 generators (2 per antennas), each made of three stages.}
+	\label{fig:toresupraicrhplant}
+\end{figure}
 
 In the LHD frequency range (1-5~\si{GHz}) which lies close the lower end of the microwave band, the electromagnetic power is generated by klystrons. A klystron is a vacuum tube used as amplifiers at narrow band microwave and radio frequencies. In the fusion domain, they are used mainly to produce high power waves, at the level of hundred of kilo watts during many seconds. First klystrons have been invented by the Varian brothers in 1937 \sidecite{Pond2008}. The first klystrons have been intensively used during World War II, as RF power generators for RADAR systems. Klystrons sources between 2.45~\si{GHz} and 5~\si{GHz} are now available at the 0.5-0.8~\si{MW}/10-1000~\si{s} level. The Tore Supra/WEST system frequency is 3.7~\si{GHz}$\pm$ 2.5~\si{MHz} \sidecite{peauger2005, kazarian2005, beunas2009, delpech2011-1}),
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/chap1/ToreSupra_LHCD_klystrons}
+	\caption{Tore Supra/WEST 700~kW/CW klystrons}
+	\label{fig:toresupralhcdklystrons}
+\end{figure}
+
+
 % #####################################################
-\subsubsection{Transmission Lines}
+\subsection{Transmission Lines}
 Many devices have been developed in order to transmit, measure, combine or split high RF power from one point to another. These devices are commonly used on ICRH and LHCD systems to transport the power from the sources to an antenna, but also in order to protect the sources from possible reflected RF power by the plasma.  
 
-\todo{Add some pictures}
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=1.0\linewidth]{figures/chap1/RF_HCD_lines}
+%	\caption{Illustrattion of the various kinds of high power transmission lines used in fusion with their associated range of frequencies.}
+%	\label{fig:rfhcdlines}
+%\end{figure}
 
-% #####################################################
-% #####################################################
-\subsubsection{High Power Coaxial Components}
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap1/SPINNER_Rigid_Line}
+	\caption{Picture of a rigid coaxial line (from SPINNER).}
+	\label{fig:spinnerrigidline}
+\end{marginfigure}
+
 Rigid coaxial transmission lines for high power application are commonly available in 30, 50 or 75~$\si{\Omega}$ characteristic impedances. The former is optimized for power handling while the later is used for minimum attenuation. In between, 50~$\si{\Omega}$ lines are a compromise between power handling and attenuation. 
-
-\todo{Picture of coaxial components}
 
 Rigid coaxial lines are used in the ICRH frequency range (30-60~\si{MHz}). These components are usually filled with dry air or nitrogen up to few atmospheres in order to avoid dielectric voltage breakdown. Coaxial lines main properties are recalled in Section~\ref{sec:coaxial_lines}.
 
 In Tore Supra/WEST, ICRH lines consist in Spinner 30~\si{\Omega} 9" coaxial lines ($\phi_\mathrm{i}/\phi_\mathrm{o}=140/230~\si{mm}$ with 2 and 5~\si{mm} thickness respectively). The inner conductor is often made of copper for the internal conductor while the outer conductor is made of aluminium AG5. Long pulse duration can be limited by the thermal expansion of the (inner) conductor. Modelling have shown that forcing dry air or nitrogen flow between inner and outer conductor would however be sufficient to reach 2\si{MW}/1000\si{s} \sidecite{vulliez2005}.
+
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap1/SPINNER_Rectangular_waveguide}
+	\caption{Pictures of rectangular waveguides (from SPINNER).}
+	\label{fig:spinnerrectangularwaveguide}
+\end{marginfigure}
 
 As the RF frequency increases, coaxial cable losses become unpracticable for high power applications. In the LH range of frequencies (1-5~\si{GHz}), hollow rectangular waveguides are preferred for the transport of the RF power from the klystrons to the torus. In addition to their low losses, they also allow a greater breakdown voltage than coaxial lines of the same size. In this frequency range the wavelength in vacuum is of the order of 30~\si{cm} to 6~\si{cm}. Rectangular waveguide main properties are recalled in Section~\ref{sec:rectangular_waveguide}
 
@@ -358,7 +399,7 @@ line to separate the pressurized part of the line from the vacuum part of the li
 % #####################################################
 % #####################################################
 % #####################################################
-\subsubsection{Antennas}\label{sec:RF_antennas}
+\subsection{Antennas}\label{sec:RF_antennas}
 \marginnote{In the literature, the terms \textit{launchers} or \textit{couplers} are sometime used in the fusion community to distinct LHCD antennas from ICRH antennas. In this document, we do not make any difference between these terms, they are all radiating elements. }
 
 Being inserted in machine's ports, ICRH and LHCD antennas are facing the plasma and therefore must  withstand harsh operational constraints: 
@@ -375,7 +416,7 @@ In this manuscript, only IC and LH antennas are discussed. Despite that IC anten
 
 
 % #####################################################
-\subsubsection{Waveguide Plumbing – a practical example with Tore Supra/WEST}
+\subsection{Waveguide Plumbing – a practical example with Tore Supra/WEST}
 As an example of high power system, the Tore Supra/WEST LHCD system is illustrated in Figure \ref{fig:toresupralhcdsystem}. The power is generated at the klystron plant and transmitted to the two launchers through rectangular waveguides (8~lines per launcher). 
 
 \begin{figure}

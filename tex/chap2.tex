@@ -1,7 +1,9 @@
 % RF coupling
+\setchapterpreamble[u]{\margintoc}
 \chapter{RF Coupling}
 \label{chap:rf_coupling}
-%\margintoc
+
+
 This chapter aims to give the key elements in order to derive the optimum characteristics for RF plasma heating or current drive antennas. The section \ref{sec:waves-in-plasma} recall the necessary elements to characterize the propagation medium, in particular the kind of cold plasma wave modes that can propagate in the plasma as a response to a given RF excitation. The sections \ref{sec:icrh} and \ref{sec:lhcd} focuses on the specific ICRH and LHCD range of frequencies. 
 
 Many antenna-plasma coupling models have been developed and most rely on a "slab" approximation which consists in assuming uniformity in the toroidal and poloidal directions while imposing a radiation boundary condition in the radial direction. While much of the essential physics of the coupling at the plasma–antenna interface can be elucidated using this slab approximation, real-life experiments presents additional problems since plasma is not homogeneous, antenna geometries can be complex, images currents are induced on the passive conducting elements surrounding the antenna and antennas excitation is not perfect. Thus, plasma response and wave fields must be solved with more refinements, treating the antenna geometry as accurately as possible. Antenna-plasma coupling is still a topic of continued research interest and some contributions are presented in Section~\ref{sec:ALOHA}, \ref{sec:LHCD_FW_antena_coupling} and \ref{sec:ICRH_FW_antena_coupling}.
@@ -11,18 +13,16 @@ Many antenna-plasma coupling models have been developed and most rely on a "slab
 This section is a reminder of the basic properties of wave propagation in a magnetized plasma. In-depth treatment and derivations of the results given in this section can be found in the standards physics oriented textbooks \sidecite{stix1992, Brambilla1998, Swanson2003, Cairns1991, Golant1989}. 
 
 \subsection{Maxwell Equations in Time Harmonic Regime}
-We shall start the Maxwell equations is their most general form, before recasting them to fit our needs. The usual electromagnetic field quantities are expressed in terms of six quantities that are, following the terminology used \sidecite{Harrington2001}:
+We shall start the Maxwell equations in terms of vector fields in three dimensions, before recasting them to fit our needs. The usual electromagnetic field quantities are expressed following the terminology used in \citeauthyear{Harrington2001}:
 \begin{itemize}
 	\item $\boldsymbol{\mathcal{E}}$: the electric field intensity (in $\si{V/m}$)
 	\item $\boldsymbol{\mathcal{H}}$: the magnetic field intensity (in $\si{A/m}$)
 	\item $\boldsymbol{\mathcal{D}}$: the electric flux density (in $\si{A.s/m^2=C/m^2}$)
-	\item $\boldsymbol{\mathcal{B}}$: the magnetic flux density (in $\si{V.s/m^2=Wb/m^2}$, also known as Tesla $\si{T}$)
+	\item $\boldsymbol{\mathcal{B}}$: the magnetic flux density (in $\si{V.s/m^2} = \si{Wb/m^2} := \si{T}$)
 	\item $\boldsymbol{\mathcal{J}}$: the electric current density (in $\si{A/m^2}$)
 	\item $q_v$: the electric charge density (in $\si{C/m^3}$)
 \end{itemize}
-where all quantities are function of space and time, e.g. $\boldsymbol{\mathcal{E}}=\boldsymbol{\mathcal{E}}(\mathbf{r},t)$. 
-
-Maxwell equations can be stated as:
+where all quantities are function of space and time, e.g. $\boldsymbol{\mathcal{E}}=\boldsymbol{\mathcal{E}}(\mathbf{r},t)$. Maxwell equations can be stated as:
 \begin{subequations}
 	\begin{align}
 		\boldsymbol{\nabla} \times \boldsymbol{\mathcal{E}} &= -\frac{\partial \boldsymbol{\mathcal{B}}}{\partial t} \label{eq:Maxwell-Faraday}\\
@@ -32,9 +32,9 @@ Maxwell equations can be stated as:
 	\end{align}
 	\label{eq:MaxwellEquations}
 \end{subequations} 
-with $\mu_0=4\pi\times10^7~\si{H/m}$ the vacuum magnetic permeability and $\varepsilon_0=1/(\mu_0 c^2)~\si{F/m}$ the vacuum dielectric permittivity with $c$ the speed of light.
 
-The previous expressions are non-linear by nature. We will limit our analysis to a stationary and an homogeneous plasma. Moreover, we will assume that Radio-Frequency source time excitation varies sinusoidally in time with a single frequency. Such case of time varying electromagnetic fields is referred as time-harmonic  \sidecite{Harrington2001} and the analysis of fields quantities $\boldsymbol{\mathcal{A}}$ can be simplified by using complex quantities $\Abf$\footnote{The choice of the time sign convention $+j\omega t$ is motivated to match the one adopted in most RF solvers, commercial or the ones developed in this work, which is most prevalent in electrical engineering texts. Note that in general, waves in plasma texts use the opposite sign convention, ie. $e^{-i\omega t}$\cite{bradley2007, michelsen2019}. While both conventions are mathematically valid, the use of $exp(–j\omega t)$ can be preferable when dealing with the principal value of complex number square roots, which does not require numerical tricks as the ones defined for example in \cite{Hillairet2007a}. Using $j=-i$ allows one to convert results from one convention to the other.}:
+
+The previous expressions are non-linear by nature. In order to make further understanding of the plasma waves, we will limit our analysis to a stationary and an homogeneous plasma. Moreover, we will assume that Radio-Frequency source time excitation varies sinusoidally in time with a single frequency. Such case of time varying electromagnetic fields is referred as time-harmonic  \sidecite{Harrington2001} and the analysis of fields quantities $\boldsymbol{\mathcal{A}}$ can be simplified by using complex quantities $\Abf$\footnote{The choice of the time sign convention $+j\omega t$ is motivated to match the one adopted in most RF solvers, commercial or the ones developed in this work, which is most prevalent in electrical engineering texts. Note that in general, waves in plasma texts use the opposite sign convention, ie. $e^{-i\omega t}$\cite{bradley2007, michelsen2019}. While both conventions are mathematically valid, the use of $exp(–j\omega t)$ can be preferable when dealing with the principal value of complex number square roots, which does not require numerical tricks as the ones defined for example in \cite{Hillairet2007a}. Using $j=-i$ allows one to convert results from one convention to the other.}:
 \marginnote{We will adopt $j$ as the complex unit, ie. $j^2=-1$.}
 \begin{equation}
 \boldsymbol{\mathcal{A}}(\rbf,t) 
@@ -47,17 +47,17 @@ The previous expressions are non-linear by nature. We will limit our analysis to
 $$
 \boldsymbol{\mathcal{A}}(\rbf,t) 
 	\stackrel{\Delta}{=} 
-	 \int \diff \omega \Re\left[\boldsymbol{\mathcal{A}}(\rbf,\omega)e^{j\omega t}  \right]
+	 \int  \Re\left[\boldsymbol{\mathcal{A}}(\rbf,\omega)e^{j\omega t}  \diff \omega \right]
 $$
 which can be seen as a time-domain Fourier transform. Moreover, since $\boldsymbol{\mathcal{A}}(\rbf,t) $ is real function, then $\boldsymbol{\mathcal{A}}(\rbf,-\omega)=\boldsymbol{\mathcal{A}}^*(\rbf,\omega)$ by property of the Fourier transform.}
-
-It is also convenient to represent field phasors $\Abf(\mathbf{r})$ in the Fourier space using plane-wave expansion \sidecite[+5cm]{clemmow1996}: 
+To simplify the mathematical treatment, it is convenient to represent field phasors $\Abf(\mathbf{r})$ in the Fourier space using a plane-wave expansion \sidecite[+5cm]{clemmow1996}: 
 \begin{equation}
 		\boldsymbol{\mathcal{A}}(\mathbf{r}, t) 
 		=
 		\Re \left[
-		\int \diff \kbf \;
+		\int 
 		\mathbf{A}(\kbf) e^{j(\omega t - \kbf\cdot\rbf)}
+		\diff \kbf \;
 		\right]
 	\label{eq:k-spectralDefinition}
 \end{equation}
@@ -96,18 +96,18 @@ Fluxes densities $(\boldsymbol{\mathcal{D}}, \boldsymbol{\mathcal{B}})$ differ f
 		\boldsymbol{\mathcal{J}} =& \boldsymbol{\mathcal{J}}(\boldsymbol{\mathcal{E}},\boldsymbol{\mathcal{H}})
 	\end{align}
 \end{subequations}
-Some situations may arise where the induction fields are no more linearly proportional to the primitive intensity fields. In such cases, one needs to extend the definition of linearity using linear differential relations\sidecite{Mackay2010}:
+Some situations may arise where the induction fields are no more linearly proportional to the primitive intensity fields. In such cases, one needs to extend the definition of linearity using linear differential relations such as \sidecite{Mackay2010}:
 \begin{subequations}
 	\begin{align}
 		\boldsymbol{\mathcal{D}} &= \varepsilon \boldsymbol{\mathcal{E}} + \varepsilon_1 \boldsymbol{\mathcal{E}}^2  + \ldots \\
 		\boldsymbol{\mathcal{B}} &= \varepsilon \boldsymbol{\mathcal{H}} + \varepsilon_1 \boldsymbol{\mathcal{H}}^2 + \ldots \\
 	\end{align}
-\end{subequations}
-Such situation arises typically when high intensity RF fields are used, which leads to non-linear phenomenons such \emph{ponderomotive effect}\sidecite{Krapchev1979}, an effect studied for LHCD in \sidecite{preynas2013}.
+\end{subequations}%
+Such situation arises typically when high intensity RF fields are used, which leads to non-linear phenomenons such \emph{ponderomotive effect}~\sidecite[-1cm]{fukuyama1980, krapchev1981, theilhaber1982}, an effect studied for LHCD in \sidecite{preynas2013}.
 
 
 
-Appendix TODO shows that a magnetized plasma can be considered as an anisotropic medium for electromagnetic waves.  In such case, the response of the medium is different depending on the direction of the oscillating field and expressed by tensor constitutive relationships. Since we have assumed that the plasma is homogeneous and stationnary, constitutive relations become algebraic time-invariant relationships\sidecite{Dumont2017}%\marginnote{We will admit the generalized Ohm's law $\Jbf(\Ebf)=\sigma\Ebf$.}:
+A magnetized plasma can be considered as an anisotropic medium for electromagnetic waves \sidecite{stix1992}. In such case, the response of the medium is different depending on the polarization of the oscillating field and expressed by tensor constitutive relationships. Since we have assumed that the plasma is homogeneous and stationary, constitutive relations become algebraic time-invariant relationships \sidecite[-1cm]{Dumont2017}\marginnote{We will admit the generalized Ohm's law $\Jbf(\Ebf)=\sigma\Ebf$.}:
 \begin{subequations}
 	\begin{align}
 		\Dbf(\kbf, \omega) 
@@ -126,8 +126,8 @@ Appendix TODO shows that a magnetized plasma can be considered as an anisotropic
 		\label{eq:disp_relation_kw_J}
 	\end{align}
 	\label{eq:k-omegaDispersionRelation}
-\end{subequations}
-where $\boldsymbol{\varepsilon}$, $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$ are the dielectric tensor, the permeability tensor and the conductivity tensor respectively, which can be interpreted as 3x3 matrices\sidecite{Swanson2003}. Maxwell equations (\ref{eq:k-omegaMaxwellEquations}) reads with the supplementary assumption that the medium is non magnetic (i.e. $\boldsymbol{\mu}=\mu_0$):\marginnote{The $(\kbf,\omega)$ dependance is assumed from now for the ease of reading.}
+\end{subequations}%
+where $\boldsymbol{\varepsilon}$, $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$ are the dielectric, the permeability and the conductivity tensors respectively, which can be interpreted as 3x3 matrices \sidecite{Swanson2003}. We also define $\mu_0=4\pi\times10^7~\si{H/m}$ the vacuum magnetic permeability and $\varepsilon_0=1/(\mu_0 c^2)~\si{F/m}$ the vacuum dielectric permittivity with $c$ the speed of light. With the supplementary assumption that the medium is non-magnetic (i.e. $\boldsymbol{\mu}=\mu_0$), Maxwell equations (\ref{eq:k-omegaMaxwellEquations}) reads\marginnote{The $(\kbf,\omega)$ dependence is assumed implicitly from now for the ease of reading.}:
 \begin{subequations}
 	\begin{align}
 		\kbf \times \Ebf  
@@ -149,15 +149,17 @@ where $\boldsymbol{\varepsilon}$, $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$ a
 		\kbf  \cdot \Hbf 
 		=& 0	
 	\end{align}
+	\label{eq:maxwell_equations_kspace}
 \end{subequations}
 
 Combining the first two equations leads to the wave equation:
 \begin{equation}
-\nbf \times \nbf \times \Ebf + \Kbf \cdot \Ebf = 0
+\kbf \times \kbf \times \Ebf + k_0^2 \Kbf \cdot \Ebf = 0
+\label{eq:wave_equation_kxkxE}
 \end{equation}
-where $\nbf = \kbf / \norm{\kbf} = \kbf/k_0$ and $\Kbf$ the permittivity tensor:
+where $\Kbf$ the plasma equivalent permittivity tensor:
 \begin{equation}
-\Kbf(\rbf, \omega) =  
+\Kbf(\omega) =  
 \boldsymbol{\varepsilon}_r - \frac{j}{\omega \varepsilon_0} \boldsymbol{\sigma}
 =
 \left(
@@ -168,23 +170,49 @@ K_{zx} & K_{zy} & K_{zz} \\
 \end{array}
 \right)
 \end{equation}  
-
-
-\subsection{Cold Plasma Approximation}
-
-We follow the usual choice of geometry and coordinates, in which the $z$ direction is taken along the direction of the magnetic field $\Bbf_0$.  
-
-On se place dans les hypothèses d'un plasma froid, c'est-à-dire que
-l'on suppose que la température $T_{i}$ des espèces présentes dans
-le plasma est nulle\cite[chap.5]{Brambilla1998}.
-
-
-
-
-Such medium can support various kinds of waves, which main properties are derived in this section. 
-
+Introducing the refraction index $\nbf = \kbf / \norm{\kbf} = \kbf/k_0$ leads to its normalized version:
 \begin{equation}
-\Kbf(\rbf,\omega)
+\nbf \times \nbf \times \Ebf + \Kbf \cdot \Ebf = 0
+\label{eq:wave_equation_nxnxE}
+\end{equation}
+
+
+
+% ############################################################
+\subsection{Vacuum Dispersion Relation}
+In a non-dispersive isotropic homogeneous non-lossy dielectric medium, such as vacuum (or air), the wavevector $\kbf$ direction is given from Eqs.(\ref{eq:maxwell_equations_kspace}):
+\begin{equation}
+\mathbf{\hat{k}}\cdot\mathbf{E}=0
+\;\;\;\;\;\;
+\mathbf{H}=\frac{n}{Z_{0}}\hat{\kbf}\times\mathbf{E}\label{eq:vecteur_onde_vide}
+\end{equation}
+where $n=\sqrt{\varepsilon_{r}}$ is the medium optical index. $Z_{0}=\sqrt{\frac{\mu_{0}}{\varepsilon_{0}}}=\mu_{0}c_{0}=\frac{1}{\varepsilon_{0}c_{0}}$ is the \emph{vacuum characteristic impedance}. The wave equation Eq.(\ref{eq:wave_equation_kxkxE}) can be put under matrix form:
+\begin{equation}
+\mathbf{M}(\kbf, \omega) \cdot \Ebf = 0
+\end{equation}
+which is a system of 3 equations and 3 unknowns $(E_{x},E_{y},E_{z})$. The condition for this system to have a non-trivial solution is equivalent to solving:
+\begin{equation}
+\det\left[\mathbf{M}(\kbf, \omega)\right] =  0
+\end{equation}
+which leads to a relationship between the wavevector $\kbf$ and the angular RF frequency $\omega$, called the \textit{dispersion relation} of the medium \cite[§4]{rothwell2018})\sidenote{While in a lossy medium $k^{2}=\mu\varepsilon\omega^{2}-j\omega\mu\sigma$ where $\sigma$ is the medium electrical conductivity in \si{S/m}.}. This relationship is simple for homogeneous dielectric medium:
+\begin{equation}
+k = \sqrt{\mu\varepsilon}\omega = n \frac{\omega}{c}
+\end{equation}
+
+
+% #################################################
+% #################################################
+\subsection{Cold Plasma Approximation}
+In the so-called \textit{cold plasma} approximation, the temperature $T_s$ of all species $s$ in the plasma is supposed to be zero \cite[chap.5]{Brambilla1998}. Although this approximation seems restrictive, the cold plasma model describes surprisingly well the wave propagation in tokamak magnetized plasma. Such medium can support various kinds of waves, which main properties are derived in this section. 
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/chap2/plasma-waves_geometry}
+	\caption{Stix frame $(\mathbf{x},\mathbf{y},\mathbf{z})$, where $\mathbf{z}$ is in the direction of anisotropy (the direction of the magnetic field $\Bbf_0$). As plasma parameters are supposed invariant in the $\mathbf{y}$ direction (slab model), the wavevector $\kbf$ is in the $(\mathbf{x},\mathbf{z})$ plane. }
+	\label{fig:plasma-wavesgeometry}
+\end{marginfigure}
+We follow the usual choice of geometry and coordinates illustrated in Figure~\ref{fig:plasma-wavesgeometry}, in which the $\mathbf{z}$ direction is taken along the direction of the magnetic field $\Bbf_0$.  The equivalent dielectric tensor in this frame can be written as the following form \sidecite[-3cm]{stix1992}:
+\begin{equation}
+\Kbf(\omega)
 =
 \left(\begin{array}{ccc}
 	S & j D & 0\\
@@ -196,641 +224,200 @@ Such medium can support various kinds of waves, which main properties are derive
 where
 \begin{subequations}
 	\begin{eqnarray}
-	S(\mathbf{r},\omega) 
+	S(\omega) 
 	& = & 
-	1-\sum_{i}\frac{\omega_{pi}^{2}}{\omega^{2}-\Omega_{ci}^{2}}
+	1-\sum_{s}\frac{\omega_{i}^{2}}{\omega^{2}-\Omega_{s}^{2}}
 	\label{eq:stix_S}
 	\\
-	D(\mathbf{r},\omega) 
+	D(\omega) 
 	& = & 
-	\sum_{i}\frac{\Omega_{ci}}{\omega}\frac{\omega_{pi}^{2}}{\omega^{2}-\Omega_{ci}^{2}}
+	\sum_{s}\frac{\Omega_{s}}{\omega}\frac{\omega_{s}^{2}}{\omega^{2}-\Omega_{s}^{2}}
 	\label{eq:stix_D}
 	\\
-	P(\mathbf{r},\omega) 
+	P(\omega) 
 	& = & 
-	1-\sum_{i}\frac{\omega_{pi}^{2}}{\omega^{2}}
+	1-\sum_{s}\frac{\omega_{s}^{2}}{\omega^{2}}
 	\label{eq:stix_P}
 	\end{eqnarray}
 	\label{eq:stix_SDP}
 \end{subequations}
-where $\omega$, $\Omega_{c,s}$ and $\omega_{p,s}$ are respectively the RF source, the cyclotron and the plasma angular frequencies of the species $s$.
-
-
-Due to its electrical conductivity, a plasma couples to electric and magnetic fields. 
-
-The physical description of an electromagnetic wave propagating in a given medium
-necessitates a self-consistent handling of the particles comprising the medium (and
-their mutual interactions) on one hand, and of the electromagnetic eld on the other
-hand.
-
-
-Waves in plasmas are solutions of the system comprising Maxwell's equations and those relating currents and electric fields in the plasma. These
-equations identify the combination of plasma parameters under which the waves
-exist. From those, we can then check which could be suitable to transport power
-from the plasma edge to the plasma center.
-As an example, we calculate this relationship
-First, a general introduction to the 
-antennas
-
-
-The plasma being an anisotropic dielectric medium
-
-the wave-number spectrum in the toroidal and poloidal direction is imposed by the geometry and the excitation of the antenna. Wavevector in the radial direction is deduced from the dispersion relation
-
-
-
-Much of the essential physics of the problem can be understood using simplified geometry (slab)
-assume that the inhomogeneity is in the $x$-direction which is also the direction of $k_\perp$. Modelling the wave in the equatorial plane of the tokamak. $k_y$ set to zero without adding anything essential to the conclusions
-
-
-
-\subsection{Vacuum Dispersion Relation}
-In a non-dispersive isotropic homogeneous non-lossy dielectric medium, such as vacuum (or air), the wavevector $\kbf=k\mathbf{\hat{k}}$ direction is given by:
-\begin{equation}
-\mathbf{\hat{k}}\cdot\mathbf{E}=0
-\;\;\;\;\;\;
-\mathbf{H}=\frac{n}{Z_{0}}\hat{\kbf}\times\mathbf{E}\label{eq:vecteur_onde_vide}
-\end{equation}
-where $\mathbf{\hat{k}}$ the unit vector in the direction of $\kbf$, $k=|\kbf|=n k_{0}$ is the wavenumber and $n=\sqrt{\varepsilon_{r}}$ the medium optical index. $Z_{0}=\sqrt{\frac{\mu_{0}}{\varepsilon_{0}}}=\mu_{0}c_{0}=\frac{1}{\varepsilon_{0}c_{0}}$ is the \emph{vacuum impedance}. The wave equation in such a medium is:
-\begin{equation}
-\kbf \times \kbf \times \mathbf{E} + k^{2} \mathbf{E} = \mathbf{0}
-\end{equation}
-
-The condition for that system of 3 equations and 3 unknowns $(E_{x},E_{y},E_{z})$ to have a non-trivial solution, consists in solving the \emph{dispersion relation} between the wavevector $\kbf$ and the angular frequency $\omega$, i.e. $\kbf(\omega)$. In this medium, this relation is simple (TODO demo): $k=\sqrt{\mu\varepsilon}\omega=\frac{c}{n}\omega$((7.4) \sidecite{Jackson1998})\sidenote{While in a lossy medium $k^{2}=\mu\varepsilon\omega^{2}-j\omega\mu\sigma$ (sec. 8.2 \sidecite{Bladel2007}).}.
-
-\subsection{Cold Plasma Dispersion Relation}
-Starting from Maxwell equations expressed in the $k-\omega$ domain (\ref{eq:k-omegaMaxwellEquations}) and assuming that the dispersion relations are of the form (\ref{eq:k-omegaDispersionRelation}), with the supplementary assumption that the medium is non magnetic (i.e. $\boldsymbol{\mu}=\mu_0$), one has thus:
+where $\omega$, $\Omega_{s}$ and $\omega_{s}$ are respectively the RF, the \href{http://docs.plasmapy.org/en/v0.1/api/plasmapy.physics.parameters.gyrofrequency.html}{cyclotron} and the \href{http://docs.plasmapy.org/en/v0.1/api/plasmapy.physics.parameters.plasma_frequency.html#plasmapy.physics.parameters.plasma_frequency}{plasma} angular frequencies of the species $s$, defined by:
+%\marginnote{The spatial dependence of the cyclotron and plasma frequencies come from density $n$ and magnetic field $B_0$ which can vary in space. }
 \begin{subequations}
-	\begin{align}
-		\kbf \times \boldsymbol{\mathcal{E}} (\kbf, \omega) 
-		=& 
-		\omega \mu_0 \boldsymbol{\mathcal{H}}(\kbf, \omega) 
-		\\
-		\kbf \times \boldsymbol{\mathcal{H}} (\kbf, \omega) 
-		=& 
-		\left(
-		-\omega \boldsymbol{\varepsilon} (\kbf, \omega) 
-		+ 	
-		j\boldsymbol{\sigma} (\kbf, \omega) 
-		\right) \cdot 
-		\boldsymbol{\mathcal{E}}(\kbf, \omega)
-		\\
-		\kbf  \cdot \boldsymbol{\varepsilon}(\kbf, \omega)  \cdot \boldsymbol{\mathcal{E}} (\kbf, \omega) 
-		=& jq_v(\kbf, \omega) 
-		\\
-		\kbf  \cdot \boldsymbol{\mathcal{H}} (\kbf, \omega) 
-		=& 0	
-	\end{align}
+	\begin{eqnarray}
+	\Omega_{s}  &=& Z\, e \frac{B_{0}}{m_{s}}
+	\label{eq:cyclotron_angular_frequency} 
+	\\
+	\omega_{s}  &=& \sqrt{ \frac{Z^2 e^2 n_{s}}{\varepsilon_{0} m_{s}}}
+	\end{eqnarray}
 \end{subequations}
-combining the first two equations leads to the propagation equation:
+where $n_s$ is the density, $m_s$ the mass, $e$ the (signed) elementary charge and $Z$ the atomic number (number of protons) for the species $s$ (electron or ions). 
+
+The form of Eq.(\ref{eq:stix_K}) is a consequence of the fact that the cold plasma is a gyrotropic media. Gyrotropic media are characterized by their invariance under any rotation about the direction of anisotropy~\cite{Mackay2010}, in our case the direction of the magnetic field $\Bbf_0/B_0=\mathbf{z}$. Hence, this tensor can be equivalently re-expressed into a rotation frame $(\mathbf{u}_{+}, \mathbf{u}_{-},  \mathbf{z})$, with $\mathbf{u}_{\pm}=(\mathbf{x}\pm \mathbf{y})/\sqrt{2}$:  
 \begin{equation}
-\kbf \times \kbf \times \boldsymbol{\mathcal{E}} (\kbf, \omega) 
--
-\left(
--\omega^2 \mu_0 \boldsymbol{\varepsilon} (\kbf, \omega) 
-+ 	
-j\omega\mu_0\boldsymbol{\sigma} (\kbf, \omega) 
-\right) \cdot 
-\boldsymbol{\mathcal{E}}(\kbf, \omega)
+\Kbf(\omega)
 =
-\boldsymbol{0}
+\left(\begin{array}{ccc}
+R & 0 & 0\\
+0 & L & 0\\
+0 & 0 & P
+\end{array}\right)
+\label{eq:stix_K_RLP}
 \end{equation}
-Let's define the equivalent relative dielectric tensor $\kbf$ such as:
+where $R$ is the \textit{right-hand} polarized component and $L$ is the \textit{left-hand} polarized component, defined as:
+\marginnote{And inversely:, 
+	$$
+	S =  \frac{1}{2}\left(R+L\right)
+	$$ 
+	$$ 
+	D = \frac{1}{2}\left(R-L\right)
+	$$
+Letters $S$, $D$, and $P$ originally come from \textit{sum}, \textit{difference} and \textit{plasma} terms \cite{stix1992}.}
+\begin{subequations}
+	\begin{eqnarray}
+	R(\omega) 
+	& = S + D = & 
+	1-\sum_{s}\frac{\omega_{s}^{2}}{\omega(\omega+\Omega_{s})}
+	\label{eq:stix_R}
+	\\
+	L(\omega)
+	& = S - D = & 
+	1-\sum_{s}\frac{\omega_{s}^{2}}{\omega(\omega-\Omega_{s})}
+	\label{eq:stix_L}
+	\end{eqnarray}
+	\label{eq:stix_RL}
+\end{subequations}
+
+
+% ##########################################################
+% ##########################################################
+\subsection{Cold Plasma Dispersion Relation}
+Starting from wave equation Eq.(\ref{eq:wave_equation_nxnxE}) and using that the equivalent cold plasma dielectric tensor Eq.(\ref{eq:stix_K}), one obtain:\marginnote{It is supposed that the plasma is invariant along the $\mathrm{y}$ direction, which is equivalent to say that $n_y=0$.}
 \begin{equation}
-\kbf(\kbf,\omega)
-=
-\frac{j}{\omega\varepsilon_0}\boldsymbol{\sigma} (\kbf, \omega)
--\mathbf{I}
+\left(\begin{array}{ccc}
+S - n_{z}^{2} & jD & n_{x}n_{z}\\
+-jD & S - n_{x}^{2} - n_{z}^{2} & 0\\
+n_{x}n_{z} & 0 & P - n_{x}^{2}
+\end{array}\right)\left(\begin{array}{c}
+E_{x}\\
+E_{y}\\
+E_{z}
+\end{array}\right)=\mathbf{0}
+\label{eq:relation_disp_matr_froid}
 \end{equation}
-then,
-\begin{equation}
-\kbf \times \kbf \times \boldsymbol{\mathcal{E}} (\kbf, \omega) 
-- k_0^2
-\kbf(\kbf, \omega) \cdot 
-\boldsymbol{\mathcal{E}}(\kbf, \omega)
-=
-\boldsymbol{0}
-\end{equation}
-where $k_0=\frac{\omega}{c}$
-% Dans un plasma froid magnétisé, la situation est radicalement différente,
-% car les courants de polarisation générés par les mouvements électroniques
-% et ioniques modifient la polarisation des ondes planes ainsi que leur
-% dispersion. Différentes branches de dispersion, ou \emph{modes}, apparaissent\cite[chap.8]{Rax2005}. 
-% 
-% On rappelle l'expression des équations de Maxwell en régime harmonique
-% pour une onde plane de vecteur d'onde $\kbf$ :
-% 
-% \begin{eqnarray}
-% \kbf\times\mathbf{E} & = & \omega\mu_{0}\mathbf{H}\\
-% \kbf\times\mathbf{H} & = & -\omega\varepsilon_{0}\kbf\cdot\mathbf{E}
-% \end{eqnarray}
-% Pour déterminer les propriétés de ces modes, on étudie les solutions
-% de l'\emph{équation d'onde} déduite des deux précédentes équations\footnote{NB : L'équation d'onde ne dépend pas de la convention temporelle choisie.}
-% :
-% 
-% \begin{equation}
-% \mathbf{n}\times\mathbf{n}\times\mathbf{\tilde{E}}+\mathbb{K}\cdot\mathbf{\tilde{E}}=\mathbf{0}\label{eq:Helmoltz}
-% \end{equation}
-% où $\mathbf{n}=\kbf/k_{0}$ correspond au vecteur d'indice de
-% réfraction, dont la direction est celle du vecteur d'onde $\kbf$
-% et l'amplitude celle de l'indice de réfraction. A priori, la matrice
-% $\mathbb{K}$ dépend des trois composantes du vecteur d'onde $\kbf$.
-% En choisissant le système de coordonnées cartésien l'équation \ref{eq:Helmoltz}
-% peut s'écrire sous forme matricielle\footnote{On peut s'économiser un peu de calcul vectoriel grâce à un peu d'algèbre
-% et le formalisme des dyadiques\cite{Belov2003,Lindell1995}. En utilisant
-% l'identité ``BAC-CAB'', le double produit vectoriel s'écrit $\mathbf{n}\times\mathbf{n}\times\mathbf{\tilde{E}}=\mathbf{n}\left(\mathbf{n}\cdot\mathbf{\tilde{E}}\right)-\mathbf{\tilde{E}}\left(\mathbf{n}\cdot\mathbf{n}\right)=\mathbf{n}\left(\mathbf{n}\cdot\mathbf{\tilde{E}}\right)-n^{2}\mathbf{\tilde{E}}$.
-% Avec l'opération dyadique $\mathbf{n}\left(\mathbf{n}\cdot\tilde{\mathbf{E}}\right)=\mathbf{nn}\cdot\mathbf{\tilde{E}}$
-% et $\mathbb{I}=\mathbf{xx}+\mathbf{yy}=\mathbf{zz}$ l'opérateur dyadique
-% unité vérifiant $\mathbf{\tilde{E}}=\mathbb{I}\cdot\tilde{\mathbf{E}}$on
-% peut alors factoriser l'équation \ref{eq:Helmoltz} en un opérateur
-% dyadique $\left(\mathbf{nn}-n^{2}\mathbb{I}+\mathbb{K}\right)\cdot\tilde{\mathbf{E}}=\mathbf{0}$
-% qui donne directement l'expression matricielle de l'équation \ref{eq:relation_disp_matr}.} :
-% \begin{equation}
-% \left(\begin{array}{ccc}
-% K_{xx}-n_{y}^{2}-n_{z}^{2} & K_{xy}+n_{x}n_{y} & K_{xz}+n_{x}n_{z}\\
-% K_{yx}+n_{x}n_{y} & K_{yy}-n_{x}^{2}-n_{z}^{2} & K_{yz}+n_{y}n_{z}\\
-% K_{zx}+n_{x}n_{z} & K_{zy}+n_{y}n_{z} & K_{zz}-n_{x}^{2}-n_{y}^{2}
-% \end{array}\right)\left(\begin{array}{c}
-% \tilde{E_{x}}\\
-% \tilde{E}_{y}\\
-% \tilde{E}_{z}
-% \end{array}\right)=\mathbf{0}\label{eq:relation_disp_matr}
-% \end{equation}
-%  Si l'on suppose en plus que le vecteur d'onde $\kbf$ (ie.
-% la propagation de l'onde) soit contenu dans le plan $x-z$ (ie $k_{y}=n_{y}=0$),
-% l'équation précédente devient :
-% 
-% \begin{equation}
-% \left(\begin{array}{ccc}
-% K_{xx}-n_{z}^{2} & K_{xy} & K_{xz}+n_{x}n_{z}\\
-% K_{yx} & K_{yy}-n_{x}^{2}-n_{z}^{2} & K_{yz}\\
-% K_{zx}+n_{x}n_{z} & K_{zy} & K_{zz}-n_{x}^{2}
-% \end{array}\right)\left(\begin{array}{c}
-% \tilde{E_{x}}\\
-% \tilde{E}_{y}\\
-% \tilde{E}_{z}
-% \end{array}\right)=\mathbf{0}\label{eq:relation_disp_matr_full}
-% \end{equation}
-% Si le plasma est homogène (indépendant de $\mathbf{r}$) on peut exploiter
-% l'équivalence entre toutes les directions perpendiculaires au champ
-% magnétique statique pour prédire que $\mathbb{K}$ doit être fonction
-% de $k_{\parallel}$et $k_{\perp}^{2}$ seulement. 
-% 
-% \begin{figure}
-% \begin{centering}
-% \includegraphics[width=0.5\textwidth]{figures/geometrie_dispersion_plasma}
-% \par\end{centering}
-% \caption{Géométrie cartésienne du milieu plasma.\label{fig:G=0000E9om=0000E9trie-cart=0000E9sienne-plasma}}
-% \end{figure}
-% 
-% Si $\mathbb{K}$ est le tenseur de permittivité d'un plasma froid
-% (\ref{eq:tenseur_stix}) définit dans l'annexe \ref{sec:Tenseur-de-permittivit=0000E9},
-% c'est-à-dire tel que $z$ soit parallèle au champ magnétique (Figure
-% \ref{fig:G=0000E9om=0000E9trie-cart=0000E9sienne-plasma}), alors
-% on a:
-% 
-% \begin{equation}
-% \left(\begin{array}{ccc}
-% S-n_{z}^{2} & jD & n_{x}n_{z}\\
-% -jD & S-n_{x}^{2}-n_{z}^{2} & 0\\
-% n_{x}n_{z} & 0 & P-n_{x}^{2}
-% \end{array}\right)\left(\begin{array}{c}
-% \tilde{E_{x}}\\
-% \tilde{E}_{y}\\
-% \tilde{E}_{z}
-% \end{array}\right)=\mathbf{0}\label{eq:relation_disp_matr_froid}
-% \end{equation}
-% On définit $\theta$ comme l'angle entre le vecteur d'onde $\kbf$
-% et la direction $\hat{\mathbf{e}}_{z}$ du champ magnétique, soit
-% $n_{x}=n_{\perp}=n\sin\theta$ et $n_{z}=n_{\parallel}=n\cos\theta$,
-% on a alors \footnote{Pour obtenir la version harmonique en convention $-j\omega t$, il
-% faut remplacer $n^{2}\rightarrow-n^{2}$ et $j\rightarrow-j$.}:
-% 
-% \begin{equation}
-% \left(\begin{array}{ccc}
-% S-n^{2}\cos^{2}\theta & jD & n^{2}\cos\theta\sin\theta\\
-% -jD & S-n^{2} & 0\\
-% n^{2}\cos\theta\sin\theta & 0 & P-n^{2}\sin^{2}\theta
-% \end{array}\right)\left(\begin{array}{c}
-% \tilde{E}_{x}\\
-% \tilde{E}_{y}\\
-% \tilde{E}_{z}
-% \end{array}\right)=\mathbf{0}\label{eq:cold_plasma_dispersion_relation_matrix}
-% \end{equation}
-% 
-% L'existence de solutions non triviales à l'équation d'onde (les modes)
-% (\ref{eq:relation_disp_matr_full}) nécessite que le déterminant de
-% la matrice soit nul. Cette condition donne la \emph{relation de dispersion},
-% qui pour un plasma froid peut s'écrire \cite[p.8-9]{Stix1992}\cite[§2.1.3]{Swanson2003}\cite[§18.1]{Brambilla1998}:
-% 
-% \begin{equation}
-% \boxed{An^{4}-Bn^{2}+C=0}\label{eq:cold_plasma_dispersion_relation_n}
-% \end{equation}
-% avec\footnote{Où l'on a remarqué que $S^{2}-D^{2}=RL$. Les expressions $A,B,C$
-% ne dépendent pas de la convention temporelle choisie. }:
-% 
-% \begin{eqnarray}
-% A & = & S\sin^{2}\theta+P\cos^{2}\theta\\
-% B & = & \left(S^{2}-D^{2}\right)\sin^{2}\theta+PS\left(1+\cos^{2}\theta\right)=RL\sin^{2}\theta+PS\left(1+\cos^{2}\theta\right)\\
-% C & = & P\left(S^{2}-D^{2}\right)=PRL
-% \end{eqnarray}
-% Soit $n=n(\theta,\omega)=n(\hat{\kbf},\omega)$ la solution
-% de la relation de dispersion pour une fréquence $\omega$ et une direction
-% de propagation $\hat{\kbf}$ (ie. $\theta$) données. Une onde
-% plane d'indice $n$ et de nombre d'onde $\kbf=n\frac{\omega}{c}\mathbf{\hat{k}}$
-% peut se propager dans le plasma à la fréquence $\omega$ et dans la
-% direction du vecteur unitaire $\mathbf{\hat{k}}$ en l'absence de
-% sources extérieures (plus exactement avec des sources situées à l'infini).
-% Une telle onde est appelée \emph{onde caractéristique} ou \emph{mode
-% de propagation} (mode propre) du plasma.
-% 
-% L'équation (\ref{eq:cold_plasma_dispersion_relation_n}) est une équation
-% du second degré en $n^{2}$ ayant pour solution : 
-% \begin{equation}
-% n^{2}=\frac{B\pm\sqrt{\Delta}}{2A}\label{eq:solution_cold_plasma_dispersion_relation_n}
-% \end{equation}
-% où son déterminant $\Delta=B^{2}-4AC$ vaut : 
-% \begin{equation}
-% \Delta=(RL-PS)^{2}\sin^{4}\theta+4P^{2}D^{2}\cos^{2}\theta\label{eq:cold_plasma_determinant_dispersion_relation_n}
-% \end{equation}
-% 
-% Le déterminant (\ref{eq:cold_plasma_determinant_dispersion_relation_n})
-% n'est jamais négatif, ce qui signifie que l'équation (\ref{eq:cold_plasma_dispersion_relation_n})
-% a toujours deux solutions réelles et distinctes en $n^{2}$. Ainsi,
-% les ondes planes dans un plasma froid sont soit purement propagatives
-% ($n^{2}>0$) soit purement évanescentes ($n^{2}<0$) ; les oscillations
-% amorties sont exclues. La transition entre ces deux régimes a lieu
-% aux coupures ($n=0$) et aux résonances ($n\to\infty$). 
-% 
-% Les deux racines peuvent être confondues lorsque le déterminant être
-% nul, dans les cas particulier suivant :
-% \begin{itemize}
-% \item En propagation parallèle, ie $\theta=0$, lorsque $P=0$ ;
-% \item En propagation perpendiculaire, ie $\theta=\pi/2$, lorsque $RL=PS$.
-% \end{itemize}
-% Dans le cadre de l'approximation froide définie par l\textquoteright absence
-% de \emph{dispersion spatiale}, c'est-à-dire lorsque les éléments du
-% tenseur $\mathbb{K}$ ne dépendent pas de l'indice de réfraction $\mathbf{n}$
-% (ie. du vecteur d'onde $\kbf$), l'équation (\ref{eq:cold_plasma_dispersion_relation_n})
-% est une simple équation quadratique en $n^{2}$. Il existe donc deux
-% solutions distinctes qui peuvent se propager dans le plasma ; un plasma
-% froid est donc un milieu \emph{biréfringent} (les ondes peuvent être
-% évanescentes ou non, selon les caractéristiques du plasma). Si on
-% avait introduit des effets thermiques, les éléments du tenseur de
-% permittivité dépendraient alors du vecteur d'onde et de nouveaux modes
-% apparaitraient\cite[§1.2.2]{Dumont2007}. 
-% 
-% \subsubsection{Expression en fonction de $\theta$.}
-% 
-% L'équation de dispersion (\ref{eq:cold_plasma_dispersion_relation_n})
-% peut être exprimée sous diverses formes équivalentes. La relation
-% de dispersion (\ref{eq:cold_plasma_dispersion_relation_n}) peut être
-% exprimée en fonction de l'angle $\theta$\cite[§18.2]{Brambilla1998}:
-% 
-% \begin{equation}
-% \tan^{2}\theta=-\frac{P\left(n^{2}-R\right)\left(n^{2}-L\right)}{\left(Sn^{2}-RL\right)\left(n^{2}-P\right)}\label{eq:cold_plasma_dispersion_relation_theta}
-% \end{equation}
-% En résolvant pour $n^{2}$ on obtient un cas particulier des équations
-% d'Appleton-Hartree, et en particulier pour $D=0$
-% \begin{equation}
-% n^{2}=\begin{cases}
-% \frac{PS}{S\sin^{2}\theta+P\cos^{2}\theta} & \mbox{extraordinary mode}\\
-% S & \mbox{oridnary mode}
-% \end{cases}\label{eq:cold_plasma_dispersion_relation_solution_n}
-% \end{equation}
-% 
-% 
-% \subsubsection{Expression en fonction de $n_{\parallel}$.}
-% 
-% Lorsque le nombre d'onde $n_{\parallel}=n_{z}$ est définit par des
-% conditions extérieures, comme la structure d'une antenne, et en supposant
-% que la propagation est contrainte au plan (xOz) ($n_{y}=0$), la relation
-% de dispersion peut être exprimée en fonction de $n_{\perp}^{2}=n_{x}^{2}=n^{2}-n_{\parallel}^{2}$.
-% Ainsi, le déterminant de (\ref{eq:relation_disp_matr_froid}) donne
-% une équations quadratique en $n_{\perp}^{2}$\cite[§18.2]{Brambilla1998}\footnote{En convention $-j\omega t$: $A_{1}n_{\perp}^{4}-B_{1}n_{\perp}^{2}+C_{1}=0$ }:
-% 
-% \begin{equation}
-% A_{1}n_{\perp}^{4}+B_{1}n_{\perp}^{2}+C_{1}=0\label{eq:cold_plasma_dispersion_relation_n_perp}
-% \end{equation}
-% avec 
-% 
-% \begin{eqnarray}
-% A_{1} & = & S\\
-% B_{1} & = & \left(P+S\right)\left(n_{\parallel}^{2}-S\right)+D^{2}=RL+PS-n_{\parallel}^{2}(P+S)\\
-% C_{1} & = & P\left(\left(n_{\parallel}^{2}-S\right)^{2}-D^{2}\right)=P(n_{\parallel}^{2}-R)(n_{\parallel}^{2}-L)
-% \end{eqnarray}
-% où on rappelle que $R=S+D$ et $L=S-D$. Les coupures, qui correspondent
-% aux transitions entre propagation et évanescence, sont alors définies
-% pour $n_{\perp}=0$. Les résonances pour $n_{\perp}\to\infty$. Comme
-% précédemment, le déterminant de l'équation est toujours positif ou
-% nul, l'équation (\ref{eq:cold_plasma_dispersion_relation_n_perp})
-% possède donc deux solutions, qui peuvent éventuellement être complexes
-% conjuguées selon les conditions (fréquence, densité, etc.). La solution
-% s'exprime par \cite[§15.9.2]{Friedberg2007}:
-% 
-% \begin{equation}
-% n_{\perp}^{2}=-\frac{P}{2S}\left(D^{2}/P-S-n_{\parallel}^{2}\pm\sqrt{\left(D^{2}/P-S-n_{\parallel}^{2}\right)^{2}+\frac{4SD^{2}}{P}}\right)\label{eq:cold_plasma_solution_n_perp}
-% \end{equation}
-% La solution dont la valeur est la plus grande, c'est-à-dire pour laquelle
-% la valeur de la vitesse de phase perpendiculaire $v_{\perp}=\omega/k_{\perp}$
-% sera la plus petite, correspond à la branche dite \emph{lente}, l'autre
-% branche étant la solution dite \emph{rapide}.
-% 
-% \begin{figure}[h]
-% \begin{centering}
-% \includegraphics[width=0.9\textwidth]{figures/n_perp_vs_ne}\label{Flo:n_perp_vs_ne}\caption{Exemple de solutions de l'équation de dispersion pour $n_{\perp}^{2}$
-% en fonction de la densité électronique $n_{e}$. \textbf{$n_{\parallel}=2.0$
-% }et\textbf{ $B_{0}=2.95$~}T, f=3.7GHz.}
-% \par\end{centering}
-% \end{figure}
-% 
-% Pour des valeurs de $\left|P\right|$ grande ($\omega\ll\omega_{pe}$),
-% les deux racines (\ref{eq:cold_plasma_solution_n_perp}) peuvent s'approcher
-% par au premier ordre en $\omega^{2}/\omega_{pe}^{2}$ (cf. \cite[p.222]{Brambilla1998}).
-% De la même façon, dans le voisinage des fréquences LH, on peut faire
-% l'hypothèse $D\approx0$. Dans ce cas, l'équation de dispersion s'écrit
-% (avec la convention temporelle $e^{j\omega t}$):
-% \begin{eqnarray}
-% A_{1}n_{\perp}^{4}+B_{1}n_{\perp}^{2}+C_{1} & = & 0\label{eq:cold_plasma_dispersion_relation_n_perp_approx1}
-% \end{eqnarray}
-% avec
-% \begin{eqnarray}
-% A_{1} & = & S\\
-% B_{1} & = & S^{2}+PS-n_{\parallel}^{2}(P+S)\\
-% C_{1} & = & P(n_{\parallel}^{2}-S)^{2}
-% \end{eqnarray}
-% Les solutions de l'équation de dispersion \ref{eq:cold_plasma_dispersion_relation_n_perp_approx1}
-% sont dans ce cas :
-% \begin{eqnarray}
-% n_{\perp}^{2}=n_{\perp,F}^{2} & = & -\left(S+n_{\parallel}^{2}\right)\label{eq:n_perp_fast_wave_solution_approximate}\\
-% n_{\perp}^{2}=n_{\perp,S}^{2} & = & -\frac{P}{S}\left(S+n_{\parallel}^{2}\right)\label{eq:n_perp_slow_wave_solution_approximate}
-% \end{eqnarray}
-% Enfin, toujours au voisinage du domaine de plasma de bord, $S\approx1$
-% d'où \ref{eq:cold_plasma_dispersion_relation_n_perp_approx1} :
-% \begin{equation}
-% n_{\perp}^{4}+\left(1-n_{\parallel}^{2}\right)\left(1+P\right)n_{\perp}^{2}+P\left(n_{\parallel}^{2}-1\right)^{2}=0
-% \end{equation}
-% qui a pour solutions:
-% \begin{eqnarray}
-% n_{\perp}^{2}=n_{\perp,F}^{2} & = & -\left(1-n_{\parallel}^{2}\right)\label{eq:n_perp_fast_wave_solution_approximate2}\\
-% n_{\perp}^{2}=n_{\perp,S}^{2} & = & -P\left(1-n_{\parallel}^{2}\right)\label{eq:n_perp_slow_wave_solution_approximate2}
-% \end{eqnarray}
-% 
-% 
-% \subsection{Polarisation des champs}
-% 
-% Chaque mode propre de la solution de dispersion possède une polarisation
-% définie par la relation de dispersion exprimée sous forme matricielle
-% (\ref{eq:relation_disp_matr_froid}). Ainsi, on déduit des deux dernières
-% relations les relations existantes entre les composantes $\tilde{E}_{x}$
-% et $\tilde{E}_{y}$\footnote{En convention $-j\omega t$ : $\frac{\tilde{E}_{y}}{\tilde{E}_{x}}=-\frac{jD}{S-n^{2}}$
-% et $\frac{\tilde{E}_{z}}{\tilde{E}_{x}}=-\frac{n_{\perp}n_{\parallel}}{P-n_{\perp}^{2}}$.}:
-% 
-% \begin{equation}
-% \frac{\tilde{E}_{y}}{\tilde{E}_{x}}=\frac{jD}{S+n^{2}}\label{eq:relation_entre_composantes_X_Y}
-% \end{equation}
-% et entre les composantes $\tilde{E}_{x}$ et $\tilde{E}_{z}$:
-% 
-% \begin{equation}
-% \frac{\tilde{E}_{z}}{\tilde{E}_{x}}=\frac{n_{\perp}n_{\parallel}}{P+n_{\perp}^{2}}\label{eq:relation_entre_composantes_X_Z}
-% \end{equation}
-% 
-% En utilisant la relation issue de la première ligne de (\ref{eq:relation_disp_matr_froid}),
-% on en déduit une expression générale pour le champ radial en fonction
-% des composantes transverses y et z :
-% \begin{equation}
-% \tilde{E}_{x}=\frac{-jD\tilde{E}_{y}+n_{\perp}n_{\parallel}\tilde{E}_{z}}{S+n_{\parallel}^{2}}\label{eq:relation_entre_composantes_X_Y_Z}
-% \end{equation}
-% En injectant cette expression dans les deux précédentes, on trouve
-% :
-% 
-% \begin{eqnarray}
-% \left[\left(S+n_{\perp}^{2}+n_{\parallel}^{2}\right)\left(S+n_{\parallel}^{2}\right)-D^{2}\right]\tilde{E}_{y}-jDn_{\perp}n_{\parallel}\tilde{E}_{z} & = & 0\label{eq:relation_entre_composantes_Y_Z_1}\\
-% jDn_{\perp}n_{\parallel}\tilde{E}_{y}+\left[\left(P+n_{\perp}^{2}\right)\left(S+n_{\parallel}^{2}\right)-n_{\perp}^{2}n_{\parallel}^{2}\right]\tilde{E}_{z} & = & 0\label{eq:relation_entre_composantes_Y_Z_2}
-% \end{eqnarray}
-% 
-% 
-% \subsubsection{Polarisation dominante des modes lents et rapides}
-% 
-% En prenant \ref{eq:relation_entre_composantes_Y_Z_1} pour $n_{\perp}^{2}=n_{\perp,F}^{2}$,
-% on obtiens le condition de polarisation de l'onde rapide au premier
-% ordre :
-% 
-% \begin{equation}
-% \tilde{E}_{z}=0\label{eq:polarisation_FastWave}
-% \end{equation}
-% En prenant \ref{eq:relation_entre_composantes_Y_Z_2} pour $n_{\perp}^{2}=n_{\perp,S}^{2}$,
-% on obtiens la condition de polarisation de l'onde lente au premier
-% ordre :
-% 
-% \begin{equation}
-% \tilde{E}_{y}=0\label{eq:polarisation_SlowWave}
-% \end{equation}
-% 
-% 
-% \subsubsection{Polarisation dans le plasma}
-% 
-% En prenant \ref{eq:relation_entre_composantes_X_Z} pour $n_{\perp}^{2}=n_{\perp,S}^{2}$
-% dans l'hypothèse ou $D\approx0$ et $P<0$, il vient
-% \begin{equation}
-% \frac{\tilde{E}_{z}}{\tilde{E}_{x}}=\frac{\left(-\frac{P}{S}\left(S+n_{\parallel}^{2}\right)\right)^{1/2}n_{\parallel}}{P-\frac{P}{S}\left(S+n_{\parallel}^{2}\right)}=\frac{\left(S\left(S+n_{\parallel}^{2}\right)\right)^{1/2}}{\left|P\right|^{1/2}n_{\parallel}}
-% \end{equation}
-% par conséquent, à mesure que la densité locale augmente ($\left|P\right|$
-% augmente, et augmente plus vite que $S$), la polarisation dominante
-% est radiale ($\tilde{E}_{x}$).
-% 
-% \subsection{Vitesse de phase}
-% 
-% \subsection{Vitesse de groupe}
-% 
-% La vitesse de groupe est donnée par\cite[§7.2, §18.5]{Brambilla1998}:
-% 
-% \begin{equation}
-% \mathbf{v}_{g}\left(\kbf_{0}\right)=\left.\frac{\partial\omega}{\partial\kbf}\right|_{\kbf=\kbf_{0}}
-% \end{equation}
-% ou, en posant Soit $\mathcal{D}$ la partie gauche de l'équation \ref{eq:cold_plasma_dispersion_relation_n}:
-% 
-% \begin{equation}
-% \mathbf{v}_{g}\left(\kbf_{0}\right)=-\left.{\displaystyle \frac{\frac{\partial\mathcal{D}}{\partial\kbf}}{\frac{\partial\mathcal{D}}{\partial\omega}}}\right|_{\kbf=\kbf_{0}}
-% \end{equation}
-% 
-% Dans un milieu anisotrope comme le plasma froid, la vitesse de groupe,
-% qui est la vitesse de propagation de l'énergie, n'est généralement
-% pas colinéaire avec le vecteur d'onde \textbf{$\kbf$}. Aussi,
-% on décompose génarelement la vitesse de groupe selon ses composantes
-% parallèles et perpendiculaires au vecteur d'onde. Soit
-% \begin{equation}
-% \mathbf{v}_{g}=v_{gr}\mathbf{\hat{k}}+v_{g\theta}\mathbf{\hat{e}}_{\theta}
-% \end{equation}
-% avec $\mathbf{\hat{k}}=\kbf/k_{0}$ et $\mathbf{\hat{e}}_{\theta}=\mathbf{\hat{k}}\times\left(\mathbf{B}_{0}\times\mathbf{\hat{k}}\right)/B_{0}$
-% le vecteur unité perpendiculaire à $\mathbf{\hat{k}}$ dans le plan
-% formé par $\mathbf{B}_{0}$ et $\mathbf{\hat{k}}$, et
-% 
-% \begin{equation}
-% v_{gr}=-\frac{1}{k_{0}}\frac{\partial\mathcal{D}/\partial n}{\partial\mathcal{D}/\partial\omega}\quad\quad v_{g\theta}=-\frac{1}{nk_{0}}\frac{\partial\mathcal{D}/\partial\theta}{\partial\mathcal{D}/\partial\omega}
-% \end{equation}
-% 
-% Appliqué à \ref{eq:cold_plasma_dispersion_relation_n}, on a :
-% \begin{equation}
-% \end{equation}
-% 
-% L'angle entre le vecteur d'onde $\kbf$ et la vitesse de groupe
-% est alors 
-% \begin{equation}
-% \tan\alpha_{g}=\frac{v_{g\theta}}{v_{gr}}=\frac{1}{n}\frac{\partial\mathcal{D}/\partial\theta}{\partial\mathcal{D}/\partial n}=-\frac{1}{n}\frac{dn}{d\theta}
-% \end{equation}
-% 
-% 
-% \subsection{Réflexion/Transmission d'une onde plane par un plasma froid magnétisé}
-% 
-% Soit une onde plane incidente en provenance d'un milieu de permittivité
-% $\varepsilon^{i}$ sur un plasma magnétisé froid. Le champ incident
-% a pour expression générale $\mathbf{E}^{i}e^{-j\kbf^{i}\cdot\mathbf{r}}$,
-% le champ réfléchis $\mathbf{E}^{r}e^{-j\kbf^{r}\cdot\mathbf{r}}$
-% et le champ transmis $\mathbf{E}^{t}e^{-j\kbf^{t}\cdot\mathbf{r}}$.
-% Le vecteur d'onde de l'onde plane incidente $\kbf^{i}$ est
-% contenu dans le plan $xOz$ et forme un angle $\theta^{i}$ avec l'axe
-% $z$ (Figure \ref{fig:G=0000E9om=0000E9trie-reflexion}), i.e. $\kbf^{i}=\sqrt{\varepsilon^{i}}k_{0}\left(\sin\theta^{i}\mathbf{\hat{x}}+\cos\theta^{i}\mathbf{\hat{z}}\right)$.
-% Supposons par ailleurs que le champ électrique \textbf{$\mathbf{E}^{i}$}
-% soit également inclus dans ce même plan, ie. $\mathbf{E}^{i}=E^{i}\left(\cos\theta^{i}\mathbf{\hat{x}}-\sin\theta^{i}\mathbf{\hat{z}}\right)$
-% (mode TM). Les conditions aux limites établissent que les composantes
-% transverses du champ électrique doivent être continues à l'interface,
-% soit\footnote{En toute généralité, on doit avoir $\mathbf{E}_{t}^{i}+\mathbf{E}_{t}^{r}=\mathbf{E}_{t}^{t}$
-% à $x=0$ avec $\mathbf{E}_{t}=\mathbf{\hat{x}\times\left(\mathbf{E}\times\hat{x}\right)}$.}.
-% \begin{equation}
-% \mathbf{E}_{z}^{i}e^{-j\kbf^{i}\cdot\mathbf{r}}+\mathbf{E}_{z}^{r}e^{-j\kbf^{r}\cdot\mathbf{r}}=\mathbf{E}_{z}^{t}e^{-j\kbf^{t}\cdot\mathbf{r}}
-% \end{equation}
-% de plus pour que les deux cotés correspondent en tous points $x$
-% et $y$ (\emph{phase matching}):
-% \begin{equation}
-% e^{-j\kbf^{i}\cdot\mathbf{r}}=e^{-j\kbf^{r}\cdot\mathbf{r}}=e^{-j\kbf^{t}\cdot\mathbf{r}}\quad\mbox{pour }x=0
-% \end{equation}
-% ce qui nécessite
-% \begin{eqnarray}
-% k_{z}^{i} & =k_{z}^{r} & =k_{z}^{t}\\
-% k_{y}^{i} & =k_{y}^{r} & =k_{y}^{t}
-% \end{eqnarray}
-% Puisque par hypothèse $k_{y}^{i}=0$, alors toutes les composantes
-% selon $y$ des vecteurs d'onde sont nulles, impliquant que les plans
-% d'incidente et de réflexion correspondent au plan $xOz$. D'autre
-% part, puisque le milieu des ondes incidentes et réfléchies est le
-% même, on a également $\theta^{i}=\theta^{r}$. 
-% 
-% \begin{figure}[h]
-% \begin{centering}
-% \includegraphics[width=0.6\textwidth]{figures/geometrie_reflexionTransmission_plasma}\caption{Géométrie du problème.\label{fig:G=0000E9om=0000E9trie-reflexion}}
-% \par\end{centering}
-% \end{figure}
-% 
-% Au voisinage des fréquences LH, le milieu plasma peut s'approcher
-% par un milieu diélectrique uniaxe de tenseur de permittivité relative
-% \begin{equation}
-% \mathbb{K}=\left(\begin{array}{ccc}
-% S & 0 & 0\\
-% 0 & S & 0\\
-% 0 & 0 & P
-% \end{array}\right)=S\left(\mathbf{\hat{x}\mathbf{\hat{x}}+\mathbf{\hat{y}}\mathbf{\hat{y}}}\right)+P\mathbf{\,\hat{z}}\mathbf{\hat{z}}
-% \end{equation}
-% 
-% Dans un milieu biréfringent, le vecteur de Poynting n'est pas dirigé
-% selon le vecteur d'onde $\kbf$ et le champ électrique n'est
-% pas orthogonal à $\kbf$. La simple relation de dispersion $k=n\frac{\omega}{c}$
-% n'est donc plus valide. La relation de dispersion d'un tel milieu
-% donne, on l'a vu, les deux solutions, données par exemple par l'équation
-% \ref{eq:cold_plasma_dispersion_relation_solution_n}. En ce qui concerne
-% l'onde lente, l'indice perpendiculaire selon $x$ a pour expression
-% d'après la solution de l'équation de dispersion :
-% \begin{equation}
-% n_{x}^{2}=-\frac{P}{S}\left(n_{z}^{2}-S\right)
-% \end{equation}
-% 
-% En utilisant l'égalité tirée de la condition de \emph{phase matching}
-% on a alors
-% \begin{equation}
-% n_{x}^{2}=-\frac{P}{S}\left(S+\varepsilon^{i}\cos^{2}\theta^{i}\right)\rightarrow n_{x}=\pm\sqrt{\frac{\left|P\right|}{S}\left(\varepsilon^{i}\cos^{2}\theta^{i}-S\right)}
-% \end{equation}
-% La direction du nombre d'onde dans le plasma et le signe de l'équation
-% précédente reste à déterminer. Pour choisir le signe correct, on doit
-% choisir le signe du flux de puissance (vecteur de Poynting) depuis
-% l'interface vers le plasma. D'après l'équation d'onde, on déduit
-% \begin{eqnarray}
-% n_{x}n_{z}E_{x}^{t} & = & \left(P+n_{x}^{2}\right)E_{z}^{t}\\
-% \end{eqnarray}
-% et en utilisant les conditions de continuité du champ électrique et
-% de la densité flux électrique: 
-% \begin{eqnarray}
-% \left(E^{r}-E^{i}\right)\sin\theta^{i} & = & E_{z}^{t}\\
-% \varepsilon^{i}\left(E^{r}+E^{i}\right)\cos\theta^{i} & = & SE_{x}^{t}
-% \end{eqnarray}
-% On dispose maintenant de trois équations et trois inconnues ($E_{x}^{t},E_{z}^{t},E^{r}$)
-% qui nous permet de résoudre le problème: 
-% \begin{eqnarray}
-% E_{x}^{t} & = & \frac{P+n_{x}^{2}}{n_{x}n_{z}}E_{z}^{t}\\
-% E_{z}^{t} & = & \left(E^{r}-E^{i}\right)\sin\theta^{i}\\
-% E^{r} & = & ...
-% \end{eqnarray}
-%  Pour que le flux de puissance soit positif, on doit avoir
-% \begin{equation}
-% \mathbf{\hat{x}\cdot}\mathbf{S}^{t}>0\rightarrow\mathbf{\hat{x}\cdot\left(\mathbf{E}^{t}\times\mathbf{H}^{t}\right)/2}
-% \end{equation}
-% or,
-% 
-% \begin{eqnarray}
-% \mathbf{\hat{x}\cdot}\mathbf{S}^{t} & = & \mathbf{\hat{x}\cdot\left(\mathbf{E}^{t}\times\mathbf{H}^{t}\right)/2}\\
-%  & = & \mathbf{H}^{t}\cdot\left(\mathbf{\hat{x}\times}\mathbf{E}^{t}\right)/2\\
-%  & = & \frac{1}{\omega\mu_{0}}\left(k_{z}E_{x}^{t}-k_{x}E_{z}^{t}\right)\cdot\left(-E_{z}^{t}\right)/2\mathbf{\hat{y}}\\
-%  & = & \frac{-k_{0}}{\omega\mu_{0}}\left(\frac{P+n_{x}^{2}}{n_{x}}-n_{x}\right)\cdot\left(E_{z}^{t}\right)^{2}/2\mathbf{\hat{y}}\\
-%  & = & \frac{-k_{0}}{\omega\mu_{0}}\frac{P}{n_{x}}\cdot\left(E_{z}^{t}\right)^{2}/2\mathbf{\hat{y}}
-% \end{eqnarray}
-% 
-% Pour que la dernière expression soit positive, il est nécessaire que
-% $n_{x}>0$ (car $P<0$). C'est donc la racine positive qui doit être
-% choisie ==> Problème: cela devrait être la négative !:
-% \begin{equation}
-% n_{x}=\pm\sqrt{\frac{\left|P\right|}{S}\left(\varepsilon^{i}\cos^{2}\theta^{i}-S\right)}
-% \end{equation}
-% 
-% Cela démontre que l'onde est backward, dans la mesure où 
 
-% ###################################################
-% ###################################################
-% ###################################################
-\section{Ion Cyclotron Range of Frequencies}\label{sec:icrh}
-
-\todo{below}
-
-
-
-the key ICRF engineering issue-designing a coupler to effectively radiate plasma waves-can be fully described by electromagnetic theory with a simple dielectric tensor\cite{perkins1984}.
-
-Thus the electrical engineering issues of heating tokamak
-reactors can all be cast in terms of standard linear electromagnetic
-theory with the sole complication being the presence
-of off-diagonal terms in a spatially dependent dielectric tensor\cite{perkins1984}.
-
-Minority Ion Cyclotron resonance condition
-\begin{equation}
-	\omega = N\Omega_{ci} - k_\parallel v_\parallel
-\label{eq:ion_cylotron_resonance_general}
-\end{equation}
+The wavenumber spectrum in the toroidal and poloidal direction is imposed by the geometry and the RF amplitude and phase excitation of the antenna. The parallel direction is defined as the direction of the total confining magnetic field $\Bbf_0$. We define the \textit{parallel index} $n_\parallel$ as $n_\parallel = \mathbf{n}\cdot\Bbf_0/B_0$. We have in addition $n_{\parallel}=n_{z}$ from the frame we have defined above. The perpendicular direction is thus $n_{\perp}^{2}=n_{x}^{2}=n^{2}-n_{\parallel}^{2}$ and oriented along $\mathbf{x}$. The perpendicular index in the radial direction is then deduced from the dispersion relation, which With these notations reads to:
+\begin{marginlisting}
+Convenient \texttt{SymPy} script to obtain this result:
+\begin{lstlisting}[language=Python, basicstyle=\tiny]
+from sympy import *
+nx, ny, nz = symbols('n_x n_y n_z')
+S, D, P = symbols('S D P')
+M = Matrix([[S-nz**2, I*D, nx*nz], 
+			[-I*D, S-nx**2-nz**2, 0], 
+			[nx*nz, 0, P-nx**2]])
+M.det().factor(nx)
+\end{lstlisting}
+\end{marginlisting}
 
 \begin{equation}
-\Omega_{ci} = \frac{Z q B_0}{A m_p}
-\label{eq:ion_cyclotron_angular_frequency}
+A n_{\perp}^{4} + B n_{\perp}^{2} + C = 0
+\label{eq:cold_plasma_dispersion_relation_n_perp}
+\end{equation}
+with\marginnote[+2cm]{Note that $S^{2}-D^{2}=RL$.}:
+\begin{subequations}
+	\begin{eqnarray}
+		A & = & S\\
+		B & = & (S - n_\parallel^2)(S + P) - D^2 \\
+		  & = & RL + PS -n_{\parallel}^{2}(S+P) \nonumber \\
+		C & = & P[(S - n_{\parallel}^{2})^{2} - D^2] \\
+		  & = & P(n_\parallel^2 - R)(n_\parallel^2 - L) \nonumber
+		\end{eqnarray}
+		\label{eq:cold_plasma_dispersion_relation_n_perp_ABC}
+\end{subequations}
+
+As $S$, $D$ and $P$ do not depend on $\kbf$, Eq.(\ref{eq:cold_plasma_dispersion_relation_n_perp}) is a simple quadratic equation for $n_\perp^2$, which gives two solutions:
+\begin{equation}
+	n_\perp^2 
+	=
+	\frac{-B \pm  \sqrt{B^2 - 4AC}}{2A}
+	\label{eq:nperp_solution_general}
+\end{equation}
+As the discriminant $B^2 - 4AC$ can be proven to be always positive,there are two modes of plasma waves in the plasma, named \textit{Fast} and \textit{Slow} wave modes, which comes from that the fast wave has a higher phase velocity than the slow wave. Depending on the sign of the $n_\perp^2$ solution, these waves will be either propagating ($n_\perp^2>0$) or evanescent ($n_\perp^2<0$). As seen in next sections, evanescent modes play an important role in the antenna region, in particular for coupling calculations. 
+
+
+For certain values of the parameters, $n_\perp^2$ goes to zero or infinity, called \textit{cut-off} ($n_\perp^2 = 0$) or \textit{resonances} ($n_\perp^2\to\infty$) respectively \sidecite{Allis2003}. It is also possible that the two waves coalesce in a single mode, when the discriminant is zero. 
+%From Eqs.(\ref{eq:nperp_solution_general}-\ref{eq:cold_plasma_dispersion_relation_n_perp_ABC}) cut-off will occur when:
+%\begin{equation}
+%	P = 0 \mbox{ or } R = 0 \mbox{ or } L= 0
+%\end{equation}
+
+Much of the essential physics of the wave propagation in tokamak magnetized plasma can be understood using this simplified (slab) geometry. However, so far, we have assumed that the plasma was homogenous in order to deal with the plane wave expansion of the electromagnetic quantities in the $(\kbf,\omega)$ domain, while it is not the case as the density and magnetic field increase as we move away from the antenna. The hypothesis that the plasma is homogeneous is similar than assuming that phenomena take place on space scale $\Delta r$ much larger than the RF wavelength. This criteria would be fulfilled if:
+\begin{equation}
+	\Delta r \gg \max\lambda= \max \frac{\lambda_0}{\sqrt{\min \varepsilon_{r}}}\frac{\lambda_0}{\sqrt{\min\left(|S|,|D|,|P|\right)}}
 \end{equation}
 
-% ###################################################
-% ###################################################
-\subsection{ICRF Dispersion Relation}
-\sidecite{adam1987}
+
+\todo{à finir}
+%which assumes that the inhomogeneity is in the $x$-direction which is also the direction of $k_\perp$. Modelling the wave in the equatorial plane of the tokamak. $k_y$ set to zero without adding anything essential to the conclusions
+
 
 % ###################################################
 % ###################################################
-\subsection{ICRF Wave Polarization}
+% ###################################################
+\subsection{Ion Cyclotron Range of Frequencies}\label{sec:icrh}
+Plasma heating of a Tokamak plasma by wave coupling in the Ion Cyclotron Range of Frequencies (ICRF) requires injection waves at a frequency $\omega$ in order to satisfy somewhere in the plasma the resonance condition\sidecite{adam1987}:
+\begin{equation}
+	\omega - p \Omega_c - k_\parallel v_{\parallel,i} = 0
+\end{equation}
+where $p$ is the cyclotron harmonic number, $\Omega_c$ the minority ion cyclotron angular frequency and $v_{\parallel,i}$ the parallel component of the minority ion velocity. In present tokamaks, the desired RF frequency band is around 30-70W~\si{MHz}. In this range of frequency we have the ordering $\omega \ll \omega_{pe},\Omega_{ce}$ which allows to simplify a bit the previous equation. In such case, Eqs.(\ref{eq:stix_SDP}) can be further simplified for the case of a single ion species plasma to:
+\begin{subequations}
+	\begin{eqnarray}
+		S &\approx& \frac{\omega_{i}^2}{\Omega_{ci}^2 \left(1 - \omega^2/\Omega_{i}^2 \right)} \ll -1 \\
+		D &\approx& - S \frac{\omega}{\Omega_i} \gg 1 \\
+		P &\approx& - \frac{\omega_{e}^2}{\omega^2} \ll -1 \\
+		R &\approx& \frac{\omega_i^2}{\Omega_i^2 \left(1+\omega/\Omega_i\right) } \gg 1\\
+		L &\approx& \frac{\omega_i^2}{\Omega_i^2 \left(1-\omega/\Omega_i\right) } \ll -1
+	\end{eqnarray}
+\end{subequations}
 
 % ###################################################
 % ###################################################
-\subsection{Coupling Resistance}
+\subsubsection{ICRF Dispersion Relation}
+
+The roots of the dispersion equation Eqs.(\ref{eq:nperp_solution_general}) are:
+\begin{subequations}
+\begin{eqnarray}
+n_{\perp, F}^2 &\approx& \frac{\left(R - n_\parallel^2 \right)\left(R - n_\parallel^2\right)}{S-n_\parallel^2} \\
+			   &\approx& \left(S-n_\parallel^2 \right) - \frac{D^2}{S-n_\parallel^2} \nonumber \\
+n_{\perp, S}^2 &\approx& P\left(1 - \frac{n_\parallel^2}{S}\right)			  
+\end{eqnarray}
+\end{subequations}
+where the subscript $_F$ and $_S$ stands for \textit{Fast} and \textit{Slow} wave modes. 
+
+% ###################################################
+% ###################################################
+\subsubsection{ICRF Wave Polarization}
+Injecting the previous solutions into Eq.(\ref{eq:relation_disp_matr_froid}) leads to the polarization of these modes in the Stix frame:
+\begin{subequations}
+	\begin{eqnarray}
+		\mbox{Fast wave: } & E_z = 0 & \frac{E_x}{E_y}=\frac{j D}{S - n_\parallel^2} \\
+		\mbox{Slow wave: } & E_y = 0 & \frac{E_x}{E_z}=- \frac{n_\parallel n_{\perp,S} }{S - n_\parallel^2}
+	\end{eqnarray}
+\end{subequations}
+
+The key engineering issue in designing a ICRH antenna is to effectively radiate fast waves and not slow waves, as slow waves may create undesirable effects on the plasma known as \textit{RF sheaths}\sidenote{RF sheaths are briefly discussed in Section~\ref{sec:RF_sheaths}).}.
+
+
+
+
+
+
+
+
+% ###################################################
+% ###################################################
+\subsubsection{Coupling Resistance}
 \todo{reformuler}
 For effective tunneling of the fast wave launched
 by the antenna located outside the scrap-off layer, the
@@ -871,36 +458,32 @@ aspects theorique couplage\sidecite{messiaen1982}
 
 Works well with experiments\sidecite{koch1988}
 
-% ###################################################
-% ###################################################
-\subsection{Full-Wave Antenna Coupling}\label{sec:ICRH_FW_antena_coupling}
 
 
 
 
+% ###################################################
+% ###################################################
+% ###################################################
+\subsection{Lower Hybrid Range of Frequencies}\label{sec:lhcd}
 
 % ###################################################
 % ###################################################
-% ###################################################
-\section{Lower Hybrid Range of Frequencies}\label{sec:lhcd}
+\subsubsection{LHRF Dispersion Relation}
 
 % ###################################################
 % ###################################################
-\subsection{LHRF Dispersion Relation}
-
-% ###################################################
-% ###################################################
-\subsection{Resonance Cone}
+\subsubsection{Resonance Cone}
 Bellan and Porkolab PRL 34, 124, 1975.
 
 % ###################################################
 % ###################################################
-\subsection{LHRF Wave Polarization}
+\subsubsection{LHRF Wave Polarization}
 
 
 % ###################################################
 % ###################################################
-\subsection{Wave propagation and absorption in the plasma}
+\subsubsection{Wave propagation and absorption in the plasma}
 In order for the RF power to reach the plasma core, the excited waves by a LHCD launcher must satisfy different criteria: 
 
 \begin{itemize}
@@ -970,7 +553,7 @@ However, in many past and present LHCD experiments, the resonant velocity $v_{\p
 \clearpage
 % ###################################################
 % ###################################################
-\section{The ALOHA (Advanced LOwer Hybrid Antenna) code}\label{sec:ALOHA}
+\section{The ALOHA code}\label{sec:ALOHA}
 \marginnote{Parts of this section are taken from paper \citeauthyear{hillairet2010}.}
 % ###################################################
 \subsection{Context of this work}
@@ -1128,7 +711,7 @@ Finally, using (\ref{eq:linear_system_matrix}), one finds:
 \end{equation}
 where $\mathbb{I}$ is the unit matrix.
 
-\subsubsection{Antenna power spectrum}
+\subsection{Antenna power spectrum}
 An important feature of LH antennas is the radiated power spectral density $dp$ that can be computed from the Poynting vector: \begin{equation} dp\left(n_{y},n_{z}\right)=\Re\left\{ \frac{k_{0}^{2}}{4\pi^{2}}\left[\tilde{\mathbf{E}}\left(n_{y},n_{z}\right)\times\mathbf{\tilde{H}^{*}}\left(n_{y},n_{z}\right)\cdot\widehat{x}\right]\right\} \label{eq:power_spectrum_2D}
 \end{equation}
 According to previous equations, this power density can be evaluated once the power waves $\mathbf{a},\mathbf{b}$ for each waveguides have been calculated. In order to compare 1D and 2D modelling, it is possible to define a 1D spectrum $dp_{z}$ that integrates the contribution of all the $n_{y}$ for a given $n_{z}$:
@@ -1143,7 +726,7 @@ losses in the antenna:
 where $p_{n,\mbox{in}}$ and $RC_{n}$ are respectively the power incoming from an RF source and the Reflection Coefficient for the n-th module. 
 
 
-\subsubsection{Plasma surface admittance}\label{sec:surface_admittance}
+\subsection{Plasma surface admittance}\label{sec:surface_admittance}
 
 The plasma surface admittance defined in equation.(\ref{eq:surface_admittance}) can be evaluated either numerically or analytically depending on the hypothesis made on the wave propagation plasma and on the density
 profile\cite{brambilla1979, bers1983}. In ALOHA, two kinds of wave propagation models have been implemented. 
@@ -1158,7 +741,7 @@ re-normalization is required.
 The 1D approach is of great interest in spite of the approximations made. Indeed, since the waveguides of the grill are modeled by parallel plate waveguides, two different poloidal lines of waveguides are not coupled by the plasma, which means that there is no coupling between ports associated to those waveguides in the matrix $\mathbb{S}_{\mbox{grill/plasma}}$. When an antenna is composed of several poloidal lines of waveguides, it is then possible to define a density evolution for each line in order to simulate the effect of poloidal inhomogeneities. Finally, an other strong advantage of the 1D approach is to simplify the double integral of equation.(\ref{eq:coupling_admittance}) to a simple one, reducing dramatically the computation time while keeping a good agreement with experiments as it will be seen in future Sections.
 
 
-\paragraph{Several layers model}\label{sec_several_layers_model}
+\subsubsection{Several layers model}\label{sec_several_layers_model}
 
 In a tokamak plasma, the density profile of the scrape-off layer in which the LH antenna radiates may be perturbed by the antenna side limiters or other protruding objects such as other antennas. Thus, the modeling of the electron density by a single linear profile is not deeply realistic and experiments shows that the density decay length -- which can be approximated in a first order by $\lambda=n_{e}/\nabla n_{e}$ \sidecite[+0.5cm]{wesson1999} -- is millimetric in front of the grill and centimetric further \sidecite{leuterer1991}. Consequently, it seems natural to describe the electron density profile using several layers with different values of $\nabla n_{e}$.
 
@@ -1186,7 +769,7 @@ where $n_{ed}=n_{e0}+\nabla n_{e1}\, d$.
 Inside the second layer, the solution of the wave equation (\ref{eq:wave_equation}) for $\tilde{E}_{z}$ is similar to the one found in the case of a single layer since the physical requirement as $x\rightarrow+\infty$ is the same. Inside the first layer, the solution for $\tilde{E}_{z}$ is a combination of Airy and Whittaker functions. The relationship between the both solutions can be found considering that the solutions for the transverse electric and magnetic fields at the interface of both layers $x=d$ have to be continuous and the plasma admittance at the mouth of the antenna can be expressed analytically. Details of the derivation for a 1D case can be found in \citeauthyear{hillairet2010}.
 
 
-\subsubsection{Numerical validations}\label{sec:numerical_considerations}
+\subsection{Numerical validations}\label{sec:numerical_considerations}
 
 The results of the coupling calculation described in the previous sections depend on the total number of modes $N_{\mbox{modes}}$. In order to determine the minimal number of modes to take into account in order to insure the convergence of ALOHA, the total number of modes has been varied and the results on the C3 antenna compared. This is illustrated in Figure~\ref{fig:RC-E_vs_ne_vs_modes}, where the average reflection coefficient and the average electric field at the grill mouth are plotted versus the electron edge density $n_{e0}$ for the C3 antenna. When three or more modes are used, the results get very
 close, indicating that the convergence has been reached. 
@@ -1228,16 +811,16 @@ which is the density range of interest for this work.
 When the antenna is large -- that is to say in practical terms when there are more than about thirty waveguides --, the numerical computation of the coupling for a 2D plasma description becomes very difficult. In order to reach the convergence, the precision required on the calculation of the coupling terms in (\ref{eq:coupling_admittance}) leads to a drastic increase of the computational time. To avoid this problem, a solution consists in introducing losses in the vacuum permittivity. This hypothesis changes the diagonal terms of the dielectric tensor ($S'=S-j\delta$ and $P'=P-j\delta$ where $\delta$ is a factor of losses, $\delta\ll1$ and $\delta>0$) and this eliminates the singularities that appear in the expression of the admittance surface given previously. However, the implementation of the analytical solution when losses are introduced is very difficult because of the complex arguments that appear in Whittaker functions. It is then more convenient to numerically solve the differential wave equations by using the finite element method as explained previously. For the sake of illustration, setting $\delta=10^{-2}$ enables to reduce the computational time by more than two order of magnitude without disturbing the antenna response .
 
 
-\subsubsection{Summary of this work}
+\subsection{Summary of this work}
 The open-source ALOHA code has been developed to model the Lower Hybrid antenna coupling. In this code, multijunction antennas can be described by any full-wave RF software in order to take into account their detailed geometry. The plasma density layers in front of the antenna can be defined by one or two linear models in order to allow a more realistic description of the scrape-off density profile in front of the antenna. The coupling between the plasma and antenna is treated with either fast and slow waves (ALOHA-2D) or slow wave only (ALOHA-1D) via a surface admittance formulation. The code has also been successfully benchmarked to other codes: TOPLHA \sidecite[+2cm]{milanesio2011}, OLGA \sidecite[+1cm]{preinhaelter2017-1, preinhaelter2018} or FEM codes such as ANSYS HFSS \sidecite{hillairet2019}. The next Section presents some experimental comparisons with experiments performed on Tore Supra.
 
 \clearpage
 
 % #####################################################
 % #####################################################
-\subsection{ALOHA Coupling Calculations for Tore Supra/WEST LHCD Antennas}\label{sec:ALOHA_TS}
+\section{ALOHA Coupling Calculations for Tore Supra LHCD Antennas}\label{sec:ALOHA_TS}
 \marginnote{Part of this section are taken from paper \cite{hillairet2009-2}.}
-\subsubsection{Context of this work}
+\subsection{Context of this work}
 During October and November 2008, dedicated experiments were carried out in Tore Supra in order to compare the measured power reflection coefficients on the C2 and C3 launchers\sidenote{The C2 antenna has been removed from Tore Supra in 2009 and replaced by the Passive-Active Multijunction, labelled C4 (then LH2 in WEST).} with the numerical results from the ALOHA code. In order to avoid possible non-linear effects\cite{petrzilka1987, ekedahl2009}, low power pulses were used, i.e. pulses for which the power density at the mouth of the antenna is less than $2~\si{MW/m}^2$ (corresponding to a total input power of 100~kW). The parameters for pulse $\#43016$ are shown in Fig.~\ref{fig:TS43016}. A large variation of density in front of the antenna between $0.3\times10^{17}~\mathrm{m}^{-3}$ and $13\times10^{17}~\mathrm{m}^{-3}$ was obtained by varying the distance between the last closed flux surface (LCFS) and the antenna during the pulse (cut-off density is $n_{ec}=1.7\times10^{17}~\mathrm{m}^{-3}$). Electron density was measured with the Langmuir probes embedded in to the LH antennas. 
 
 \todo{Refaire la figure}
@@ -1256,7 +839,7 @@ In ALOHA, the edge plasma is described with a linear electron density profile an
 % #################################################
 % #################################################
 % #################################################
-\subsubsection{C2 antenna}
+\subsection{C2 antenna}
 We present here some comparisons between experimental measurements and ALOHA on the Tore Supra C2 antenna. This antenna, installed in 1991, has been removed in 2009 and replaced by a new passive-active multi-junction antenna\cite{guilhem2009,guilhem2011}. The C2 antenna is made of 8 modules. Each module line is a 1-to-4 multi-junction (cf.~Fig~\ref{fig:geometry_TS_LHAntennas}). Permanent built-in phase shifters produce a $90^\circ$ phase difference between each output waveguides on a toroidal line, which produce a nominal peak parallel index of $n_{\parallel,0}=1.82$.
 
 \begin{figure}[h]
@@ -1278,7 +861,7 @@ In Figure~\ref{fig:MarkI_mean_RC}, experimental reflection coefficients at diffe
 % #################################################
 % #################################################
 % #################################################
-\subsubsection{C3 antenna}
+\subsection{C3 antenna}
 C3\sidenote{The antenna has been relabelled LH1 in WEST.} has been installed in 1999 and is also made of 8 modules. Each module is a 1-to-6 multi-junction (cf. Figure~\ref{fig:geometry_TS_LHAntennas}). Permanent built-in phase shifters produce a $90^\circ$ phase difference between each output waveguides on a toroidal line, which produce a nominal peak parallel index of $n_{\parallel,0}=2.02$.
 
 In Figure~\ref{fig:MarkII_mean_RC}, experimental reflection coefficients at different electron densities, measured during Tore Supra pulses \#43014-43016 for the 4 first lower modules of the C3 antenna are plotted. The density is measured with the nearest Langmuir probe placed at the bottom of the C3 antenna. 
@@ -1294,11 +877,11 @@ In Figure~\ref{fig:MarkII_mean_RC}, experimental reflection coefficients at diff
 
 
 % ##################################################
-\subsubsection{C4 antenna}
+\subsection{C4 antenna}
 \todo{Figures Mélanie}
 
 % ##################################################
-\subsubsection{Summary of this section}
+\subsection{Summary of this section}
 
 Experimental reflection coefficients at different electron densities, measured during Tore Supra pulses had been compared with the ALOHA code predictions. Results obtained with ALOHA are in good agreement with the experimental measurements for both Tore Supra antennas and shows that ALOHA is an efficient LH predictive tool. 
 
@@ -1397,8 +980,8 @@ The Figure~\ref{fig:LH_fied_spectrum} illustrate the benchmark with the ALOHA co
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=1.0\linewidth]{figures/chap2/LHCD/LH_HFSS_vs_ALOHA_Ez}\\
-	\includegraphics[width=1.0\linewidth]{figures/chap2/LHCD/LH_HFSS_vs_ALOHA_spectrum}
+	\includegraphics[width=0.8\linewidth]{figures/chap2/LHCD/LH_HFSS_vs_ALOHA_Ez}\\
+	\includegraphics[width=0.8\linewidth]{figures/chap2/LHCD/LH_HFSS_vs_ALOHA_spectrum}
 	\caption{Example of comparison between ALOHA and HFSS ($n_e = 2n_c$ , $\lambda_n=1$ cm, 1 mm vacuum gap).  Top: toroidal component of the electric field at the mouth of the antenna. Bottom: Power density spectrum excited by the antenna.}
 	\label{fig:LH_fied_spectrum}
 \end{figure}
