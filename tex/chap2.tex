@@ -1,4 +1,5 @@
 % RF coupling
+\setchapterimage{figures/chap2/chapter_head} % Optionally specify theheight
 \setchapterpreamble[u]{\margintoc}
 \chapter{RF Coupling}
 \label{chap:rf_coupling}
@@ -251,7 +252,14 @@ where $\omega$, $\Omega_{s}$ and $\omega_{s}$ are respectively the RF, the \href
 	\omega_{s}  &=& \sqrt{ \frac{Z^2 e^2 n_{s}}{\varepsilon_{0} m_{s}}}
 	\end{eqnarray}
 \end{subequations}
-where $n_s$ is the density, $m_s$ the mass, $e$ the (signed) elementary charge and $Z$ the atomic number (number of protons) for the species $s$ (electron or ions). 
+where $n_s$ is the density, $m_s$ the mass, $e$ the (signed) elementary charge and $Z$ the atomic number (number of protons) for the species $s$ (electron or ions). The parameters $S$, $D$ and $P$ depend of the plasma species densities and the magnetic field. Their values are illustrated in Figure~:\ref{fig:sdpvsfnfixedbfixed} for a Deuterium plasma for density and magnetic field representative of the one we could find in front of a Tore Supra/WEST antenna.
+
+\begin{figure*}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap2/SDP_vs_f_nfixed_Bfixed}
+	\caption{Values of the $S$, $D$, $P$ for a Deuterium plasma for density and magnetic field representative of the one we could find in front of a Tore Supra/WEST antenna. The typical Ion Cyclotron and Lower Hybrid range  of frequencies are indicated for convenience.}
+	\label{fig:sdpvsfnfixedbfixed}
+\end{figure*}
 
 The form of Eq.(\ref{eq:stix_K}) is a consequence of the fact that the cold plasma is a gyrotropic media. Gyrotropic media are characterized by their invariance under any rotation about the direction of anisotropy~\cite{Mackay2010}, in our case the direction of the magnetic field $\Bbf_0/B_0=\mathbf{z}$. Hence, this tensor can be equivalently re-expressed into a rotation frame $(\mathbf{u}_{+}, \mathbf{u}_{-},  \mathbf{z})$, with $\mathbf{u}_{\pm}=(\mathbf{x}\pm \mathbf{y})/\sqrt{2}$:  
 \begin{equation}
@@ -324,12 +332,12 @@ M.det().factor(nx)
 A n_{\perp}^{4} + B n_{\perp}^{2} + C = 0
 \label{eq:cold_plasma_dispersion_relation_n_perp}
 \end{equation}
-with\marginnote[+2cm]{Note that $S^{2}-D^{2}=RL$.}:
+with\marginnote[+3cm]{Where we have used $S^{2}-D^{2}=RL$.}\sidenote{NB: some signs are reversed from the solutions usually found in the literature, due to the choice of the harmonic sign $e^{j\omega t}$}:
 \begin{subequations}
 	\begin{eqnarray}
 		A & = & S\\
-		B & = & (S - n_\parallel^2)(S + P) - D^2 \\
-		  & = & RL + PS -n_{\parallel}^{2}(S+P) \nonumber \\
+		B & = & D^2 - (S - n_\parallel^2)(S + P)\\
+		  & = & -RL - PS + n_{\parallel}^{2}(S+P) \nonumber \\
 		C & = & P[(S - n_{\parallel}^{2})^{2} - D^2] \\
 		  & = & P(n_\parallel^2 - R)(n_\parallel^2 - L) \nonumber
 		\end{eqnarray}
@@ -343,7 +351,7 @@ As $S$, $D$ and $P$ do not depend on $\kbf$, Eq.(\ref{eq:cold_plasma_dispersion_
 	\frac{-B \pm  \sqrt{B^2 - 4AC}}{2A}
 	\label{eq:nperp_solution_general}
 \end{equation}
-As the discriminant $B^2 - 4AC$ can be proven to be always positive,there are two modes of plasma waves in the plasma, named \textit{Fast} and \textit{Slow} wave modes, which comes from that the fast wave has a higher phase velocity than the slow wave. Depending on the sign of the $n_\perp^2$ solution, these waves will be either propagating ($n_\perp^2>0$) or evanescent ($n_\perp^2<0$). As seen in next sections, evanescent modes play an important role in the antenna region, in particular for coupling calculations. 
+As the discriminant $B^2 - 4AC$ can be proven to be always positive,there are two modes of plasma waves in the plasma, named \textit{Fast} and \textit{Slow} wave modes, which comes from that the fast wave has a higher phase velocity than the slow wave. Depending on the sign of the $n_\perp^2$ solution, these waves will be either propagating ($n_\perp^2>0$) or evanescent ($n_\perp^2<0$). As seen in next sections, evanescent modes play an important role in the antenna region, in particular for coupling calculations. The antenna region is outside of the confined plasma, where the magnetic field line are open, and is called the \textit{scrap-off layer} (SOL). 
 
 
 For certain values of the parameters, $n_\perp^2$ goes to zero or infinity, called \textit{cut-off} ($n_\perp^2 = 0$) or \textit{resonances} ($n_\perp^2\to\infty$) respectively \sidecite{Allis2003}. It is also possible that the two waves coalesce in a single mode, when the discriminant is zero. 
@@ -358,7 +366,8 @@ Much of the essential physics of the wave propagation in tokamak magnetized plas
 \end{equation}
 
 
-\todo{à finir}
+
+
 %which assumes that the inhomogeneity is in the $x$-direction which is also the direction of $k_\perp$. Modelling the wave in the equatorial plane of the tokamak. $k_y$ set to zero without adding anything essential to the conclusions
 
 
@@ -373,7 +382,7 @@ Plasma heating of a Tokamak plasma by wave coupling in the Ion Cyclotron Range o
 where $p$ is the cyclotron harmonic number, $\Omega_c$ the minority ion cyclotron angular frequency and $v_{\parallel,i}$ the parallel component of the minority ion velocity. In present tokamaks, the desired RF frequency band is around 30-70W~\si{MHz}. In this range of frequency we have the ordering $\omega \ll \omega_{pe},\Omega_{ce}$ which allows to simplify a bit the previous equation. In such case, Eqs.(\ref{eq:stix_SDP}) can be further simplified for the case of a single ion species plasma to:
 \begin{subequations}
 	\begin{eqnarray}
-		S &\approx& \frac{\omega_{i}^2}{\Omega_{ci}^2 \left(1 - \omega^2/\Omega_{i}^2 \right)} \ll -1 \\
+		S &\approx& \frac{\omega_{i}^2}{\Omega_{i}^2 \left(1 - \omega^2/\Omega_{i}^2 \right)} \ll -1 \\
 		D &\approx& - S \frac{\omega}{\Omega_i} \gg 1 \\
 		P &\approx& - \frac{\omega_{e}^2}{\omega^2} \ll -1 \\
 		R &\approx& \frac{\omega_i^2}{\Omega_i^2 \left(1+\omega/\Omega_i\right) } \gg 1\\
@@ -381,19 +390,54 @@ where $p$ is the cyclotron harmonic number, $\Omega_c$ the minority ion cyclotro
 	\end{eqnarray}
 \end{subequations}
 
+\begin{figure*}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap2/IC_SDP}
+	\caption{Values of $S$, $D$ and $P$ terms in the Ion Cyclotron Range of Frequency.}
+	\label{fig:icsdp}
+\end{figure*}
+
+
+
 % ###################################################
 % ###################################################
 \subsubsection{ICRF Dispersion Relation}
-
-The roots of the dispersion equation Eqs.(\ref{eq:nperp_solution_general}) are:
+The roots of the dispersion equation Eqs.(\ref{eq:nperp_solution_general}) are approximatively in the ICRF\sidecite{Brambilla1998, usoltceva2019}:
 \begin{subequations}
 \begin{eqnarray}
-n_{\perp, F}^2 &\approx& \frac{\left(R - n_\parallel^2 \right)\left(R - n_\parallel^2\right)}{S-n_\parallel^2} \\
+n_{\perp, F}^2 &\approx& \frac{\left(R - n_\parallel^2 \right)\left(L - n_\parallel^2\right)}{S-n_\parallel^2} \\
 			   &\approx& \left(S-n_\parallel^2 \right) - \frac{D^2}{S-n_\parallel^2} \nonumber \\
-n_{\perp, S}^2 &\approx& P\left(1 - \frac{n_\parallel^2}{S}\right)			  
+n_{\perp, S}^2 &\approx& \frac{P}{S}\left(S - n_\parallel^2 \right)
+\label{eq:n_perp_square_approx_ICRF}		  
 \end{eqnarray}
 \end{subequations}
-where the subscript $_F$ and $_S$ stands for \textit{Fast} and \textit{Slow} wave modes. 
+where the subscript $_F$ and $_S$ stands for \textit{Fast} and \textit{Slow} wave modes. The Figure~\ref{fig:nperpsquarevsne_ICRF} illustrates the typical range of $n_\perp^2$ values in tokamak plasma in the Ion Cyclotron Range of Frequency. 
+
+\begin{figure*}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap2/n_perp_square_vs_ne_ICRF}
+	\caption{Perpendicular index $n_\perp^2$ from Eqs.(\ref{eq:nperp_solution_general}) (or Eqs.(\ref{eq:n_perp_square_approx_ICRF})) for Slow and fast waves for the typical range of electron density $n_e$ found in front of tokamak ICRF antenna ($f=50\,\si{MHz}$, $B_0=3\,\si{T}$). As antennas radiate a continuous spectrum of parallel indexes $n_\parallel$, low and high values are indicated.}
+	\label{fig:nperpsquarevsne_ICRF}
+\end{figure*}
+
+\begin{marginfigure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap2/core_edge_antenna}
+	\caption{Illustration of the different region in a tokamak. The core plasma is confined by following closed magnetic lines. The region defined by open field lines is the region where lie the antennas. The waves generated by the IC antennas are propagative only if the density is higher than a threshold, a cut-off density.}
+	\label{fig:coreedgeantenna}
+\end{marginfigure}
+The Figure~\ref{fig:nperpsquarevsne_ICRF} shows that the Fast Wave mode, the one which is desired for heating the ions of the core plasma, becomes propagative for electron density beyond a \textit{cut-off} density $n_{c}$. This density depends of the RF frequency, the magnetic field and the parallel index excited by the antenna. Moreover, the high $n_\parallel$ component of the spectrum radiated by the antenna has to tunnel further away then the low $n\parallel$ part and tends to be filtered from the launched spectrum. In the ICRF for the Fast wave, the cut-off density $n_c$ is defined as: 
+\begin{equation}
+n_\parallel^2 = R
+\end{equation}
+which leads for a single ion plasma to: 
+\begin{equation}
+n_c \approx \Omega_i^2 \frac{\left(1 + \frac{\omega}{\Omega_i}\right)}{\frac{Z^2 e^2}{\varepsilon_{0} m_i}}n_\parallel^2 
+\end{equation}
+
+For effective tunnelling of the Fast wave launched by the antenna, located outside the unconfined region, the
+plasma density in front of the antenna should be as high as possible, which highly depends on the distance between antennas and plasma. Hence this often requires the antenna to be close as possible to the confined plasma. However, this proximity has drawbacks: the heat fluxes from the plasma are impacting the antenna are higher and must be evacuated efficiently, leading to engineering issues.
+
 
 % ###################################################
 % ###################################################
@@ -408,55 +452,50 @@ Injecting the previous solutions into Eq.(\ref{eq:relation_disp_matr_froid}) lea
 
 The key engineering issue in designing a ICRH antenna is to effectively radiate fast waves and not slow waves, as slow waves may create undesirable effects on the plasma known as \textit{RF sheaths}\sidenote{RF sheaths are briefly discussed in Section~\ref{sec:RF_sheaths}).}.
 
-
-
-
-
-
-
-
 % ###################################################
 % ###################################################
-\subsubsection{Coupling Resistance}
-\todo{reformuler}
-For effective tunneling of the fast wave launched
-by the antenna located outside the scrap-off layer, the
-plasma density in front of the antenna should be as high
-as possible, but a much larger engineering effort is needed
-for long pulse operation with a high plasma density. The
-effectiveness of fast wave propagation or maximum deliverable
-power, $Pmax$, can be indicated by the RF loading
-resistance $R_L$. The following relation shows the $Pmax$ radiated
-by the antenna modeled by a lossless transmission
-line with a characteristic impedance Z0 with a lumped
-resistance $R_L$ attached at the shorted end:
+\subsubsection{ICRF Antennas Main Figures of Merit}
+The effectiveness of Fast wave coupling is in practice measured by the maximum radiated power $P_{\mathrm{rad,max}}$ by an antenna to a given plasma and can be defined in various ways. Assuming the antenna is modelled by a lossless transmission line of characteristic impedance $Z_0$ loaded with a  resistance $R_c$, the maximum power delivered to the load would be:
 \begin{equation}
-	Pmax = \frac{1}{2} R_L \frac{V^2_{max}}{Z_0^2}
+P_\mathrm{rad,max} = \frac{1}{2} R_c I^2_{\mathrm{max}} = \frac{R_c}{2 Z_0^2} V_\mathrm{max}^2
 \end{equation}
-Because the amplitude of maximum voltage on the transmission
-line, Vmax, and Z0 depend on the geometry of
-antenna system, RL is a major parameters affecting the
-propagation performance. RL is also a measure of the
-system efficiency because there is always Ohmic loss from
-an antenna conductor in series with RL.
-The scaling of RL for an increasing electron density
-with a gradient length dc from the antenna to the cutoff
-density [5] is given by
+where $I_\mathrm{max}$ and $V_\mathrm{max}$ are the maximum peak RF current and voltage at the load. The amplitude of the maximum current on the transmission line $I_\mathrm{max}$ depends on the geometry of antenna system and of the plasma parameters. Hence, $R_c$ can be seen as a measure of the system coupling efficiency and is called the \textit{coupling} or \textit{loading} resistance. In reality however, the RF current or voltage along the strap are not constant, hence the coupling resistance can be defined using the integral over the arc length $s$ along the strap:
 \begin{equation}
-	R_L \propto \exp\left(- \nu k_\parallel d_c \right)
+	R_c = \frac{2 P_{\mathrm{rad}}}{\int_s |I(s)|^2 \diff s}
 \end{equation}
-where $\nu$ is a constant constant representing the plasma density and
-its gradient. The scaling in Eq. (3) leads to engineering
-difficulty for an effective fast wave propagation, which
-highly depends on the distance between the antenna and
-the high density plasma. Much more effort is required
-to remove the heat influx as the distance decreases.
+where $P_\mathrm{rad}$ is the time-averaged radiated power. In numerical simulation, this power can be obtained from the Poynting theorem in the $\kbf$-space as:
+\begin{equation}
+	P_\mathrm{rad}
+	=
+	\Re
+	\left\{ 
+	\frac{k_{0}^{2}}{4\pi^{2}}
+	\iint
+	\left[
+	\Ebf \left(n_{y},n_{\parallel}\right)
+	\times
+	\Hbf^{*} \left(n_{y},n_{\parallel}\right)
+	\cdot\hat{\xbf}
+	\right]
+	\right\} 
+	\diff n_y 
+	\diff n_\parallel
+\end{equation}
+During experiment, it can be obtained from power, voltage or current measurements, and its definition also vary from machine to machine. ICRF coupling theory is discussed in details \sidecite{messiaen1982} and compared with experiments in \sidecite{koch1988}.
 
-KSTAR \sidecite{bae2003-1, wang2010}
 
-aspects theorique couplage\sidecite{messiaen1982}
+The scaling of $R_c$ for an increasing electron density with a gradient length $d_c$ from the antenna to the cut-off density $n_c$,  is given by:
+\begin{equation}
+	R_c \propto \exp\left(- \nu \left< k_\parallel \right> d_c \right)
+\end{equation}
+where $\nu$ is a constant constant representing the plasma density and its gradient and $\left< k_\parallel \right>$ a characteristic factor depending on an integration over the radiated spectrum by the antenna.  On Tore Supra, this scaling has been shown to be\sidecite{clairet2004}:
+\begin{equation}
+R_c \propto exp\left(- 2 \left< k_\parallel \right> d_{\mathrm{sco}} \right)
+\end{equation}
+where $d_{\mathrm{sco}}$ is the distance from the antenna straps to the density cut-off location. 
+%KSTAR \sidecite{bae2003-1, wang2010}
 
-Works well with experiments\sidecite{koch1988}
+
 
 
 
@@ -466,34 +505,73 @@ Works well with experiments\sidecite{koch1988}
 % ###################################################
 % ###################################################
 \subsection{Lower Hybrid Range of Frequencies}\label{sec:lhcd}
+In the Lower Hybrid Range of Frequencies, i.e. for $\Omega_i \ll \omega \ll \Omega_e$, the $S$, $D$ and $P$ parameters can be simplified at the lead order \cite[p.222]{Brambilla1998} to (Figure~\ref{fig:lhsdp})):
+\begin{subequations}
+	\begin{eqnarray}
+		S &\approx& 1 - \frac{\omega_i^2}{\omega^2} + \frac{\omega_e^2}{\Omega_e^2} \approx 1 \\
+		D &\approx& - \frac{\omega_e^2}{\omega \Omega_e} \approx 0 \\
+		P &\approx& 1 - \frac{\omega_e^2}{\omega^2} = 1 - \frac{n_e}{n_c}
+	\end{eqnarray}
+\end{subequations}
+where $n_c$ is the cut-off density for the Slow-wave defined for $P=0$ or:
+\begin{equation}
+	n_c = \frac{m_e \varepsilon_{0}}{e^2} \omega^2 \approx  0.0124 f^2
+	\label{eq:lh_cutoff_density}
+\end{equation}
+\begin{figure*}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap2/LH_SDP}
+	\caption{Values of $S$, $D$ and $P$ terms in the Lower Hybrid Range of Frequency. ($f=3.7\,\si{GHz}$,$B_0=3\,\si{T}$).}
+	\label{fig:lhsdp}
+\end{figure*}
+
 
 % ###################################################
 % ###################################################
 \subsubsection{LHRF Dispersion Relation}
+In the LHRF, the solution of the dispersion relation reads:
+\begin{subequations}
+	\begin{eqnarray}
+		n_{\perp,F}^2 &\approx& S - n_\parallel^2  \approx 1 - n_\parallel^2 \\
+		\label{eq:n_perp_square_FW_LHRF}
+		n_{\perp,S}^2 &\approx& \frac{P}{S} \left(S - n_\parallel^2\right) \approx P(1- n_\parallel^2)
+		\label{eq:n_perp_square_SW_LHRF}
+	\end{eqnarray}
+	\label{eq:n_perp_square_LHRF}
+\end{subequations}
+
+\begin{figure*}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/chap2/n_perp_square_vs_ne_LHRF}
+	\caption{Perpendicular index $n_\perp^2$ from Eqs.(\ref{eq:nperp_solution_general})   for the typical range of electron density $n_e$ found in front of tokamak LHRF antenna ($f=3.7\,\si{GHz}$, $B_0=3\,\si{T}$).}
+	\label{fig:nperpsquarevsne_LHRF}
+\end{figure*}
 
 % ###################################################
 % ###################################################
-\subsubsection{Resonance Cone}
-Bellan and Porkolab PRL 34, 124, 1975.
+%\subsubsection{Resonance Cone}
+%Bellan and Porkolab PRL 34, 124, 1975.
 
 % ###################################################
 % ###################################################
 \subsubsection{LHRF Wave Polarization}
-
+Similarly, the electric field polarisation in the LHRF gets:
+\begin{subequations}
+	\begin{eqnarray}
+	\mbox{Fast wave: } & E_z = 0 & \frac{E_x}{E_y}= \frac{j D}{S - n_\parallel^2} \\
+	\mbox{Slow wave: } & E_y = 0 & \frac{E_x}{E_z}=- \frac{n_\parallel n_{\perp,S} }{S - n_\parallel^2}
+	\end{eqnarray}
+\end{subequations}
 
 % ###################################################
 % ###################################################
-\subsubsection{Wave propagation and absorption in the plasma}
+\subsubsection{Wave propagation conditions}
 In order for the RF power to reach the plasma core, the excited waves by a LHCD launcher must satisfy different criteria: 
 
 \begin{itemize}
-	\item  A \emph{cut-off condition}: the electron density in front of the launcher must be close or higher than the slow-wave electron \emph{cut-off density}. This density is given by:
-	$$
-	n_{c,\mathrm{cut-off}} = \varepsilon_0 m_e \frac{\omega^2}{e^2}
-	$$
-	and thus increases as the square of the source frequency. 
-	\item A propagation condition: in order for the LH waves to propagate into the magnetized plasma, excited waves must have an absolute value of the parallel index greater than one, i.e. $|n_{\parallel}|>1$ 
-	\item An accessibility condition: in order for the slow waves which access to the core plasma not to be mode-converted into fast waves, a minimum value of $n_{\parallel}$ for a given plasma density and magnetic field is requested :
+	\item  A \emph{cut-off condition}: the electron density in front of the launcher must be close or higher than the slow-wave electron \emph{cut-off density}, given by Eq.(\ref{eq:lh_cutoff_density}), which increases as the square of the source frequency. 
+	\item A propagation condition: in order for the Slow and fast waves in the LHRF to propagate into the magnetized plasma, from Eqs.(\ref{eq:n_perp_square_LHRF}) excited waves must have an absolute value of the parallel index greater than one, i.e. $|n_{\parallel}|>1$ 
+	\item An accessibility condition: in order for the slow waves accessing the plasma core to not be mode-converted into fast waves, a minimum value of $n_{\parallel}$ for a given plasma density and magnetic field is requested\sidecite{golant1972}:
 	$$
 	|n_{\parallel} |>| n_{\parallel \mathrm{access}} | 
 	\approx 
@@ -502,51 +580,78 @@ In order for the RF power to reach the plasma core, the excited waves by a LHCD 
 		+ \frac{\omega_{pe}^2}{\omega_{ce}^2}}
 	+ \frac{\omega_{pe} }{| \omega_{ce} |}
 	$$ 
-	When the accessibility condition is satisfied, the slow and the fast branch of the dispersion relation are separated and the LH waves can reach the core plasma.
-	Inversely, for a given $n_{\parallel}$, the previous condition leads to an upper limit for the density, above which the wave can’t propagate.
+	When the accessibility condition is satisfied, the slow and the fast branch of the dispersion relation are separated and the LH waves can reach the core plasma. Inversely, for a given $n_{\parallel}$, the previous condition leads to an upper limit for the density (inside the plasma), above which the wave can’t propagate.
 \end{itemize}
 
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=0.9\linewidth]{Figures/LHCD/C3_powerflow}
-%	\caption{Illustration of the power density radiated by a LH launcher (seen into a horizontal plane cut) into a plasma of increasing electron density. The plasma current direction is indicated. Since the launcher is designed to launch a non-symmetrical power spectrum, the power flows toward a preferred direction (opposite to the plasma current).}
-%	\label{fig:c3powerflow}
-%\end{figure}
+
+% ###################################################
+% ###################################################
+\subsubsection{LHRF Antennas Main Figures of Merit}
+There are three important figures of merit to measure the efficiency and
+performance of a LH launcher. The first one is the $\mathbf{k}$-space radiated power spectrum density $\diff p(n_y, n_\parallel)$, defined as the $k$-space Poynting vector\marginnote{Integrating the power spectrum density over the entire $n$-space gives the transmitted power to the plasma.}:
+\begin{equation} 
+\diff p
+\left(n_{y},n_{\parallel}\right)
+=\Re\left\{ \frac{k_{0}^{2}}{4\pi^{2}}
+\left[\tilde{\mathbf{E}}
+\left(n_{y},n_{\parallel}\right)
+\times
+\mathbf{\tilde{H}^{*}}\left(n_{y},n_{\parallel}\right)
+\cdot\hat{\xbf}
+\right]
+\right\} 
+\end{equation}
+Since it is often assumed that the plasma is infinite in the $y$ direction (slab model), the main acceptation of the power spectrum density is $\diff p(n_\parallel)$, which corresponds to integrate the contribution of all the $n_{y}$ for a given $n_{\parallel}$:
+\begin{equation}
+\diff p\left(n_{\parallel}\right)=\int_{-\infty}^{+\infty}\! \diff p\left(n_{y},n_{\parallel}\right)\, \diff n_y
+\end{equation}
+This quantity represents the amount of power excited by the launcher for each parallel index $n_\parallel$. The relation between this power spectrum and the array excitation is related to the Fourier transform of the electromagnetic field at the plasma-antenna interface.
+
+The second one is the ratio of the reflected power (at the mouth or at the end of the launcher) to the input power, named the reflection coefficient $R_C$\sidenote{Which should not be confounded with the coupling resistance defined for ICRF.} and often expressed in percent:
+\begin{equation}
+	R_C = P_r/P_i
+\end{equation} 
+
+The third one is the directivity of the launcher, which is the fraction of the power spectrum over its total power content. It can be viewed as the fraction of the power that goes toward one toroidal direction over the total coupled power. One can define the directivity as:
+\begin{equation}
+D = \frac{\int_{n_\parallel > 0}  \diff p(n_\parallel) \diff n_\parallel}{\int \diff p(n_\parallel) \diff n_\parallel} 
+\end{equation}
+
+Since the wave field at the launcher aperture (and thus the launcher spectrum) depends on both the antenna and the plasma, numerical coupling codes are required to make a self-consistent numerical evaluation of the coupling. Different types of launchers have been developped to balance the sometimes conflicting requirements of experimental flexibility, reduced complexity and thermal constraints. These antennas are discussed in Section~\ref{sec:LHCD_antennas_general}.
 
 
-
-The RF power is coupled by the launcher to the plasma, which means that the electromagnetic waves in the launcher’s waveguides are converted to (mainly) slow waves in the plasma. In the LH range of frequencies (~2 to 8 GHz), the wavelength of the RF waves in the plasma is well below the typical beam size, which itself is smaller than the equilibrium non-uniformity scale. It this situation, the evolution of the waves in the plasma can be described by the \emph{ray-tracing} formalism. Since the evolution of the electron population can be described with Fokker-Planck calculation, the combination of the both tools is standard for modelling LHCD experiments\sidecite{bonoli1982, peysson2012}.
-
-As said before, the LHCD launcher is a phased array of waveguide which excites a slow plasma wave. The following calculations taken from current drive theory illustrate the basic requirements of the LHCD launcher in order to optimize the current drive efficiency. 
-
-In the plasma, the incremental current $\Delta j$ carried by an electron of electrical charge $q=-e$ and accelerated from a parallel velocity $v_\parallel$ to $v_\parallel + \Delta v_\parallel$ is:
-$$\Delta j = q \Delta v_{\parallel}$$
-
-The incremental increase of kinetic energy is:
-$$\Delta E = m v_{\parallel} \Delta v_{\parallel}$$
-
-Eliminating $\Delta v_{\parallel}$ leads to an incremental current: 
-$$\Delta j = \Delta E \; q/(m v_{\parallel})$$ 
-
-Let $\nu_\mathrm{coll}$ be the Coulomb collisional frequency. At first order \footnote{Rigourously, the mathematical tool for a complete description of multiple scattering processes in the velocity-space is the Boltzman equation. The collision term modelling the multiple particles Coulomb collisions in this equation can be modelled by a collision term of the Fokker-Planck type.} the incremental energy input $\Delta E$ persists for a time $1/\nu_\mathrm{coll}$. The associated (steady-state) RF input power $\Delta P$ required is thus: 
-$$\Delta P = \nu_\mathrm{coll} \Delta E$$ 
-
-From the two previous equations, the ratio of the incremental current to the RF input power is:
-$$\Delta j/ \Delta P = q / (m \nu_\mathrm{coll} v_{\parallel})$$
-
-This suggests that more current can be driven with low parallel velocity electrons. However, fast electrons collide less often than slower, as the Coulomb collision cross section falls off with increasing relative velocity as $\nu_\mathrm{coll} \propto n_e/v_{\parallel}^3$ (for parallel velocity larger than the thermal velocity). It follows that the previous ratio is proportional to: 
-
-$$\Delta j/ \Delta P \propto (v_{\parallel}^2 q) / (m n_e)$$
-
-this means that high current drive efficiency can be reached from fast electrons. Thus, it is actually more effective to push fast electrons than slower. Even if it may be energetically more expensive to accelerate fast electrons, this energy deposition need occurs less often because current last longer when carried by relatively less collisional electrons \sidecite{fisch1987}. 
-
-For the purpose of current drive with LH waves, the Landau damping is the dominant absorption mechanism. Landau damping is a collision-less damping process in which particles exchange energy with waves travelling with the nearly same phase velocity parallel to the magnetic field, that is, for particle parallel velocity $v_{\parallel}$ satisfying resonant condition:
-
-$$\omega – k_{\parallel} v_{\parallel} = 0 $$ 
-
-where $k_{\parallel}=k_0 n_{\parallel}$ is the parallel wavenumber of the wave, $n_{\parallel}$ the parallel index of refraction and $k_0= \omega/c$ the wavenumber in vacuum. From the previous relation one deduces that the LHCD launcher must excite waves satisfying the resonant condition $v_{\parallel}=c/n_{\parallel}$. As for the slow wave to be able to penetrate into the plasma the parallel index must be greater than one and also greater to $|n_{\parallel \mathrm{access}}|$, typical LHCD launchers in current tokamaks excite a main parallel index between $n_{\parallel 0}$=1.5 to 3.0. 
-
-However, in many past and present LHCD experiments, the resonant velocity $v_{\parallel 0}=c/n_{\parallel 0}$ corresponds to supra thermal region where the number of electrons should be in principle too small for any significant wave damping to take place and to account for the observed current drive. Indeed, strong wave damping on a Maxwellian distribution with temperature $T$ requires the wave damping to be no larger than four times the thermal velocity $v_T=\sqrt{k T/m}$. This paradox is commonly referred to as the \emph{spectral gap} problem and is an active area of research. Various explanations are proposed to explain this spectral gap, among these the toroidal effects on the wave propagation that can cause sufficient up-shift (increase of the parallel wavenumber) in the parallel refraction index $n_{\parallel}$ to “fill” the spectral gap, non-linear interactions such as \textit{parametric decay instabilities} (PDI), diffraction effects or power density spectrum fluctuations. 
+%The RF power is coupled by the launcher to the plasma, which means that the electromagnetic waves in the launcher’s waveguides are converted to (mainly) slow waves in the plasma. In the LH range of frequencies (~2 to 8 GHz), the wavelength of the RF waves in the plasma is well below the typical beam size, which itself is smaller than the equilibrium non-uniformity scale. It this situation, the evolution of the waves in the plasma can be described by the \emph{ray-tracing} formalism. Since the evolution of the electron population can be described with Fokker-Planck calculation, the combination of the both tools is standard for modelling LHCD experiments\sidecite{bonoli1982, peysson2012}.
+%
+%As said before, the LHCD launcher is a phased array of waveguide which excites a slow plasma wave. The following calculations taken from current drive theory illustrate the basic requirements of the LHCD launcher in order to optimize the current drive efficiency. 
+%
+%In the plasma, the incremental current $\Delta j$ carried by an electron of electrical charge $q=-e$ and accelerated from a parallel velocity $v_\parallel$ to $v_\parallel + \Delta v_\parallel$ is:
+%$$\Delta j = q \Delta v_{\parallel}$$
+%
+%The incremental increase of kinetic energy is:
+%$$\Delta E = m v_{\parallel} \Delta v_{\parallel}$$
+%
+%Eliminating $\Delta v_{\parallel}$ leads to an incremental current: 
+%$$\Delta j = \Delta E \; q/(m v_{\parallel})$$ 
+%
+%Let $\nu_\mathrm{coll}$ be the Coulomb collisional frequency. At first order \footnote{Rigourously, the mathematical tool for a complete description of multiple scattering processes in the velocity-space is the Boltzman equation. The collision term modelling the multiple particles Coulomb collisions in this equation can be modelled by a collision term of the Fokker-Planck type.} the incremental energy input $\Delta E$ persists for a time $1/\nu_\mathrm{coll}$. The associated (steady-state) RF input power $\Delta P$ required is thus: 
+%$$\Delta P = \nu_\mathrm{coll} \Delta E$$ 
+%
+%From the two previous equations, the ratio of the incremental current to the RF input power is:
+%$$\Delta j/ \Delta P = q / (m \nu_\mathrm{coll} v_{\parallel})$$
+%
+%This suggests that more current can be driven with low parallel velocity electrons. However, fast electrons collide less often than slower, as the Coulomb collision cross section falls off with increasing relative velocity as $\nu_\mathrm{coll} \propto n_e/v_{\parallel}^3$ (for parallel velocity larger than the thermal velocity). It follows that the previous ratio is proportional to: 
+%
+%$$\Delta j/ \Delta P \propto (v_{\parallel}^2 q) / (m n_e)$$
+%
+%this means that high current drive efficiency can be reached from fast electrons. Thus, it is actually more effective to push fast electrons than slower. Even if it may be energetically more expensive to accelerate fast electrons, this energy deposition need occurs less often because current last longer when carried by relatively less collisional electrons \sidecite{fisch1987}. 
+%
+%For the purpose of current drive with LH waves, the Landau damping is the dominant absorption mechanism. Landau damping is a collision-less damping process in which particles exchange energy with waves travelling with the nearly same phase velocity parallel to the magnetic field, that is, for particle parallel velocity $v_{\parallel}$ satisfying resonant condition:
+%
+%$$\omega – k_{\parallel} v_{\parallel} = 0 $$ 
+%
+%where $k_{\parallel}=k_0 n_{\parallel}$ is the parallel wavenumber of the wave, $n_{\parallel}$ the parallel index of refraction and $k_0= \omega/c$ the wavenumber in vacuum. From the previous relation one deduces that the LHCD launcher must excite waves satisfying the resonant condition $v_{\parallel}=c/n_{\parallel}$. As for the slow wave to be able to penetrate into the plasma the parallel index must be greater than one and also greater to $|n_{\parallel \mathrm{access}}|$, typical LHCD launchers in current tokamaks excite a main parallel index between $n_{\parallel 0}$=1.5 to 3.0. 
+%
+%However, in many past and present LHCD experiments, the resonant velocity $v_{\parallel 0}=c/n_{\parallel 0}$ corresponds to supra thermal region where the number of electrons should be in principle too small for any significant wave damping to take place and to account for the observed current drive. Indeed, strong wave damping on a Maxwellian distribution with temperature $T$ requires the wave damping to be no larger than four times the thermal velocity $v_T=\sqrt{k T/m}$. This paradox is commonly referred to as the \emph{spectral gap} problem and is an active area of research. Various explanations are proposed to explain this spectral gap, among these the toroidal effects on the wave propagation that can cause sufficient up-shift (increase of the parallel wavenumber) in the parallel refraction index $n_{\parallel}$ to “fill” the spectral gap, non-linear interactions such as \textit{parametric decay instabilities} (PDI), diffraction effects or power density spectrum fluctuations. 
 
 
 
@@ -712,7 +817,12 @@ Finally, using (\ref{eq:linear_system_matrix}), one finds:
 where $\mathbb{I}$ is the unit matrix.
 
 \subsection{Antenna power spectrum}
-An important feature of LH antennas is the radiated power spectral density $dp$ that can be computed from the Poynting vector: \begin{equation} dp\left(n_{y},n_{z}\right)=\Re\left\{ \frac{k_{0}^{2}}{4\pi^{2}}\left[\tilde{\mathbf{E}}\left(n_{y},n_{z}\right)\times\mathbf{\tilde{H}^{*}}\left(n_{y},n_{z}\right)\cdot\widehat{x}\right]\right\} \label{eq:power_spectrum_2D}
+An important feature of LH antennas is the radiated power spectral density $dp$ that can be computed from the Poynting vector: 
+\begin{equation} 
+\diff p
+\left(n_{y},n_{z}\right)
+=\Re\left\{ \frac{k_{0}^{2}}{4\pi^{2}}\left[\tilde{\mathbf{E}}\left(n_{y},n_{z}\right)\times\mathbf{\tilde{H}^{*}}\left(n_{y},n_{z}\right)\cdot\widehat{x}\right]\right\} 
+\label{eq:power_spectrum_2D}
 \end{equation}
 According to previous equations, this power density can be evaluated once the power waves $\mathbf{a},\mathbf{b}$ for each waveguides have been calculated. In order to compare 1D and 2D modelling, it is possible to define a 1D spectrum $dp_{z}$ that integrates the contribution of all the $n_{y}$ for a given $n_{z}$:
 \begin{equation}
@@ -743,24 +853,24 @@ The 1D approach is of great interest in spite of the approximations made. Indeed
 
 \subsubsection{Several layers model}\label{sec_several_layers_model}
 
-In a tokamak plasma, the density profile of the scrape-off layer in which the LH antenna radiates may be perturbed by the antenna side limiters or other protruding objects such as other antennas. Thus, the modeling of the electron density by a single linear profile is not deeply realistic and experiments shows that the density decay length -- which can be approximated in a first order by $\lambda=n_{e}/\nabla n_{e}$ \sidecite[+0.5cm]{wesson1999} -- is millimetric in front of the grill and centimetric further \sidecite{leuterer1991}. Consequently, it seems natural to describe the electron density profile using several layers with different values of $\nabla n_{e}$.
+In a tokamak plasma, the density profile of the scrape-off layer in which the LH antenna radiates may be perturbed by the antenna side limiters or other protruding objects such as other antennas. Thus, the modeling of the electron density by a single linear profile is not deeply realistic and experiments shows that the density decay length -- which can be approximated in a first order by $\lambda=n_{e}/\nabla n_{e}$ \sidecite[-0.5cm]{wesson1999} -- is millimetric in front of the grill and centimetric further \sidecite{leuterer1991}. Consequently, it seems natural to describe the electron density profile using several layers with different values of $\nabla n_{e}$.
 
 \begin{marginfigure}
-	\begin{centering}
-		\includegraphics[width=1.0\textwidth]{figures/chap2/ALOHA/figure3}
-		\par\end{centering}
-	
+	\includegraphics[width=1.0\textwidth]{figures/chap2/ALOHA/figure3}
 	\caption{Description of the electronic density profile by two linear profiles
 		in front of an antenna. $x=0$ coincides with the position of the
 		mouth of the grill.\label{fig:Electron-density-profile} }
-	
 \end{marginfigure}
 
 In ALOHA, it is possible to model the plasma density profile by one or two density gradients. The first layer is characterized by a density gradient $\nabla n_{e1}$ and a thickness $d$; the second layer is characterized by a density gradient $\nabla n_{e2}$ of infinite extent, as illustrated in figure \ref{fig:Electron-density-profile}: 
 \begin{equation}
-\left\{ \begin{array}{ll}
-n_{e}\left(x\right)=n_{e0}+\nabla n_{e1}\, x & 0\leq x\leq d\\
-n_{e}\left(x\right)=n_{ed}+\nabla n_{e2}\,\left(x-d\right) & x>d\end{array}\right.\label{eq:density_profile}
+\left\{ 
+\begin{array}{ll}
+n_{e}\left(x\right)=n_{e0}+\nabla n_{e1}\, x & \mbox{for } 0\leq x\leq d\\
+n_{e}\left(x\right)=n_{ed}+\nabla n_{e2}\,\left(x-d\right) & \mbox{for }  x>d
+\end{array}
+\right.
+\label{eq:density_profile}
 \end{equation}
 
 where $n_{ed}=n_{e0}+\nabla n_{e1}\, d$.
@@ -797,14 +907,10 @@ which is the density range of interest for this work.
 
 %
 \begin{figure}[h]
-	\begin{centering}
-		\includegraphics[width=1.0\textwidth]{figures/chap2/ALOHA/figure5}
-		\par\end{centering}
-	
+	\includegraphics[width=1.0\textwidth]{figures/chap2/ALOHA/figure5}
 	\caption{Computation time versus total number of modes for a simple antenna
 		made of 8 waveguides and for the C3 antenna. The dashed lines are
 		quadratic fit in $N_{\mbox{modes}}^{2}$. \label{fig:Computation-time-versus-modes}}
-	
 \end{figure}
 
 
@@ -986,12 +1092,12 @@ The Figure~\ref{fig:LH_fied_spectrum} illustrate the benchmark with the ALOHA co
 	\label{fig:LH_fied_spectrum}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure*}[h]
 	\centering
 	\includegraphics[width=0.98\linewidth]{figures/chap2/LHCD/LH_RC_vs_NeOverNc}
 	\caption{Reflection Coefficient (RC) as calculated by ALOHA and HFSS versus the edge density   ($n_e/n_c$) with  $\lambda_n$=1~cm, $d_\mathrm{gap}$=2~mm vacuum gap.}
 	\label{fig:LH_RC_vs_NeOverNc}
-\end{figure}
+\end{figure*}
 
 \subsection{ICRF Coupling}
 In the Ion Cyclotron range of frequencies (30-60~MHz) for magnetic field in the Tesla range, the relative dielectric permittivity parameter $P$ in Eq.(\ref{eq:stix_tensor}) ranges from $-10^3$ to $-10^5$. Properly mesh the problem requires a node distance of the order of thousandth the wavelength in vacuum. In a domain size of the order of the wavelength, it makes the numerical problem hard to solve on desktop computers. If only the coupling to the fast wave is of interest, the mesh size can be forced to not be smaller than a fraction of the wavelength is the plasma $\lambda_0/\sqrt{\max(|S|, |D|)}$ where $\lambda_0$ if the  wavelength in vacuum. 
