@@ -572,17 +572,18 @@ In order for the RF power to reach the plasma core, the excited waves by a LHCD 
 	\item  A \emph{cut-off condition}: the electron density in front of the launcher must be close or higher than the slow-wave electron \emph{cut-off density}, given by Eq.(\ref{eq:lh_cutoff_density}), which increases as the square of the source frequency. 
 	\item A propagation condition: in order for the Slow and fast waves in the LHRF to propagate into the magnetized plasma, from Eqs.(\ref{eq:n_perp_square_LHRF}) excited waves must have an absolute value of the parallel index greater than one, i.e. $|n_{\parallel}|>1$ 
 	\item An accessibility condition: in order for the slow waves accessing the plasma core to not be mode-converted into fast waves, a minimum value of $n_{\parallel}$ for a given plasma density and magnetic field is requested\sidecite{golant1972}:
-	$$
+	\begin{equation}
 	|n_{\parallel} |>| n_{\parallel \mathrm{access}} | 
 	\approx 
 	\sqrt{1 
 		- \frac{\omega_{pi}^2}{\omega^2} 
 		+ \frac{\omega_{pe}^2}{\omega_{ce}^2}}
 	+ \frac{\omega_{pe} }{| \omega_{ce} |}
-	$$ 
-	When the accessibility condition is satisfied, the slow and the fast branch of the dispersion relation are separated and the LH waves can reach the core plasma. Inversely, for a given $n_{\parallel}$, the previous condition leads to an upper limit for the density (inside the plasma), above which the wave can’t propagate.
+	\label{eq:accessibilit_condition_LH}
+	\end{equation}
 \end{itemize}
 
+When the accessibility condition is satisfied, the slow and the fast branch of the dispersion relation are separated and the LH waves can reach the core plasma. Inversely, for a given $n_{\parallel}$, the previous condition leads to an upper limit for the density (inside the plasma), above which the wave can’t propagate.
 
 % ###################################################
 % ###################################################
