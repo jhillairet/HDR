@@ -1085,21 +1085,25 @@ where $\lambda_n$ is the density scrape-off length and $d_\mathrm{gap}$ the vacu
 
 The Figure~\ref{fig:LH_fied_spectrum} illustrate the benchmark with the ALOHA code on the electric field and the power density spectrum calculated from the Fourier transform of the electric and magnetic fields at the mouth of the LHRF antenna. The maximum electric field in HFSS is in general lower than in ALOHA because of the smoothing effect of the mesh. The average value is however of the same order. The average Reflection Coefficient (RC) calculated from HFSS matches well ALOHA's calculations when the edge density is higher than the cut-off density (Figure \ref{fig:LH_RC_vs_NeOverNc}). Looking in details, waveguide per waveguide, HFSS results have a reduced RC amplitude  excursion than ALOHA's.  
 
-\begin{figure}[h]
+\begin{figure*}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{figures/chap2/LHCD/LH_HFSS_vs_ALOHA_Ez}\\
-	\includegraphics[width=0.8\linewidth]{figures/chap2/LHCD/LH_HFSS_vs_ALOHA_spectrum}
+	\includegraphics[width=0.45\linewidth]{figures/chap2/LHCD/LH_HFSS_vs_ALOHA_Ez}
+	\includegraphics[width=0.45\linewidth]{figures/chap2/LHCD/LH_HFSS_vs_ALOHA_spectrum}
 	\caption{Example of comparison between ALOHA and HFSS ($n_e = 2n_c$ , $\lambda_n=1$ cm, 1 mm vacuum gap).  Top: toroidal component of the electric field at the mouth of the antenna. Bottom: Power density spectrum excited by the antenna.}
 	\label{fig:LH_fied_spectrum}
-\end{figure}
+\end{figure*}
 
 \begin{figure*}[h]
 	\centering
-	\includegraphics[width=0.98\linewidth]{figures/chap2/LHCD/LH_RC_vs_NeOverNc}
+	\includegraphics[width=0.9\linewidth]{figures/chap2/LHCD/LH_RC_vs_NeOverNc}
 	\caption{Reflection Coefficient (RC) as calculated by ALOHA and HFSS versus the edge density   ($n_e/n_c$) with  $\lambda_n$=1~cm, $d_\mathrm{gap}$=2~mm vacuum gap.}
 	\label{fig:LH_RC_vs_NeOverNc}
 \end{figure*}
 
+
+\clearpage
+% ########################################
+% ########################################
 \subsection{ICRF Coupling}
 In the Ion Cyclotron range of frequencies (30-60~MHz) for magnetic field in the Tesla range, the relative dielectric permittivity parameter $P$ in Eq.(\ref{eq:stix_tensor}) ranges from $-10^3$ to $-10^5$. Properly mesh the problem requires a node distance of the order of thousandth the wavelength in vacuum. In a domain size of the order of the wavelength, it makes the numerical problem hard to solve on desktop computers. If only the coupling to the fast wave is of interest, the mesh size can be forced to not be smaller than a fraction of the wavelength is the plasma $\lambda_0/\sqrt{\max(|S|, |D|)}$ where $\lambda_0$ if the  wavelength in vacuum. 
 
