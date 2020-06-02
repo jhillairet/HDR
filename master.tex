@@ -240,8 +240,15 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 	%----------------------------------------------------------------------------------------
 	%	RESUME
 	%----------------------------------------------------------------------------------------
-	
+	%\pagelayout{wide} % No margins
+	%	\addpart{intro}
+	% French Summary
 	\input{tex/resume.tex}
+	
+	% English Summary
+	\input{tex/intro.tex}
+	
+	%\pagelayout{margin} % Restore margins
 	
 	%----------------------------------------------------------------------------------------
 	%	TABLE OF CONTENTS & LIST OF FIGURES/TABLES
@@ -275,14 +282,6 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 	%----------------------------------------------------------------------------------------
 	
 	\mainmatter % Denotes the start of the main document content, resets page numbering and uses arabic numbers
-	
-	% Summary
-	\input{tex/intro.tex}
-	
-%	 % Page avec titre seul
-%	\pagelayout{wide} % No margins
-%	\addpart{intro}
-%	\pagelayout{margin} % Restore margins
 	
 	% Fusion and tokamak
 	\input{tex/chap1.tex}
