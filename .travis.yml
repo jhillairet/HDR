@@ -25,7 +25,8 @@ script:
   # Expect error until the last command (from Travis to not report error)
   - pdflatex -interaction=nonstopmode master.tex || true
   - biber master || true
-  - pdflatex -interaction=nonstopmode  master.tex || true
+  - pdflatex -interaction=nonstopmode master.tex || true
+  - pdflatex -interaction=nonstopmode master.tex || true  
   - pdflatex -interaction=nonstopmode master.tex # Compile twice to fix references
 
 ## Uncomment the following lines to see the packages installed in travis
