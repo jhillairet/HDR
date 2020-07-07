@@ -5,16 +5,16 @@
 \label{chap:rf_coupling}
 
 
-This chapter aims to give the key elements in order to derive the optimum characteristics for RF plasma heating or current drive antennas. The section \ref{sec:waves-in-plasma} recall the necessary elements to characterize the propagation medium, in particular the kind of cold plasma wave modes that can propagate in the plasma as a response to a given RF excitation. The sections \ref{sec:icrh} and \ref{sec:lhcd} focuses on the specific ICRH and LHCD range of frequencies. 
+This chapter aims to give the key elements in order to derive the optimum characteristics for RF plasma heating or current drive antennas. The section \ref{sec:waves-in-plasma} recall the necessary elements to characterize the propagation medium, in particular the kind of cold plasma wave modes that can propagate in the plasma as a response to a given RF excitation. The subsections \ref{sec:icrh} and \ref{sec:lhcd} focuses on the specific ICRH and LHCD range of frequencies. 
 
-Many antenna-plasma coupling models have been developed and most rely on a "slab" approximation which consists in assuming uniformity in the toroidal and poloidal directions while imposing a radiation boundary condition in the radial direction. While much of the essential physics of the coupling at the plasma–antenna interface can be elucidated using this slab approximation, real-life experiments presents additional problems since plasma is not homogeneous, antenna geometries can be complex, images currents are induced on the passive conducting elements surrounding the antenna and antennas excitation is not perfect. Thus, plasma response and wave fields must be solved with more refinements, treating the antenna geometry as accurately as possible. Antenna-plasma coupling is still a topic of continued research interest and some contributions are presented in Section~\ref{sec:ALOHA}, \ref{sec:LHCD_FW_antena_coupling} and \ref{sec:ICRH_FW_antena_coupling}.
+Many antenna-plasma coupling models have been developed and most rely on a "slab" approximation which consists in assuming uniformity in the toroidal and poloidal directions while imposing a radiation boundary condition in the radial direction. While much of the essential physics of the coupling at the plasma–antenna interface can be elucidated using this slab approximation, real-life experiments presents additional problems since plasma is not homogeneous, antenna geometries are not flat, images currents are induced on the passive conducting elements surrounding the antenna and antennas excitation is not perfect. Thus, plasma response and wave fields must be solved with more refinements, treating the antenna geometry as accurately as possible. Antenna-plasma coupling is still a topic of continued research interest and some contributions are presented in Section~\ref{sec:ALOHA}, \ref{sec:LHCD_FW_antena_coupling}.
 
 
 \section{RF Waves In Plasma}\label{sec:waves-in-plasma}
 This section is a reminder of the basic properties of wave propagation in a magnetized plasma. In-depth treatment and derivations of the results given in this section can be found in the standards physics oriented textbooks \sidecite{stix1992, Brambilla1998, Swanson2003, Cairns1991, Golant1989}. 
 
 \subsection{Maxwell Equations in Time Harmonic Regime}
-We shall start the Maxwell equations in terms of vector fields in three dimensions, before recasting them to fit our needs. The usual electromagnetic field quantities are expressed following the terminology used in \citeauthyear{Harrington2001}:
+We start with the Maxwell equations in terms of vector fields in three dimensions, before recasting them to fit our needs. The usual electromagnetic field quantities are expressed following the terminology used in \citeauthyear{Harrington2001}:
 \begin{itemize}
 	\item $\boldsymbol{\mathcal{E}}$: the electric field intensity (in $\si{V/m}$)
 	\item $\boldsymbol{\mathcal{H}}$: the magnetic field intensity (in $\si{A/m}$)
@@ -35,7 +35,7 @@ where all quantities are function of space and time, e.g. $\boldsymbol{\mathcal{
 \end{subequations} 
 
 
-The previous expressions are non-linear by nature. In order to make further understanding of the plasma waves, we will limit our analysis to a stationary and an homogeneous plasma. Moreover, we will assume that Radio-Frequency source time excitation varies sinusoidally in time with a single frequency. Such case of time varying electromagnetic fields is referred as time-harmonic  \sidecite{Harrington2001} and the analysis of fields quantities $\boldsymbol{\mathcal{A}}$ can be simplified by using complex quantities $\Abf$\footnote{The choice of the time sign convention $+j\omega t$ is motivated to match the one adopted in most RF solvers, commercial or the ones developed in this work, which is most prevalent in electrical engineering texts. Note that in general, waves in plasma texts use the opposite sign convention, ie. $e^{-i\omega t}$\cite{bradley2007, michelsen2019}. While both conventions are mathematically valid, the use of $exp(–j\omega t)$ can be preferable when dealing with the principal value of complex number square roots, which does not require numerical tricks as the ones defined for example in \cite{Hillairet2007a}. Using $j=-i$ allows one to convert results from one convention to the other.}:
+The previous expressions are non-linear by nature. In order to make further understanding of the plasma waves, we will limit our analysis to a stationary and an homogeneous plasma. Moreover, we will assume that Radio-Frequency source time excitation varies sinusoidally in time with a single frequency. Such case of time varying electromagnetic fields is referred as time-harmonic  \sidecite{Harrington2001} and the analysis of fields quantities $\boldsymbol{\mathcal{A}}$ can be simplified by using complex quantities $\Abf$\footnote{The choice of the time sign convention $+j\omega t$ is motivated to match the one adopted in most RF solvers, commercial or the ones developed in this work, which is most prevalent in electrical engineering texts. Note that in general, waves in plasma texts use the opposite sign convention, ie. $e^{-i\omega t}$\cite{bradley2007, michelsen2019}. While both conventions are mathematically valid, the use of $\exp(-j\omega t)$ can be preferable when dealing with the principal value of complex number square roots, which does not require numerical tricks as the ones defined for example in \cite{Hillairet2007a}. Using $j=-i$ allows one to convert results from one convention to the other.}:
 \marginnote{We will adopt $j$ as the complex unit, ie. $j^2=-1$.}
 \begin{equation}
 \boldsymbol{\mathcal{A}}(\rbf,t) 
@@ -128,7 +128,7 @@ A magnetized plasma can be considered as an anisotropic medium for electromagnet
 	\end{align}
 	\label{eq:k-omegaDispersionRelation}
 \end{subequations}%
-where $\boldsymbol{\varepsilon}$, $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$ are the dielectric, the permeability and the conductivity tensors respectively, which can be interpreted as 3x3 matrices \sidecite{Swanson2003}. We also define $\mu_0=4\pi\times10^7~\si{H/m}$ the vacuum magnetic permeability and $\varepsilon_0=1/(\mu_0 c^2)~\si{F/m}$ the vacuum dielectric permittivity with $c$ the speed of light. With the supplementary assumption that the medium is non-magnetic (i.e. $\boldsymbol{\mu}=\mu_0$), Maxwell equations (\ref{eq:k-omegaMaxwellEquations}) reads\marginnote{The $(\kbf,\omega)$ dependence is assumed implicitly from now for the ease of reading.}:
+where $\boldsymbol{\varepsilon}$, $\boldsymbol{\mu}$ and $\boldsymbol{\sigma}$ are the dielectric, the permeability and the conductivity tensors respectively, which can be interpreted as 3x3 matrices \sidecite{Swanson2003}. We also define $\mu_0=4\pi\times10^7~[\si{H/m}]$ the vacuum magnetic permeability and $\varepsilon_0=1/(\mu_0 c^2)~[\si{F/m}]$ the vacuum dielectric permittivity with $c$ the speed of light. With the supplementary assumption that the medium is non-magnetic (i.e. $\boldsymbol{\mu}=\mu_0$), Maxwell equations (\ref{eq:k-omegaMaxwellEquations}) reads\marginnote{The $(\kbf,\omega)$ dependence is assumed implicitly from now for the ease of reading.}:
 \begin{subequations}
 	\begin{align}
 		\kbf \times \Ebf  
@@ -265,7 +265,7 @@ where $n_s$ is the density, $m_s$ the mass\sidenote{The mass of the species $m_s
 	\label{fig:sdpvsfnfixedbfixed}
 \end{figure*}
 
-The form of Eq.(\ref{eq:stix_K}) is a consequence of the fact that the cold plasma is a gyrotropic media. Gyrotropic media are characterized by their invariance under any rotation about the direction of anisotropy~\cite{Mackay2010}, in our case the direction of the magnetic field $\Bbf_0/B_0=\mathbf{z}$. Hence, this tensor can be equivalently re-expressed into a rotation frame $(\mathbf{u}_{+}, \mathbf{u}_{-},  \mathbf{z})$, with $\mathbf{u}_{\pm}=(\mathbf{x}\pm \mathbf{y})/\sqrt{2}$:  
+The form of Eq.(\ref{eq:stix_K}) is a consequence of the fact that the cold plasma is a gyrotropic media. Gyrotropic media are characterized by their invariance under any rotation about the direction of anisotropy~\sidecite{Mackay2010}, in our case the direction of the magnetic field $\Bbf_0/B_0=\mathbf{z}$. Hence, this tensor can be equivalently re-expressed into a rotation frame $(\mathbf{u}_{+}, \mathbf{u}_{-},  \mathbf{z})$, with $\mathbf{u}_{\pm}=(\mathbf{x}\pm \mathbf{y})/\sqrt{2}$:  
 \begin{equation}
 \Kbf(\omega)
 =
@@ -318,7 +318,7 @@ E_{z}
 \label{eq:relation_disp_matr_froid}
 \end{equation}
 
-The wavenumber spectrum in the toroidal and poloidal direction is imposed by the geometry and the RF amplitude and phase excitation of the antenna. The parallel direction is defined as the direction of the total confining magnetic field $\Bbf_0$. We define the \textit{parallel index} $n_\parallel$ as $n_\parallel = \mathbf{n}\cdot\Bbf_0/B_0$. We have in addition $n_{\parallel}=n_{z}$ from the frame we have defined above. The perpendicular direction is thus $n_{\perp}^{2}=n_{x}^{2}=n^{2}-n_{\parallel}^{2}$ and oriented along $\mathbf{x}$. The perpendicular index in the radial direction is then deduced from the dispersion relation, which With these notations reads to:
+The parallel direction is defined as the direction of the total confining magnetic field $\Bbf_0$. We define the \textit{parallel index} $n_\parallel$ as $n_\parallel = \mathbf{n}\cdot\Bbf_0/B_0$. We have in addition $n_{\parallel}=n_{z}$ from the frame we have defined above. The perpendicular direction is thus $n_{\perp}^{2}=n_{x}^{2}=n^{2}-n_{\parallel}^{2}$ and oriented along $\mathbf{x}$. The wavenumber spectrum in the toroidal and poloidal direction is imposed by the geometry and the RF amplitude and phase excitation of the antenna. The perpendicular index in the radial direction is then deduced from the dispersion relation, which with these notations reads to:
 \begin{marginlisting}
 Convenient \texttt{SymPy} script to obtain this result:
 \begin{lstlisting}[language=Python, basicstyle=\tiny]
@@ -348,14 +348,14 @@ with\marginnote[+3cm]{Where we have used $S^{2}-D^{2}=RL$.}\sidenote{NB: some si
 		\label{eq:cold_plasma_dispersion_relation_n_perp_ABC}
 \end{subequations}
 
-As $S$, $D$ and $P$ do not depend on $\kbf$, Eq.(\ref{eq:cold_plasma_dispersion_relation_n_perp}) is a simple quadratic equation for $n_\perp^2$, which gives two solutions:
+As $S$, $D$ and $P$ do not depend on $\mathbf{n}$, Eq.(\ref{eq:cold_plasma_dispersion_relation_n_perp}) is a simple quadratic equation for $n_\perp^2$, which gives two solutions:
 \begin{equation}
 	n_\perp^2 
 	=
 	\frac{-B \pm  \sqrt{B^2 - 4AC}}{2A}
 	\label{eq:nperp_solution_general}
 \end{equation}
-As the discriminant $B^2 - 4AC$ can be proven to be always positive,there are two modes of plasma waves in the plasma, named \textit{Fast} and \textit{Slow} wave modes, which comes from that the fast wave has a higher phase velocity than the slow wave. Depending on the sign of the $n_\perp^2$ solution, these waves will be either propagating ($n_\perp^2>0$) or evanescent ($n_\perp^2<0$). As seen in next sections, evanescent modes play an important role in the antenna region, in particular for coupling calculations. The antenna region is outside of the confined plasma, where the magnetic field line are open, and is called the \textit{scrap-off layer} (SOL). 
+As the discriminant $B^2 - 4AC$ can be proven to be always positive,there are two modes of plasma waves in the plasma, named \textit{Fast} and \textit{Slow} wave modes, which comes from that the fast wave has a higher phase velocity than the slow wave. Depending on the sign of the $n_\perp^2$ solution, these waves will be either propagating ($n_\perp^2>0$) or evanescent ($n_\perp^2<0$). As seen in next sections, evanescent modes play an important role in the antenna region, in particular for coupling calculations. The antenna region is outside of the confined plasma, where the magnetic field line are open, which is called the \textit{scrap-off layer} (SOL). 
 
 
 For certain values of the parameters, $n_\perp^2$ goes to zero or infinity, called \textit{cut-off} ($n_\perp^2 = 0$) or \textit{resonances} ($n_\perp^2\to\infty$) respectively \sidecite{Allis2003}. It is also possible that the two waves coalesce in a single mode, when the discriminant is zero. 
@@ -364,9 +364,13 @@ For certain values of the parameters, $n_\perp^2$ goes to zero or infinity, call
 %	P = 0 \mbox{ or } R = 0 \mbox{ or } L= 0
 %\end{equation}
 
-Much of the essential physics of the wave propagation in tokamak magnetized plasma can be understood using this simplified (slab) geometry. However, so far, we have assumed that the plasma was homogenous in order to deal with the plane wave expansion of the electromagnetic quantities in the $(\kbf,\omega)$ domain, while it is not the case as the density and magnetic field increase as we move away from the antenna. The hypothesis that the plasma is homogeneous is similar than assuming that phenomena take place on space scale $\Delta r$ much larger than the RF wavelength. This criteria would be fulfilled if:
+Much of the essential physics of the wave propagation in tokamak magnetized plasma can be understood using this simplified (slab) geometry. However, so far, we have assumed that the plasma was homogenous in order to use a plane wave expansion of the electromagnetic quantities in the $(\kbf,\omega)$ domain. however, it is not the case in reality as the density and magnetic field increase as we move away from the antenna. The hypothesis that the plasma is homogeneous is similar than assuming that phenomena take place on space scale $\Delta r$ much larger than the RF wavelength. This criteria would be fulfilled if:
 \begin{equation}
-	\Delta r \gg \max\lambda= \max \frac{\lambda_0}{\sqrt{\min \varepsilon_{r}}}\frac{\lambda_0}{\sqrt{\min\left(|S|,|D|,|P|\right)}}
+	\Delta r \gg \max\lambda 
+	= 
+	\max \frac{\lambda_0}{\sqrt{\min \varepsilon_{r}}}
+	=
+	\frac{\lambda_0}{\sqrt{\min\left(|S|,|D|,|P|\right)}}
 \end{equation}
 
 
@@ -379,11 +383,11 @@ Much of the essential physics of the wave propagation in tokamak magnetized plas
 % ###################################################
 % ###################################################
 \subsection{Ion Cyclotron Range of Frequencies}\label{sec:icrh}
-Plasma heating of a Tokamak plasma by wave coupling in the Ion Cyclotron Range of Frequencies (ICRF) requires injection waves at a frequency $\omega$ in order to satisfy somewhere in the plasma the resonance condition\sidecite{adam1987}:
+Plasma heating of a tokamak plasma by wave coupling in the Ion Cyclotron Range of Frequencies (ICRF) requires injecting waves at a frequency $\omega$ in order to satisfy somewhere in the plasma the resonance condition\sidecite{adam1987}:
 \begin{equation}
 	\omega - p \Omega_c - k_\parallel v_{\parallel,i} = 0
 \end{equation}
-where $p$ is the cyclotron harmonic number, $\Omega_c$ the minority ion cyclotron angular frequency and $v_{\parallel,i}$ the parallel component of the minority ion velocity. In present tokamaks, the desired RF frequency band is around 30-70W~\si{MHz}. In this range of frequency we have the ordering $\omega \ll \omega_{pe},\Omega_{ce}$ which allows to simplify a bit the previous equation. In such case, Eqs.(\ref{eq:stix_SDP}) can be further simplified for the case of a single ion species plasma to:
+where $p$ is the cyclotron harmonic number, $\Omega_c$ the minority ion cyclotron angular frequency and $v_{\parallel,i}$ the parallel component of the minority ion velocity. In present tokamaks, the desired RF frequency band is around 30-70~\si{MHz}. Typical values of parameters $S$, $D$ and $P$ are illustrated in Figure~\ref{fig:icsdp}. In this range of frequency we have the ordering $\omega \ll \omega_{pe},\Omega_{ce}$ which allows to simplify a bit the previous equation. In such case, Eqs.(\ref{eq:stix_SDP}) can be further simplified for the case of a single ion species plasma to:
 \begin{subequations}
 	\begin{eqnarray}
 		S &\approx& \frac{\omega_{i}^2}{\Omega_{i}^2 \left(1 - \omega^2/\Omega_{i}^2 \right)} \ll -1 \\
@@ -420,7 +424,7 @@ where the subscript $_F$ and $_S$ stands for \textit{Fast} and \textit{Slow} wav
 \begin{figure*}[h]
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/chap2/n_perp_square_vs_ne_ICRF}
-	\caption{Perpendicular index $n_\perp^2$ from Eqs.(\ref{eq:nperp_solution_general}) (or Eqs.(\ref{eq:n_perp_square_approx_ICRF})) for Slow and fast waves for the typical range of electron density $n_e$ found in front of tokamak ICRF antenna ($f=50\,\si{MHz}$, $B_0=3\,\si{T}$). As antennas radiate a continuous spectrum of parallel indexes $n_\parallel$, low and high values are indicated.}
+	\caption{Perpendicular index $n_\perp^2$ from Eqs.(\ref{eq:nperp_solution_general}) (or Eqs.(\ref{eq:n_perp_square_approx_ICRF})) for Slow and Fast waves for the typical range of electron density $n_e$ found in front of tokamak ICRF antenna ($f=50\,\si{MHz}$, $B_0=3\,\si{T}$). As antennas radiate a continuous spectrum of parallel indexes $n_\parallel$, low and high values are indicated.}
 	\label{fig:nperpsquarevsne_ICRF}
 \end{figure*}
 
@@ -500,7 +504,7 @@ The scaling of $R_c$ for an increasing electron density with a gradient length $
 \end{equation}
 where $\nu$ is a constant constant representing the plasma density and its gradient and $\left< k_\parallel \right>$ a characteristic factor depending on an integration over the radiated spectrum by the antenna.  On Tore Supra, this scaling has been shown to be\sidecite{clairet2004}:
 \begin{equation}
-R_c \propto exp\left(- 2 \left< k_\parallel \right> d_{\mathrm{sco}} \right)
+R_c \propto \exp\left(- 2 \left< k_\parallel \right> d_{\mathrm{sco}} \right)
 \end{equation}
 where $d_{\mathrm{sco}}$ is the distance from the antenna straps to the density cut-off location. 
 %KSTAR \sidecite{bae2003-1, wang2010}
@@ -580,8 +584,8 @@ In order for the RF power to reach the plasma core, the excited waves by a LHCD 
 
 \begin{itemize}
 	\item  A \emph{cut-off condition}: the electron density in front of the launcher must be close or higher than the slow-wave electron \emph{cut-off density}, given by Eq.(\ref{eq:lh_cutoff_density}), which increases as the square of the source frequency. 
-	\item A propagation condition: in order for the Slow and fast waves in the LHRF to propagate into the magnetized plasma, from Eqs.(\ref{eq:n_perp_square_LHRF}) excited waves must have an absolute value of the parallel index greater than one, i.e. $|n_{\parallel}|>1$ 
-	\item An accessibility condition: in order for the slow waves accessing the plasma core to not be mode-converted into fast waves, a minimum value of $n_{\parallel}$ for a given plasma density and magnetic field is requested\sidecite{golant1972}:
+	\item A propagation condition: in order for the Slow and Fast waves in the LHRF to propagate into the magnetized plasma, from Eqs.(\ref{eq:n_perp_square_LHRF}) excited waves must have an absolute value of the parallel index greater than one, i.e. $|n_{\parallel}|>1$ 
+	\item An accessibility condition: in order for the Slow waves accessing the plasma core to not be mode-converted into Fast waves, a minimum value of $n_{\parallel}$ for a given plasma density and magnetic field is requested\sidecite{golant1972}:
 	\begin{equation}
 	|n_{\parallel} |>| n_{\parallel \mathrm{access}} | 
 	\approx 
@@ -593,39 +597,39 @@ In order for the RF power to reach the plasma core, the excited waves by a LHCD 
 	\end{equation}
 \end{itemize}
 
-When the accessibility condition is satisfied, the slow and the fast branch of the dispersion relation are separated and the LH waves can reach the core plasma. Inversely, for a given $n_{\parallel}$, the previous condition leads to an upper limit for the density (inside the plasma), above which the wave can’t propagate.
+When the accessibility condition is satisfied, the Slow and Fast branches of the dispersion relation are separated and the LH waves can reach the core plasma. Inversely, for a given $n_{\parallel}$, the previous condition leads to an upper limit for the density (inside the plasma), above which the wave can’t propagate.
 
 % ###################################################
 % ###################################################
 \subsubsection{LHRF Antennas Main Figures of Merit}
 There are three important figures of merit to measure the efficiency and
-performance of a LH launcher. The first one is the $\mathbf{k}$-space radiated power spectrum density $\diff p(n_y, n_\parallel)$, defined as the $k$-space Poynting vector\marginnote{Integrating the power spectrum density over the entire $n$-space gives the transmitted power to the plasma.}:
+performance of a LH launcher. The first one is the $\mathbf{k}$-space radiated power spectrum density $ p(n_y, n_\parallel)$, defined as the $k$-space Poynting vector\marginnote{Integrating the power spectrum density over the entire $n$-space gives the transmitted power to the plasma.}:
 \begin{equation} 
-\diff p
+ p
 \left(n_{y},n_{\parallel}\right)
 =\Re\left\{ \frac{k_{0}^{2}}{4\pi^{2}}
 \left[\tilde{\mathbf{E}}
 \left(n_{y},n_{\parallel}\right)
 \times
-\mathbf{\tilde{H}^{*}}\left(n_{y},n_{\parallel}\right)
+\tilde{\mathbf{H}}^{*}\left(n_{y},n_{\parallel}\right)
 \cdot\hat{\xbf}
 \right]
 \right\} 
 \end{equation}
-Since it is often assumed that the plasma is infinite in the $y$ direction (slab model), the main acceptation of the power spectrum density is $\diff p(n_\parallel)$, which corresponds to integrate the contribution of all the $n_{y}$ for a given $n_{\parallel}$:
+Since it is often assumed that the plasma is infinite in the $y$ direction (slab model), the main acceptation of the power spectrum density is $ p(n_\parallel)$, which corresponds to integrate the contribution of all the $n_{y}$ for a given $n_{\parallel}$:
 \begin{equation}
-\diff p\left(n_{\parallel}\right)=\int_{-\infty}^{+\infty}\! \diff p\left(n_{y},n_{\parallel}\right)\, \diff n_y
+ p\left(n_{\parallel}\right)=\int_{-\infty}^{+\infty}\!  p\left(n_{y},n_{\parallel}\right)\, \diff n_y
 \end{equation}
-This quantity represents the amount of power excited by the launcher for each parallel index $n_\parallel$. The relation between this power spectrum and the array excitation is related to the Fourier transform of the electromagnetic field at the plasma-antenna interface.
+This quantity represents the amount of power excited by the launcher for each parallel index $n_\parallel$. % The relation between this power spectrum and the array excitation is related to the Fourier transform of the electromagnetic field at the plasma-antenna interface.
 
-The second one is the ratio of the reflected power (at the mouth or at the end of the launcher) to the input power, named the reflection coefficient $R_C$\sidenote{Which should not be confounded with the coupling resistance defined for ICRF.} and often expressed in percent:
+The second one is the ratio of the reflected power (at the mouth or at the end of the launcher) to the input power, named the reflection coefficient $R_c$\sidenote{Which should not be confounded with the coupling resistance defined for ICRF, nor the contact resistance.} and often expressed in percent:
 \begin{equation}
-	R_C = P_r/P_i
+	R_c = P_r/P_i
 \end{equation} 
 
 The third one is the directivity of the launcher, which is the fraction of the power spectrum over its total power content. It can be viewed as the fraction of the power that goes toward one toroidal direction over the total coupled power. One can define the directivity as:
 \begin{equation}
-D = \frac{\int_{n_\parallel > 0}  \diff p(n_\parallel) \diff n_\parallel}{\int \diff p(n_\parallel) \diff n_\parallel} 
+D = \frac{\int_{n_\parallel > 0}   p(n_\parallel) \diff n_\parallel}{\int  p(n_\parallel) \diff n_\parallel} 
 \end{equation}
 
 Since the wave field at the launcher aperture (and thus the launcher spectrum) depends on both the antenna and the plasma, numerical coupling codes are required to make a self-consistent numerical evaluation of the coupling. Different types of launchers have been developped to balance the sometimes conflicting requirements of experimental flexibility, reduced complexity and thermal constraints. These antennas are discussed in Section~\ref{sec:LHCD_antennas_general}.
@@ -828,21 +832,29 @@ Finally, using (\ref{eq:linear_system_matrix}), one finds:
 where $\mathbb{I}$ is the unit matrix.
 
 \subsection{Antenna power spectrum}
-An important feature of LH antennas is the radiated power spectral density $dp$ that can be computed from the Poynting vector: 
+An important feature of LH antennas is the radiated power spectral density $p$ that can be computed from the Poynting vector: 
 \begin{equation} 
-\diff p
+ p
 \left(n_{y},n_{z}\right)
-=\Re\left\{ \frac{k_{0}^{2}}{4\pi^{2}}\left[\tilde{\mathbf{E}}\left(n_{y},n_{z}\right)\times\mathbf{\tilde{H}^{*}}\left(n_{y},n_{z}\right)\cdot\widehat{x}\right]\right\} 
+=\Re\left\{ \frac{k_{0}^{2}}{4\pi^{2}}\left[\tilde{\mathbf{E}}\left(n_{y},n_{z}\right)\times\tilde{\mathbf{H}}^{*}\left(n_{y},n_{z}\right)\cdot\widehat{x}\right]\right\} 
 \label{eq:power_spectrum_2D}
 \end{equation}
-According to previous equations, this power density can be evaluated once the power waves $\mathbf{a},\mathbf{b}$ for each waveguides have been calculated. In order to compare 1D and 2D modelling, it is possible to define a 1D spectrum $dp_{z}$ that integrates the contribution of all the $n_{y}$ for a given $n_{z}$:
+According to previous equations, this power density can be evaluated once the power waves $\mathbf{a},\mathbf{b}$ for each waveguides have been calculated. In order to compare 1D and 2D modelling, it is possible to define a 1D spectrum $p_{z}$ that integrates the contribution of all the $n_{y}$ for a given $n_{z}$:
 \begin{equation}
-dp_{z}\left(n_{z}\right)=\int_{-\infty}^{+\infty}\! dp\left(n_{y},n_{z}\right)\, dn_{y}\label{eq:power_spectrum_1D}
+p_{z}\left(n_{z}\right)
+=
+\int_{-\infty}^{+\infty}\! 
+p\left(n_{y},n_{z}\right)\, \diff n_{y}
+\label{eq:power_spectrum_1D}
 \end{equation}
 Finally, the power conservation must imply that, neglecting the RF
 losses in the antenna:
 \begin{equation}
-\int\int_{-\infty}^{+\infty}\! dp\left(n_{y},n_{z}\right)\, dn_{y}\, dn_{z}=\sum_{n=1}^{N_{\mbox{module}}}p_{n,\mbox{in}}\left(1-RC_{n}\right)\label{eq:spectrum_power_conservation}
+\int\int_{-\infty}^{+\infty}\! 
+p\left(n_{y},n_{z}\right)\, dn_{y}\, \diff n_{z}
+=
+\sum_{n=1}^{N_{\mbox{module}}}p_{n,\mbox{in}}\left(1-RC_{n}\right)
+\label{eq:spectrum_power_conservation}
 \end{equation}
 where $p_{n,\mbox{in}}$ and $RC_{n}$ are respectively the power incoming from an RF source and the Reflection Coefficient for the n-th module. 
 
@@ -1024,15 +1036,15 @@ S & jD & 0 \\
 \end{equation}
 where the parameters $S$, $D$, $P$ are defined in Eqs.(\ref{eq:stix_SDP}) and depends of the RF frequency, the plasma species and the confining magnetic field. 
 %The range of values taken by the $S, D$ and $P$ parameter for typical operational parameters for ICRF and LHRF is illustrated in Fig.\ref{fig:sdp_vs_density}. 
-A decade ago, antenna to plasma coupling modelling with commercial full-wave tools was not possible unless some severe simplifications, as they used to not support anisotropic and inhomogeneous dielectric media. Moreover, solving such problems requires large computer resources, which were not easily available since recently. Community codes such as {OLGA} \cite{preinhaelter2017} or {ALOHA} \cite{hillairet2010} (Section~\ref{sec:ALOHA}) and {TOPLHA} \cite{milanesio2012} for LHRF and {ANTITER II} \cite{messiaen2011} or {TOPICA} \cite{lancellotti2006} for {ICRF}, were developed specifically for that purpose. While these tools are generally faster than full-wave modelling since they solve part of the problem in the spectral domain, their Doppelgänger is to assume slab plasma and eventually simplified antenna geometries to keep an analytical formulation of the problem. When dealing with detailed and curved antennas, poloidal and toroidal plasma curvatures or wave scattering by plasma inhomogeneities, 3D numerical approaches become mandatory. 
+A decade ago, antenna to plasma coupling modelling with commercial full-wave tools was not possible unless some severe simplifications, as they used to not support anisotropic and inhomogeneous dielectric media. Moreover, solving such problems requires large computer resources, which were not easily available since recently. Community codes such as {OLGA} \sidecite[-2cm]{preinhaelter2017} or {ALOHA} \sidecite[-1.5cm]{hillairet2010} (Section~\ref{sec:ALOHA}) and {TOPLHA} \sidecite[-1cm]{milanesio2012} for LHRF and {ANTITER II} \sidecite{messiaen2011} or {TOPICA} \sidecite[+0.5cm]{lancellotti2006} for {ICRF}, were developed specifically for that purpose. While these tools are generally faster than full-wave modelling since they solve part of the problem in the spectral domain, their Doppelgänger is to assume slab plasma and eventually simplified antenna geometries to keep an analytical formulation of the problem. When dealing with detailed and curved antennas, poloidal and toroidal plasma curvatures or wave scattering by plasma inhomogeneities, 3D numerical approaches become mandatory. 
 
-Regarding coupling performances only, using constant dielectric fast-wave antenna loading has been proved to be a good workaround \cite{messiaen2011-1}. In practice, using high permittivity medium such as (salty) water\cite{messiaen2005} or BaTiO3 solutions\cite{helou2018} are used in laboratory experiments. Hence,  antenna coupling performances have been investigated substituting the plasma load  with a salty water tank in ANSYS HFSS \cite{ravera2012, qin2015} or with BaTiO3 in Microwave CST \cite{bottollier-curtet2011}. Meta-material load had been successfully tested\cite{rustomji2018} for LHRF coupling measurements at low power. 
+Regarding coupling performances only, using constant dielectric fast-wave antenna loading has been proved to be a good workaround \sidecite{messiaen2011-1}. In practice, using high permittivity medium such as (salty) water\sidecite{messiaen2005} or BaTiO3 solutions\sidecite{helou2018} are used in laboratory experiments. Hence,  antenna coupling performances have been investigated substituting the plasma load  with a salty water tank in ANSYS HFSS \sidecite{ravera2012, qin2015} or with BaTiO3 in Microwave CST \sidecite[+0.5cm]{bottollier-curtet2011}. Meta-material load had been successfully tested\sidecite[+1cm]{rustomji2018} for LHRF coupling measurements at low power. 
 
 However, using constant dielectric as radiation medium can't reproduce neither the inhomogeneity produced by increasing density in operational conditions or the medium gyrotropy and anisotropy effects on antenna loading. If these effect are not crucial for coupling calculations, they are for interest for other codes using antenna coupling quantities as input. As an example, if the magnetic field is aligned with the $z$ direction, the radiated spectrum generated by the antenna which depend on the wave number in toroidal $k_z$ and poloidal $k_y$ directions, is an even function of $k_z$ but not of $k_y$ due to gyrotropy\sidecite{messiaen2011, colas2019}.
 
-Since the last decade, full wave codes such as {COMSOL}, Microwave {CST} or {ANSYS} {HFSS} for example, have been able to define propagating medium as anisotropic tensor with eventually negative or complex permittivity, spatial and frequency dependences. This ability allowed coupling calculations of the C-Mod LH launcher\cite{meneghini2009-1}. Recently, the open-source initiative \cite{shiraiwa2017-1} allows modelling RF waves propagation in edge and core plasmas. In all cases, a difficulty arises in the model setup if  geometry is partially taken into account to save resources: in this case, boundary conditions at the edges of the plasma domain need to be defined. Indeed, default radiation or absorbing boundary conditions such as Perfectly Matched Layer (PML) shipped in all these software are not designed to be used directly on the anisotropic material boundaries but instead on isotropic mediums. For antenna to plasma coupling, the plasma medium in which the antenna radiate is at the contrary considered as an semi-infinite medium and should be thus defined with attached ideal absorbing boundary conditions. Specific PML for anisotropic materials such as a magnetized cold plasma have been used in \cite{jacquot2013, colas2019} and mathematically studied in  \cite{becache2017}. Recently in \cite{louche2017}, a 1D cold plasma has been modelled in CST Microwave Studio and compared against analytical solutions. Due to a software limitation to define non-homogeneous medium, a stratified PML has been used to mimic the single pass absorption in a bulk plasma. To obtain a precise solution, a large number of layers are required in the PML. 
+Since the last decade, full wave codes such as {COMSOL}, Microwave {CST} or {ANSYS} {HFSS} for example, have been able to define propagating medium as anisotropic tensor with eventually negative or complex permittivity, spatial and frequency dependences. This ability allowed coupling calculations of the C-Mod LH launcher\sidecite{meneghini2009-1}. Recently, the open-source initiative \sidecite{shiraiwa2017-1} allows modelling RF waves propagation in edge and core plasmas. In all cases, a difficulty arises in the model setup if  geometry is partially taken into account to save resources: in this case, boundary conditions at the edges of the plasma domain need to be defined. Indeed, default radiation or absorbing boundary conditions such as Perfectly Matched Layer (PML) shipped in all these software are not designed to be used directly on the anisotropic material boundaries but instead on isotropic mediums. For antenna to plasma coupling, the plasma medium in which the antenna radiate is at the contrary considered as an semi-infinite medium and should be thus defined with attached ideal absorbing boundary conditions. Specific PML for anisotropic materials such as a magnetized cold plasma have been used in \sidecite[-0.5cm]{jacquot2013, colas2019} and mathematically studied in  \sidecite[+0.5cm]{becache2017}. Recently in \sidecite[+1cm]{louche2017}, a 1D cold plasma has been modelled in CST Microwave Studio and compared against analytical solutions. Due to a software limitation to define non-homogeneous medium, a stratified PML has been used to mimic the single pass absorption in a bulk plasma. To obtain a precise solution, a large number of layers are required in the PML. 
 
-Thanks to the collaboration between CEA, ITER and ANSYS, the RF modelling software ANSYS HFSS supports inhomogeneous anisotropic medium since 2016\sidecite{hillairet2019-2}. The purpose of the work presented in this section is not to produce a rigorous approach of the coupling simulation or to model the wave absorption mechanism in the plasma or non-linear effects such as sheaths  on the antenna boundaries. The motivation is to assess the ability of HFSS to describe the usual range of experimental magnetized cold plasma inhomogeneous parameters facing LHRF (sec.\ref{sec:LHRF}) antennas, away from resonances, in order to guide the RF designer during the design phase of an antenna. Due to space constraint, we focuses only on the LHRF case.%, but the treatment of ICRF cases is similar.
+Thanks to the collaboration between CEA, ITER and ANSYS, the RF modelling software ANSYS HFSS supports inhomogeneous anisotropic medium since 2016\sidecite{hillairet2019-2}. The purpose of the work presented in this section is not to produce a rigorous approach of the coupling simulation or to model the wave absorption mechanism in the plasma or non-linear effects such as sheaths  on the antenna boundaries. The motivation is to assess the ability of HFSS to describe the usual range of experimental magnetized cold plasma inhomogeneous parameters facing LHRF antennas, away from resonances, in order to guide the RF designer during the design phase of an antenna. The treatment of ICRF cases is similar.
 
 \subsection{LHRF Coupling}
 As previously seen in Section~\ref{sec:lhcd}, in the Lower Hybrid Current Drive range of frequencies (2-6~GHz) and edge plasma electron densities in current tokamak experiments ($n_e=10^{17}-10^{18}$ $\si{m^{-3}}$), the cold plasma dielectric tensor is mostly diagonal:
@@ -1087,7 +1099,7 @@ As a rule of thumb, a toroidal region at least four times larger than the antenn
 \end{marginfigure}
 
 
-In the example illustrated by Figure~\ref{fig:lhelectricfield} and its results presented in Figure~\ref{fig:LH_HFSS}, a 3D LHRF antenna made of six waveguides (76~mm heigh in poloidal direction, 8.5~mm width in toroidal direction and spaced by 2~mm and excited at 3.7~GHz) is facing a small vacuum gap (few millimetres of less) before a linearly increasing density plasma described by:
+In the example illustrated in Figures~\ref{fig:lhelectricfield} and \ref{fig:LH_HFSS}, a 3D LHRF antenna made of six waveguides (76~mm heigh in poloidal direction, 8.5~mm width in toroidal direction and spaced by 2~mm and excited at 3.7~GHz) is facing a small vacuum gap (few millimetres of less) before a linearly increasing density plasma described by:
 \begin{equation}
 	n_e(x)=n_{e0} \left(1+ \frac{x-d_\mathrm{gap}}{\lambda_n} \right)
 \end{equation} 
@@ -1127,6 +1139,6 @@ However, if anisotropy effects are discarded, using an inhomogeneous equivalent-
 \subsection{Summary of this section}
 Thanks to the collaboration between CEA, ITER and ANSYS, the RF modelling software ANSYS HFSS supports inhomogeneous anisotropic medium since 2016\sidecite{hillairet2019-2}. The ANSYS HFSS software have been benchmarked for coupling calculations of Lower Hybrid Resonance Frequency to usual edge tokamak cold magnetize plasma conditions. Reflected power and electric field obtained in HFSS agree well with the dedicated LH coupling code ALOHA if absorbing boundary conditions are properly set. In practice, usual edge plasma scenario can be modelled with the requirement of a vacuum gap. The  required memory resources increases with the electron density increase, which can be a practical limitation for high-density scenarios.
 
-For ICRF, the magnitude of the dielectric tensor elements, in particular in the direction parallel to the confinement magnetic field, reach high values which do not allow a direct implementation in HFSS unless using large computing resources. However, if one is only interested in coupling calculation (S/Z-parameters and first order electromagnetic fields), discarding anisotropy effects, using an equivalent dielectric as a loading medium leads to satisfactory results with respect to the IC dedicated coupling code ANTITER II. 
+For ICRF, the magnitude of the dielectric tensor elements, in particular in the direction parallel to the confinement magnetic field, reach high values which do not allow a direct implementation in HFSS unless using large computing resources. However, if one is only interested in coupling calculation (S/Z-parameters and first order electromagnetic fields), discarding anisotropy effects, using an equivalent dielectric as a loading medium leads to satisfactory results. 
 
 In both case, since it is possible to define inhomogeneous media in HFSS, one can describe equation-based evolution or to directly use numerical data (coming from edge plasma diagnostic such as reflectometers) to model various coupling scenarios. The results obtained can be used by antenna designers to evaluate coupling performances. 
