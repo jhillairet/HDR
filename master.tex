@@ -121,6 +121,8 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 %%%% Margin TOC depth
 \renewcommand{\themargintocdepth}{1}
 
+
+
 % Redefine the citation style: uses numbered sidenotes (upperscript)
 %\RenewDocumentCommand{\formatmargincitation}{m}{%
 %	\supercite{#1} \citeauthor*{#1} (\citeyear{#1})\\
@@ -326,7 +328,7 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 	%----------------------------------------------------------------------------------------
 	%%%% Main bibliography of the document
 	% The bibliography needs to be compiled with biber 	
-	\defbibnote{bibnote}{Here are the references in alphabetical order.\par\bigskip} % Prepend this text to the bibliography
+	\defbibnote{bibnote}{References are in alphabetical order.\par\bigskip} % Prepend this text to the bibliography
 	% Use the "nyt" sorting for the bibliography
 	\begin{refcontext}[sorting=nyt]
 		\printbibliography[heading=bibintoc, title=Bibliography, prenote=bibnote] 

@@ -2,7 +2,7 @@
 % #####################################################
 % #####################################################
 \setchapterpreamble[u]{\margintoc}
-\chapter{RF Fundamentals}\label{chap:RF_fundamentals}
+\chapter{RF Engineering Fundamentals}\label{chap:RF_fundamentals}
 
 
 \epigraph{It is not knowledge, but the act of learning, not possession but the act of getting there, which grants the greatest enjoyment.}{Carl Friedrich Gauss}
@@ -15,11 +15,11 @@ We will review the fundamentals of transmission line theory (Section~\ref{sec:tr
 % #####################################################
 % #####################################################
 \section[Uniform Transmission Lines]{Uniform Transmission lines Properties}\label{sec:transmission_line}
-\marginnote[*-2]{Parts of this Section are taken from the documentation of the open-source Python package \href{http://scikit-rf.org/}{scikit-rf} which is maintained by the author and used in RF circuit models, for example in \citeauthyear{hillairet2015-2} or in \citeauthyear{hillairet2019-1}.}
+\marginnote[*-2]{Parts of this Section are taken from the documentation of the open-source Python package \href{http://scikit-rf.org/}{scikit-rf} which is maintained by the author and used in RF circuit models, for example in \citeauthyear{hillairet2015-2} or in \citeauthyear{hillairet2019-1}. More about the \href{http://scikit-rf.org/}{scikit-rf} package is given in Section~\ref{sec:OSS}.}
 
 Once RF waves have been generated, it must be transmitted to the antennas, using suitable transmission line depending on the RF frequency and power level. The main results and properties of uniform transmission lines are reviewed in this section. The results given here are well-known and can be found in numerous textbooks such as \sidecite{Harrington2001, marcuvitz1951, Thourel1988, Collin1990, gonzalez1997, pozar2012, Orfanidis, steer2019-3} to give a personal selection.
 
-A transmission line is defined as \textit{uniform} if its dimensions and electrical properties are identical for all planes transverse to the direction of propagation. The results listed in this section are used in the following sections of this manuscript for the design and the analysis of high power RF components.
+A \textit{transmission line} is specialized structure in which an RF signal can propagate. A transmission line is defined as \textit{uniform} if its dimensions and electrical properties are identical for all planes transverse to the direction of propagation. The results listed in this section are used in the following sections of this manuscript for the design and the analysis of high power RF components.
 
 % #####################################################
 \subsection{Voltage and Current}
@@ -122,7 +122,7 @@ The SWR can be equivalently defined as the ratio of maximum (forward and backwar
 Note that the SWR becomes constant for lossless lines. 
 
 
-Finally, some special cases are reminded for convenience in the Table~\ref{tab:special_case_loaded_line}.
+Finally, some special cases are recalled for convenience in the Table~\ref{tab:special_case_loaded_line}.
 
 \begin{table}[h]
 	\begin{center}
@@ -145,7 +145,7 @@ Finally, some special cases are reminded for convenience in the Table~\ref{tab:s
 
 % #####################################################
 \subsection{Line Impedance}
-The impedance seen toward the load at a point of the line, that is the ratio between total voltage and current at this point, is at a distance $z=-\ell$ from the load:
+The impedance seen toward the load at a point of the line, i.e. the ratio between total voltage and current at this point, is at a distance $z=-\ell$ from the load:
 \begin{subequations}
 	\begin{align}
 Z(z=-\ell) 
@@ -271,7 +271,7 @@ As in typical plasma application the load impedance $Z_L$ is complex-valued, ach
 	\item maximize the power transfer to the antenna 
 	\item minimize the power reflected to the generator (protection and efficiency)
 	\item minimize the power lost in the transmission line (net efficiency)
-	\item insure the good control of the antenna amplitude/phase
+	\item ensure the good control of the antenna amplitude/phase
 \end{itemize}
 
 If the generator is not equipped with internal matching network, it is a good engineering practice to place a matching network as close as possible from its output. Similarly, placing a matching network as close as possible from the load reduce the standing waves and thus the peak current (dissipation problems) and the peak voltage (corona and breakdown problems) in the transmission line between the source and the load \cite[§4]{Rizzi1988}.
@@ -298,7 +298,7 @@ A RF \textit{network} such as the one illustrated in Fig.~\ref{fig:microwave_net
 	\label{fig:microwave_network}
 \end{marginfigure}
 
-Scattering parameters can be defined in several ways \sidecite{dobrowolski2010}, which has been discussed extensively in the literature since the 60's \cite{carlin1956, kurokawa1965, woods1972, marks1992, williams2013, amakawa2016}. Indeed, there is some arbitrariness to define some forward and reflected waves ($a, b$) such that ($|a|^2, |b|^2$) represent the time-averaged power carried by the forward and reflected voltage waves ($\Vfwd, \Vrefl$) (or current waves, or both). However, as seen in section \ref{sec:power_and_losses}, the power superposition principle does not hold for lossy lines and complex characteristic impedances (but superposition of voltages and currents does), so this mapping cannot be done in general. The various definitions of scattering parameters differ on how they handle complex impedances and eventually additional modes other than TEM, but all of these definitions give the same results for real-valued characteristic impedances and lossless lines\footnote{Because most of time lossless lines are assumed, this is probably the reason why most textbooks assume that the characteristic impedance is real in their presentation of scattering parameters. While complex-referenced S-parameters may be seen as a matter of purely academic concern with little practical use, it is not and it has also implications in electromagnetic simulators that are often silent on how they implement such situations.}. To deal with lossy lines and complex characteristic impedances, few methodologies exist but two are nowadays mostly adopted: \textit{power-wave} and \textit{pseudo-wave}  definitions. 
+Scattering parameters can be defined in several ways \sidecite{dobrowolski2010}, which has been discussed extensively in the literature since the 60's \sidecite{carlin1956, kurokawa1965, woods1972, marks1992, williams2013, amakawa2016}. Indeed, there is some arbitrariness to define some forward and reflected waves ($a, b$) such that ($|a|^2, |b|^2$) represent the time-averaged power carried by the forward and reflected voltage waves ($\Vfwd, \Vrefl$) (or current waves, or both). However, as seen in section \ref{sec:power_and_losses}, the power superposition principle does not hold for lossy lines and complex characteristic impedances (but superposition of voltages and currents does), so this mapping cannot be done in general. The various definitions of scattering parameters differ on how they handle complex impedances and eventually additional modes other than TEM, but all of these definitions give the same results for real-valued characteristic impedances and lossless lines\footnote{Because most of time lossless lines are assumed, this is probably the reason why most textbooks assume that the characteristic impedance is real in their presentation of scattering parameters. While complex-referenced S-parameters may be seen as a matter of purely academic concern with little practical use, it is not and it has also implications in electromagnetic simulators that are often silent on how they implement such situations.}. To deal with lossy lines and complex characteristic impedances, few methodologies exist but two are nowadays mostly adopted: \textit{power-wave} and \textit{pseudo-wave}  definitions. 
 
 The \textit{power-waves} concept has been introduced in \sidecite{kurokawa1965}, where the forward $a$ and reflected $b$ power-waves are defined as:
 \begin{subequations}
@@ -321,7 +321,7 @@ As seen in the previous section, impedance match and maximum power transfer are 
 
 This definition introduces "wave" variables that can no longer be interpreted as incoming and outgoing waves from ports. However, they can be interpreted in terms of power flow at a junction, which explains its wide adoption by the RF community. Most RF circuit solvers (such as Keysight ADS, ANSYS Circuit) use the \textit{power-waves} definition. \marginnote[*-4]{Because of its wide adoption, \href{http://scikit-rf.org/}{scikit-rf} also uses the power-waves definition by default (mostly in order to replicate results from commercial solvers) but allows the use of pseudo-wave definition as well.} 
 
-However, the power-wave definition has some caveats one must be aware of. In particular, power-waves definition may not give physical results in case of complex characteristic impedance\footnote{A simple illustration of the problem is to consider a transmission line of complex characteristic impedance $Z_0$ loaded with an impedance $Z_L=Z_0^*$. Voltage and current waves as defined at the beginning of this section will lead to a non zero reflection coefficient $\Gamma_L$ while power-waves-based tools will give a zero reflection coefficient $\Gamma_\mathrm{pw,L}$\cite{amakawa2016}.} and are not always continuous at the interface between circuits unless reference impedance is real, so cannot be cascaded in all cases \sidecite{marks1992, williams2013}. In the real world, all transmission lines are lossy (at least to a small degree) and this contradiction has been identified shortly after Kurokawa seminal paper\cite{amakawa2016} but somewhat forgotten after. For this reason, \citeauthyear{marks1992} introduced the \textit{pseudo-waves} definition of S-parameters\footnote{where a phase factor used in \cite{marks1992} has been omitted here for simplification.}:\marginnote{Again, the pseudo-wave definition equals the travelling-wave definition when $\Zref$ is real-valued. This paragraph aims only to highlight the fact that great care should be taken when dealing with S-parameters with lossy transmission lines with electromagnetic solvers, in particular closed-source ones.}
+However, the power-wave definition has some caveats one must be aware of. In particular, power-waves definition may not give physical results in case of complex characteristic impedance\footnote{A simple illustration of the problem is to consider a transmission line of complex characteristic impedance $Z_0$ loaded with an impedance $Z_L=Z_0^*$. Voltage and current waves as defined at the beginning of this section will lead to a non-zero reflection coefficient $\Gamma_L$ while power-waves-based tools will give a zero reflection coefficient $\Gamma_\mathrm{pw,L}$\cite{amakawa2016}.} and are not always continuous at the interface between circuits unless reference impedance is real, so cannot be cascaded in all cases \sidecite{marks1992, williams2013}. In the real world, all transmission lines are lossy (at least to a small degree) and this contradiction has been identified shortly after \citeauthyear{kurokawa1965} seminal paper \sidecite{amakawa2016} but somewhat forgotten after. For this reason, \citeauthyear{marks1992} introduced the \textit{pseudo-waves} definition of S-parameters\footnote{where a phase factor used in \cite{marks1992} has been omitted here for simplification.}:\marginnote{Again, the pseudo-wave definition equals the travelling-wave definition when $\Zref$ is real-valued. This paragraph aims only to highlight the fact that great care should be taken when dealing with S-parameters with lossy transmission lines with electromagnetic solvers, in particular closed-source ones.}
 \begin{subequations}
 	\begin{align}
 		a_i =& \frac{\sqrt{\Re(Z_{R,i})}}{|Z_{R,i}|} \Vfwd_i 
@@ -380,13 +380,14 @@ where $V=V_0 e^{\mp\gamma z}$ is the voltage between the conductors and $I=I_0 e
 % #####################################################
 \subsection{Characteristic Impedance}
 The characteristic impedance $Z_0$ in $[\si{\Omega}]$ of a coaxial line is:
+\marginnote{Or also, $Z_0\approx 138 \sqrt{\frac{\mu_r}{\varepsilon_{r}}} \log_{10}\left( \frac{b}{a} \right)$}
 \begin{equation}
 Z_0 = 
 	\frac{1}{2\pi} \sqrt{\frac{\mu_0 \mu_r}{\varepsilon_{0} \varepsilon_{r}}} \ln\left( \frac{b}{a} \right)
-	=
+	\approx
 	60 \sqrt{\frac{\mu_r}{\varepsilon_{r}}} \ln\left( \frac{b}{a} \right) 
 \end{equation}
-\marginnote[-1cm]{Or also, $Z_0\approx 138 \sqrt{\frac{\mu_r}{\varepsilon_{r}}} \log_{10}\left( \frac{b}{a} \right)$}
+
 with $\varepsilon_{r}$ the relative permittivity and $\mu_r$ the relative permeability of the filling dielectric. 
 
 % #####################################################
@@ -409,6 +410,8 @@ The Ohmic heat flux $\Psi$ (in [$\si{W/m^2}$]) due to the flow of RF current on 
 \frac{|I(z)|^2}{(\pi \phi)^2}
 \label{eq:ohmic_heat_flux_coaxial}
 \end{equation}
+where $R_s$ is the sheet resistance given by Eq.(\ref{eq:sheet_resistance}).
+
 The previous expression can be used to calculate thermal behaviour of high power coaxial components (Fig.~\ref{fig:coaxial_losses}). The Ohmic power loss per unit length $P_\ell$ (in \si{W/m}) dissipated in a coaxial line is the sum of the inner and the outer conductors losses:
 \begin{equation}
 P_\ell (z)
@@ -421,12 +424,12 @@ P_\ell (z)
 \end{equation}
 
 
-\begin{figure}
+\begin{figure*}
 	\centering
-	\includegraphics[width=1.0\linewidth]{figures/chap3/coaxial_losses}
+	\includegraphics[width=0.8\linewidth]{figures/chap3/coaxial_losses}
 	\caption{Coaxial losses in a 2~meter 30~\si{\Omega} 9" coaxial line with $P_\mathrm{i}=500~\si{kW}$ and  $P_\mathrm{r}=300~\si{kW}$ at 100~\si{MHz}. Inner conductor is in copper while the outer conductor is in aluminium. Heat flux from Eq.(\ref{eq:ohmic_heat_flux_coaxial}) is benchmarked against full-wave ANSYS HFSS.}
 	\label{fig:coaxial_losses}
-\end{figure}
+\end{figure*}
 
 %Finally, the attenuation $\alpha=P_\ell(z=0)/(2P_0)$ in $[\si{Neper/m}]$ of a coaxial line is\cite[Ex.2.7]{pozar2012}:
 %\begin{equation}
@@ -613,10 +616,10 @@ where $P_\mathrm{i}$ (in [\si{W}]) is the forward power and $P_\mathrm{r}$ the r
 \begin{subequations}
 	\begin{align}
 	|A_{10}| =& \sqrt{2Z_{10} P_\mathrm{i}} \\
-	|B_{10}| =& \sqrt{2Z_{10} P_\mathrm{r}} =  R |A_{10}|
+	|B_{10}| =& \sqrt{2Z_{10} P_\mathrm{r}} =  |\Gamma| |A_{10}|
 	\end{align}	
 \end{subequations}	
-where we have used the "voltage" reflection coefficient $R$ defined by $R^2=P_\mathrm{r}/P_\mathrm{i}$. Using all the previous definitions, the electromagnetic field in Eqs.(\ref{eq:rectwg_EHfields_TE10}) can be directly related to forward and reflected powers, giving peak values comparable to full-wave calculations and for breakdown analysis. A simple benchmark of these relations is given on Fig.\ref{fig:rectwg_benchmark_fields}.
+where we have used the "voltage" reflection coefficient $|\Gamma|$ defined by $\Gamma=B_{10}/A_{10}$ for a mono-mode transmission line. In practice however, the usual figure of merit is the "power" reflection coefficient given by $|\Gamma|^2 = P_\mathrm{r}/P_\mathrm{i}$. Using all the previous definitions, the electromagnetic field in Eqs.(\ref{eq:rectwg_EHfields_TE10}) can be directly related to forward and reflected powers, giving peak values comparable to full-wave calculations and for breakdown analysis. A simple benchmark of these relations is given on Fig.\ref{fig:rectwg_benchmark_fields}.
 
 The electric field for the $\TE_{10}$ mode is maximum at $y=a/2$ (in the middle of the waveguide). This peak electric field value for this mode is:
 \begin{equation}
@@ -624,7 +627,7 @@ The electric field for the $\TE_{10}$ mode is maximum at $y=a/2$ (in the middle 
 	=
 	2 \sqrt{\frac{Z_{10} P_\mathrm{i}}{a b }} 
 		\left( 
-			1 + R
+			1 + |\Gamma|
 		\right)
 \end{equation}
 
@@ -632,7 +635,7 @@ The maximum incident power before breakdown for a given reflection coefficient i
 \begin{equation}
 	P_{\mathrm{max,bd}}
 	= 
-	\frac{a b}{4 Z_{10}} \frac{E_d^2}{\left(1 + R\right)^2}
+	\frac{a b}{4 Z_{10}} \frac{E_d^2}{\left(1 + |\Gamma|\right)^2}
 \end{equation}
 with $E_d$ the electric strength of the medium. The previous expression shows that the maximum power is again obtained for a minimum reflection coefficient and increase with the waveguide dimensions. 
 
@@ -671,11 +674,11 @@ R_s \left[
 \label{eq:rectwg_power_loss_per_unit_length}
 \end{equation}
 
-\begin{figure}
+\begin{figure*}
 	\centering
-	\includegraphics[width=1.0\linewidth]{figures/chap3/rectangular_waveguide_fields_losses}
+	\includegraphics[width=0.8\linewidth]{figures/chap3/rectangular_waveguide_fields_losses}
 	\caption{$E$ and $H$ fields and RF losses in a 400~\si{mm} WR284 waveguide ($72.13 \times 34.04$~\si{mm}) with $P_\mathrm{i}=500~\si{kW}$ and  $P_\mathrm{r}=100~\si{kW}$ at 3.7~\si{GHz}. Conductor are in copper. Results are  benchmarked against full-wave ANSYS HFSS.}
 	\label{fig:rectwg_benchmark_fields}
-\end{figure}
+\end{figure*}
 
 
