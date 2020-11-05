@@ -3,7 +3,7 @@
 % #####################################################
 \setchapterimage[3cm]{figures/chap3/chapter_head_LHRF} % Optionally specify theheight
 \setchapterpreamble[u]{\margintoc}
-\chapter[High Power RF Devices for the Lower Hybrid Range of Frequency]{High Power RF Devices for the LHRF}\label{eq:LHRF_work}
+\chapter[High Power RF Devices for the Lower Hybrid Range of Frequency]{High Power RF Devices for the LHRF}\label{chap:LHRF}
 
 \setlength{\epigraphwidth}{.7\textwidth}
 \epigraph{Les sciences ne sont pas comme Minerve, qui sortit tout armée du cerveau de Jupiter ; elles sont filles du temps, et se forment insensiblement, d’abord par la collection des méthodes indiquées par l’expérience, et plus tard par la découverte des principes qui se déduisent de la combinaison de ces méthodes. }{Brillat-Savarin, Physiologie du goût.}
@@ -61,13 +61,11 @@ In a large tokamak, a conventional LH grill made of independently fed waveguides
 \begin{marginfigure}
 	\centering
 	\includegraphics[width=0.9\linewidth]{figures/chap3/ToreSupra_C3}
-	\caption{Tore Supra Multijunction launcher C3 (now LH1 in WEST) (288 waveguides, total dimensions 60cm x 60cm, 1999). Frequency: 3.7GHz.}
+	\caption{Tore Supra Multijunction launcher LH1 (288 waveguides, total dimensions 60cm x 60cm, 1999). Frequency: 3.7GHz.}
 	\label{fig:toresupraC3}
 \end{marginfigure}
 
-A judicious choice of the phasing of the output waveguides leads to an important self-matching property of the multijunction (also known as \emph{recycling effect} or \emph{load resilience}). Indeed, for specific phase values, the reflected waves from the plasma which return back in the secondary waveguides can be reflected back to the plasma, thus leading to multiple reflections in the secondary waveguides. This recycling effect, which takes place between the plasma-antenna discontinuity and the E-plane bi-junctions, leads to an attenuation of the waves at each passage by the plasma, and ultimately to a decrease of the reflected power toward the RF sources. 
-
-The Tore Supra antenna C1 and C2 (Figure~\ref{fig:toresupraC2}), then C3 (Figure~\ref{fig:toresupraC3}) (now named LH1 in WEST) are multijunction antennas.
+A judicious choice of the phasing of the output waveguides leads to an important self-matching property of the multijunction (also known as \emph{recycling effect} or \emph{load resilience}). Indeed, for specific phase values, the reflected waves from the plasma which return back in the secondary waveguides can be reflected back to the plasma, thus leading to multiple reflections in the secondary waveguides. This recycling effect, which takes place between the plasma-antenna discontinuity and the E-plane bi-junctions, leads to an attenuation of the waves at each passage by the plasma, and ultimately to a decrease of the reflected power toward the RF sources. The Tore Supra LHCD antennas (Figure~\ref{fig:toresupraC2} and Figure~\ref{fig:toresupraC3}) are multijunction antennas.
 
 %\todo{Illustration of the recycling effect (load resilience) inside a multijunction}.
 
@@ -90,10 +88,10 @@ Being close to the plasma leads to increase the heat fluxes into on the launcher
 \begin{marginfigure}
 	\centering
 	\includegraphics[width=0.9\linewidth]{figures/chap3/ToreSupra_C4}
-	\caption{The Tore Supra PAM (C4, now named LH2 in WEST) launcher. (96 active waveguides, 102 passive waveguides, approx. 7 tons, front face dimensions 60cm x 60cm, 3.7 GHz, 2009).}
+	\caption{The WEST PAM antenna LH2. (96 active waveguides, 102 passive waveguides, approx. 7 tons, front face dimensions 60cm x 60cm, 3.7 GHz, 2009).}
 	\label{fig:toresuprac4}
 \end{marginfigure}
-In order to insure a lower reflected power than a conventional grill, it has been proposed to associate this alternation of passive-active waveguide to  use a multijunction. This is the \textit{Passive-Active Multijunction} (PAM) concept, which addresses two of the main criticisms made to LH launchers, i.e. the coupling efficiency and the heat loads resilience. The WEST Antenna LH2 (previously named C4 in Tore Supra) is a PAM antenna (Figure~\ref{fig:toresuprac4}, \citeauthyear{guilhem2009, guilhem2011}). 
+In order to insure a lower reflected power than a conventional grill, it has been proposed to associate this alternation of passive-active waveguide to  use a multijunction. This is the \textit{Passive-Active Multijunction} (PAM) concept, which addresses two of the main criticisms made to LH launchers, i.e. the coupling efficiency and the heat loads resilience. The WEST Antenna LH2 is a PAM antenna (Figure~\ref{fig:toresuprac4}, \citeauthyear{guilhem2009, guilhem2011}). 
 
 
 % #####################################################
@@ -116,6 +114,9 @@ Motivated by the reduction of the RF losses and the increase of the reliability 
 	\caption{Left: final assembly CAD model with 16 four-way splitters. Right: Picture of the LH2 launcher inside the Alcator C-Mod vacuum vessel with its lateral protections in January 2012 (\citeauthyear{Meneghini2012}).}
 	\label{fig:cmodlh2}
 \end{figure}
+
+
+
 
 %
 %
@@ -494,7 +495,7 @@ A tokamak operates at pressures different from the transmission line pressure. R
 
 As the dimensions of the tokamak access ports are limited, the number of transmission lines connected to the antenna is limited too. In order to fit into the available space, to simplify the assembly design and to improve the maintenance of the system, the number of transmission lines and thus the number of RF windows must be kept as low as possible. This leads to increase the power handling capability of each transmission line, and ultimately of each window.
 
-In the proposed ITER LHCD design (Cf. Section~\ref{sec:ITER_LHCD_antenna}), 24~\si{MW}~CW of RF power at 5~\si{GHz} are expected to be generated and transmitted to the plasma. In order to separate the vacuum vessel pressure from the cryostat waveguide pressure, forty eight 5~\si{GHz} 500~\si{kW} windows are to be assembled on the waveguides at the equatorial port flange. For nuclear safety reasons, 48 additional windows could be located in the cryostat section, to separate the cryostat waveguide pressure from the exterior transmission line pressure and to monitor it. Because the failure of a window would lead to lock a transmission line, these windows have been identified as one of the main critical components for the ITER LHCD system since first ITER LHCD studies \sidecite{bibet2005}. In order to initiate this R\&D effort, two 5~\si{GHz} 500~\si{kW}/5~s pill-box prototype windows have been developed and manufactured in 2012 by the PMB/ALCEN Company in close collaboration with the CEA/IRFM\sidecite{hillairet2014, hillairet2015}. 
+In the proposed ITER LHCD design (Cf. Section~\ref{sec:ITER_LHCD_antenna}), 24~\si{MW}~CW of RF power at 5~\si{GHz} are expected to be generated and transmitted to the plasma. In order to separate the vacuum vessel pressure from the cryostat waveguide pressure, forty eight 5~\si{GHz} 500~\si{kW} windows are to be assembled on the waveguides at the equatorial port flange. For nuclear safety reasons, 48 additional windows could be located in the cryostat section, to separate the cryostat waveguide pressure from the exterior transmission line pressure and to monitor it. Because the failure of a window would lead to lock a transmission line, these windows have been identified as one of the main critical components for the ITER LHCD system since first ITER LHCD studies \sidecite{bibet2005}. In order to initiate this R\&D effort, two 5~\si{GHz} 500~\si{kW}/5~s pill-box prototype windows have been developed and manufactured in 2012 by the PMB/ALCEN Company in close collaboration with the CEA/IRFM\sidecite{hillairet2015}. 
 
 % ############################################
 \subsection{RF and Thermo-Mechanical Design}
@@ -680,3 +681,12 @@ Post-mortem RF measurement of two BeO samples of one of the windows shows that t
 
  
 This work shows that large margins must be taken from the reference design (or alternatively accept large production wastes), especially in cases where mechanical stresses are close to acceptable margins. It is believed that improvements in the manufacturing (in particular the brazing of the ceramic) and in the water cooling circuit are necessary to achieve the target performances.  
+
+
+\section{Chapter Summary and Perspectives}
+This chapter summarizes some of my research activities concerning the design and the tests of RF components in the LH range of frequencies. In the frame of the design of a LHCD system for ITER, prototypes of a mode-converter and a BeO window have been manufactured and tested at low and high RF power respectively. As I learned the hard way with the 500~kW 5~GHz window prototypes, the main challenge is not always the high power compatibility but more often the steady-state operation which adds supplementary difficulties in the design and manufacturing. This aspect of steady-state compatibility, is often underestimated in the fusion community.
+
+Yet, to be economically viable, a future fusion power plant will require to work continuously over long periods (days, months or years). Hence, such a goal should be at the main focus of fusion research. Achieving steady-state operation in a tokamak requires to partially or fully drive the plasma current. While this statement is known since the advent of tokamaks in the history of fusion research, producing reliable and performant plasma discharges have long remained an issue, putting steady-state plasma topics in the background. With the arrival of superconducting machines, continuous operation emerged as a research topic \textit{per se}, but is still nowadays underestimated or, listed as secondary. The ITER LHCD system, first expected in the second phase of the machine, has finally been removed from the list of its heating and current drive systems in 2018\sidecite{iterorganization2018}. ITER steady-state
+operation scenarios are now expected to be sustained with a combination of Neutral Beam and Electron Cyclotron power, which has never been demonstrated experimentally.
+
+Recently, an LHCD antenna located on the high-field side of the DIII-D machine has been developed to improve both power coupling and current drive efficiency \sidecite{wukitch2017, seltzman2019-1}. A similar project is under study on KSTAR \sidecite{kim2019}. If integrated in a fusion reactor design from the beginning, such antenna concept could allow reaching steady-state operations. Finally, helicon current drive is also a promising technique to drive plasma current in reactor relevant conditions \sidecite{paul2009} and few projects are on-going various machine \sidecite{wang2017-1, wi2018, pinsker2019}.

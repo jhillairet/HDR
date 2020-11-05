@@ -11,7 +11,7 @@ Many antenna-plasma coupling models have been developed and most rely on a "slab
 
 
 \section{RF Waves In Cold Magnetized Plasma}\label{sec:waves-in-plasma}
-This section is a reminder of the basic properties of wave propagation in a magnetized plasma. In-depth treatment and derivations of the results given in this section can be found in the standards physics oriented textbooks \sidecite{stix1992, Brambilla1998, Swanson2003, Cairns1991, Golant1989}. 
+This section is a reminder of the basic properties of wave propagation in a magnetized plasma. In-depth treatment and derivations of the results given in this section can be found in the standards physics oriented textbooks \sidecite{stix1992, Brambilla1998, Swanson2003, Cairns1991, golant1989}. 
 
 \subsection{Maxwell Equations in Time Harmonic Regime}
 We start with the Maxwell equations in matter in terms of vector fields in three dimensions, before recasting them to fit our needs. The usual electromagnetic field quantities are expressed following the terminology used in \citeauthyear{Harrington2001}:
@@ -924,7 +924,7 @@ Inside the second layer, the solution of the wave equation (\ref{eq:wave_equatio
 
 \subsection{Numerical validations}\label{sec:numerical_considerations}
 
-The results of the coupling calculation described in the previous sections depend on the total number of modes $N_{\mbox{modes}}$. In order to determine the minimal number of modes to take into account in order to insure the convergence of ALOHA, the total number of modes has been varied and the results on the Tore Supra "C3" antenna (now named "LH1" in WEST) compared. This is illustrated in Figure~\ref{fig:RC-E_vs_ne_vs_modes}, where the average reflection coefficient and the average electric field at the grill mouth are plotted versus the electron edge density $n_{e0}$ for the C3 antenna. When three or more modes are used, the results get very
+The results of the coupling calculation described in the previous sections depend on the total number of modes $N_{\mbox{modes}}$. In order to determine the minimal number of modes to take into account in order to insure the convergence of ALOHA, the total number of modes has been varied and the results on the Tore Supra "LH1" antenna (now named "LH1" in WEST) compared. This is illustrated in Figure~\ref{fig:RC-E_vs_ne_vs_modes}, where the average reflection coefficient and the average electric field at the grill mouth are plotted versus the electron edge density $n_{e0}$ for the LH1 antenna. When three or more modes are used, the results get very
 close, indicating that the convergence has been reached. 
 
 %
@@ -939,20 +939,20 @@ close, indicating that the convergence has been reached.
 	
 	\caption{Reflection coefficient (upper) and average electric
 		field at the mouth (lower) vs edge electron density
-		for the C3 antenna calculated by ALOHA, for different total number
+		for the LH1 antenna calculated by ALOHA, for different total number
 		of modes taken in account.\label{fig:RC-E_vs_ne_vs_modes} }
 	
 \end{figure}
 
 
-In Figure~\ref{fig:Computation-time-versus-modes}, the computation time has been plotted versus the total number of modes $N_{\mbox{modes}}$ for a simple antenna made of 8 independently fed waveguides and for the C3 antenna (57 waveguides per row). As illustrated in the Figure~\ref{fig:Computation-time-versus-modes}, the time complexity of the coupling calculation is function of the number of waveguides and the number of modes taken into account. In both examples, the running time is proportional to the square of the product of the number of waveguides and the number of modes, i.e. $O\left(N_{\mbox{wg}}^{2}\times N_{\mbox{modes}}^{2}\right)$. In the following of this paper, 3 modes were used for all the simulations made with ALOHA. 3 modes are sufficient at low density ( $1.10^{17}\sim20.10^{17}\mbox{\ensuremath{m^{-3}}}$)
+In Figure~\ref{fig:Computation-time-versus-modes}, the computation time has been plotted versus the total number of modes $N_{\mbox{modes}}$ for a simple antenna made of 8 independently fed waveguides and for the LH1 antenna (57 waveguides per row). As illustrated in the Figure~\ref{fig:Computation-time-versus-modes}, the time complexity of the coupling calculation is function of the number of waveguides and the number of modes taken into account. In both examples, the running time is proportional to the square of the product of the number of waveguides and the number of modes, i.e. $O\left(N_{\mbox{wg}}^{2}\times N_{\mbox{modes}}^{2}\right)$. In the following of this paper, 3 modes were used for all the simulations made with ALOHA. 3 modes are sufficient at low density ( $1.10^{17}\sim20.10^{17}\mbox{\ensuremath{m^{-3}}}$)
 which is the density range of interest for this work.
 
 %
 \begin{figure}[h]
 	\includegraphics[width=1.0\textwidth]{figures/chap2/ALOHA/figure5}
 	\caption{Computation time versus total number of modes for a simple antenna
-		made of 8 waveguides and for the C3 antenna. The dashed lines are
+		made of 8 waveguides and for the LH1 antenna. The dashed lines are
 		quadratic fit in $N_{\mbox{modes}}^{2}$. \label{fig:Computation-time-versus-modes}}
 \end{figure}
 
@@ -970,7 +970,7 @@ The open-source ALOHA code has been developed to model the Lower Hybrid antenna 
 \section{ALOHA Coupling Calculations for Tore Supra LHCD Antennas}\label{sec:ALOHA_TS}
 \marginnote{Part of this section are taken from paper \cite{hillairet2009-2}.}
 \subsection{Context of this work}
-In October and November 2008, dedicated experiments were carried out in Tore Supra in order to compare the measured power reflection coefficients on the C2 and C3 launchers with the numerical results from the ALOHA code. In order to avoid possible non-linear effects\cite{petrzilka1987, ekedahl2009}, low power pulses were used, i.e. pulses for which the power density at the mouth of the antenna is less than $2~\si{MW/m}^2$ (corresponding to a total input power of 100~kW). The parameters for pulse $\#43016$ are shown in Fig.~\ref{fig:TS43016}. A large variation of density in front of the antenna between $0.3\times10^{17}~\mathrm{m}^{-3}$ and $13\times10^{17}~\mathrm{m}^{-3}$ was obtained by varying the distance between the last closed flux surface (LCFS) and the antenna during the pulse (cut-off density is $n_{ec}=1.7\times10^{17}~\mathrm{m}^{-3}$). Electron density was measured with the Langmuir probes embedded in to the LH antennas. 
+In October and November 2008, dedicated experiments were carried out in Tore Supra in order to compare the measured power reflection coefficients on the C2 and LH1 launchers with the numerical results from the ALOHA code. In order to avoid possible non-linear effects\cite{petrzilka1987, ekedahl2009}, low power pulses were used, i.e. pulses for which the power density at the mouth of the antenna is less than $2~\si{MW/m}^2$ (corresponding to a total input power of 100~kW). The parameters for pulse $\#43016$ are shown in Fig.~\ref{fig:TS43016}. A large variation of density in front of the antenna between $0.3\times10^{17}~\mathrm{m}^{-3}$ and $13\times10^{17}~\mathrm{m}^{-3}$ was obtained by varying the distance between the last closed flux surface (LCFS) and the antenna during the pulse (cut-off density is $n_{ec}=1.7\times10^{17}~\mathrm{m}^{-3}$). Electron density was measured with the Langmuir probes embedded in to the LH antennas. 
 
 \todo{Refaire la figure}
 \begin{figure}[h]
@@ -981,7 +981,7 @@ In October and November 2008, dedicated experiments were carried out in Tore Sup
 
 %Also shown are the poloidal cross sections of the plasma at the time of the RFA measurements at t = 7.05, 9.2 and 10.9 s (strictly speaking these are the poloidal cross sections for 42939 but I found very similar cross sections for all shots). The densities (as well as other RFA parameters like Jsat, Ti and Te) measured for different shots and fixed time are very similar because the plasma density is almost identical for all shots, the difference in the heating power between shots is very small and Ip is constant. The density e-folding increases slightly as the plasma moves from the APL during the shot, which could be explained by the enhancement of the particle transport on the LFS, as demonstrated earlier by the Jamie�s Mach probe measurements.
 
-In ALOHA, the edge plasma is described with a linear electron density profile and no vacuum layer in front of the grill. RFA measurements have been used to estimate typical scrape-off thickness in front of the antennas\cite{kocan2008-1}. The connection lengths $L_{c,LH}$ in front of C2 and C3, corresponding to the distance between protruding side limiters, are known to be $40~\si{cm}$ and $60~\si{cm}$. Assuming that the ratio of the cross-field diffusion coefficient $D_\perp$ and the plasma acoustic velocity $c_s$ is constant in the SOL, and using scrape-off thickness defined as $\lambda_n=\frac{n_{e0}}{\nabla n_{e0}}=\sqrt{\frac{D_\perp L_c}{c_s}}$, one finds that $\lambda_{n,LH}=\sqrt{\frac{L_{c,RFA}}{L_{c,LH}}\lambda_{n,RFA}^2}$. 
+In ALOHA, the edge plasma is described with a linear electron density profile and no vacuum layer in front of the grill. RFA measurements have been used to estimate typical scrape-off thickness in front of the antennas\cite{kocan2008-1}. The connection lengths $L_{c,LH}$ in front of C2 and LH1, corresponding to the distance between protruding side limiters, are known to be $40~\si{cm}$ and $60~\si{cm}$. Assuming that the ratio of the cross-field diffusion coefficient $D_\perp$ and the plasma acoustic velocity $c_s$ is constant in the SOL, and using scrape-off thickness defined as $\lambda_n=\frac{n_{e0}}{\nabla n_{e0}}=\sqrt{\frac{D_\perp L_c}{c_s}}$, one finds that $\lambda_{n,LH}=\sqrt{\frac{L_{c,RFA}}{L_{c,LH}}\lambda_{n,RFA}^2}$. 
 
 
 
@@ -994,7 +994,7 @@ We present here some comparisons between experimental measurements and ALOHA on 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1.0\textwidth]{figures/chap2/Tore_Supra/geometry_TS_LHAntennas}
-	\caption{ALOHA description of the upper parts of C2 and C3 antennas . Grey parts symbolizes passive waveguides.}
+	\caption{ALOHA description of the upper parts of C2 and LH1 antennas . Grey parts symbolizes passive waveguides.}
 	\label{fig:geometry_TS_LHAntennas}
 \end{figure}
 
@@ -1010,15 +1010,15 @@ In Figure~\ref{fig:MarkI_mean_RC}, experimental reflection coefficients at diffe
 % #################################################
 % #################################################
 % #################################################
-\subsection{C3 antenna}
-C3\sidenote{The antenna has been relabelled LH1 in WEST.} has been installed in 1999 and is also made of 8 modules. Each module is a 1-to-6 multi-junction (cf. Figure~\ref{fig:geometry_TS_LHAntennas}). Permanent built-in phase shifters produce a $90^\circ$ phase difference between each output waveguides on a toroidal line, which produces a nominal peak parallel index of $n_{\parallel,0}=2.02$.
+\subsection{LH1 antenna}
+LH1 has been installed in 1999 and is also made of 8 modules. Each module is a 1-to-6 multi-junction (cf. Figure~\ref{fig:geometry_TS_LHAntennas}). Permanent built-in phase shifters produce a $90^\circ$ phase difference between each output waveguides on a toroidal line, which produces a nominal peak parallel index of $n_{\parallel,0}=2.02$.
 
-In Figure~\ref{fig:MarkII_mean_RC}, experimental reflection coefficients at different electron densities, measured during Tore Supra pulses \#43014-43016 for the 4 first lower modules of the C3 antenna are plotted. The density is measured with the nearest Langmuir probe placed at the bottom of the C3 antenna. 
+In Figure~\ref{fig:MarkII_mean_RC}, experimental reflection coefficients at different electron densities, measured during Tore Supra pulses \#43014-43016 for the 4 first lower modules of the LH1 antenna are plotted. The density is measured with the nearest Langmuir probe placed at the bottom of the LH1 antenna. 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.95\textwidth]{figures/chap2/Tore_Supra/C3_mean_lowerMod}
-	\caption{Average reflection  coefficient (in percents) versus electron density (normalized to LH cut-off density) for C3 antennas. Measured reflection  coefficient are taken from TS pulses number 43014-43016. Black curve corresponds to a $2~mm$ scrape-off thickness ($\pm 1~mm$).}
+	\caption{Average reflection  coefficient (in percents) versus electron density (normalized to LH cut-off density) for LH1 antennas. Measured reflection  coefficient are taken from TS pulses number 43014-43016. Black curve corresponds to a $2~mm$ scrape-off thickness ($\pm 1~mm$).}
 	\label{fig:MarkII_mean_RC}
 \end{figure}
 
@@ -1026,8 +1026,8 @@ In Figure~\ref{fig:MarkII_mean_RC}, experimental reflection coefficients at diff
 
 
 % ##################################################
-\subsection{C4 antenna}
-\todo{To complete eventually}
+%\subsection{LH2 antenna}
+%\todo{To complete eventually}
 
 % ##################################################
 \subsection{Summary of this section}
@@ -1162,3 +1162,14 @@ Thanks to the collaboration between CEA, ITER and ANSYS, the RF modelling softwa
 For ICRF, the magnitude of the dielectric tensor elements, in particular in the direction parallel to the confinement magnetic field, reach high values which do not allow a direct implementation in HFSS unless using large computing resources. However, if one is only interested in coupling calculation (S/Z-parameters and first order electromagnetic fields), discarding anisotropy effects, using an equivalent dielectric as a loading medium leads to satisfactory results. 
 
 In both cases, since it is possible to define inhomogeneous media in HFSS, one can describe equation-based evolution or to directly use numerical data (coming from edge plasma diagnostic such as reflectometers) to model various coupling scenarios. The results obtained can be used by antenna designers to evaluate coupling performances. 
+
+\section{Chapter Summary and Perspectives}
+In this chapter we first gave the key elements to evaluate the coupling of radio-frequency electromagnetic waves excited by antennas to cold plasma waves in a magnetized plasma, focusing only on LHCD and ICRH range of frequencies. Maximizing the transmission of several megawatts of RF power to magnetized plasma is a major topic in order to achieve high temperature plasma. RF coupling is often an issue for current fusion experiments and achieving good performances is mandatory for future reactors.
+
+
+In the LHCD range of frequencies, the open-source ALOHA code has been developed to model the LH antenna coupling. In this code, simple or advanced antenna designs can be described by any full-wave RF software in order to take into account their detailed geometry. The plasma density layers in front of the antenna can be defined by one or two linear models in order to allow a more realistic description of the scrape-off density profile in front of the antenna. The coupling between the plasma and antenna is treated with either fast and slow waves or slow wave only full or semi-analytic formulations. The code has also been successfully benchmarked to other codes or commercial FEM codes. Despite being still used today, ALOHA, like any other scientific code being about ten years old, would merit few upgrade. First of all, its core capabilities could be upgraded with the advances made in slow and fast wave coupling treatments, such as the ones made by Josef Preinhaelter in the AOLGA code\sidecite{preinhaelter2012, preinhaelter2014, preinhaelter2017-1}. Moreover, ALOHA has been developed in Matlab and Fortran, two languages that are losing momentum in the scientific community. Rewriting ALOHA in a more modern languages such as Python and Julia would allow sustaining its use for the coming years but also benefiting of the vast associated ecosystem of scientific libraries. Among them, one could think of finite-element packages so solve the plasma impedance for any arbitrary density profiles or the use of optimization (for design phases) and machine learning packages (for experiment interpretation).
+
+
+In the IC range of frequency, the coupling calculations are usually performed using dedicated closed-source codes and recently also with Finite Element commercial codes such as COMSOL or HFSS. So, until recently no open-source code for the coupling of IC antennas to magnetized plasma was existing. Several initiatives to fill this gap appeared, such as the ERMES code\footnote{\url{http://tts.cimne.com/ermes/software.html}} \sidecite{otin2020} or the Finite Element suite Petra-M \footnote{\url{https://github.com/piScope/PetraM_Base}} \sidecite{shiraiwa2017-1, bertelli2020}. Collaborations have been organized with the developers of these tools, in order to progress in the analysis of the coupling conditions in WEST and first results are coming. 
+
+

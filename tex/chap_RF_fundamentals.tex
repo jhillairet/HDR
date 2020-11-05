@@ -143,6 +143,14 @@ Finally, some special cases are recalled for convenience in the Table~\ref{tab:s
 \end{table}
 
 
+In the particular case of ICRH antennas, the reactance $X_s$ of the radiating elements ("straps") is generally much larger then its resistance $R_s$, i.e. $R_s \ll X_s$. Assuming a strap of impedance $Z_s=R_s+j X_s$ connected to a transmission line of real characteristic impedance $Z_0$, the SWR can approximated to:
+
+\begin{equation}
+	\SWR \approx \frac{Z_0^2 + X_s^2}{R_s Z_0}
+\end{equation}
+
+
+
 % #####################################################
 \subsection{Line Impedance}
 The impedance seen toward the load at a point of the line, i.e. the ratio between total voltage and current at this point, is at a distance $z=-\ell$ from the load:
