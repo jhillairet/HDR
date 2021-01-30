@@ -17,7 +17,7 @@ We will review the fundamentals of transmission line theory (Section~\ref{sec:tr
 % #####################################################
 % #####################################################
 \section[Uniform Transmission Lines]{Uniform Transmission lines Properties}\label{sec:transmission_line}
-\marginnote[*-2]{Parts of this Section are taken from the documentation of the open-source Python package \href{http://scikit-rf.org/}{scikit-rf} made by the author. More about the \href{http://scikit-rf.org/}{scikit-rf} package is given in Section~\ref{sec:OSS}.}
+\marginnote[*-2]{Parts of this Section are taken from the documentation of the open-source Python package \href{http://scikit-rf.org/}{scikit-rf} written by the author. More details on the \href{http://scikit-rf.org/}{scikit-rf} package is given in Section~\ref{sec:OSS}.}
 
 Once RF waves have been generated, it must be transmitted to the antennas, using suitable transmission line depending on the RF frequency and power level. The main results and properties of uniform transmission lines are reviewed in this section. The results given here are well-known and can be found in numerous textbooks such as \sidecite{Harrington2001, marcuvitz1951, Thourel1988, Collin1990, gonzalez1997, pozar2012, Orfanidis, steer2019-3} to give a personal selection.
 
@@ -80,7 +80,12 @@ The voltage and current at the input ($z=-d$) of a piece of uniform transmission
 % #####################################################
 \subsection{Reflection Coefficient}
 The ratio of the reflected to forward voltage (or current) at a distance $z$ defines the \textit{reflection coefficient} $\Gamma$:
-\marginnote{\textit{Return loss} RL is the negative of the magnitude of the reflection coefficient in \si{dB}. Since power is proportional to the square of the voltage, return loss is given by $$\mathrm{RL} = -20 \log_{10} |\Gamma|$$
+\marginnote{\textit{Return loss} RL is a measure of the effectiveness of power delivery from a transmission line to a load, such as an antenna (\citeauthyear{bird2009}). Expressed in dB, return loss is defined as:
+$$
+\mathrm{RL} = 10 \log_{10} \left( \frac{P_i}{P_r} \right)
+$$
+Hence it is the negative of the magnitude of the reflection coefficient in \si{dB}. Since power is proportional to the square of the voltage, return loss is given by 
+$$\mathrm{RL} = -20 \log_{10} |\Gamma|$$
 The \textit{transmission coefficient} can be also defined as $$T=1+\Gamma$$
  sometime expressed as the \textit{insertion loss} IL in \si{dB}:
  $$\mathrm{IL}=-20 \log |T|$$}
@@ -194,7 +199,7 @@ Keeping the notation used in Figure~\ref{fig:transmissionlinepropertiesvi} and u
 	\end{align}
 \end{subequations}
 hence the power lost in the line is:
-\marginnote{The total loss $\mathrm{ML}$ in a line in \si{dB} can also be stated as:
+\marginnote{The total loss $\mathrm{TL}$ in a line in \si{dB} can also be stated as:
 $$
  \mathrm{TL}=10\log_{10} \left( \frac{A^2 - |\Gamma_L|^2}{A(1 - |\Gamma_L|^2)} \right)
 $$

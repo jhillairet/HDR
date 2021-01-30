@@ -4,13 +4,16 @@
 \chapter{Controlled Fusion, RF heating and Current Drive}
 \label{chap:fusion_and_rf}
 
+\epigraph{The first step of any project is to grossly underestimate its complexity and difficulty. }{Nicoll Hunt}
+
+%\epigraph{There is a fundamental presumption in physics that the way you understand the world is that you keep isolating its ingredients until you understand the stuff you think is truly fundamental. Then you presume that the other things you don't understand are details. The assumption os that there are a small number of principles that you can discern }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Nuclear Fusion}\label{sec:nuclear_fusion}
 \subsection{Fusion Power}\label{sec:fusion_power}
-\marginnote{Part of this section are taken from Master Fusion lecturer notes on Tokamak dimensioning, organized at CEA/IRFM for the French Fusion Master students in 2019 and 2020. This teaching work also led to the paper  \citeauthyear{sarazin2019}.}
-\marginnote[+2.5cm]{Some figures in this manuscript, like Figures~\ref{fig:chap1:reactivity} and \ref{fig:chap1:nTtau_machines}, have been made in the frame on an \href{https://github.com/alfkoehn/fusion_plots/}{open-source project} created in collaboration with Alf Koehn from the University of Stuttgart, which purpose is to reproduce classic figures used in Fusion textbooks using open-source codes and data.}
+\marginnote[+0.5cm]{Part of this section are taken from Master Fusion lecturer notes on Tokamak dimensioning, organized at CEA/IRFM for the French Fusion Master students in 2019 and 2020. This teaching work also led to the paper  \citeauthyear{sarazin2019}.}
+\marginnote[+3cm]{Some figures in this manuscript, like Figures~\ref{fig:chap1:reactivity} and \ref{fig:chap1:nTtau_machines}, have been made in the frame on an \href{https://github.com/alfkoehn/fusion_plots/}{open-source project} created in collaboration with Alf Koehn from the University of Stuttgart, which purpose is to reproduce classic figures used in Fusion textbooks using open-source codes and data.}
 Nuclear fusion is the process that powers all the stars in the Universe, including our Sun. If controlled in a reactor, fusion power could be an ideal energy source. It would run on hydrogen isotopes\sidenote[][+5cm]{Such as deuterium which can be found in sea water and tritium which can be generated inside the reactor}, does not generate greenhouse gas and creates no radioactive waste except the reactor vessel components itself. It would be a dispatchable source (in contrast to intermittency inherently affecting solar and wind energies) and would require much less land area than wind or solar power installations for similar power. But producing a self-sustaining fusion reaction requires that deuterium and tritium be heated to over 150~million~\si{K}, a temperature at which they become plasma: an electrically charged gas. 
 
 Indeed, to get nuclear fusion, nuclei have to come close enough to each other where nuclear forces can overcome their mutual electrostatic repulsion. This would require temperatures of the order of 720 \si{keV} for head-on collisions of thermal particles to lead to fusion reactions in a classical way. 
@@ -34,11 +37,10 @@ Finally, the average reaction rate $\left < r_{12} \right >$ reads:
 The temperature dependence of the reactivity $\langle \sigma v \rangle_{12}$ is plotted on Figure~\ref{fig:chap1:reactivity} for several fusion reactions.
 
 \begin{figure} 
-	\begin{center}
+	\centering
 		\includegraphics[width=1.0\textwidth]{figures/chap1/Fusion_Reactivity.png}
 		\caption{Fusion reactivity versus temperature for few couples of fusion reactions. Data from \citeauthyear{richardson2019}.}
 		\label{fig:chap1:reactivity}
-	\end{center}
 \end{figure}
 
 From Figure~\ref{fig:chap1:reactivity}, the Deuterium (D)-Tritium (T) reactivity $\left<\sigma v\right>_{\mathrm{DT}}$ reaches its maximum for a temperature of 64 keV, corresponding to a temperature of $742\times10^6$ K. Since it has the highest reaction rate, the D-T reaction is the “easiest” to initiate (maximum reactivity at lowest temperature) of all fusion reactions and is the main targeted reaction for controlled fusion reactors\sidecite{cea1987, ball2019}: 
@@ -120,7 +122,7 @@ Keeping only conduction losses and ignoring radiation loss (which is a large app
 		\frac{T^2}{\left<\sigma v \right>_{\mathrm{DT}}}
 \end{equation*}
 As illustrated in Figure~\ref{fig:chap1:reactivity}, the reactivity $\left<\sigma v \right>_{\mathrm{DT}}$ depends on the temperature. The quantity $T_i^2 / \left<\sigma v \right>_{\mathrm{DT}}$ is found to have an absolute minimum around 14 $\si{keV}$. In this temperature region, the D-T reactivity can be approximated as $\left<\sigma v \right>_{\mathrm{DT}}\approx 1.1\times10^{-24} \hat{T}^2$~\sidecite{wesson2011,cea1987}. 
-\marginnote[*+2]{$\hat T$ is expressed in \si{keV}: $\hat T=10^{-3} k_B T_{[K]}/e$}
+\marginnote{$\hat T$ is expressed in \si{keV}: $\hat T=10^{-3} k_B T_{[K]}/e$}
 This leads to:
 \begin{equation}	
 	n \hat{T} \tau_E > 3\times 10^{21} \, \si{keV.s.particles/m^3}
@@ -128,16 +130,12 @@ This leads to:
 \end{equation}
 Past or current fusion reactors achieved so far 1/10th of this value, but 30 years ago they only achieved 1/100 000th of it. Some of these performances are illustrated for various present and future magnetic confinement devices in Figure~\ref{fig:chap1:nTtau_machines}.
 
-
-
-\begin{figure} 
-	\begin{center}
-		\includegraphics[width=1.0\textwidth]{figures/chap1/nTtau_machines.png}
-		\caption{triple-product $n T_i \tau_E$ as a function of ion temperature $T_i$ for various devices (including stellarators, tokamaks, spherical tokamaks). Figure from \href{https://github.com/alfkoehn/fusion_plots/releases/tag/v1.0.0}{Alf Koehn}.}
-		\label{fig:chap1:nTtau_machines}
-	\end{center}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{figures/chap1/nTtau_machines}
+	\caption{triple-product $n T_i \tau_E$ as a function of ion temperature $T_i$ for various devices (including stellarators, tokamaks, spherical tokamaks). Figure from \href{https://github.com/alfkoehn/fusion_plots/releases/tag/v1.0.0}{Alf Koehn}.}
+	\label{fig:chap1:nTtau_machines}
 \end{figure}
-
 
 
 % ####################################################
@@ -226,21 +224,10 @@ The confinement time $\tau_e$ in L-mode\sidenote{L-mode is the relevant mode her
 %\frac{a^{1.7} \kappa^{1.7} \hat B^{2.1} A}{n_{20}^{0.8} T_k}  
 %$$
 
-At equilibrium, Ohmic power balances thermal losses\sidenote{Radiation losses are again neglected here for the sake of simplicity.} and the Figure~\ref{fig:ohmicpowervsthermallosses} shows that for typical tokamak fusion reactor parameters\sidenote{Main dimensions used:
-\begin{itemize}
-	\item $a$ = 2 m
-	%\item $\varepsilon$ = 0.4
-	\item $\kappa$ = 2
-	\item $B$ = 4.7 T
-	\item $n_{20}$ = 1.5 [$\times 10^{20}$ $\si{m^{-3}}$]
-	%\item $q_\star$ = 2
-	\item $A$ = 2.5 (average mass number DT mixture)
-\end{itemize}
-}
+At equilibrium, Ohmic power balances thermal losses\sidenote{Radiation losses are again neglected here for the sake of simplicity.} and the Figure~\ref{fig:ohmicpowervsthermallosses} shows that for typical tokamak fusion reactor parameters\sidenote{Main dimensions used: $a$ = 2 m, $\kappa$ = 2, $B$ = 4.7 T, $n_{20}$ = 1.5 [$\times 10^{20}$ $\si{m^{-3}}$], $A$ = 2.5 (average mass number DT mixture)}
 the maximum temperature achievable by ohmic heating is about few keV only. This temperature is not high enough for the alpha power to dominate: some other form of external heating is thus required. 
 
 \begin{figure}[h]
-	\centering
 	\includegraphics[width=1\linewidth]{figures/chap1/OhmicPower_vs_ThermalLosses}
 	\caption{Ohmic Power Density and Thermal Losses as a function of the plasma temperature.}
 	\label{fig:ohmicpowervsthermallosses}
@@ -268,7 +255,7 @@ Thus, to run in steady-state, a tokamak requires the plasma current to be sustai
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{General Principles}
 As introduced in the previous section, auxiliary heating techniques are mandatory in tokamaks to raise ion temperature to the required values for burning state due to the physics inherent limitations. Several auxiliary heating and current drive systems have been developed in the history of fusion experiments and two broad types are used, namely neutral beam injection and radio-frequency methods. %Each has physics-based and technological strengths and weaknesses. 
-The former involves injection of high energy beams of neutral atoms that can cross the machine magnetic field and transfer its energy to the plasma via charge exchange reactions. Among the latter, many concepts have been tested\footnote{To the author knowledge, there is unfortunately no reference book listing all these various efforts and their associated successes (or failures). Putting apart the textbook dealing with waves in plasma, only few books have been written years ago specifically on the topic of RF heating and current drive: \citeauthyear{granatstein1985}, \citeauthyear{Golant1989}, \citeauthyear{Cairns1991}. Unfortunately, neither describes the technological aspects associated to a given heating or current drive method. Engineering "tips and tricks" and technological know-how is mostly transmitted internally in research institutes with relatively few international exchanges. This was not a problem as the number of staff was sufficient. As cost-driven management results in staff reduction, this know-how tends to disappear... To sum up, there is currently no "how to build a fusion RF plasma heating and current drive system" book (yet?).} and results reported in conferences and journal papers \sidecite{hwang1981, bers1984, england1989, jacquinot1999, pinsker2001} or in book chapters \sidecite{kikuchi2012,Freidberg2007} or \sidecite{hillairet2020-1}. 
+The former involves injection of high energy beams of neutral atoms that can cross the machine magnetic field and transfer its energy to the plasma via charge exchange reactions. Among the latter, many concepts have been tested\footnote{To the author knowledge, there is unfortunately no reference book listing all these various efforts and their associated successes (or failures). Putting apart the textbook dealing with waves in plasma, only few books have been written years ago specifically on the topic of RF heating and current drive: \citeauthyear{granatstein1985}, \citeauthyear{golant1989}, \citeauthyear{Cairns1991}. Unfortunately, neither describes the technological aspects associated to a given heating or current drive method. Engineering "tips and tricks" and technological know-how is mostly transmitted internally in research institutes with relatively few international exchanges. This was not a problem as the number of staff was sufficient. As cost-driven management results in staff reduction, this know-how tends to disappear... To sum up, there is currently no "how to build a fusion RF plasma heating and current drive system" book (yet?).} and results reported in conferences and journal papers \sidecite{hwang1981, bers1984, england1989, jacquinot1999, pinsker2001} or in book chapters \sidecite{kikuchi2012,Freidberg2007} or \sidecite{hillairet2020-1}. 
 
 As the sizes of the fusion machines increased, a selection occurred on the kinds of selected RF systems, constrained by cost considerations, the know-how of the time and by the experience of people in charge\footnote{"What is history but a fable agreed upon?" (Napoleon Bonaparte).}. Nowadays, the RF systems used in large fusion experiments are Ion and Electron Cyclotron Resonance Heating (ICRH and ECRH) and Lower Hybrid Current Drive (LHCD). Only ICRH and ECRH are planned in ITER\sidenote{\url{www.iter.org/mach/Heating}} after that LHCD has been removed from its latest research plan \sidecite{iterorganization2018}. The Figure~\ref{fig:rfhcdantennas} illustrates ICRH, LH and ECRH antennas for heating and current drive applications in the Tore Supra tokamak, with their associated frequency range.
 
@@ -297,7 +284,7 @@ In this manuscript, we will focus only on ICRH and LHCD systems. Moreover, we wi
 \subsection{Ion Cyclotron Resonance Frequency}
 Magnetic fields causes electrons and ions to spiral around magnetic field lines and is the basis of plasma magnetic confinement. The cyclotron frequency $f_c = \frac{q B}{2\pi m}$ (or, equivalently, the gyrofrequency $\Omega_c = \frac{q B}{m}$), corresponds to the number of cycles a particle completes around its circular trajectory every second.
 
-The resonance between the natural cyclotron motion of an ion in a static magnetic field with an electromagnetic wave having the same (gyro)frequency have been recognized early in the magnetic fusion research as a bulk plasma heating method\sidecite[-1cm]{berger1958, stix1958}. Experimental confirmations rapidly confirmed the theoretical findings\sidecite{stix1958-1, stix1960, hooke1961, rothman1969}. Nowadays, ICRH is the RF heating scheme whose highest powers have been coupled, with for example up to 16.5~\si{MW} in JET \sidecite[+1cm]{jacquinot1999}. ICRH is used in almost all present day tokamaks at multi-\si{MW} level and it is likely it will  play an important role in next generation experiments and fusion reactors.
+The resonance between the natural cyclotron motion of an ion in a static magnetic field with an electromagnetic wave having the same (gyro)frequency have been recognized early in the magnetic fusion research as a bulk plasma heating method\sidecite{berger1958, stix1958}. Experimental confirmations rapidly confirmed the theoretical findings\sidecite{stix1958-1, stix1960, hooke1961, rothman1969}. Nowadays, ICRH is the RF heating scheme whose highest powers have been coupled, with for example up to 16.5~\si{MW} in JET \sidecite{jacquinot1999}. ICRH is used in almost all present day tokamaks at multi-\si{MW} level and it is likely it will  play an important role in next generation experiments and fusion reactors.
 
 %Hot plasmas being weakly collisional, waves damping have to rely on collision-less wave-particle mechanisms. Absorption of the ICRF wave power in the ion cyclotron range of frequency can happen by three mechanisms: minority heating, harmonic heating or mode conversion. 
 
@@ -324,7 +311,7 @@ In the 80', effective ion heating had only been obtained in a small number of ex
 
 Rather than trying to heat ions, it was theorized that high phase velocity waves travelling in the direction parallel to the magnetic field could interact quasi-linearly by Landau interaction with the electrons population, and by using an asymmetric spectrum could drive a large amount additional of toroidal plasma current \sidecite{fisch1978}. In the same fashion as for LHRH, the RF power is coupled to the plasma via launchers made of rectangular waveguides stacked periodically in the horizontal direction parallel to the toroidal magnetic field. However, at the contrary of LHRH launchers, the LH waves are launched preferentially in one toroidal direction by mean of a phased array. The LH waves excited by such an array have an asymmetric parallel spectrum. The LH waves create an asymmetry in the electron distribution, which ultimately results in a net electric current \sidecite{fisch1987}. This technique is known as \emph{Lower Hybrid Current Drive} and despite the fact that the Lower Hybrid resonance is not any more involved in the use of this method in tokamaks, the term remained. LHCD has been confirmed on the PLT tokamak in 1982 \sidecite{bernabei1982} and in Alcator-C in 1984 \sidecite{porkolab1984}. 
 
-Since in 1982 many impressive results were presented on LHCD\sidecite{stevens1983, porkolab1984, tonon1983} toward steady-state or quasi-steady state tokamak operations, most LH experiments were dedicated to electron interaction and especially to current drive. A recent review of LHCD is available in \sidecite[+0.5cm]{bonoli2014}.
+Since in 1982 many impressive results were presented on LHCD\sidecite{stevens1983, porkolab1984, tonon1983} toward steady-state or quasi-steady state tokamak operations, most LH experiments were dedicated to electron interaction and especially to current drive. A recent review of LHCD is available in \sidecite{bonoli2014}.
 
 Currently in the fusion community, the "LH waves" term refers to the waves which satisfy the slow-wave branch\sidenote{These terms will be introduced in details the next chapter.} of the cold plasma dispersion relation for wavenumber parallel to the direction of the magnetic field higher than the vacuum wavenumber ($|k_{\parallel}|>k_0$) with a RF frequency $\omega$ which lies between the ion cyclotron $\omega_{ci}$ and the electron cyclotron $\omega_{ce}$ frequencies. 
 
@@ -340,7 +327,7 @@ Currently in the fusion community, the "LH waves" term refers to the waves which
 %	\label{fig:rfhcdsources}
 %\end{figure}
 
-In the ICRH frequency range (30-60~\si{MHz}), electrical to electromagnetic power transformation is typically carried out by a series of amplifiers (Tetrode, Triode), a technology derived from high-power steady-state broadcast transmitters. Typical unit sizes for present ICRH pulsed systems are 2~\si{MW} (around 500~\si{kW} in CW). The Tore Supra/WEST ICRH plant is equipped with Thales Electron Device tetrodes\sidecite{clerc1986, clerc1992-1} and shares some aspects of the JET ICRH plant which is detailed in \sidecite[+0.5cm]{wade1994}.
+In the ICRH frequency range (30-60~\si{MHz}), electrical to electromagnetic power transformation is typically carried out by a series of amplifiers (Tetrode, Triode), a technology derived from high-power steady-state broadcast transmitters. Typical unit sizes for present ICRH pulsed systems are 2~\si{MW} (around 500~\si{kW} in CW). The Tore Supra/WEST ICRH plant is equipped with Thales Electron Device tetrodes\sidecite{clerc1986, clerc1992-1} and shares some aspects of the JET ICRH plant which is detailed in \sidecite{wade1994}.
 
 \begin{figure}[h]
 	\centering
@@ -354,8 +341,8 @@ In the LH frequency range (1-5~\si{GHz}) which lies close the lower end of the m
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\linewidth]{figures/chap1/ToreSupra_LHCD_klystrons}
 	\caption{Tore Supra/WEST 700~kW/CW klystrons}
+	\includegraphics[width=0.8\linewidth]{figures/chap1/ToreSupra_LHCD_klystrons}
 	\label{fig:toresupralhcdklystrons}
 \end{figure}
 
@@ -404,26 +391,26 @@ In both cases, since the lines are connected to the antenna (which is in vacuum)
 Being inserted in machine's ports, ICRH and LHCD antennas are facing the plasma and therefore must  withstand harsh operational constraints: 
 \begin{itemize}
 	\item high vacuum compatibility ($<10^{-4}\,\si{Pa}$), 
-	\item high temperature (above 200°C during machine baking)
+	\item high temperature (eventually above 200°C during machine baking)
 	\item high heat fluxes on plasma facing components (up to few \si{MW/m^2} transiently or in steady-state conditions)
 	\item high RF power (Megatwatt range, CW power), inducing large RF losses
-	\item large electromechanical forces and torques induced by disruption, ie. brutal loss of plasma (\si{MN})
+	\item large electromechanical forces and torques induced by disruptions (brutal loss of plasma confinement) (\si{MN})
 \end{itemize}
 These constraints restrict the list of usable materials to certain kinds of metals or ceramics only. Moreover, the large heat fluxes due to the plasma or to the RF losses require the antenna to be actively cooled in order to sustain continuous operation. Moreover, in future machine like ITER, neutron activation and nuclear safety and remote handling compatibility adds supplementary constraints on material choices and mechanical designs.
 
-In this manuscript, only ICRH and LHCD antennas are discussed. Although IC waves can be used for current drive and LH waves to plasma heating, these systems will be regarded as dedicated to plasma heating and current drive respectively. ICRH antennas and in particular the WEST antenna are discussed in Chapter~\ref{chap:ICRF}. The Tore Supra/WEST and ITER LHCD antennas are discussed in Chapter~\ref{chap:LHRF}.
+In this manuscript, only ICRH and LHCD antennas are discussed. Although IC waves can be used for current drive and LH waves contribute to plasma heating, these systems will be regarded as dedicated to plasma heating and current drive respectively. ICRH antennas and in particular the WEST antenna are discussed in Chapter~\ref{chap:ICRF}. The Tore Supra/WEST and ITER LHCD antennas are discussed in Chapter~\ref{chap:LHRF}.
 
 
 % #####################################################
-\subsection{Waveguide Plumbing – a practical example with Tore Supra/WEST}
+\subsection{Waveguide Plumbing – A Practical Example with Tore Supra/WEST}
 As an example of high power system, the Tore Supra/WEST LHCD system is illustrated in Figure \ref{fig:toresupralhcdsystem}. The power is generated at the klystron plant and transmitted to the two launchers through rectangular waveguides (8~lines per launcher). 
 
-\begin{figure}
+\begin{figure*}
 	\centering
 	\includegraphics[width=0.9\linewidth]{figures/chap1/ToreSupra_LHCD_System}
 	\caption{Schematic of the Tore Supra LHCD system, from the klystrons plant to the vacuum vessel.}
 	\label{fig:toresupralhcdsystem}
-\end{figure}
+\end{figure*}
 
 Once reaching the launcher rear end, the power goes trough a \textit{hybrid junction} (also called 3-dB splitter). This device splits the forward power into two waveguides, one to feed the upper part and the other for the lower part of the launcher.  If reflected power (from the plasma) returns from these two waveguides, the power is recombined and directed to a fourth one. An actively cooled water load is connected to this fourth port, in order to dump the remaining RF power reflected by the plasma and thus protect the klystron. A rectangular waveguide 3-dB splitter is illustrated in Figure \ref{fig:hybridjunction1}. 
 
@@ -447,17 +434,17 @@ After being split by the hybrid junction, the RF power goes through various devi
 \end{itemize}
 
 
-\begin{figure}
+\begin{figure*}
 	\centering
 	\includegraphics[width=0.9\linewidth]{figures/chap1/ToreSupra_C4_CAD}
 	\caption{Illustration of the power splitting scheme in WEST LHCD launcher LH1 or LH2.}
 	\label{fig:toresuprac4cad}
-\end{figure}
+\end{figure*}
 
 
-\begin{figure}
+\begin{figure*}
 	\centering
 	\includegraphics[width=0.9\linewidth]{figures/chap1/ModeConverter}
 	\caption{Illustration of the electric field distribution in a TE10-TE30 mode converter at 5 GHz. The device is excited from the left.}
 	\label{fig:modeconverter}
-\end{figure}
+\end{figure*}
