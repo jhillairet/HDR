@@ -1,0 +1,59 @@
+% -- These version PDF -- %
+\pdfoutput=1
+\documentclass[11pt,a4paper,twoside]{report}
+%\usepackage{chapterbib}
+\usepackage{graphicx}
+\usepackage[english]{babel}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{cite}
+\usepackage{makeidx}
+\usepackage{fancyhdr}
+\usepackage{pdfpages}
+\usepackage{bibentry}
+
+% -- Style de page -- %
+\addtolength{\headwidth}{\marginparsep}
+\addtolength{\headwidth}{\marginparwidth}
+\pagestyle{fancyplain}
+
+
+% -- Personnalisation -- %
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter. #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection. #1}{}}
+\include{mydimensions}
+\include{myabbrevs}
+%\include{myhypens}
+
+
+% -- Index -- %
+\makeindex
+
+% -- Titre provisoire -- %
+\title{%
+  \hrule\bigbreak%
+  {\huge Enhancing Performances of High Power Radio-Frequency Systems in Magnetic Confinement Fusion Devices}
+  \bigbreak\hrule}
+\author{{\Large J.Hillairet} (CEA / IRFM)}
+\date{27 May 2021}
+
+\begin{document}
+% \nobibliography*
+
+% -- Equivalences index -- %
+%\include{myindexequivs}
+
+% Style de page: preambule
+\pagenumbering{roman}
+\lhead[\fancyplain{}{\bfseries\thepage}]%
+      {\fancyplain{}{}}
+\rhead[\fancyplain{}{}]%
+      {\fancyplain{}{\bfseries\thepage}}
+\cfoot{}
+
+%This page is intentionnaly left blanck (for pagenumbering purpose)
+\clearemptydoublepage
+\include{titre}
+
+\end{document}
