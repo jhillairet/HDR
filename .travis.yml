@@ -8,6 +8,7 @@ dist: bionic
 before_install:
   - sudo apt-get install python-pygments
 install:
+  - travis_wait mvn install
   - source ./texlive/texlive_install.sh
 cache:
   directories:
