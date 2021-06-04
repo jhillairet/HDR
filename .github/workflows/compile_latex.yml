@@ -10,39 +10,7 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v1
 
-      - name: 1st pdflatex master
+      - name: Compile LaTeX document
         uses: dante-ev/latex-action@latest
         with:
           root_file: master.tex
-          compiler: pdflatex
-          args: -interaction=nonstopmode -shell-escape
-          
-      - name: biber master
-        uses: dante-ev/latex-action@latest
-        with:
-          root_file: master.tex
-          compiler: biber
-          args:
-
-
-      - name: 2nd pdflatex master
-        uses: dante-ev/latex-action@latest
-        with:
-          root_file: master.tex
-          compiler: pdflatex
-          args: -interaction=nonstopmode -shell-escape
-
-
-      - name: 3rd pdflatex master
-        uses: dante-ev/latex-action@latest
-        with:
-          root_file: master.tex
-          compiler: pdflatex
-          args: -interaction=nonstopmode -shell-escape
-
-      - name: final pdflatex master
-        uses: dante-ev/latex-action@latest
-        with:
-          root_file: master.tex
-          compiler: pdflatex
-          args: -interaction=nonstopmode -shell-escape
