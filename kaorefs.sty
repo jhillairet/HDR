@@ -1,4 +1,4 @@
-\ProvidesPackage{styles/kaorefs}
+\ProvidesPackage{kaorefs}
 
 % Easily label and reference elements
 % Note that \label must appear after \caption
@@ -37,6 +37,26 @@
 \newcommand{\examplename}{}
 \newcommand{\exercisename}{}
 
+\addto\captionsdanish{%
+  \renewcommand{\chapternameshort}{Kap.}
+  \renewcommand{\sectionname}{Sektion}
+  \renewcommand{\sectionnameshort}{Sek.}
+  \renewcommand{\subsectionname}{Undersektion}
+  \renewcommand{\subsectionnameplural}{Undersectioner}
+  \renewcommand{\subsectionnameshort}{Undersek.}
+  \renewcommand{\figurenameshort}{Fig.}
+  \renewcommand{\tablenameshort}{Tab.}
+  \renewcommand{\eqname}{Formel}
+  \renewcommand{\eqnameshort}{Frml.}
+  \renewcommand{\defname}{Definition}
+  \renewcommand{\assumname}{Hypotese}
+  \renewcommand{\thmname}{Sætning}
+  \renewcommand{\propname}{Postulat}
+  \renewcommand{\lemmaname}{Hjælpesætning}
+  \renewcommand{\remarkname}{Bemærkning}
+  \renewcommand{\examplename}{Eksempel}
+  \renewcommand{\exercisename}{Øvelse}
+}
 \addto\captionsenglish{%
   \renewcommand{\chapternameshort}{Chap.}
   \renewcommand{\sectionname}{Section}
@@ -116,7 +136,7 @@
 %\newcommand{\refch}[1]{\hyperref[#1]{\chaptername\xspace\usekomafont{chapter}\normalsize\nameref{ch:#1}}\xspace\vpageref{ch:#1}\,}
 \newcommand{\refchshort}[1]{\hyperref[ch:#1]{\chapternameshort\xspace\ref{ch:#1}}}
 \newcommand{\refch}[1]{\hyperref[ch:#1]{\chaptername\xspace\ref{ch:#1}}}
-\newcommand{\vrefch}[1]{\hyperref[ch:#1]{\chaptername\xspace\vref{ch:#1}}}
+\newcommand{\vrefch}[1]{\hyperref[ch:#1]{\chaptername\xspace\ref{ch:#1} \vpageref{ch:#1}}}
 \newcommand{\nrefch}[1]{\hyperref[ch:#1]{\chaptername\xspace\ref{ch:#1} (\nameref{ch:#1})}}
 \newcommand{\frefch}[1]{\hyperref[ch:#1]{\chaptername\xspace\ref{ch:#1} (\nameref{ch:#1}) \vpageref{ch:#1}}}
 
