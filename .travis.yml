@@ -17,7 +17,7 @@ cache:
 before_script: cd $TRAVIS_BUILD_DIR
 script:
   # Texliveonfly will download packages automatically
-  - texliveonfly ./master.tex --compiler=pdflatex
+  - travis_wait texliveonfly ./master.tex --compiler=pdflatex
   # You can use latexmk to automatically handle bibtex and references (recommended)
   #- latexmk -pdflua -interaction=nonstopmode ./master.tex
   
