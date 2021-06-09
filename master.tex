@@ -9,6 +9,10 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 %overfullrule=true, % If uncommented, overly long lines will be marked by a black box; useful for correcting spacing problems
 ]{kaobook} 
 
+%%%% to add the cover page
+\usepackage{pdfpages}
+
+
 %%%% set to 1 to add 1st Author Publications in the manuscript
 \def\addpublications{0}
 
@@ -177,6 +181,11 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 
 %----------------------------------------------------------------------------------------
 \begin{document}
+	%----------------------------------------------------------------------------------------
+	%	Official Cover Page
+	%----------------------------------------------------------------------------------------
+	
+	\includepdf[pages={1}]{cover_page/main.pdf}
 	
 	%----------------------------------------------------------------------------------------
 	%	TITLE
@@ -191,7 +200,7 @@ numbers=noenddot, % Comment to output dots after chapter numbers; the most commo
 	
 	\author[Julien Hillairet]{Julien Hillairet}
 	
-	\date{\today}
+	\date{27th of May 2021}
 	
 	%\publishers{An Awesome Publisher}
 	
